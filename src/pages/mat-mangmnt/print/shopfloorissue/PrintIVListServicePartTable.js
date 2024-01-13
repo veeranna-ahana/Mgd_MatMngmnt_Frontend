@@ -8,7 +8,8 @@ import {
   Image,
 } from "@react-pdf/renderer";
 import { formatDate } from "../../../../utils";
-import MLLogo from "../../../../../../frontend/src/ML-LOGO.png";
+// import MLLogo from "../../../../../../frontend/src/ML-LOGO.png";
+import MLLogo from "../../../../../../Mgd_MatMngmnt_Frontend/src/ML-LOGO.png";
 
 const styles = StyleSheet.create({
   page: {
