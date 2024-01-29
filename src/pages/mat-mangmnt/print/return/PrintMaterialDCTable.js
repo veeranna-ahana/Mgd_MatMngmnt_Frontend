@@ -8,7 +8,6 @@ import {
   Image,
 } from "@react-pdf/renderer";
 import { formatDate } from "../../../../utils";
-// import MLLogo from "../../../../../../frontend/src/ML-LOGO.png";
 import MLLogo from "../../../../../../Mgd_MatMngmnt_Frontend/src/ML-LOGO.png";
 
 //function PrintMaterialDCTable() {
@@ -178,10 +177,17 @@ const PrintMaterialDCTable = ({
                 }}
               >
                 {/* <Text>{"   "}</Text> */}
+                <View style={{ borderBottom: "1px" }}>
+                  <Text style={{ ...styles.fontBold }}>
+                    Material / Scarp Sheets Return Challan
+                  </Text>
+                </View>
                 <Text style={{ ...styles.fontBold }}>
                   Magod Laser Machining Private Limited
                 </Text>
-                <Text>GST: 29AABCM1970H1ZE CIN: U28900KA1995PTC018437</Text>
+                <Text style={{ ...styles.fontBold }}>
+                  GST: 29AABCM1970H1ZE CIN: U28900KA1995PTC018437
+                </Text>
                 <Text>
                   Plot No 72, 2nd Phase, KIADB Indl Area Jigani, Anekal Taluk
                   Bengaluru - 560105
@@ -190,11 +196,6 @@ const PrintMaterialDCTable = ({
                   Ph : 08110 414313, 9513393352, sales@magodlaser.in,
                   www.magodlaser.in
                 </Text>
-                <View>
-                  <Text style={{ ...styles.fontBold }}>
-                    Material / Scarp Sheets Return Challan
-                  </Text>
-                </View>
               </View>
               <Text style={{ width: "10%" }}>{copyVal.copyName}</Text>
             </View>
@@ -298,12 +299,12 @@ const PrintMaterialDCTable = ({
               {/* <View style={{ ...styles.titleRight1 }}></View> */}
 
               {/* <Text style={styles.titleFull1}> */}
-              <View style={{ ...styles.insideBox }}>
+              {/* <View style={{ ...styles.insideBox }}>
                 <View style={{ display: "flex", flexDirection: "row" }}>
                   <Text style={{ ...styles.fontBold }}>Authority : </Text>
                   <Text>{dcRegister?.AuhtorisingDocu}</Text>
                 </View>
-              </View>
+              </View> */}
 
               {/* <Text style={styles.topspace}></Text> */}
 
@@ -369,7 +370,18 @@ const PrintMaterialDCTable = ({
                 }}
               >
                 <Text style={{ ...styles.fontBold }}>Remarks :</Text>
-                <View style={{ padding: "5%", border: "1px" }}></View>
+                <View
+                  style={{
+                    ...styles.insideBox,
+                    border: "1px",
+                    minHeight: "48px",
+                    display: "flex",
+                    alignContent: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Text>{formHeader?.RV_Remarks}</Text>
+                </View>
               </View>
               <View
                 style={{
@@ -385,8 +397,8 @@ const PrintMaterialDCTable = ({
                     ...styles.titleMiddle2,
                   }}
                 >
-                  <Text style={{ ...styles.fontBold }}>Total Items : </Text>
-                  <Text>{outData?.length}</Text>
+                  <Text style={{ ...styles.fontBold }}>Total Quantity : </Text>
+                  <Text>{totalQTYVar}</Text>
                 </View>
 
                 <View
@@ -396,8 +408,8 @@ const PrintMaterialDCTable = ({
                     ...styles.titleMiddle2,
                   }}
                 >
-                  <Text style={{ ...styles.fontBold }}>Total Quantity : </Text>
-                  <Text>{totalQTYVar}</Text>
+                  <Text style={{ ...styles.fontBold }}>Total Weight : </Text>
+                  <Text>{formHeader.TotalWeight}</Text>
                 </View>
               </View>
             </View>

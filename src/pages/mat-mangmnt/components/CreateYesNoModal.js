@@ -17,10 +17,12 @@ function CreateYesNoModal(props) {
 
     //get running no and assign to RvNo
     let yyyy = formatDate(new Date(), 6).toString();
+    console.log("yyyyyyyyyyyy........", yyyy);
     const url =
       endpoints.getRunningNo + "?SrlType=MaterialReceiptVoucher&Period=" + yyyy;
     //console.log(url);
     getRequest(url, (data) => {
+      console.log("dataaaaa.............", data);
       data.map((obj) => {
         let newNo = parseInt(obj.Running_No) + 1;
         //let no = "23/000" + newNo;
@@ -53,6 +55,7 @@ function CreateYesNoModal(props) {
           Period: formatDate(new Date(), 6),
           RunningNo: newNo,
         };
+        console.log("first.................", inputData.Period);
         postRequest(endpoints.updateRunningNo, inputData, (data) => {});
 
         //update header
