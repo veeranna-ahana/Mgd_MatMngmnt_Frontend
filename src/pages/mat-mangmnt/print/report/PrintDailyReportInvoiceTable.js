@@ -7,7 +7,6 @@ import {
   Text,
   Image,
 } from "@react-pdf/renderer";
-// import MLLogo from "../../../../../../frontend/src/ML-LOGO.png";
 import MLLogo from "../../../../../../Mgd_MatMngmnt_Frontend/src/ML-LOGO.png";
 
 import { formatDate } from "../../../../utils";
