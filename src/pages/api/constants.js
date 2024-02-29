@@ -21,6 +21,7 @@ export const endpoints = {
   //mtrl data
   getMtrlData: `${API}/mtrlData/allmtrldata`,
   getRowByMtrlCode: `${API}/mtrlData/getRowByMtrlCode`,
+  getSpecific_Wt: `${API}/mtrlData/getSpecific_Wt`,
 
   //shape data
   getAllShapes: `${API}/shapes/getAllShapes`,
@@ -80,12 +81,14 @@ export const endpoints = {
   updateRunningNo: `${API}/runningNo/updateRunningNoBySrlType`,
   insertRunningNo: `${API}/runningNo/insertRunningNo`,
   getAndInsertRunningNo: `${API}/runningNo/getAndInsertRunningNo`,
+  insertRunNoRow: `${API}/runningNo/insertRunNoRow`,
 
   //Material stock List
   //getMtrlReceiptDetailsByRvID: `${API}/mtrlReceiptDetails/getMtrlReceiptDetailsByRvID`,
   insertMtrlStockList: `${API}/mtrlStockList/insertMtrlStockList`,
   checkStockAvailable: `${API}/mtrlStockList/checkStockAvailable`,
   deleteMtrlStockByRVNo: `${API}/mtrlStockList/deleteMtrlStockByRVNo`,
+  updateAfterRemoveStock: `${API}/mtrlStockList/updateAfterRemoveStock`,
   deleteMtrlStockByIVNo: `${API}/mtrlStockList/deleteMtrlStockByIVNo`,
   updateIssueIVNo: `${API}/mtrlStockList/updateIssueIVNo`,
   updateIVNoNULL: `${API}/mtrlStockList/updateIVNoNULL`,

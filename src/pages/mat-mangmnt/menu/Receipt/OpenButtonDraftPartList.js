@@ -9,6 +9,7 @@ import DeleteSerialYesNoModal from "../../components/DeleteSerialYesNoModal";
 import DeleteRVModal from "../../components/DeleteRVModal";
 import { formatDate } from "../../../../utils";
 import { useLocation } from "react-router-dom";
+import { Typeahead } from "react-bootstrap-typeahead";
 
 const { getRequest, postRequest } = require("../../../api/apiinstance");
 const { endpoints } = require("../../../api/constants");
@@ -58,6 +59,7 @@ function OpenButtonDraftPartList() {
   let [custdata, setCustdata] = useState([]);
   let [mtrlDetails, setMtrlDetails] = useState([]);
   const [saveUpdateCount, setSaveUpdateCount] = useState(0);
+  const [selectedPart, setSelectedPart] = useState([]);
 
   let [formHeader, setFormHeader] = useState({
     rvId: "",
@@ -80,7 +82,6 @@ function OpenButtonDraftPartList() {
       "?id=" +
       location.state.id;
     getRequest(url, (data) => {
-      console.log("data = ", data);
       formHeader.rvId = data.RvID;
       formHeader.receiptDate = formatDate(new Date(data.ReceiptDate), 4);
       formHeader.rvNo = data.RV_No;
@@ -93,22 +94,17 @@ function OpenButtonDraftPartList() {
       formHeader.calcWeight = data.TotalCalculatedWeight;
       formHeader.type = data.Type;
 
-      //data.ReceiptDate = formatDate(new Date(data.ReceiptDate), 4);
-      //data.RV_Date = formatDate(new Date(data.RV_Date), 3);
-      //setFormHeader(data);
-
       //get customer details for address
       getRequest(endpoints.getCustomers, (data1) => {
         const found = data1.find((obj) => obj.Cust_Code === data.Cust_Code);
-        // data.address = found.Address;
         formHeader.address = found.Address;
         setFormHeader(formHeader);
+        setCalcWeightVal(data.TotalCalculatedWeight);
 
         //get part details
         const url1 =
           endpoints.getPartReceiptDetailsByRvID + "?id=" + location.state.id;
         getRequest(url1, (data2) => {
-          console.log("dataa.........", data2);
           data2.forEach((obj) => {
             obj["id"] = obj["Id"];
             obj["partId"] = obj["PartId"];
@@ -118,8 +114,6 @@ function OpenButtonDraftPartList() {
             obj["qtyRejected"] = obj["QtyRejected"];
           });
           setPartArray(data2);
-          //setFormHeader(formHeader);
-          //console.log(data2);
         });
       });
 
@@ -131,40 +125,12 @@ function OpenButtonDraftPartList() {
         setMtrlDetails(foundPart);
       });
     });
-    //console.log("data = ", custdata);
   }
 
   useEffect(() => {
     fetchData();
     //setPartArray(partArray);
   }, []); //[inputPart]);
-
-  /*  let changeCustomer = async (e) => {
-    e.preventDefault();
-    const { value, name } = e.target;
-
-    const found = custdata.find((obj) => obj.Cust_Code === value);
-    //setCustDetailVal(found.Address);
-
-    setFormHeader((preValue) => {
-      //console.log(preValue)
-      return {
-        ...preValue,
-        [name]: value,
-        customerName: found.Cust_name,
-        customer: found.Cust_Code,
-        address: found.Address,
-      };
-    });
-    //fetchMtrlData();
-
-    //const foundPart = mtrlDetails.filter((obj) => obj.Cust_code == value);
-    //setMtrlDetails(foundPart);
-    getRequest(endpoints.getCustBomList, (data) => {
-      const foundPart = data.filter((obj) => obj.Cust_code == value);
-      setMtrlDetails(foundPart);
-    });
-  };*/
 
   const columns = [
     {
@@ -194,28 +160,60 @@ function OpenButtonDraftPartList() {
     {
       text: "Qty Rejected",
       dataField: "qtyRejected",
-      formatter: (celContent, row) => <div className="">{qtyRejected}</div>,
+      // formatter: (celContent, row) => <div className="">{qtyRejected}</div>,
       headerStyle: { whiteSpace: "nowrap" },
     },
   ];
+
+  const changePartID = (selected) => {
+    setSelectedPart(selected);
+
+    setInputPart((preValue) => ({
+      ...preValue,
+      partId: selected.length > 0 ? selected[0].PartId : "",
+    }));
+
+    postRequest(endpoints.updatePartReceiptDetails, inputPart, (data) => {
+      if (data.affectedRows !== 0) {
+        // Handle success, if needed
+      } else {
+        toast.error("Record Not Updated");
+      }
+    });
+
+    const newArray = partArray.map((p) =>
+      p.id === partUniqueId
+        ? {
+            ...p,
+            partId: selected.length > 0 ? selected[0].PartId : "",
+          }
+        : p
+    );
+
+    setPartArray(newArray);
+  };
 
   const changePartHandle = (e) => {
     const { value, name } = e.target;
     if (name === "unitWeight" && parseFloat(value) < 0) {
       toast.error("unitWeight should be a positive value");
+      return;
     }
+
+    const formattedValue =
+      name === "unitWeight" ? value.replace(/(\.\d{3})\d+/, "$1") : value;
     setInputPart((preValue) => {
-      //console.log(preValue)
       return {
         ...preValue,
-        [name]: value,
+        [name]: formattedValue,
       };
     });
-    inputPart[name] = value;
+    inputPart[name] = formattedValue;
     inputPart.custBomId = formHeader.customer;
     inputPart.rvId = formHeader.rvId;
     // inputPart.qtyRejected = 0;
-    inputPart.qtyRejected = inputPart.qtyReceived - inputPart.qtyAccepted;
+    inputPart.qtyRejected =
+      parseFloat(inputPart.qtyReceived) - parseFloat(inputPart.qtyAccepted);
     inputPart.qtyUsed = 0;
     inputPart.qtyReturned = 0;
     inputPart.qtyIssued = 0;
@@ -229,45 +227,59 @@ function OpenButtonDraftPartList() {
       }
     });
 
-    const newArray = partArray.map((p) =>
-      //p.id === "d28d67b2-6c32-4aae-a7b6-74dc985a3cff"
-      p.id === partUniqueId
-        ? {
-            ...p,
-            [name]: value,
-          }
-        : p
-    );
-    //console.log(newArray);
+    // const newArray = partArray.map((p) =>
+    //   p.id === partUniqueId
+    //     ? {
+    //         ...p,
+    //         [name]: formattedValue,
+
+    //       }
+    //     : p
+    // );
+
+    const newArray = partArray.map((p) => {
+      if (p.id === partUniqueId) {
+        // Calculate the updated qtyRejected based on the new qtyReceived and qtyAccepted values
+        const qtyReceived =
+          name === "qtyReceived" ? formattedValue : p.qtyReceived;
+        const qtyAccepted =
+          name === "qtyAccepted" ? formattedValue : p.qtyAccepted;
+        const qtyRejected = parseFloat(qtyReceived) - parseFloat(qtyAccepted);
+
+        return {
+          ...p,
+          [name]: formattedValue,
+          qtyRejected: isNaN(qtyRejected) ? 0 : qtyRejected,
+        };
+      } else {
+        return p;
+      }
+    });
+
     setPartArray(newArray);
 
-    // let totwt = 0;
-    // partArray.map((obj) => {
-    //   totwt =
-    //     parseFloat(totwt) +
-    //     parseFloat(obj.unitWeight) * parseFloat(obj.qtyReceived);
-    //   //console.log(newWeight);
-    // });
-    // setCalcWeightVal(parseFloat(totwt).toFixed(2));
-    // setFormHeader({ ...formHeader, calcWeight: parseFloat(totwt).toFixed(2) });
-
     let totwt = 0;
-    partArray.map((obj) => {
+    newArray.map((obj) => {
       totwt =
         parseFloat(totwt) +
-        parseFloat(obj.unitWeight) * parseFloat(obj.qtyReceived);
-      //console.log(newWeight);
+        // parseFloat(obj.unitWeight) * parseFloat(obj.qtyReceived);
+        parseFloat(obj.unitWeight) * parseFloat(obj.qtyAccepted);
     });
-    setCalcWeightVal(parseFloat(totwt).toFixed(2));
-    setFormHeader({ ...formHeader, calcWeight: parseFloat(totwt).toFixed(2) });
+
+    setCalcWeightVal(parseFloat(totwt).toFixed(3));
+    setFormHeader({ ...formHeader, calcWeight: parseFloat(totwt).toFixed(3) });
   };
 
-  console.log("calcWT", calcWeightVal);
-  //add new part
   let { partId, unitWeight, qtyReceived, qtyAccepted, qtyRejected } = inputPart;
-  //let id = uuid();
+
   const addNewPart = (e) => {
-    console.log("entering into add new ");
+    const isAnyPartIDEmpty = partArray.some((item) => item.partId === "");
+
+    if (isAnyPartIDEmpty) {
+      toast.error("Select Part ID for the Inserted row");
+      return;
+    }
+
     setBoolVal3(false);
 
     //clear all part fields
@@ -282,12 +294,8 @@ function OpenButtonDraftPartList() {
     inputPart.unitWeight = 0;
     inputPart.custBomId = formHeader.customer;
 
-    // console.log("partarray = ", partArray);
-    console.log("inputPart = ", inputPart);
-
     //insert blank row in table
     postRequest(endpoints.insertPartReceiptDetails, inputPart, (data) => {
-      // console.log("entering into add new");
       if (data.affectedRows !== 0) {
         let id = data.insertId;
         inputPart.id = id;
@@ -310,44 +318,63 @@ function OpenButtonDraftPartList() {
         };
         //setPartArray(newRow);
         setPartArray([...partArray, newRow]);
+        setSelectedPart([]);
         setInputPart(inputPart);
       } else {
         toast.error("Record Not Inserted");
       }
     });
+  };
 
-    //console.log("after = ", partArray);
-  };
   const deleteButtonState = () => {
-    setModalOpen(true);
+    if (!inputPart?.id) {
+      toast.error("Select Part");
+    } else {
+      setModalOpen(true);
+    }
   };
+
   //delete part
   const handleDelete = () => {
     //minus calculated weight
-    // console.log("partarray = ", partArray);
-    console.log("id = ", inputPart.id);
 
     postRequest(endpoints.deletePartReceiptDetails, inputPart, (data) => {
       if (data.affectedRows !== 0) {
-        const newArray = partArray.filter(
-          (p) =>
-            //p.id === "d28d67b2-6c32-4aae-a7b6-74dc985a3cff"
-            p.id !== inputPart.id
-        );
+        const newArray = partArray.filter((p) => p.id !== inputPart.id);
+
         setPartArray(newArray);
         toast.success("Material Deleted");
+        setInputPart({
+          id: "",
+          partId: "",
+          unitWeight: "",
+          qtyReceived: "",
+          qtyAccepted: "",
+          qtyRejected: "0",
+        });
+        setSelectedPart([]);
+
+        let totwt = 0;
+        newArray.map((obj) => {
+          totwt =
+            parseFloat(totwt) +
+            // parseFloat(obj.unitWeight) * parseFloat(obj.qtyReceived);
+            parseFloat(obj.unitWeight) * parseFloat(obj.qtyAccepted);
+        });
+        setCalcWeightVal(parseFloat(totwt).toFixed(3));
+        formHeader.calcWeight = parseFloat(totwt).toFixed(3);
+        setFormHeader(formHeader);
+
+        postRequest(
+          endpoints.updateHeaderMaterialReceiptRegister,
+          formHeader,
+          (data) => {
+            if (data.affectedRows !== 0) {
+            }
+          }
+        );
       }
     });
-
-    //cal weight
-    let totwt = 0;
-    partArray.map((obj) => {
-      totwt =
-        parseFloat(totwt) +
-        parseFloat(obj.unitWeight) * parseFloat(obj.qtyReceived);
-      //console.log(newWeight);
-    });
-    setCalcWeightVal(parseFloat(totwt).toFixed(2));
   };
 
   const selectRow = {
@@ -359,58 +386,45 @@ function OpenButtonDraftPartList() {
       setInputPart({
         id: row.id,
         partId: row.partId,
+        // partId: isSelect ? row.partId : "",
         unitWeight: row.unitWeight,
         qtyAccepted: row.qtyAccepted,
         qtyRejected: row.qtyRejected,
         qtyReceived: row.qtyReceived,
       });
+      setSelectedPart([{ PartId: row.partId }]);
     },
   };
 
   //input header change event
+  // const InputHeaderEvent = (e) => {
+  //   const { value, name } = e.target;
+  //   setFormHeader((preValue) => {
+  //     return {
+  //       ...preValue,
+  //       [name]: value,
+  //     };
+  //   });
+  // };
+
   const InputHeaderEvent = (e) => {
     const { value, name } = e.target;
-    setFormHeader((preValue) => {
-      //console.log(preValue)
-      return {
-        ...preValue,
-        [name]: value,
-      };
-    });
+
+    const formattedValue =
+      name === "weight" ? value.replace(/(\.\d{3})\d+/, "$1") : value;
+
+    setFormHeader((prevFormHeader) => ({
+      ...prevFormHeader,
+      [name]: formattedValue,
+      [formHeader.calcWeight]: calcWeightVal,
+    }));
   };
 
-  const insertHeaderFunction = () => {
-    //to save data
-    postRequest(
-      endpoints.insertHeaderMaterialReceiptRegister,
-      formHeader,
-      (data) => {
-        //console.log("data = ", data);
-        if (data.affectedRows !== 0) {
-          setFormHeader((preValue) => {
-            return {
-              ...preValue,
-              rvId: data.insertId,
-            };
-          });
-          setSaveUpdateCount(saveUpdateCount + 1);
-          toast.success("Record Saved Successfully");
-          //enable part section and other 2 buttons
-          setBoolVal1(false);
-        } else {
-          toast.error("Record Not Inserted");
-        }
-      }
-    );
-  };
-  console.log("updatedformheader", formHeader);
   const updateHeaderFunction = () => {
-    //console.log("update formheader = ", formHeader);
     postRequest(
       endpoints.updateHeaderMaterialReceiptRegister,
       formHeader,
       (data) => {
-        //console.log("data = ", data);
         if (data.affectedRows !== 0) {
           setSaveUpdateCount(saveUpdateCount + 1);
           toast.success("Record Updated Successfully");
@@ -429,19 +443,64 @@ function OpenButtonDraftPartList() {
       toast.error("Please Select Customer");
     } else if (formHeader.reference.length == 0)
       toast.error("Please Enter Customer Document Material Reference");
-    else {
-      /*if (saveUpdateCount == 0) {
-        insertHeaderFunction();
-        setBoolVal2(true);
-      } else {*/
-      //to update data
-      updateHeaderFunction();
-      //}
+    else if (
+      parseFloat(inputPart.qtyAccepted) > parseFloat(inputPart.qtyReceived)
+    ) {
+      toast.error("QtyAccepted should be less than or equal to QtyReceived");
     }
+    // else {
+    //   updateHeaderFunction();
+    // }
+    else {
+      //checl part array table valid data
+
+      let flag1 = 0;
+
+      for (let i = 0; i < partArray.length; i++) {
+        if (
+          partArray[i].partId === "" ||
+          partArray[i].unitWeight === "" ||
+          partArray[i].qtyReceived === "" ||
+          partArray[i].qtyAccepted === ""
+        ) {
+          flag1 = 1;
+        }
+
+        if (
+          parseFloat(partArray[i].qtyAccepted) >
+          parseFloat(partArray[i].qtyReceived)
+        ) {
+          flag1 = 2;
+        }
+      }
+      if (flag1 === 1) {
+        toast.error("Please fill correct Part details");
+      } else if (flag1 === 2) {
+        toast.error("QtyAccepted should be less than or equal to QtyReceived");
+      } else {
+        //to update data
+        updateHeaderFunction();
+      }
+    }
+  };
+
+  const getRVNo = async () => {
+    const requestData = {
+      unit: "Jigani",
+      srlType: "MaterialReceiptVoucher",
+      ResetPeriod: "Year",
+      ResetValue: 0,
+      VoucherNoLength: 4,
+    };
+
+    postRequest(endpoints.insertRunNoRow, requestData, async (data) => {
+      console.log("RV NO Response", data);
+    });
   };
 
   const allotRVButtonState = (e) => {
     e.preventDefault();
+    getRVNo();
 
     if (partArray.length === 0) {
       toast.error("Add Details Before Saving");
@@ -469,7 +528,7 @@ function OpenButtonDraftPartList() {
           partArray[i].dynamicPara1 == 0.0
         ) {
           flag1 = 2;
-          console.log("Setting flag1 to 2");
+
           break; // Add a break to ensure this condition is not overwritten by subsequent checks
         }
 
@@ -480,7 +539,6 @@ function OpenButtonDraftPartList() {
           partArray[i].qtyReceived === undefined
         ) {
           flag1 = 3;
-          console.log("Setting flag1 to 3");
         }
 
         if (
@@ -490,19 +548,15 @@ function OpenButtonDraftPartList() {
           partArray[i].qtyAccepted === undefined
         ) {
           flag1 = 4;
-          console.log("Setting flag1 to 4");
         }
 
         if (partArray[i].locationNo == "") {
           flag1 = 5;
-          console.log("Setting flag1 to 5");
         }
         if (partArray[i].qtyAccepted > partArray[i].qtyReceived) {
           flag1 = 6;
         }
       }
-
-      console.log("flag1 value:", flag1);
 
       if (flag1 === 1) {
         toast.error("Select Material");
@@ -523,23 +577,8 @@ function OpenButtonDraftPartList() {
 
   const allotRVYesButton = async (data) => {
     await delay(500);
-    //console.log("data = ", formHeader);
     setFormHeader(data);
-    //console.log("formheader = ", formHeader);
     setBoolVal4(true);
-    //console.log("formheader = ", formHeader);
-    //formHeader = data;
-    //formHeader.rvNo = data.rvNo;
-    //setFormHeader(formHeader);
-
-    /*setFormHeader((preValue) => {
-      return {
-        ...preValue,
-        rvNo: data.rvNo,
-      };
-    });*/
-
-    //console.log("formHeader = ", formHeader);
   };
   const deleteRVButton = async () => {
     setDeleteRvModalOpen(true);
@@ -567,6 +606,15 @@ function OpenButtonDraftPartList() {
     deleteRVButtonState();
     setDeleteRvModalOpen(false);
   };
+
+  const blockInvalidQtyChar = (e) =>
+    ["e", "E", "+", "-", "."].includes(e.key) && e.preventDefault();
+
+  const blockInvalidChar = (e) =>
+    ["e", "E", "+", "-"].includes(e.key) && e.preventDefault();
+
+  console.log("inputPart", inputPart);
+  console.log("partArray", partArray);
   return (
     <div>
       <CreateYesNoModal
@@ -626,6 +674,8 @@ function OpenButtonDraftPartList() {
             <label className="form-label">Weight</label>
             <input
               type="number"
+              onKeyDown={blockInvalidChar}
+              min="0"
               name="weight"
               value={formHeader.weight}
               onChange={InputHeaderEvent}
@@ -654,7 +704,7 @@ function OpenButtonDraftPartList() {
               name="reference"
               value={formHeader.reference}
               onChange={InputHeaderEvent}
-              disabled={boolVal2 & boolVal4}
+              disabled={boolVal2 && boolVal4}
             />
           </div>
           <div className="col-md-3">
@@ -731,41 +781,7 @@ function OpenButtonDraftPartList() {
             headerClasses="header-class tableHeaderBGColor"
           ></BootstrapTable>
         </div>
-        {/*<div className="col-md-6 col-sm-12">
-           <table className="table table-striped table-bordered">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Part Id</th>
-                <th>Unit Wt</th>
-                <th>Qty Received</th>
-                <th>Qty Accepted</th>
-                <th>Qty Rejected</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {partArray.map((part, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{part.partId}</td>
-                  <td>{part.unitWeight}</td>
-                  <td>{part.qtyReceived}</td>
-                  <td>{part.qtyAccepted}</td>
-                  <td>{part.qtyRejected}</td>
-                  <td>
-                    <button
-                      className="btn btn-danger form-control"
-                      onClick={() => handleDelete(part.id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table> 
-        </div>*/}
+
         <div className="col-md-4 col-sm-12">
           <div className="ip-box form-bg">
             <div className="row justify-content-center mt-1 mb-3">
@@ -780,17 +796,21 @@ function OpenButtonDraftPartList() {
               </button>
             </div>
             <div className="row">
+              {/* <label className="form-label">Srl Details</label> */}
+              <p className="form-title-deco mt-1">
+                <h5>Serial Details</h5>
+              </p>
               <div className="col-md-4">
-                <label className="form-label mt-1">Part ID</label>
+                <label className="form-label mt-2">Part ID</label>
                 {/* </div>
               <div className="col-md-8" style={{ marginTop: "8px" }}> */}
               </div>
-              <div className="col-md-8">
+              {/* <div className="col-md-8">
                 <select
                   className="ip-select dropdown-field"
                   name="partId"
                   value={inputPart.partId}
-                  onChange={changePartHandle}
+                  onChange={changePartID}
                   disabled={boolVal4}
                 >
                   <option value="" disabled selected>
@@ -802,6 +822,18 @@ function OpenButtonDraftPartList() {
                     </option>
                   ))}
                 </select>
+              </div> */}
+              <div className="col-md-8">
+                <Typeahead
+                  className="in-field"
+                  id="partId"
+                  labelKey="PartId"
+                  options={mtrlDetails}
+                  selected={selectedPart}
+                  onChange={changePartID}
+                  disabled={boolVal4}
+                  placeholder="Select Part"
+                />
               </div>
             </div>
             <div className="row">
@@ -816,6 +848,8 @@ function OpenButtonDraftPartList() {
                   value={inputPart.unitWeight}
                   onChange={changePartHandle}
                   //onKeyUp={changePartHandle1}
+                  onKeyDown={blockInvalidChar}
+                  min="0"
                   disabled={boolVal4}
                 />
               </div>
@@ -829,9 +863,11 @@ function OpenButtonDraftPartList() {
                   className="in-field"
                   type="number"
                   name="qtyReceived"
+                  min="0"
                   //value={tempVal}
                   value={inputPart.qtyReceived}
                   onChange={changePartHandle}
+                  onKeyDown={blockInvalidQtyChar}
                   disabled={boolVal4}
                 />
               </div>
@@ -848,6 +884,8 @@ function OpenButtonDraftPartList() {
                   name="qtyAccepted"
                   value={inputPart.qtyAccepted}
                   onChange={changePartHandle}
+                  onKeyDown={blockInvalidQtyChar}
+                  min="0"
                   disabled={boolVal4}
                 />
               </div>

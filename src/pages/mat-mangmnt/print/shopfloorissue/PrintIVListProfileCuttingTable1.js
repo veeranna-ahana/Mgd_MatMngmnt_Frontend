@@ -8,6 +8,7 @@ import {
   Image,
 } from "@react-pdf/renderer";
 import { formatDate } from "../../../../utils";
+// import MLLogo from "../../../../../../frontend/src/ML-LOGO.png";
 import MLLogo from "../../../../../../Mgd_MatMngmnt_Frontend/src/ML-LOGO.png";
 
 const styles = StyleSheet.create({
@@ -282,15 +283,15 @@ const PrintIVListProfileCuttingTable1 = ({ formHeader, tableData }) => (
 
         <View style={styles.blockRightAlign2}>
           <Text>Material</Text>
-          <Text style={styles.linegap}>Length</Text>
+          <Text style={styles.linegap}>Height</Text>
           <Text style={styles.linegap}>Qty</Text>
           <Text style={styles.linegap}>Source</Text>
         </View>
         <View style={styles.blockLeftAlign2}>
           <Text>{formHeader.Mtrl_Code}</Text>
-          <Text style={styles.linegap}>{formHeader.Para1}</Text>
+          <Text style={styles.linegap}>{formHeader.Para3}</Text>
           <Text style={styles.linegap}>{formHeader.Qty}</Text>
-          <Text style={styles.linegap}>Custom</Text>
+          <Text style={styles.linegap}>{formHeader.CustMtrl}</Text>
         </View>
 
         <View style={styles.blockRightAlign2}>
@@ -303,11 +304,11 @@ const PrintIVListProfileCuttingTable1 = ({ formHeader, tableData }) => (
         </View>
 
         <View style={styles.blockRightAlign2}>
-          <Text>Height</Text>
+          <Text>Length</Text>
           <Text style={styles.linegap}>Process</Text>
         </View>
         <View style={styles.blockLeftAlign2}>
-          <Text>{formHeader.Para3}</Text>
+          <Text>{formHeader.Para1}</Text>
           <Text style={styles.linegap}>{formHeader.MProcess}</Text>
         </View>
 

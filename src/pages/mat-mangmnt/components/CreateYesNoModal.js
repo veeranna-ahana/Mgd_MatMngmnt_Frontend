@@ -55,6 +55,8 @@ function CreateYesNoModal(props) {
           Period: formatDate(new Date(), 6),
           RunningNo: newNo,
         };
+
+        console.log("Period", inputData.Period);
         console.log("first.................", inputData.Period);
         postRequest(endpoints.updateRunningNo, inputData, (data) => {});
 

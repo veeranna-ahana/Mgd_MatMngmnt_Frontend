@@ -8,6 +8,7 @@ import {
   Image,
 } from "@react-pdf/renderer";
 import { formatDate } from "../../../../utils";
+// import MLLogo from "../../../../../../frontend/src/ML-LOGO.png";
 import MLLogo from "../../../../../../Mgd_MatMngmnt_Frontend/src/ML-LOGO.png";
 
 const styles = StyleSheet.create({
@@ -209,7 +210,7 @@ const PrintIVListServicePartTable = ({ formHeader, tableData }) => (
         <Text style={styles.title1}>Magod Laser Machining Pvt Ltd : Jigni</Text>
 
         <Text style={styles.title2}>
-          Production : Assemby Parts Issue Voucher
+          Production : Assembly Parts Issue Voucher
         </Text> */}
         {/* marginLeft: "127px" */}
 
@@ -275,7 +276,7 @@ const PrintIVListServicePartTable = ({ formHeader, tableData }) => (
         <Text style={styles.line1}>
           ______________________________________________________________________________________________
         </Text>
-        <Text style={styles.assemblyPartList}>Assemby Parts List</Text>
+        <Text style={styles.assemblyPartList}>Assembly Parts List</Text>
         <Text style={styles.partQuantity}>Part Quantity</Text>
         {/* Table Header */}
         <View></View>
