@@ -20,7 +20,7 @@ function Parts(props) {
   let [thirdTableData, setThirdTableData] = useState([]);
 
   let [firstTableSelectedRow, setFirstTableSelectedRow] = useState([]);
-  let [secondSelectedRow, setSecondSelectedRow] = useState({ selected: [] });
+
   const [srlIVID, setSrlIVID] = useState("");
   const [IVNOVal, setIVNOVal] = useState("");
 
@@ -36,6 +36,12 @@ function Parts(props) {
   const [runningNo, setRunningNo] = useState([]);
 
   const fetchData = () => {
+    setFirstTableData([]);
+    setSecondTableData([]);
+    setThirdTableData([]);
+    setFirstTableSelectedRow([]);
+    setrvNoVal("");
+    setCustRefVal("");
     //console.log("props = ", props);
     if (props && props.custCode.length !== 0) {
       let url1 = endpoints.partFirst + "?Cust_Code=" + props.custCode;
@@ -396,7 +402,7 @@ function Parts(props) {
         toast.error(
           "Greater then the quantity received, plus already returned/used."
         );
-      } else if (returnNew === 0) {
+      } else if (returnNew <= 0) {
         toast.error("Stock is already returned");
       } else {
         // toast.success("good to go!!!");
@@ -476,8 +482,22 @@ function Parts(props) {
   };
 
   const createReturnVoucherValidationFunc = () => {
-    getRunningNo();
-    setConfirmModalOpen(true);
+    if (props.custCode) {
+      if (firstTableSelectedRow.length > 0 || secondTableData.length > 0) {
+        if (thirdTableData.length > 0) {
+          getRunningNo();
+          setConfirmModalOpen(true);
+        } else {
+          toast.warning(
+            "Select atleast one Part for creating the return voucher"
+          );
+        }
+      } else {
+        toast.warning("Select the Document for creating the return voucher");
+      }
+    } else {
+      toast.warning("Select the Customer for creating the return voucher");
+    }
   };
 
   const createReturnVoucherFunc = async () => {
@@ -760,7 +780,6 @@ function Parts(props) {
                 <div style={{ maxHeight: "400px", overflow: "auto" }}>
                   <SecondTable
                     secondTableData={secondTableData}
-                    secondSelectedRow={secondSelectedRow}
                     selectRowSecondFunc={selectRowSecondFunc}
                     thirdTableData={thirdTableData}
                   />
@@ -816,7 +835,10 @@ function Parts(props) {
           </div> */}
               <div>
                 <div style={{ maxHeight: "400px", overflow: "auto" }}>
-                  <ThirdTable thirdTableData={thirdTableData} />
+                  <ThirdTable
+                    thirdTableData={thirdTableData}
+                    setThirdTableData={setThirdTableData}
+                  />
 
                   {/* <BootstrapTable
                 keyField="Id"
