@@ -16,6 +16,7 @@ function ShopFloorMaterialAllotment(props) {
   const [tableData, setTableData] = useState([]);
   const [treeData, setTreeData] = useState([]);
   const [ncid, setncid] = useState("");
+  const [custCode, setCustCode] = useState("");
 
   console.log("Props Type", props.type);
   console.log("Props HasBom", props.hasbom);
@@ -209,8 +210,12 @@ function ShopFloorMaterialAllotment(props) {
     bgColor: "#98A8F8",
     onSelect: (row, isSelect, rowIndex, e) => {
       setncid(row.Ncid);
+      // console.log("row", row);
+      setCustCode(row.Cust_Code);
     },
   };
+
+  // console.log("custCode", custCode);
 
   const allotMaterial = () => {
     if (ncid === "") {
@@ -221,14 +226,14 @@ function ShopFloorMaterialAllotment(props) {
           "/MaterialManagement/ShopFloorIssue/Service/Parts/ShopFloorAllotmentForm", //MaterialAllotmentMain
 
           {
-            state: { ncid },
+            state: { ncid, custCode },
           }
         );
       } else if (props.formtype == "Units" || props.formtype == "Others") {
         nav(
           "/MaterialManagement/ShopFloorIssue/Service/Units/MaterialAllotmentForm", //UnitsMatAllotmentForm
           {
-            state: { ncid },
+            state: { ncid, custCode },
           }
         );
       }

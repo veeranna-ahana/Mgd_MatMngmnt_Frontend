@@ -16,6 +16,7 @@ const { endpoints } = require("../../../../../api/constants");
 function ProductionMatIssueParts() {
   const nav = useNavigate();
   const location = useLocation();
+  console.log("CustCode", location?.state?.custCode);
 
   const [tableData, setTableData] = useState([]);
   const [rowData, setRowData] = useState({});
@@ -87,10 +88,13 @@ function ProductionMatIssueParts() {
       });
     });
     //get table data
+
     let url2 =
       endpoints.getProductionMaterialIssuePartsTable +
       "?id=" +
-      location.state.issueIDVal;
+      location?.state?.issueIDVal +
+      "&custCode=" +
+      location?.state?.custCode;
     getRequest(url2, (data) => {
       console.log("table data..................... = ", data);
       setTableData(data);
