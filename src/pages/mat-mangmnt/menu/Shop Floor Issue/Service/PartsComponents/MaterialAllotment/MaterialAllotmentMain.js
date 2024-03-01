@@ -18,6 +18,8 @@ function MaterialAllotmentMain() {
   const location = useLocation();
   const nav = useNavigate();
   console.log("ncid = ", location?.state?.ncid);
+  console.log("custCode = ", location?.state?.custCode);
+
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
   const [formHeader, setFormHeader] = useState({});
   const [firstTable, setFirstTable] = useState([]);
@@ -535,7 +537,10 @@ function MaterialAllotmentMain() {
               "/MaterialManagement/ShopFloorIssue/IVListService/Issued/ShopMatIssueVoucher",
 
               {
-                state: { issueIDVal: data.insertId },
+                state: {
+                  issueIDVal: data.insertId,
+                  custCode: location?.state?.custCode,
+                },
               }
             );
           }
