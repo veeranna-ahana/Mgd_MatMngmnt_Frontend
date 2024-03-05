@@ -47,9 +47,13 @@ function OpenButtonDraftPartList() {
     id: "",
     partId: "",
     unitWeight: "",
+    custBomId: "",
     qtyReceived: "",
     qtyAccepted: "",
     qtyRejected: "0",
+    qtyUsed: 0,
+    qtyReturned: 0,
+    qtyIssued: 0,
   });
 
   //const [custDetailVal, setCustDetailVal] = useState("");
@@ -75,6 +79,8 @@ function OpenButtonDraftPartList() {
     type: "", //"Parts",
     address: "",
   });
+
+  console.log("formHeader.customer", formHeader.customer);
 
   async function fetchData() {
     const url =
@@ -165,21 +171,57 @@ function OpenButtonDraftPartList() {
     },
   ];
 
+  // const changePartID = (selected) => {
+  //   setSelectedPart(selected);
+
+  //   setInputPart((preValue) => ({
+  //     ...preValue,
+  //     partId: selected.length > 0 ? selected[0].PartId : "",
+  //   }));
+
+  //   postRequest(endpoints.updatePartReceiptDetails, inputPart, (data) => {
+  //     if (data.affectedRows !== 0) {
+  //       // Handle success, if needed
+  //     } else {
+  //       toast.error("Record Not Updated");
+  //     }
+  //   });
+
+  //   const newArray = partArray.map((p) =>
+  //     p.id === partUniqueId
+  //       ? {
+  //           ...p,
+  //           partId: selected.length > 0 ? selected[0].PartId : "",
+  //         }
+  //       : p
+  //   );
+
+  //   setPartArray(newArray);
+  // };
+
   const changePartID = (selected) => {
     setSelectedPart(selected);
 
-    setInputPart((preValue) => ({
-      ...preValue,
+    setInputPart((prevInputPart) => ({
+      ...prevInputPart,
       partId: selected.length > 0 ? selected[0].PartId : "",
     }));
 
-    postRequest(endpoints.updatePartReceiptDetails, inputPart, (data) => {
-      if (data.affectedRows !== 0) {
-        // Handle success, if needed
-      } else {
-        toast.error("Record Not Updated");
+    // Use the updated inputPart inside the postRequest callback
+    postRequest(
+      endpoints.updatePartReceiptDetails,
+      {
+        ...inputPart,
+        partId: selected.length > 0 ? selected[0].PartId : "",
+      },
+      (data) => {
+        if (data.affectedRows !== 0) {
+          // Handle success, if needed
+        } else {
+          toast.error("Record Not Updated");
+        }
       }
-    });
+    );
 
     const newArray = partArray.map((p) =>
       p.id === partUniqueId
@@ -383,6 +425,7 @@ function OpenButtonDraftPartList() {
     bgColor: "#8A92F0",
     onSelect: (row, isSelect, rowIndex, e) => {
       setPartUniqueId(row.id);
+      // console.log("row draft", row);
       setInputPart({
         id: row.id,
         partId: row.partId,
@@ -391,6 +434,10 @@ function OpenButtonDraftPartList() {
         qtyAccepted: row.qtyAccepted,
         qtyRejected: row.qtyRejected,
         qtyReceived: row.qtyReceived,
+        custBomId: formHeader.customer,
+        qtyUsed: row.QtyUsed,
+        qtyReturned: row.QtyReturned,
+        qtyIssued: row.QtyIssued,
       });
       setSelectedPart([{ PartId: row.partId }]);
     },
@@ -441,9 +488,13 @@ function OpenButtonDraftPartList() {
     e.preventDefault();
     if (formHeader.customer.length == 0) {
       toast.error("Please Select Customer");
-    } else if (formHeader.reference.length == 0)
+    } else if (formHeader.reference.length == 0) {
       toast.error("Please Enter Customer Document Material Reference");
-    else if (
+    } else if (formHeader.weight === "") {
+      toast.error(
+        "Enter the Customer Material Weight as per Customer Document"
+      );
+    } else if (
       parseFloat(inputPart.qtyAccepted) > parseFloat(inputPart.qtyReceived)
     ) {
       toast.error("QtyAccepted should be less than or equal to QtyReceived");
@@ -508,6 +559,7 @@ function OpenButtonDraftPartList() {
       partArray.length !== 0 &&
       (formHeader.weight == 0.0 ||
         formHeader.weight === null ||
+        formHeader.weight === "" ||
         formHeader.weight === undefined)
     ) {
       toast.error(
@@ -898,7 +950,11 @@ function OpenButtonDraftPartList() {
                 <input
                   className="in-field"
                   type="number"
-                  value={inputPart.qtyReceived - inputPart.qtyAccepted}
+                  // value={inputPart.qtyReceived - inputPart.qtyAccepted}
+                  value={
+                    parseFloat(inputPart.qtyReceived) -
+                    parseFloat(inputPart.qtyAccepted)
+                  }
                   name="qtyRejected"
                   readOnly
                 />

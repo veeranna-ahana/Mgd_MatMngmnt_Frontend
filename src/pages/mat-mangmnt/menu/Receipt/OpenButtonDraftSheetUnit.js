@@ -125,7 +125,7 @@ function OpenButtonDraftSheetUnit(props) {
     totalWeightCalculated: 0.0,
     totalWeight: "",
     locationNo: "",
-    upDated: "",
+    updated: "",
     qtyRejected: 0,
     qtyUsed: 0,
     qtyReturned: 0,
@@ -343,6 +343,7 @@ function OpenButtonDraftSheetUnit(props) {
   }, []); //[inputPart]);
 
   const changeMtrl = async (name, value) => {
+    console.log("Selected Material:", value);
     const newSelectedMtrl = value ? [{ Mtrl_Code: value }] : [];
     setSelectedMtrl(newSelectedMtrl);
 
@@ -444,6 +445,8 @@ function OpenButtonDraftSheetUnit(props) {
       }
     });
     //set inputPart set material code
+
+    console.log("Updating inputPart with:", name, value);
     setInputPart((preValue) => {
       //console.log(preValue)
       return {
@@ -456,6 +459,8 @@ function OpenButtonDraftSheetUnit(props) {
     setInputPart(inputPart);
 
     await delay(500);
+
+    console.log("Posting updated inputPart to backend:", inputPart);
     //update database row
     postRequest(endpoints.updateMtrlReceiptDetails, inputPart, (data) => {
       if (data.affectedRows !== 0) {
@@ -526,7 +531,11 @@ function OpenButtonDraftSheetUnit(props) {
       toast.error("Please Select Customer");
     } else if (formHeader.reference.length == 0)
       toast.error("Please Enter Customer Document Material Reference");
-    else if (parseFloat(inputPart.accepted) > parseFloat(inputPart.qty)) {
+    else if (formHeader.weight === "") {
+      toast.error(
+        "Enter the Customer Material Weight as per Customer Document"
+      );
+    } else if (parseFloat(inputPart.accepted) > parseFloat(inputPart.qty)) {
       toast.error("Accepted value should be less than or equal to Received");
     } else {
       if (saveUpdateCount == 0) {
@@ -541,10 +550,10 @@ function OpenButtonDraftSheetUnit(props) {
       } else {
         let flag1 = 0;
         for (let i = 0; i < materialArray.length; i++) {
-          console.log("Material Code", materialArray[i].mtrlCode);
-          console.log("locationNo", materialArray[i].locationNo);
-          console.log("Received", materialArray[i].qty);
-          console.log("Accepted", materialArray[i].accepted);
+          // console.log("Material Code", materialArray[i].mtrlCode);
+          // console.log("locationNo", materialArray[i].locationNo);
+          // console.log("Received", materialArray[i].qty);
+          // console.log("Accepted", materialArray[i].accepted);
 
           if (
             materialArray[i].mtrlCode == "" ||
@@ -601,6 +610,7 @@ function OpenButtonDraftSheetUnit(props) {
     } else if (
       materialArray.length !== 0 &&
       (formHeader.weight == 0.0 ||
+        formHeader.weight === "" ||
         formHeader.weight === null ||
         formHeader.weight === undefined)
     ) {
@@ -842,7 +852,7 @@ function OpenButtonDraftSheetUnit(props) {
           // getRequest(url, async (data) => {
           let url = endpoints.getSpecific_Wt + "?code=" + inputPart.mtrlCode;
           getRequest(url, async (data) => {
-            console.log("data", data);
+            // console.log("data", data);
             //setCustdata(data);
 
             let TotalWeightCalculated =
@@ -881,7 +891,7 @@ function OpenButtonDraftSheetUnit(props) {
               p.id === id
                 ? {
                     ...p,
-                    [name]: value,
+                    [name]: formattedValue,
                     qty: inputPart.qty,
                     // inspected: inputPart.inspected,
                     inspected: inputPart.inspected == true ? 1 : 0,
@@ -929,7 +939,7 @@ function OpenButtonDraftSheetUnit(props) {
       p.id === id
         ? {
             ...p,
-            [name]: value,
+            [name]: formattedValue,
             qty: inputPart.qty,
             // inspected: inputPart.inspected == "on" ? 1 : 0,
             inspected: inputPart.inspected == true ? 1 : 0,
@@ -954,7 +964,7 @@ function OpenButtonDraftSheetUnit(props) {
     clickToSelect: true,
     bgColor: "#8A92F0",
     onSelect: (row, isSelect, rowIndex, e) => {
-      console.log("Row = ", row);
+      // console.log("Row = ", row);
       setSelectedMtrl([{ Mtrl_Code: row.mtrlCode }]);
 
       if (row.updated === 1) {
@@ -967,6 +977,7 @@ function OpenButtonDraftSheetUnit(props) {
 
       const url1 = endpoints.getMtrlReceiptDetailsByID + "?id=" + row.id;
       getRequest(url1, async (data2) => {
+        // console.log("data2", data2);
         data2?.forEach((obj) => {
           obj.id = obj.Mtrl_Rv_id;
           obj.mtrlRvId = obj.Mtrl_Rv_id;
@@ -986,7 +997,7 @@ function OpenButtonDraftSheetUnit(props) {
           obj.totalWeightCalculated = obj.TotalWeightCalculated;
           obj.totalWeight = obj.TotalWeight;
           obj.locationNo = obj.LocationNo;
-          obj.updated = obj.Updated;
+          obj.updated = obj.UpDated;
           obj.qtyRejected = obj.QtyRejected;
           obj.qtyUsed = obj.QtyUsed;
           obj.qtyReturned = obj.QtyReturned;
@@ -997,24 +1008,29 @@ function OpenButtonDraftSheetUnit(props) {
 
           if (obj.id === row.id) {
             setMtrlStock(obj);
+            // console.log("obj.shapeID", obj.shapeID);
             setInputPart({
-              qtyRejected: obj.qtyRejected,
-              id: obj.id,
-              srl: obj.srl,
-              mtrlCode: obj.mtrlCode,
-              dynamicPara1: obj.dynamicPara1,
-              dynamicPara2: obj.dynamicPara2,
-              dynamicPara3: obj.dynamicPara3,
-              qty: obj.qty,
-              inspected: obj.inspected,
-              locationNo: obj.locationNo,
-              updated: obj.updated,
-              accepted: obj.accepted,
-              totalWeightCalculated: obj.totalWeightCalculated,
-              totalWeight: obj.totalWeight,
+              qtyRejected: obj.QtyRejected,
+              id: obj.Mtrl_Rv_id,
+              srl: obj.Srl,
+              mtrlCode: obj.Mtrl_Code,
+              custCode: obj.Cust_Code,
+              dynamicPara1: obj.DynamicPara1,
+              dynamicPara2: obj.DynamicPara2,
+              dynamicPara3: obj.DynamicPara3,
+              shapeID: obj.ShapeID,
+              qty: obj.Qty,
+              inspected: obj.Inspected,
+              locationNo: obj.LocationNo,
+              updated: obj.UpDated,
+              accepted: obj.Accepted,
+              totalWeightCalculated: obj.TotalWeightCalculated,
+              totalWeight: obj.TotalWeight,
+              qtyUsed: obj.QtyUsed,
+              qtyReturned: obj.QtyReturned,
             });
 
-            if (obj.shapeID === 1) {
+            if (obj.ShapeID === 1) {
               // Sheet
               setPara1Label("Width");
               setPara2Label("Length");
@@ -1089,75 +1105,162 @@ function OpenButtonDraftSheetUnit(props) {
     },
   };
 
+  // const addToStock = async () => {
+  //   if (Object.keys(mtrlStock).length === 0) {
+  //     toast.error("Please Select Material");
+  //   } else {
+  //     const newRow = {
+  //       //mtrlStockId :
+  //       mtrlRvId: mtrlStock.Mtrl_Rv_id,
+  //       custCode: mtrlStock.Cust_Code,
+  //       customer: formHeader.customerName,
+  //       custDocuNo: "",
+  //       rvNo: formHeader.rvNo,
+  //       mtrlCode: mtrlStock.Mtrl_Code,
+  //       shapeID: mtrlStock.shapeID,
+  //       shape: "",
+  //       material: mtrlStock.material,
+  //       dynamicPara1: mtrlStock.dynamicPara1,
+  //       dynamicPara2: mtrlStock.dynamicPara2,
+  //       dynamicPara3: mtrlStock.dynamicPara3,
+  //       dynamicPara4: "0.00",
+  //       locked: 0,
+  //       scrap: 0,
+  //       issue: 0,
+  //       weight: formHeader.weight,
+  //       scrapWeight: "0.00",
+  //       srl: mtrlStock.Srl,
+  //       ivNo: "",
+  //       ncProgramNo: "",
+  //       locationNo: mtrlStock.locationNo,
+  //       accepted: mtrlStock.accepted,
+  //     };
+
+  //     postRequest(endpoints.insertMtrlStockList, newRow, async (data) => {
+  //       if (data.affectedRows !== 0) {
+  //         //enable remove stock buttons
+  //         toast.success("Stock Added Successfully");
+
+  //         setBoolValStock("on");
+
+  //         setRmvBtn(true);
+  //         setAddBtn(false);
+  //       } else {
+  //         toast.error("Stock Not Added");
+  //       }
+  //     });
+
+  //     //update updated status = 1
+  //     let updateObj = {
+  //       id: mtrlStock.Mtrl_Rv_id,
+  //       upDated: 1,
+  //     };
+
+  //     console.log("updateObj", updateObj);
+  //     postRequest(
+  //       endpoints.updateMtrlReceiptDetailsUpdated,
+  //       updateObj,
+  //       async (data) => {
+  //         console.log("updated = 1");
+  //       }
+  //     );
+  //     // update checkbox
+  //     for (let i = 0; i < materialArray.length; i++) {
+  //       // if (materialArray[i].mtrlCode == mtrlStock.Mtrl_Code) {
+  //       if (materialArray[i].id === mtrlStock.id) {
+  //         materialArray[i].updated = 1;
+  //       }
+  //     }
+  //     await delay(500);
+  //     setMaterialArray(materialArray);
+  //     setInputPart({ ...inputPart, updated: 1 });
+  //   }
+  // };
+
   const addToStock = async () => {
     if (Object.keys(mtrlStock).length === 0) {
       toast.error("Please Select Material");
     } else {
-      const newRow = {
-        //mtrlStockId :
-        mtrlRvId: mtrlStock.Mtrl_Rv_id,
-        custCode: mtrlStock.Cust_Code,
-        customer: formHeader.customerName,
-        custDocuNo: "",
-        rvNo: formHeader.rvNo,
-        mtrlCode: mtrlStock.Mtrl_Code,
-        shapeID: mtrlStock.shapeID,
-        shape: "",
-        material: mtrlStock.material,
-        dynamicPara1: mtrlStock.dynamicPara1,
-        dynamicPara2: mtrlStock.dynamicPara2,
-        dynamicPara3: mtrlStock.dynamicPara3,
-        dynamicPara4: "0.00",
-        locked: 0,
-        scrap: 0,
-        issue: 0,
-        weight: formHeader.weight,
-        scrapWeight: "0.00",
-        srl: mtrlStock.Srl,
-        ivNo: "",
-        ncProgramNo: "",
-        locationNo: mtrlStock.locationNo,
-        accepted: mtrlStock.accepted,
-      };
+      let url = endpoints.getSpecific_Wt + "?code=" + inputPart.mtrlCode;
+      getRequest(url, async (data) => {
+        const weight = getWeight(
+          data,
+          parseFloat(inputPart.dynamicPara1),
+          parseFloat(inputPart.dynamicPara2),
+          parseFloat(inputPart.dynamicPara3)
+        );
 
-      postRequest(endpoints.insertMtrlStockList, newRow, async (data) => {
-        if (data.affectedRows !== 0) {
-          //enable remove stock buttons
-          toast.success("Stock Added Successfully");
+        // const finalWeight = (weight * 0.000001).toFixed(3);
+        const finalWeight = Math.round(weight * 0.000001 * 100) / 100;
 
-          setBoolValStock("on");
+        console.log("finalWeight", finalWeight);
 
-          setRmvBtn(true);
-          setAddBtn(false);
-        } else {
-          toast.error("Stock Not Added");
+        const newRow = {
+          //mtrlStockId :
+          mtrlRvId: mtrlStock.Mtrl_Rv_id,
+          custCode: mtrlStock.Cust_Code,
+          customer: formHeader.customerName,
+          custDocuNo: "",
+          rvNo: formHeader.rvNo,
+          mtrlCode: mtrlStock.Mtrl_Code,
+          shapeID: mtrlStock.shapeID,
+          shape: "",
+          material: mtrlStock.material,
+          dynamicPara1: mtrlStock.dynamicPara1,
+          dynamicPara2: mtrlStock.dynamicPara2,
+          dynamicPara3: mtrlStock.dynamicPara3,
+          dynamicPara4: "0.00",
+          locked: 0,
+          scrap: 0,
+          issue: 0,
+          weight: finalWeight,
+          scrapWeight: "0.00",
+          srl: mtrlStock.Srl,
+          ivNo: "",
+          ncProgramNo: "",
+          locationNo: mtrlStock.locationNo,
+          accepted: mtrlStock.accepted,
+          // qtyAccepted: mtrlStock.qtyAccepted,
+        };
+
+        postRequest(endpoints.insertMtrlStockList, newRow, async (data) => {
+          if (data.affectedRows !== 0) {
+            //enable remove stock buttons
+            toast.success("Stock Added Successfully");
+
+            setBoolValStock("on");
+
+            setRmvBtn(true);
+            setAddBtn(false);
+          } else {
+            toast.error("Stock Not Added");
+          }
+        });
+
+        //update updated status = 1
+        let updateObj = {
+          id: mtrlStock.Mtrl_Rv_id,
+          upDated: 1,
+        };
+        console.log("updateObj", updateObj);
+        postRequest(
+          endpoints.updateMtrlReceiptDetailsUpdated,
+          updateObj,
+          async (data) => {
+            console.log("updated", data.upDated);
+          }
+        );
+        //update checkbox
+        for (let i = 0; i < materialArray.length; i++) {
+          // if (materialArray[i].mtrlCode == mtrlStock.Mtrl_Code) {
+          if (materialArray[i].id === mtrlStock.id) {
+            materialArray[i].updated = 1;
+          }
         }
+        await delay(500);
+        setInputPart({ ...inputPart, updated: 1 });
+        setMaterialArray(materialArray);
       });
-
-      //update updated status = 1
-      let updateObj = {
-        id: mtrlStock.Mtrl_Rv_id,
-        upDated: 1,
-      };
-
-      console.log("updateObj", updateObj);
-      postRequest(
-        endpoints.updateMtrlReceiptDetailsUpdated,
-        updateObj,
-        async (data) => {
-          console.log("updated = 1");
-        }
-      );
-      // update checkbox
-      for (let i = 0; i < materialArray.length; i++) {
-        // if (materialArray[i].mtrlCode == mtrlStock.Mtrl_Code) {
-        if (materialArray[i].id === mtrlStock.id) {
-          materialArray[i].updated = 1;
-        }
-      }
-      await delay(500);
-      setMaterialArray(materialArray);
-      setInputPart({ ...inputPart, updated: 1 });
     }
   };
 
@@ -1336,7 +1439,7 @@ function OpenButtonDraftSheetUnit(props) {
       postRequest(endpoints.deleteMtrlReceiptDetails, inputPart, (data) => {
         if (data.affectedRows !== 0) {
           const newArray = materialArray.filter((p) => p.id !== inputPart.id);
-          console.log("newArray", newArray);
+          // console.log("newArray", newArray);
           setMaterialArray(newArray);
           toast.success("Material Deleted");
           setInputPart({
@@ -1397,6 +1500,8 @@ function OpenButtonDraftSheetUnit(props) {
     deleteRVButtonState();
     setDeleteRvModalOpen(false);
   };
+
+  console.log("rvId", formHeader.rvId);
 
   const blockInvalidQtyChar = (e) =>
     ["e", "E", "+", "-", "."].includes(e.key) && e.preventDefault();

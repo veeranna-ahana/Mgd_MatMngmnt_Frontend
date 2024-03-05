@@ -94,12 +94,16 @@ export function formatDate(dateObj, format) {
 }
 
 export function getWeight(obj, para1, para2, para3) {
-  //console.log(" getweight = ", obj);
+  console.log(" getweight = ", obj);
+  console.log(" para1 = ", para1);
+  console.log(" para2 = ", para2);
+  console.log(" para3 = ", para3);
+
   let dblWeight = 0;
   let dblVol = getVolume(obj, obj.Shape, para1, para2, para3);
-  //console.log(" dblVol = ", dblVol);
-  dblWeight = dblVol * obj.SpecificWt;
-  //dblWeight = dblVol * getDensity();
+  console.log(" dblVol = ", dblVol);
+  // dblWeight = dblVol * obj.SpecificWt;
+  dblWeight = dblVol * getDensity(obj);
   console.log(" dblweight = ", dblWeight);
   return dblWeight;
 }
@@ -122,6 +126,23 @@ export function getWeight(obj, para1, para2, para3) {
         return 0
 }*/
 
+export function getDensity(obj) {
+  if (!obj) {
+    return 0;
+  }
+
+  const specificWt = parseFloat(obj.SpecificWt);
+  const specific_Wt = parseFloat(obj.Specific_Wt);
+
+  if (!isNaN(specificWt) && specificWt > 0) {
+    return specificWt;
+  } else if (!isNaN(specific_Wt) && specific_Wt > 0) {
+    return specific_Wt;
+  } else {
+    return 0;
+  }
+}
+
 export function getVolume(obj, shape, para1, para2, para3) {
   let dblVol = 0;
   if (shape === "Sheet") {
@@ -130,8 +151,8 @@ export function getVolume(obj, shape, para1, para2, para3) {
   } else if (shape === "Tiles") {
     dblVol = obj.StaticPara1 * obj.StaticPara2 * obj.StaticPara3;
   } else if (shape === "Tube Rectangle") {
-    console.log("entering into tube rectangle..............");
-    debugger;
+    // console.log("entering into tube rectangle..............");
+    // debugger;
     dblVol =
       para1 *
       (obj.StaticPara1 * obj.StaticPara2 -
