@@ -38,13 +38,26 @@ function PNew() {
   const [partUniqueId, setPartUniqueId] = useState();
   const [partArray, setPartArray] = useState([]);
 
+  // const [inputPart, setInputPart] = useState({
+  //   id: "",
+  //   partId: "",
+  //   unitWeight: "",
+  //   qtyReceived: 0,
+  //   qtyAccepted: 0,
+  //   qtyRejected: 0,
+  // });
+
   const [inputPart, setInputPart] = useState({
     id: "",
     partId: "",
     unitWeight: "",
-    qtyReceived: 0,
-    qtyAccepted: 0,
-    qtyRejected: 0,
+    custBomId: "",
+    qtyReceived: "",
+    qtyAccepted: "",
+    qtyRejected: "0",
+    qtyUsed: 0,
+    qtyReturned: 0,
+    qtyIssued: 0,
   });
 
   const [calcWeightVal, setCalcWeightVal] = useState(0);
@@ -136,7 +149,7 @@ function PNew() {
     {
       text: "Qty Rejected",
       dataField: "qtyRejected",
-      formatter: (celContent, row) => <div className="">{qtyRejected}</div>,
+      // formatter: (celContent, row) => <div className="">{qtyRejected}</div>,
       headerStyle: { whiteSpace: "nowrap" },
     },
   ];
@@ -144,17 +157,26 @@ function PNew() {
   const changePartID = (selected) => {
     setSelectedPart(selected);
 
-    setInputPart((preValue) => ({
-      ...preValue,
+    setInputPart((prevInputPart) => ({
+      ...prevInputPart,
       partId: selected.length > 0 ? selected[0].PartId : "",
     }));
 
-    postRequest(endpoints.updatePartReceiptDetails, inputPart, (data) => {
-      if (data.affectedRows !== 0) {
-      } else {
-        toast.error("Record Not Updated");
+    // Use the updated inputPart inside the postRequest callback
+    postRequest(
+      endpoints.updatePartReceiptDetails,
+      {
+        ...inputPart,
+        partId: selected.length > 0 ? selected[0].PartId : "",
+      },
+      (data) => {
+        if (data.affectedRows !== 0) {
+          // Handle success, if needed
+        } else {
+          toast.error("Record Not Updated");
+        }
       }
-    });
+    );
 
     const newArray = partArray.map((p) =>
       p.id === partUniqueId
@@ -168,9 +190,65 @@ function PNew() {
     setPartArray(newArray);
   };
 
+  // const changePartHandle = (e) => {
+  //   const { value, name } = e.target;
+
+  //   if (name === "unitWeight" && parseFloat(value) < 0) {
+  //     toast.error("unitWeight should be a positive value");
+  //     return;
+  //   }
+
+  //   const formattedValue =
+  //     name === "unitWeight" ? value.replace(/(\.\d{3})\d+/, "$1") : value;
+  //   setInputPart((preValue) => {
+  //     return {
+  //       ...preValue,
+  //       [name]: formattedValue,
+  //     };
+  //   });
+  //   inputPart[name] = formattedValue;
+  //   inputPart.custBomId = formHeader.customer;
+  //   inputPart.rvId = formHeader.rvId;
+  //   inputPart.qtyRejected =
+  //     parseFloat(inputPart.qtyReceived) - parseFloat(inputPart.qtyAccepted);
+  //   inputPart.qtyUsed = 0;
+  //   inputPart.qtyReturned = 0;
+  //   inputPart.qtyIssued = 0;
+
+  //   setInputPart(inputPart);
+
+  //   postRequest(endpoints.updatePartReceiptDetails, inputPart, (data) => {
+  //     if (data.affectedRows !== 0) {
+  //     } else {
+  //       toast.error("Record Not Updated");
+  //     }
+  //   });
+
+  //   const newArray = partArray.map((p) =>
+  //     p.id === partUniqueId
+  //       ? {
+  //           ...p,
+  //           [name]: formattedValue,
+  //         }
+  //       : p
+  //   );
+
+  //   setPartArray(newArray);
+
+  //   let totwt = 0;
+  //   newArray.map((obj) => {
+  //     totwt =
+  //       parseFloat(totwt) +
+  //       // parseFloat(obj.unitWeight) * parseFloat(obj.qtyReceived);
+  //       parseFloat(obj.unitWeight) * parseFloat(obj.qtyAccepted);
+  //   });
+
+  //   setCalcWeightVal(parseFloat(totwt).toFixed(3));
+  //   setFormHeader({ ...formHeader, calcWeight: parseFloat(totwt).toFixed(3) });
+  // };
+
   const changePartHandle = (e) => {
     const { value, name } = e.target;
-
     if (name === "unitWeight" && parseFloat(value) < 0) {
       toast.error("unitWeight should be a positive value");
       return;
@@ -187,29 +265,50 @@ function PNew() {
     inputPart[name] = formattedValue;
     inputPart.custBomId = formHeader.customer;
     inputPart.rvId = formHeader.rvId;
+    // inputPart.qtyRejected = 0;
     inputPart.qtyRejected =
       parseFloat(inputPart.qtyReceived) - parseFloat(inputPart.qtyAccepted);
     inputPart.qtyUsed = 0;
     inputPart.qtyReturned = 0;
     inputPart.qtyIssued = 0;
-
     setInputPart(inputPart);
 
+    //update blank row with respected to modified part textfield
     postRequest(endpoints.updatePartReceiptDetails, inputPart, (data) => {
-      if (data.affectedRows !== 0) {
+      if (data?.affectedRows !== 0) {
       } else {
         toast.error("Record Not Updated");
       }
     });
 
-    const newArray = partArray.map((p) =>
-      p.id === partUniqueId
-        ? {
-            ...p,
-            [name]: formattedValue,
-          }
-        : p
-    );
+    // const newArray = partArray.map((p) =>
+    //   p.id === partUniqueId
+    //     ? {
+    //         ...p,
+    //         [name]: formattedValue,
+
+    //       }
+    //     : p
+    // );
+
+    const newArray = partArray.map((p) => {
+      if (p.id === partUniqueId) {
+        // Calculate the updated qtyRejected based on the new qtyReceived and qtyAccepted values
+        const qtyReceived =
+          name === "qtyReceived" ? formattedValue : p.qtyReceived;
+        const qtyAccepted =
+          name === "qtyAccepted" ? formattedValue : p.qtyAccepted;
+        const qtyRejected = parseFloat(qtyReceived) - parseFloat(qtyAccepted);
+
+        return {
+          ...p,
+          [name]: formattedValue,
+          qtyRejected: isNaN(qtyRejected) ? 0 : qtyRejected,
+        };
+      } else {
+        return p;
+      }
+    });
 
     setPartArray(newArray);
 
@@ -224,59 +323,6 @@ function PNew() {
     setCalcWeightVal(parseFloat(totwt).toFixed(3));
     setFormHeader({ ...formHeader, calcWeight: parseFloat(totwt).toFixed(3) });
   };
-
-  // const changePartHandle = (e) => {
-  //   const { value, name } = e.target;
-
-  //   if (name === "unitWeight" && parseFloat(value) < 0) {
-  //     toast.error("unitWeight should be a positive value");
-  //     return;
-  //   }
-
-  //   const formattedValue =
-  //     name === "unitWeight" ? value.replace(/(\.\d{3})\d+/, "$1") : value;
-
-  //   // Update inputPart state
-  //   setInputPart((prevInputPart) => ({
-  //     ...prevInputPart,
-  //     [name]: formattedValue,
-  //     custBomId: formHeader.customer,
-  //     rvId: formHeader.rvId,
-  //     qtyRejected: inputPart.qtyReceived - inputPart.qtyAccepted,
-  //     qtyUsed: 0,
-  //     qtyReturned: 0,
-  //     qtyIssued: 0,
-  //   }));
-
-  //   // Update the server with the new inputPart data
-  //   postRequest(endpoints.updatePartReceiptDetails, inputPart, (data) => {
-  //     if (data.affectedRows === 0) {
-  //       toast.error("Record Not Updated");
-  //     }
-  //   });
-
-  //   // Update the partArray with the new value
-  //   const newArray = partArray.map((p) =>
-  //     p.id === partUniqueId
-  //       ? {
-  //           ...p,
-  //           [name]: formattedValue,
-  //         }
-  //       : p
-  //   );
-  //   setPartArray(newArray);
-
-  //   // Calculate and set the total weight
-  //   let totwt = 0;
-  //   newArray.forEach((obj) => {
-  //     totwt += parseFloat(obj.unitWeight) * parseFloat(obj.qtyAccepted);
-  //   });
-  //   setCalcWeightVal(totwt.toFixed(3));
-  //   setFormHeader((prevFormHeader) => ({
-  //     ...prevFormHeader,
-  //     calcWeight: totwt.toFixed(3),
-  //   }));
-  // };
 
   //add new part
   let { partId, unitWeight, qtyReceived, qtyAccepted, qtyRejected } = inputPart;
@@ -388,6 +434,7 @@ function PNew() {
     clickToSelect: true,
     bgColor: "#8A92F0",
     onSelect: (row, isSelect, rowIndex, e) => {
+      // console.log("row new", row);
       setPartUniqueId(row.id);
       setInputPart({
         id: row.id,
@@ -397,6 +444,7 @@ function PNew() {
         qtyRejected: row.qtyRejected,
         qtyReceived: row.qtyReceived,
       });
+
       setSelectedPart([{ PartId: row.partId }]);
     },
   };
@@ -473,6 +521,10 @@ function PNew() {
       toast.error("Please Select Customer");
     } else if (formHeader.reference.length === 0) {
       toast.error("Please Enter Customer Document Material Reference");
+    } else if (formHeader.weight === "") {
+      toast.error(
+        "Enter the Customer Material Weight as per Customer Document"
+      );
     } else if (
       parseFloat(inputPart.qtyAccepted) > parseFloat(inputPart.qtyReceived)
     ) {
@@ -546,6 +598,7 @@ function PNew() {
       partArray.length !== 0 &&
       (formHeader.weight === 0.0 ||
         formHeader.weight === "0" ||
+        formHeader.weight === "" ||
         formHeader.weight === null ||
         formHeader.weight === undefined)
     ) {
@@ -934,8 +987,12 @@ function PNew() {
               <div className="col-md-8 ">
                 <input
                   className="in-field"
-                  type="nember"
-                  value={inputPart.qtyReceived - inputPart.qtyAccepted}
+                  type="number"
+                  // value={inputPart.qtyReceived - inputPart.qtyAccepted}
+                  value={
+                    parseFloat(inputPart.qtyReceived) -
+                    parseFloat(inputPart.qtyAccepted)
+                  }
                   name="qtyRejected"
                   readOnly
                 />

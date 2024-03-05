@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getWeight } from "../../../../utils";
+
 import BootstrapTable from "react-bootstrap-table-next";
 import { formatDate } from "../../../../utils";
 import { useLocation } from "react-router-dom";
@@ -348,98 +350,205 @@ function OpenButtonOpenSheetUnit() {
       callback("hello");
     }, 500);
   }
+  // const addToStock = async () => {
+  //   if (Object.keys(mtrlStock).length === 0) {
+  //     toast.error("Please Select Material");
+  //   } else {
+  //     const newRow = {
+  //       //mtrlStockId :
+  //       mtrlRvId: mtrlStock.Mtrl_Rv_id,
+  //       custCode: mtrlStock.Cust_Code,
+  //       customer: formHeader.customerName,
+  //       custDocuNo: "",
+  //       rvNo: formHeader.rvNo,
+  //       mtrlCode: mtrlStock.Mtrl_Code,
+  //       shapeID: mtrlStock.shapeID,
+  //       shape: "",
+  //       material: mtrlStock.material,
+  //       dynamicPara1: mtrlStock.dynamicPara1,
+  //       dynamicPara2: mtrlStock.dynamicPara2,
+  //       dynamicPara3: mtrlStock.dynamicPara3,
+  //       dynamicPara4: "0.00",
+  //       locked: 0,
+  //       scrap: 0,
+  //       issue: 0,
+  //       weight: formHeader.weight,
+  //       scrapWeight: "0.00",
+  //       srl: mtrlStock.Srl,
+  //       ivNo: "",
+  //       ncProgramNo: "",
+  //       locationNo: mtrlStock.locationNo,
+  //       // qtyAccepted: mtrlStock.qtyAccepted,
+  //       accepted: mtrlStock.accepted,
+  //     };
+
+  //     // postRequest(endpoints.insertMtrlStockList, newRow, async (data) => {
+
+  //     //   if (data.affectedRows !== 0) {
+  //     //     //enable remove stock buttons
+  //     //     toast.success("Stock Added Successfully");
+  //     //     // setBoolVal2(true);
+  //     //     // setBoolVal3(false);
+  //     //     setRmvBtn(true);
+  //     //     setAddBtn(false);
+  //     //   } else {
+  //     //     toast.error("Stock Not Added");
+  //     //   }
+  //     // });
+
+  //     postRequest(endpoints.insertMtrlStockList, newRow, async (data) => {
+  //       if (data.affectedRows !== 0) {
+  //         //enable remove stock buttons
+  //         toast.success("Stock Added Successfully");
+  //         //setBoolVal2(true);
+  //         //setBoolVal3(false);
+  //         setBoolValStock("on");
+  //         // setBoolVal6(true);
+  //         // setBoolVal7(false);
+  //         setRmvBtn(true);
+  //         setAddBtn(false);
+  //       } else {
+  //         toast.error("Stock Not Added");
+  //       }
+  //     });
+  //     //update updated status = 1
+  //     let updateObj = {
+  //       id: mtrlStock.Mtrl_Rv_id,
+  //       upDated: 1,
+  //     };
+  //     postRequest(
+  //       endpoints.updateMtrlReceiptDetailsUpdated,
+  //       updateObj,
+  //       async (data) => {
+  //         // console.log("updated = 1");s
+  //       }
+  //     );
+
+  //     // updateCount(1, (nm) => {
+
+  //     //   setMtrlArray(mtrlArray);
+  //     // });
+
+  //     for (let i = 0; i < mtrlArray.length; i++) {
+  //       if (mtrlArray[i].Mtrl_Rv_id == mtrlStock.Mtrl_Rv_id) {
+  //         // if (mtrlArray[i].mtrlCode == mtrlStock.Mtrl_Code) {
+  //         mtrlArray[i].updated = 1;
+  //       }
+  //     }
+  //     await delay(500);
+  //     let newArray = mtrlArray;
+
+  //     setMtrlArray([]);
+  //     await delay(200);
+  //     setMtrlArray(newArray);
+  //     // setInputPart({ ...inputPart, upda     ted: 1 });
+  //   }
+  // };
+
   const addToStock = async () => {
     if (Object.keys(mtrlStock).length === 0) {
       toast.error("Please Select Material");
     } else {
-      const newRow = {
-        //mtrlStockId :
-        mtrlRvId: mtrlStock.Mtrl_Rv_id,
-        custCode: mtrlStock.Cust_Code,
-        customer: formHeader.customerName,
-        custDocuNo: "",
-        rvNo: formHeader.rvNo,
-        mtrlCode: mtrlStock.Mtrl_Code,
-        shapeID: mtrlStock.shapeID,
-        shape: "",
-        material: mtrlStock.material,
-        dynamicPara1: mtrlStock.dynamicPara1,
-        dynamicPara2: mtrlStock.dynamicPara2,
-        dynamicPara3: mtrlStock.dynamicPara3,
-        dynamicPara4: "0.00",
-        locked: 0,
-        scrap: 0,
-        issue: 0,
-        weight: formHeader.weight,
-        scrapWeight: "0.00",
-        srl: mtrlStock.Srl,
-        ivNo: "",
-        ncProgramNo: "",
-        locationNo: mtrlStock.locationNo,
-        // qtyAccepted: mtrlStock.qtyAccepted,
-        accepted: mtrlStock.accepted,
-      };
+      let url = endpoints.getSpecific_Wt + "?code=" + inputPart.mtrlCode;
+      getRequest(url, async (data) => {
+        const weight = getWeight(
+          data,
+          parseFloat(inputPart.dynamicPara1),
+          parseFloat(inputPart.dynamicPara2),
+          parseFloat(inputPart.dynamicPara3)
+        );
 
-      // postRequest(endpoints.insertMtrlStockList, newRow, async (data) => {
+        const finalWeight = Math.round(weight * 0.000001 * 100) / 100;
 
-      //   if (data.affectedRows !== 0) {
-      //     //enable remove stock buttons
-      //     toast.success("Stock Added Successfully");
-      //     // setBoolVal2(true);
-      //     // setBoolVal3(false);
-      //     setRmvBtn(true);
-      //     setAddBtn(false);
-      //   } else {
-      //     toast.error("Stock Not Added");
-      //   }
-      // });
+        const newRow = {
+          //mtrlStockId :
+          mtrlRvId: mtrlStock.Mtrl_Rv_id,
+          custCode: mtrlStock.Cust_Code,
+          customer: formHeader.customerName,
+          custDocuNo: "",
+          rvNo: formHeader.rvNo,
+          mtrlCode: mtrlStock.Mtrl_Code,
+          shapeID: mtrlStock.shapeID,
+          shape: "",
+          material: mtrlStock.material,
+          dynamicPara1: mtrlStock.dynamicPara1,
+          dynamicPara2: mtrlStock.dynamicPara2,
+          dynamicPara3: mtrlStock.dynamicPara3,
+          dynamicPara4: "0.00",
+          locked: 0,
+          scrap: 0,
+          issue: 0,
+          weight: finalWeight,
+          scrapWeight: "0.00",
+          srl: mtrlStock.Srl,
+          ivNo: "",
+          ncProgramNo: "",
+          locationNo: mtrlStock.locationNo,
+          // qtyAccepted: mtrlStock.qtyAccepted,
+          accepted: mtrlStock.accepted,
+        };
 
-      postRequest(endpoints.insertMtrlStockList, newRow, async (data) => {
-        if (data.affectedRows !== 0) {
-          //enable remove stock buttons
-          toast.success("Stock Added Successfully");
-          //setBoolVal2(true);
-          //setBoolVal3(false);
-          setBoolValStock("on");
-          // setBoolVal6(true);
-          // setBoolVal7(false);
-          setRmvBtn(true);
-          setAddBtn(false);
-        } else {
-          toast.error("Stock Not Added");
+        // postRequest(endpoints.insertMtrlStockList, newRow, async (data) => {
+
+        //   if (data.affectedRows !== 0) {
+        //     //enable remove stock buttons
+        //     toast.success("Stock Added Successfully");
+        //     // setBoolVal2(true);
+        //     // setBoolVal3(false);
+        //     setRmvBtn(true);
+        //     setAddBtn(false);
+        //   } else {
+        //     toast.error("Stock Not Added");
+        //   }
+        // });
+
+        postRequest(endpoints.insertMtrlStockList, newRow, async (data) => {
+          if (data.affectedRows !== 0) {
+            //enable remove stock buttons
+            toast.success("Stock Added Successfully");
+            //setBoolVal2(true);
+            //setBoolVal3(false);
+            setBoolValStock("on");
+            // setBoolVal6(true);
+            // setBoolVal7(false);
+            setRmvBtn(true);
+            setAddBtn(false);
+          } else {
+            toast.error("Stock Not Added");
+          }
+        });
+        //update updated status = 1
+        let updateObj = {
+          id: mtrlStock.Mtrl_Rv_id,
+          upDated: 1,
+        };
+        postRequest(
+          endpoints.updateMtrlReceiptDetailsUpdated,
+          updateObj,
+          async (data) => {
+            // console.log("updated = 1");s
+          }
+        );
+
+        // updateCount(1, (nm) => {
+
+        //   setMtrlArray(mtrlArray);
+        // });
+
+        for (let i = 0; i < mtrlArray.length; i++) {
+          if (mtrlArray[i].Mtrl_Rv_id == mtrlStock.Mtrl_Rv_id) {
+            // if (mtrlArray[i].mtrlCode == mtrlStock.Mtrl_Code) {
+            mtrlArray[i].updated = 1;
+          }
         }
+        await delay(500);
+        let newArray = mtrlArray;
+
+        setMtrlArray([]);
+        await delay(200);
+        setMtrlArray(newArray);
+        // setInputPart({ ...inputPart, updated: 1 });
       });
-      //update updated status = 1
-      let updateObj = {
-        id: mtrlStock.Mtrl_Rv_id,
-        upDated: 1,
-      };
-      postRequest(
-        endpoints.updateMtrlReceiptDetailsUpdated,
-        updateObj,
-        async (data) => {
-          // console.log("updated = 1");s
-        }
-      );
-
-      // updateCount(1, (nm) => {
-
-      //   setMtrlArray(mtrlArray);
-      // });
-
-      for (let i = 0; i < mtrlArray.length; i++) {
-        if (mtrlArray[i].Mtrl_Rv_id == mtrlStock.Mtrl_Rv_id) {
-          // if (mtrlArray[i].mtrlCode == mtrlStock.Mtrl_Code) {
-          mtrlArray[i].updated = 1;
-        }
-      }
-      await delay(500);
-      let newArray = mtrlArray;
-
-      setMtrlArray([]);
-      await delay(200);
-      setMtrlArray(newArray);
-      // setInputPart({ ...inputPart, updated: 1 });
     }
   };
 
