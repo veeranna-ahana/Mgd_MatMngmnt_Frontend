@@ -260,7 +260,7 @@ const PrintDailyReportReceiptTable = ({
                       <Text style={styles.rvnoVal}>{item.RV_No}</Text>
                       <Text style={styles.customerVal}>{item.Customer}</Text>
                       <Text style={styles.materialVal}>{item.material}</Text>
-                      <Text style={styles.shapeVal}>{item.Shape}</Text>
+                      <Text style={styles.shapeVal}>{item.mtrl_code}</Text>
                       <Text style={styles.totalweightVal}>
                         {item.totalWeight}
                       </Text>

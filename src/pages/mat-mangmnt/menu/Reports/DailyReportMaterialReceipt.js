@@ -7,23 +7,22 @@ function DailyReportMaterialReceipt() {
       {" "}
       <div style={{ height: "200px", overflowY: "scroll" }}>
         <Table striped>
-          <thead
-          className="tableHeaderBGColor">
-            style={{
+          <thead className="tableHeaderBGColor">
+            style=
+            {{
               textAlign: "center",
               position: "sticky",
               top: "-1px",
             }}
-          >
             <tr>
-              <th style={{whiteSpace:"nowrap"}}>RV No</th>
+              <th style={{ whiteSpace: "nowrap" }}>RV No</th>
               <th>Customer</th>
-              <th style={{whiteSpace:"nowrap"}}>Customer Doc No</th>
+              <th style={{ whiteSpace: "nowrap" }}>Customer Doc No</th>
               <th>Type</th>
-              <th style={{whiteSpace:"nowrap"}}>Receipt Details</th>
+              <th style={{ whiteSpace: "nowrap" }}>Receipt Details</th>
               <th>Quantity</th>
-              <th style={{whiteSpace:"nowrap"}}>Weight Caluclated</th>
-              <th style={{whiteSpace:"nowrap"}}>Actual Weight</th>
+              <th style={{ whiteSpace: "nowrap" }}>Weight Caluclated</th>
+              <th style={{ whiteSpace: "nowrap" }}>Actual Weight</th>
             </tr>
           </thead>
 
