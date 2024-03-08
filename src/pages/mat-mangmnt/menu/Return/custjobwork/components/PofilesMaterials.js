@@ -312,13 +312,22 @@ function PofilesMaterials(props) {
                       RV_Srl: "",
                       Qty: element.Qty,
                       TotalWeightCalculated: (
-                        parseFloat(element.Qty) * parseFloat(element.Weight)
+                        parseFloat(element.Qty) *
+                        parseFloat(
+                          element.Scrap === 0
+                            ? element.Weight
+                            : element.ScrapWeight
+                        )
                       )
                         // parseFloat(element.TotalCalculatedWeight)
                         .toFixed(3),
                       TotalWeight: (
                         parseFloat(element.Qty) *
-                        parseFloat(element.ScrapWeight)
+                        parseFloat(
+                          element.Scrap != 0
+                            ? element.Weight
+                            : element.ScrapWeight
+                        )
                       )
                         // parseFloat(element.TotalWeight)
                         .toFixed(3),
