@@ -45,7 +45,7 @@ function StockList(props) {
 
       //set customer 0
       const found = await data.find((obj) => obj.Cust_Code === "0000");
-      console.log("cust data found = ", found);
+      //console.log("cust data found = ", found);
       setCustomerDetails(() => {
         return {
           customerName: found.Cust_name,
@@ -68,7 +68,7 @@ function StockList(props) {
           data[i].id = i + 1;
         }
         setFirstTable(data);
-        console.log("first table = ", data);
+        //console.log("first table = ", data);
       });
 
       //second table
@@ -78,7 +78,7 @@ function StockList(props) {
         }
         setSecondAllData(data);
         //setFirstTable(data);
-        console.log("second table = ", data);
+        //console.log("second table = ", data);
       });
 
       //third table
@@ -88,7 +88,7 @@ function StockList(props) {
         }
         //setFirstTable(data);
         setThirdAllData(data);
-        console.log("third table = ", data);
+        //console.log("third table = ", data);
       });
     }
   };
@@ -98,7 +98,7 @@ function StockList(props) {
   }, []);
 
   const changeCustomer = (e) => {
-    //console.log("e = ", e);
+    ////console.log("e = ", e);
     if (e.length !== 0) {
       setCustCode(e[0].Cust_Code);
 
@@ -114,7 +114,7 @@ function StockList(props) {
           data[i].id = i + 1;
         }
         setFirstTable(data);
-        console.log("first table = ", data);
+        //console.log("first table = ", data);
       });
 
       //second table
@@ -124,7 +124,7 @@ function StockList(props) {
         }
         setSecondAllData(data);
         //setFirstTable(data);
-        console.log("second table = ", data);
+        //console.log("second table = ", data);
       });
 
       //third table
@@ -134,7 +134,7 @@ function StockList(props) {
         }
         //setFirstTable(data);
         setThirdAllData(data);
-        console.log("third table = ", data);
+        //console.log("third table = ", data);
       });
 
       //set customer data
@@ -256,7 +256,7 @@ function StockList(props) {
     clickToSelect: true,
     bgColor: "#98A8F8",
     onSelect: (row, isSelect, rowIndex, e) => {
-      //console.log("row = ", row);
+      ////console.log("row = ", row);
       setSecondTable(
         secondAllData.filter((obj) => obj.Material === row.Material)
       );
@@ -268,7 +268,7 @@ function StockList(props) {
     clickToSelect: true,
     bgColor: "#98A8F8",
     onSelect: (row, isSelect, rowIndex, e) => {
-      //console.log("row = ", row);
+      ////console.log("row = ", row);
       setThirdTable(
         thirdAllData.filter((obj) => obj.Mtrl_Code === row.Mtrl_Code)
       );
@@ -290,7 +290,7 @@ function StockList(props) {
   for (let i = 0; i < thirdTable.length; i++) {
     if (thirdTable[i].Scrap !== 0) {
       tq2 = tq2 + thirdTable[i].Qty;
-      tw2 = tw2 + parseFloat(thirdTable[i].Weight);
+      tw2 = tw2 + parseFloat(thirdTable[i].ScrapWeight);
     }
   }
   delay(300);
@@ -298,6 +298,8 @@ function StockList(props) {
   const scrapDataTbl = thirdTable.filter((item, index) => {
     return item.Scrap !== 0;
   });
+
+  //console.log("scrapDataTbl", scrapDataTbl);
 
   const tblDataTbl = thirdTable.filter((item, index) => {
     return item.Scrap === 0;
@@ -420,8 +422,8 @@ function StockList(props) {
   }
   //fullStockTable.push({ material: "Aluminium", data: thirdAllData });
   delay(500);
-  // console.log("table = ", fullStockTable);
-  // console.log("table scrap = ", fullStockScrapTable);
+  // //console.log("table = ", fullStockTable);
+  // //console.log("table scrap = ", fullStockScrapTable);
 
   // nav("/MaterialManagement/Reports/PrintReportFullStockList", {
   //   state: {
@@ -486,8 +488,8 @@ function StockList(props) {
     // }
     // //fullStockTable.push({ material: "Aluminium", data: thirdAllData });
     // await delay(500);
-    // console.log("table = ", fullStockTable);
-    // console.log("table scrap = ", fullStockScrapTable);
+    // //console.log("table = ", fullStockTable);
+    // //console.log("table scrap = ", fullStockScrapTable);
 
     // nav("/MaterialManagement/Reports/PrintReportFullStockList", {
     //   state: {
