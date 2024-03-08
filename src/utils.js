@@ -200,14 +200,27 @@ export function get_Iv_DetailsEntry(
   else {
     if (Shape === "Sheet") {
       Details =
-        (dblDP1 + " " + objShape.DynamicPara1Unit + " X " + dblDP2) &
-        (" " +
-          objShape.DynamicPara2Unit +
-          " X " +
-          objMaterialCode.StaticPara1 +
-          " " +
-          objShape.StaticPara1Unit +
-          " ");
+        dblDP1 +
+        " " +
+        objShape.DynamicPara1Unit +
+        " X " +
+        dblDP2 +
+        " " +
+        objShape.DynamicPara2Unit +
+        " X " +
+        objMaterialCode.StaticPara1 +
+        " " +
+        objShape.StaticPara1Unit +
+        " ";
+      // Details =
+      //   (dblDP1 + " " + objShape.DynamicPara1Unit + " X " + dblDP2) &
+      //   (" " +
+      //     objShape.DynamicPara2Unit +
+      //     " X " +
+      //     objMaterialCode.StaticPara1 +
+      //     " " +
+      //     objShape.StaticPara1Unit +
+      //     " ");
     }
     if (Shape === "Plate") {
       Details =
