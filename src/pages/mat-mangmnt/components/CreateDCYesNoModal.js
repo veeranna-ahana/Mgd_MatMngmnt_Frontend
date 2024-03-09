@@ -168,7 +168,13 @@ function CreateDCYesNoModal(props) {
     //   text: "123",
     // });
     // props.setTest(true);
+
+    let todayDateSplited = formatDate(new Date(), 2).split("-");
+
+    let sortedTodayDate = `${todayDateSplited[2]}/${todayDateSplited[1]}/${todayDateSplited[0]}`;
+
     props.formHeader.IVStatus = "Returned";
+    props.formHeader.PkngDCDate = sortedTodayDate;
     props.createDcResponse(props.formHeader);
 
     // props.setFormHeader
