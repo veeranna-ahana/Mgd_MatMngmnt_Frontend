@@ -624,23 +624,26 @@ function OutwordMaterialIssueVocher(props) {
         <div>
           <div className="row">
             <div className="col-md-3">
-              <label className="form-label">IV No</label>
+              <label className="form-label">IV No & IV Date</label>
               <input
                 type="text"
                 name="IvId"
-                value={formHeader.IV_No}
+                value={`${formHeader.IV_No} | ${formHeader.IV_Date}`}
                 disabled
                 className="input-disabled"
-                // onChange={InputHeaderEvent}
               />
             </div>
             <div className="col-md-3">
-              <label className="form-label">IV Date</label>
+              <label className="form-label">DC No & DC Date</label>
 
               <input
                 type="text"
                 name="IVDate"
-                value={formHeader.IV_Date}
+                value={
+                  formHeader.PkngDcNo
+                    ? `${formHeader.PkngDcNo} | ${formHeader.PkngDCDate}`
+                    : ""
+                }
                 disabled
                 className="input-disabled"
               />
@@ -656,23 +659,15 @@ function OutwordMaterialIssueVocher(props) {
               />
             </div>
             <div className="col-md-3">
-              <label className="form-label">DC No / PN No</label>
+              <label className="form-label">Calculated Weight</label>
               <input
-                type="text"
-                name="PkngDcNo"
-                value={
-                  formHeader.PkngDcNo
-                  // ? formHeader.PkngDcNo +
-                  //   "   Date : " +
-                  //   formHeader.PkngDCDate
-                  // : ""
-                }
-                // onChange={InputHeaderEvent}
+                name="Type"
+                value={formHeader.TotalCalculatedWeight}
                 disabled
                 className="input-disabled"
               />
             </div>
-            <div className="col-md-3">
+            <div className="col-md-6">
               <label className="form-label">Customer</label>
               <input
                 type="text"
@@ -692,7 +687,7 @@ function OutwordMaterialIssueVocher(props) {
                 className="input-disabled"
               />
             </div>
-            <div className="col-md-3">
+            {/* <div className="col-md-3">
               <label className="form-label">Calculated Weight</label>
               <input
                 name="Type"
@@ -700,7 +695,7 @@ function OutwordMaterialIssueVocher(props) {
                 disabled
                 className="input-disabled"
               />
-            </div>
+            </div> */}
             <div className="col-md-3">
               <label className="form-label">Actual Weight</label>
               <input

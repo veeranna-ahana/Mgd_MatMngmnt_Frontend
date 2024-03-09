@@ -280,16 +280,20 @@ export default function PrintPartsDCTable(props) {
                       }}
                     >
                       <View style={{ display: "flex", flexDirection: "row" }}>
-                        <Text style={{ ...styles.fontBold }}>DC No : </Text>
-                        <Text>{props.formHeader?.PkngDcNo}</Text>
-                      </View>{" "}
-                      <View style={{ display: "flex", flexDirection: "row" }}>
                         <Text style={{ ...styles.fontBold }}>IV No : </Text>
                         <Text>{props.formHeader?.IV_No}</Text>
                       </View>
                       <View style={{ display: "flex", flexDirection: "row" }}>
                         <Text style={{ ...styles.fontBold }}>IV Date : </Text>
                         <Text>{props.formHeader?.IV_Date}</Text>
+                      </View>
+                      <View style={{ display: "flex", flexDirection: "row" }}>
+                        <Text style={{ ...styles.fontBold }}>DC No : </Text>
+                        <Text>{props.formHeader?.PkngDcNo}</Text>
+                      </View>
+                      <View style={{ display: "flex", flexDirection: "row" }}>
+                        <Text style={{ ...styles.fontBold }}>DC Date : </Text>
+                        <Text>{props.formHeader?.PkngDCDate}</Text>
                       </View>
                     </View>
                   </View>
