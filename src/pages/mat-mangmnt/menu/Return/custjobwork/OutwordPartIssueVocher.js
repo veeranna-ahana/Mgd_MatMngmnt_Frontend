@@ -83,6 +83,7 @@ function OutwordPartIssueVocher(props) {
         Customer: data.Customer,
         CustGSTNo: data.CustGSTNo,
         PkngDcNo: data.PkngDcNo,
+        PkngDCDate: data.PkngDCDate,
         TotalWeight: parseFloat(data.TotalWeight).toFixed(3),
         TotalCalculatedWeight: parseFloat(data.TotalCalculatedWeight).toFixed(
           3
