@@ -493,7 +493,7 @@ function MaterialAllotmentMain() {
                   header5,
                   async (data) => {
                     if (data.affectedRows !== 0) {
-                      //toast.success("Record updated Successfully");
+                      // toast.success("Record updated Successfully");
                     } else {
                       //toast.error("Record Not Updated");
                     }

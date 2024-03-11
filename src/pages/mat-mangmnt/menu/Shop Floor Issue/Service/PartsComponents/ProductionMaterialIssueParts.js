@@ -12,7 +12,7 @@ function ProductionMaterialIssueParts() {
         <form action="">
           <div className="row">
             <div className="col-md-3">
-              <label className="form-label">Issue Vt Not</label>
+              <label className="form-label">Issue Vt No</label>
               <input className="" />
             </div>
             <div className="col-md-3">

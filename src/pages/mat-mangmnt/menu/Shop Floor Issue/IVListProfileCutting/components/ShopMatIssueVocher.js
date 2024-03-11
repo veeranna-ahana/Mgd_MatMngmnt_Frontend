@@ -43,6 +43,7 @@ function ShopMatIssueVocher() {
   });
 
   // console.log("IssueIDVal", location?.state?.issueIDVal);
+  console.log("formHeader", formHeader);
 
   const fetchData = async () => {
     let url =
@@ -280,7 +281,7 @@ function ShopMatIssueVocher() {
             {" "}
             <div className="col-md-12">
               <label className="form-label">Source</label>
-              <input className="" disabled value={formHeader.Remarks} />
+              <input className="" disabled value={formHeader.CustMtrl} />
             </div>
           </div>
         </div>
