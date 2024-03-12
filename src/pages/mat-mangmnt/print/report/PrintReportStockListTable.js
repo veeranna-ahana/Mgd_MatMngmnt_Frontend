@@ -276,7 +276,7 @@ const PrintReportStockListTable = ({
                             <Text style={styles.para}>{item.ScrapWeight}</Text>
                             {/* <Text style={styles.para}>{item.Weight}</Text> */}
                             <Text style={styles.para}>
-                              {item.Locked !== 0 ? " Locked" : ""}
+                              {/* {item.Locked !== 0 ? " Locked" : ""} */}
                             </Text>
                           </View>
                         </>
