@@ -73,6 +73,8 @@ function PurchaseUnitsOpenRVList() {
     {
       text: "RV No",
       dataField: "RV_No",
+      sort: true,
+      headerStyle: { whiteSpace: "nowrap" },
     },
     {
       text: "RV Date",
@@ -82,10 +84,12 @@ function PurchaseUnitsOpenRVList() {
     },
     {
       text: "Customer",
+      sort: true,
       dataField: "Customer",
     },
     {
       text: "Cust Doc No",
+      sort: true,
       dataField: "CustDocuNo",
     },
   ];

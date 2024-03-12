@@ -844,7 +844,7 @@ function OpenButtonOpenSheetUnit() {
   return (
     <div>
       <div>
-        <h4 className="title">Material Receipt Voucher</h4>
+        <h4 className="title"></h4>
 
         <div className="row">
           <div className="col-md-3">

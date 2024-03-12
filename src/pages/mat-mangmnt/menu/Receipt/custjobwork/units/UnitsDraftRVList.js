@@ -95,6 +95,7 @@ export default function UnitsDraftRVList(props) {
       text: "RV No",
       dataField: "RV_No",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "RV Date",
@@ -106,11 +107,13 @@ export default function UnitsDraftRVList(props) {
     {
       text: "Customer",
       dataField: "Customer",
+      sort: true,
     },
     {
       text: "Cust Doc No",
       dataField: "CustDocuNo",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
   ];
   return (

@@ -95,6 +95,7 @@ export default function SheetsDraftRVList() {
       text: "RV No",
       dataField: "RV_No",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "RV Date",
@@ -105,10 +106,12 @@ export default function SheetsDraftRVList() {
     {
       text: "Customer",
       dataField: "Customer",
+      sort: true,
     },
     {
       text: "Cust Doc No",
       dataField: "CustDocuNo",
+      sort: true,
     },
   ];
   return (

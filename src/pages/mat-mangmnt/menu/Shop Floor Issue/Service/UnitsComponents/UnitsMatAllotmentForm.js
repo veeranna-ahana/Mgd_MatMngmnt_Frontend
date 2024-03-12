@@ -704,7 +704,8 @@ function UnitsMatAllotmentForm() {
             />
           </div>
           <div className="col-md-3">
-            <label className="form-label">Width</label>
+            {/* <label className="form-label">Width</label> */}
+            <label className="form-label">Length</label>
             <input value={formHeader.Para1} disabled />
           </div>
 
@@ -724,7 +725,8 @@ function UnitsMatAllotmentForm() {
             <input value={formHeader.PStatus} disabled />
           </div>
           <div className="col-md-3">
-            <label className="form-label">Length</label>
+            {/* <label className="form-label">Length</label> */}
+            <label className="form-label">Width</label>
             <input value={formHeader.Para2} disabled />
           </div>
 

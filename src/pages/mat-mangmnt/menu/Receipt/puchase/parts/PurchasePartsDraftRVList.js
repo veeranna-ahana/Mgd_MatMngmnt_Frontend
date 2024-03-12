@@ -77,6 +77,8 @@ function PurchasePartsDraftRVList() {
     {
       text: "RV No",
       dataField: "RV_No",
+      sort: true,
+      headerStyle: { whiteSpace: "nowrap" },
     },
     {
       text: "RV Date",
@@ -87,10 +89,12 @@ function PurchasePartsDraftRVList() {
     {
       text: "Customer",
       dataField: "Customer",
+      sort: true,
     },
     {
       text: "Cust Doc No",
       dataField: "CustDocuNo",
+      sort: true,
     },
   ];
   return (

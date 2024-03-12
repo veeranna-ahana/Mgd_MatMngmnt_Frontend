@@ -99,6 +99,7 @@ function UnitsClosedRVList() {
       text: "RV No",
       dataField: "RV_No",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "RV Date",
@@ -109,10 +110,12 @@ function UnitsClosedRVList() {
     {
       text: "Customer",
       dataField: "Customer",
+      sort: true,
     },
     {
       text: "Cust Doc No",
       dataField: "CustDocuNo",
+      sort: true,
     },
   ];
   return (

@@ -101,7 +101,8 @@ function PClosedRVList() {
     {
       text: "RV No",
       dataField: "RV_No",
-      //      sort: true,
+      headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "RV Date",
@@ -112,12 +113,12 @@ function PClosedRVList() {
     {
       text: "Customer",
       dataField: "Customer",
-      //    sort: true,
+      sort: true,
     },
     {
       text: "Cust Doc No",
       dataField: "CustDocuNo",
-      //  sort: true,
+      sort: true,
     },
   ];
   return (

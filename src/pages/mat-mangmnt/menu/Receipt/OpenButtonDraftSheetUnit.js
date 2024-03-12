@@ -1034,6 +1034,7 @@ function OpenButtonDraftSheetUnit(props) {
               // Sheet
               setPara1Label("Width");
               setPara2Label("Length");
+              setPara3Label("");
               setUnitLabel1("mm");
               setUnitLabel2("mm");
               setSheetRowSelect(true);
@@ -1045,6 +1046,7 @@ function OpenButtonDraftSheetUnit(props) {
               // Plate
               setPara1Label("Length");
               setPara2Label("Width");
+              setPara3Label("");
               setUnitLabel1("mm");
               setUnitLabel2("mm");
               setPlateRowSelect(true);
@@ -1054,6 +1056,8 @@ function OpenButtonDraftSheetUnit(props) {
 
             if (obj.ShapeID === 3 || obj.ShapeID === 4 || obj.ShapeID === 5) {
               setPara1Label("Length");
+              setPara2Label("");
+              setPara3Label("");
               setUnitLabel1("mm");
               setTubeRowSelect(true);
             } else {
@@ -1063,6 +1067,8 @@ function OpenButtonDraftSheetUnit(props) {
             if (obj.ShapeID === 6 || obj.ShapeID === 7) {
               // Titles, Strip
               setPara1Label("");
+              setPara2Label("");
+              setPara3Label("");
               setUnitLabel1("");
               setTilesStripRowSelect(true);
             } else {
@@ -1085,6 +1091,8 @@ function OpenButtonDraftSheetUnit(props) {
             if (obj.ShapeID === 9) {
               // Cylinder
               setPara1Label("Volume");
+              setPara2Label("");
+              setPara3Label("");
               setUnitLabel1("CubicMtr");
               setCylinderRowSelect(true);
             } else {
@@ -1094,6 +1102,8 @@ function OpenButtonDraftSheetUnit(props) {
             if (obj.ShapeID === 10) {
               // Units
               setPara1Label("Qty");
+              setPara2Label("");
+              setPara3Label("");
               setUnitLabel1("Nos");
               setUnitRowSelect(true);
             } else {

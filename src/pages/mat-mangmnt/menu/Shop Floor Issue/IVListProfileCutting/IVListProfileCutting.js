@@ -50,17 +50,20 @@ function IVListProfileCutting(props) {
     {
       text: "IV No",
       dataField: "IV_No",
+      sort: true,
       headerStyle: { whiteSpace: "nowrap" },
     },
     {
       text: "Issue Date",
       dataField: "Issue_date",
       formatter: statusFormatter,
+      sort: true,
       headerStyle: { whiteSpace: "nowrap" },
     },
     {
       text: "NC Program No",
       dataField: "NC_ProgramNo",
+      sort: true,
       headerStyle: { whiteSpace: "nowrap" },
     },
     {

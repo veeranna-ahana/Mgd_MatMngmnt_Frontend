@@ -96,6 +96,7 @@ function UnitsOpenRVList() {
     {
       text: "RV No",
       dataField: "RV_No",
+      sort: true,
     },
     {
       text: "RV Date",
@@ -106,10 +107,12 @@ function UnitsOpenRVList() {
     {
       text: "Customer",
       dataField: "Customer",
+      sort: true,
     },
     {
       text: "Cust Doc No",
       dataField: "CustDocuNo",
+      sort: true,
     },
   ];
 

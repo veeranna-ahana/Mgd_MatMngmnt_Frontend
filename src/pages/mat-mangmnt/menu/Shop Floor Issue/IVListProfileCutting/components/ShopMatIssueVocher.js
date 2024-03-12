@@ -43,7 +43,8 @@ function ShopMatIssueVocher() {
   });
 
   // console.log("IssueIDVal", location?.state?.issueIDVal);
-  console.log("formHeader", formHeader);
+  // console.log("formHeader", formHeader);
+  console.log("tableData", tableData);
 
   const fetchData = async () => {
     let url =
