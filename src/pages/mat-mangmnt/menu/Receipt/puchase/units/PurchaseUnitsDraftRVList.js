@@ -73,6 +73,8 @@ export default function PurchaseUnitsDraftRVList() {
     {
       text: "RV No",
       dataField: "RV_No",
+      sort: true,
+      headerStyle: { whiteSpace: "nowrap" },
     },
     {
       text: "RV Date",
@@ -82,10 +84,12 @@ export default function PurchaseUnitsDraftRVList() {
     },
     {
       text: "Customer",
+      sort: true,
       dataField: "Customer",
     },
     {
       text: "Cust Doc No",
+      sort: true,
       dataField: "CustDocuNo",
     },
   ];

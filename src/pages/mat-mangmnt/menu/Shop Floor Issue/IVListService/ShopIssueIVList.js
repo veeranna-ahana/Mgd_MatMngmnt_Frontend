@@ -36,31 +36,37 @@ function ShopIssueIVList(props) {
       text: "IssueID",
       dataField: "IssueID",
       hidden: true,
+      sort: true,
     },
     {
       text: "IV No",
       dataField: "IV_No",
+      sort: true,
       headerStyle: { whiteSpace: "nowrap" },
     },
     {
       text: "Issue Date",
       dataField: "Issue_date",
       formatter: statusFormatter,
+      sort: true,
       headerStyle: { whiteSpace: "nowrap" },
     },
     {
       text: "Task No",
       dataField: "TaskNo",
+      sort: true,
       headerStyle: { whiteSpace: "nowrap" },
     },
     {
       text: "NC Program No",
       dataField: "NcId",
+      sort: true,
       headerStyle: { whiteSpace: "nowrap" },
     },
     {
       text: "Qty Issued",
       dataField: "QtyIssued",
+      sort: true,
       headerStyle: { whiteSpace: "nowrap" },
     },
     {

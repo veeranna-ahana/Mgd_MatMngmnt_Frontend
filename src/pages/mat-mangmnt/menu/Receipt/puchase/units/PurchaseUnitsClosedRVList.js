@@ -81,6 +81,7 @@ function PurchaseUnitsClosedRVList() {
       text: "RV No",
       dataField: "RV_No",
       sort: true,
+      headerStyle: { whiteSpace: "nowrap" },
     },
     {
       text: "RV Date",

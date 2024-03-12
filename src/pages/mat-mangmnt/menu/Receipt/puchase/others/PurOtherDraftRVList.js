@@ -160,6 +160,7 @@ export default function PurOtherDraftRVList(props) {
     {
       text: "RV No",
       dataField: "RV_No",
+      sort: true,
       headerStyle: { whiteSpace: "nowrap" },
     },
     {
@@ -171,9 +172,11 @@ export default function PurOtherDraftRVList(props) {
     {
       text: "Customer",
       dataField: "Customer",
+      sort: true,
     },
     {
       text: "Cust Doc No",
+      sort: true,
       dataField: "CustDocuNo",
     },
   ];

@@ -98,6 +98,8 @@ function SheetsClosedRVList() {
     {
       text: "RV No",
       dataField: "RV_No",
+      headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "RV Date",
@@ -108,10 +110,12 @@ function SheetsClosedRVList() {
     {
       text: "Customer",
       dataField: "Customer",
+      sort: true,
     },
     {
       text: "Cust Doc No",
       dataField: "CustDocuNo",
+      sort: true,
     },
   ];
   return (
