@@ -539,7 +539,6 @@ function MaterialAllotmentMain() {
               {
                 state: {
                   issueIDVal: data.insertId,
-                  custCode: location?.state?.custCode,
                 },
               }
             );
