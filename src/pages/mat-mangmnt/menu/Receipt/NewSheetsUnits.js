@@ -133,6 +133,8 @@ function NewSheetsUnits(props) {
     qtyReturned: 0,
   });
 
+  const [serialNumber, setSerialNumber] = useState(materialArray.length);
+
   const columns = [
     {
       text: "#",
@@ -521,6 +523,7 @@ function NewSheetsUnits(props) {
           // Sheet
           setPara1Label("Width");
           setPara2Label("Length");
+          setPara3Label("");
           setUnitLabel1("mm");
           setUnitLabel2("mm");
           setSheetRowSelect(true);
@@ -532,6 +535,7 @@ function NewSheetsUnits(props) {
           // Plate
           setPara1Label("Length");
           setPara2Label("Width");
+          setPara3Label("");
           setUnitLabel1("mm");
           setUnitLabel2("mm");
           setPlateRowSelect(true);
@@ -542,6 +546,8 @@ function NewSheetsUnits(props) {
         if (material.Shape.includes("Tube")) {
           // Tube
           setPara1Label("Length");
+          setPara2Label("");
+          setPara3Label("");
           setUnitLabel1("mm");
           setTubeRowSelect(true);
         } else {
@@ -551,6 +557,8 @@ function NewSheetsUnits(props) {
         if (material.Shape === "Tiles" || material.Shape === "Strip") {
           // Titles, Strip
           setPara1Label("");
+          setPara2Label("");
+          setPara3Label("");
           setUnitLabel1("");
           setTilesStripRowSelect(true);
         } else {
@@ -573,6 +581,8 @@ function NewSheetsUnits(props) {
         if (material.Shape === "Cylinder") {
           // Cylinder
           setPara1Label("Volume");
+          setPara2Label("");
+          setPara3Label("");
           setUnitLabel1("CubicMtr");
           setCylinderRowSelect(true);
         } else {
@@ -582,6 +592,8 @@ function NewSheetsUnits(props) {
         if (material.Shape === "Units") {
           // Units
           setPara1Label("Qty");
+          setPara2Label("");
+          setPara3Label("");
           setUnitLabel1("Nos");
           setUnitRowSelect(true);
         } else {
@@ -920,8 +932,12 @@ function NewSheetsUnits(props) {
       return;
     }
 
-    let count = materialArray.length + 1;
-    let srl = (count <= 9 ? "0" : "") + count;
+    // let count = materialArray.length + 1;
+    // let srl = (count <= 9 ? "0" : "") + count;
+    let newSerialNumber = serialNumber + 1;
+    let srl = (newSerialNumber <= 9 ? "0" : "") + newSerialNumber;
+
+    setSerialNumber(newSerialNumber);
 
     //clear all part fields
     inputPart.rvId = formHeader.rvId;
