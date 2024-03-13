@@ -180,12 +180,22 @@ function PofilesMaterials(props) {
             for (let i = 0; i < thirdTableData.length; i++) {
               const element = thirdTableData[i];
               // console.log("element...", element);
-              RVTotalWeight =
-                parseFloat(RVTotalWeight) + parseFloat(element.ScrapWeight);
-              // parseFloat(RVTotalWeight) + parseFloat(element.TotalWeight);
-              RVTotalCalWeight =
-                parseFloat(RVTotalCalWeight) + parseFloat(element.Weight);
-              // parseFloat(element.TotalCalculatedWeight);
+
+              if (element.Scrap != 0) {
+                RVTotalCalWeight =
+                  RVTotalCalWeight + parseFloat(element.ScrapWeight);
+                RVTotalWeight = RVTotalWeight + parseFloat(element.Weight);
+              } else {
+                RVTotalCalWeight =
+                  RVTotalCalWeight + parseFloat(element.Weight);
+                RVTotalWeight = RVTotalWeight + parseFloat(element.ScrapWeight);
+              }
+              // RVTotalWeight =
+              //   parseFloat(RVTotalWeight) + parseFloat(element.ScrapWeight);
+              // // parseFloat(RVTotalWeight) + parseFloat(element.TotalWeight);
+              // RVTotalCalWeight =
+              //   parseFloat(RVTotalCalWeight) + parseFloat(element.Weight);
+              // // parseFloat(element.TotalCalculatedWeight);
             }
             let newRowMaterialIssueRegister = {
               IV_No: no,
