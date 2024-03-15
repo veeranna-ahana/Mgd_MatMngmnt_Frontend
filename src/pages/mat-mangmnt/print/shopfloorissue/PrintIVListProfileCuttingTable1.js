@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     marginLeft: "10px",
     marginTop: "10px",
     fontSize: 11,
-    textDecoration: "underline",
+    // textDecoration: "underline",
   },
   lastText: {
     width: "45%",
@@ -207,6 +207,13 @@ const styles = StyleSheet.create({
     fontSize: "9",
     alignSelf: "center",
   },
+
+  issueTime: {
+    width: "10%",
+    marginLeft: "15px",
+    fontSize: 10,
+    marginTop: "5px",
+  },
 });
 
 const PrintIVListProfileCuttingTable1 = ({ formHeader, tableData }) => (
@@ -222,7 +229,7 @@ const PrintIVListProfileCuttingTable1 = ({ formHeader, tableData }) => (
           <Image src={MLLogo} style={styles.logoImage} />
           <View>
             <Text style={styles.title1}>
-              Magod Laser Machining Pvt Ltd : Jigni
+              Magod Laser Machining Pvt Ltd : Jigani
             </Text>
             <Text style={styles.title2}>Material : Floor Issue</Text>
             <Text style={{ ...styles.companyInfo, marginLeft: "90px" }}>
@@ -357,8 +364,11 @@ const PrintIVListProfileCuttingTable1 = ({ formHeader, tableData }) => (
         </Text>
 
         {/* Issue By & Received By */}
-        <Text style={styles.issuedByReceivedBy}>Issued By and Time</Text>
+        <Text style={styles.issuedByReceivedBy}>
+          Issued By and Time {formHeader.Issue_time}
+        </Text>
         <Text style={styles.issuedByReceivedBy}>Received By and Time</Text>
+
         <Text style={styles.emptyWholeBlock}> </Text>
         <Text style={styles.emptyWholeBlock}> </Text>
         <Text style={styles.emptyWholeBlock}> </Text>
