@@ -49,7 +49,7 @@ function PrintIVListProfileCutting({
   const handleClose = () => {
     setIsPrintModalOpen(false);
   };
-  console.log("formHeader", formHeader);
+  // console.log("formHeader", formHeader);
 
   return (
     <Modal show={isOpen} onHide={handleClose} fullscreen>
