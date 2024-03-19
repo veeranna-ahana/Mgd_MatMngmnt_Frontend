@@ -25,6 +25,7 @@ export default function SecondTable(props) {
                   ? "rowSelectedClass"
                   : ""
               }
+              key={key}
             >
               <td>{key + 1}</td>
               <td>{val.MtrlStockID}</td>

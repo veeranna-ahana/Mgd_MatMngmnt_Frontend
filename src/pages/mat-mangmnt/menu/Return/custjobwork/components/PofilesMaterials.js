@@ -102,14 +102,23 @@ function PofilesMaterials(props) {
   const selectRowFirstFun = (rowData) => {
     setFirstTableSelectedRow([]);
     setFirstTableSelectedRow([rowData]);
-    const newArray = allData.filter((obj) => {
-      return (
-        obj.RV_No === rowData.RV_No &&
+    const newArray = allData.filter(
+      (obj) =>
+        obj.Mtrl_Rv_id === rowData.Mtrl_Rv_id &&
         obj.Mtrl_Code === rowData.Mtrl_Code &&
         obj.DynamicPara1 === rowData.DynamicPara1 &&
-        obj.DynamicPara2 === rowData.DynamicPara2
-      );
-    });
+        obj.DynamicPara2 === rowData.DynamicPara2 &&
+        obj.Scrap === rowData.Scrap
+      // {
+      //   return (
+      //     obj.Mtrl_Rv_id === rowData.Mtrl_Rv_id &&
+      //     obj.RV_No === rowData.RV_No &&
+      //     obj.Mtrl_Code === rowData.Mtrl_Code &&
+      //     obj.DynamicPara1 === rowData.DynamicPara1 &&
+      //     obj.DynamicPara2 === rowData.DynamicPara2
+      //   );
+      // }
+    );
     setSecondTableData([]);
     setSecondTableData(newArray);
   };
