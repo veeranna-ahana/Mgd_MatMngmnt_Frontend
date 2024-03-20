@@ -202,6 +202,7 @@ function PofilesMaterials(props) {
                     obj.DynamicPara2 === element.DynamicPara2 &&
                     obj.DynamicPara3 === element.DynamicPara3 &&
                     obj.Material === element.Material &&
+                    obj.Mtrl_Code === element.Mtrl_Code &&
                     obj.RV_No === element.RV_No &&
                     obj.Scrap === element.Scrap
                 );
@@ -242,6 +243,7 @@ function PofilesMaterials(props) {
                         obj.DynamicPara2 === element.DynamicPara2 &&
                         obj.DynamicPara3 === element.DynamicPara3 &&
                         obj.Material === element.Material &&
+                        obj.Mtrl_Code === element.Mtrl_Code &&
                         obj.RV_No === element.RV_No &&
                         obj.Scrap === element.Scrap
                     ).length > 0
