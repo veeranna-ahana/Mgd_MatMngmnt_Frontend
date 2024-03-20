@@ -12,6 +12,7 @@ export default function ThirdTable(props) {
             <th>Width</th>
             <th>Length</th>
             <th>Weight</th>
+            <th>Scrap Weight</th>
           </tr>
         </thead>
         <tbody>
@@ -22,7 +23,8 @@ export default function ThirdTable(props) {
               <td>{val.Mtrl_Code}</td>
               <td>{val.DynamicPara1}</td>
               <td>{val.DynamicPara2}</td>
-              <td>{parseFloat(val.Weight).toFixed(2)}</td>
+              <td>{parseFloat(val.Weight || 0).toFixed(2)}</td>
+              <td>{parseFloat(val.ScrapWeight || 0).toFixed(2)}</td>
             </tr>
           ))}
         </tbody>

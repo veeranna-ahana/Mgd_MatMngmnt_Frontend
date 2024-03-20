@@ -182,12 +182,84 @@ function PofilesMaterials(props) {
             let yy = formatDate(new Date(), 6).toString().substring(2);
             let no = yy + "/" + series;
             setIVNOVal(no);
+
+            // creating the merged array for details
+            let dataToPost = [];
+            for (let i = 0; i < thirdTableData.length; i++) {
+              const element = thirdTableData[i];
+              if (dataToPost.length === 0) {
+                dataToPost.push({
+                  ...element,
+                  SrlNo: i + 1,
+                  Qty: 1,
+                  MtrlStockID: element.MtrlStockID,
+                });
+              } else {
+                const filterData = dataToPost.filter(
+                  (obj) =>
+                    obj.Cust_Docu_No === element.Cust_Docu_No &&
+                    obj.DynamicPara1 === element.DynamicPara1 &&
+                    obj.DynamicPara2 === element.DynamicPara2 &&
+                    obj.DynamicPara3 === element.DynamicPara3 &&
+                    obj.Material === element.Material &&
+                    obj.RV_No === element.RV_No &&
+                    obj.Scrap === element.Scrap
+                );
+                if (filterData.length > 0) {
+                  let changeRow = filterData[0];
+                  changeRow.Qty = changeRow.Qty + 1;
+                  changeRow.Weight = (
+                    parseFloat(changeRow.Weight) + parseFloat(element.Weight)
+                  ).toFixed(3);
+                  changeRow.ScrapWeight = (
+                    parseFloat(changeRow.ScrapWeight) +
+                    parseFloat(element.ScrapWeight)
+                  ).toFixed(3);
+                  dataToPost[changeRow.SrlNo - 1] = changeRow;
+                } else {
+                  dataToPost.push({
+                    ...element,
+                    SrlNo: i + 1,
+                    Qty: 1,
+                    // MtrlStockID: element.MtrlStockID,
+                  });
+                }
+              }
+            }
+            let detailsFilteredData = [];
+            const abc = dataToPost.filter((obj) => obj != undefined);
+            for (let i = 0; i < abc.length; i++) {
+              const element = abc[i];
+              if (detailsFilteredData.length === 0) {
+                detailsFilteredData.push(element);
+              } else {
+                if (
+                  !(
+                    detailsFilteredData.filter(
+                      (obj) =>
+                        obj.Cust_Docu_No === element.Cust_Docu_No &&
+                        obj.DynamicPara1 === element.DynamicPara1 &&
+                        obj.DynamicPara2 === element.DynamicPara2 &&
+                        obj.DynamicPara3 === element.DynamicPara3 &&
+                        obj.Material === element.Material &&
+                        obj.RV_No === element.RV_No &&
+                        obj.Scrap === element.Scrap
+                    ).length > 0
+                  )
+                ) {
+                  detailsFilteredData.push(element);
+                }
+              }
+            }
+
+            console.log("detailsFilteredData", detailsFilteredData);
+
             // creating var for register starts
             // calculating the total weights for selected materials in third table for register
             let RVTotalWeight = 0;
             let RVTotalCalWeight = 0;
-            for (let i = 0; i < thirdTableData.length; i++) {
-              const element = thirdTableData[i];
+            for (let i = 0; i < detailsFilteredData.length; i++) {
+              const element = detailsFilteredData[i];
               // console.log("element...", element);
 
               if (element.Scrap != 0) {
@@ -225,6 +297,11 @@ function PofilesMaterials(props) {
               Dc_ID: 0,
               Type: thirdTableData[0].Type,
             };
+
+            console.log(
+              "newRowMaterialIssueRegister",
+              newRowMaterialIssueRegister
+            );
             // creating var for register ends now post to BE
             postRequest(
               endpoints.insertMaterialIssueRegister,
@@ -233,53 +310,53 @@ function PofilesMaterials(props) {
                 // console.log("first post done in register...", data);
                 if (respRegister.insertId) {
                   setSrlIVID(respRegister.insertId);
-                  // creating var for details starts
-                  let dataToPost = [];
-                  for (let i = 0; i < thirdTableData.length; i++) {
-                    const element = thirdTableData[i];
-                    if (dataToPost.length === 0) {
-                      dataToPost.push({
-                        ...element,
-                        SrlNo: i + 1,
-                        Qty: 1,
-                        MtrlStockID: element.MtrlStockID,
-                      });
-                    } else {
-                      const filterData = dataToPost.filter(
-                        (obj) => obj.Cust_Docu_No === element.Cust_Docu_No
-                      );
-                      if (filterData.length > 0) {
-                        let changeRow = filterData[0];
-                        changeRow.Qty = changeRow.Qty + 1;
-                        dataToPost[changeRow.SrlNo - 1] = changeRow;
-                      } else {
-                        dataToPost.push({
-                          ...element,
-                          SrlNo: i + 1,
-                          Qty: 1,
-                          MtrlStockID: element.MtrlStockID,
-                        });
-                      }
-                    }
-                  }
-                  let detailsFilteredData = [];
-                  const abc = dataToPost.filter((obj) => obj != undefined);
-                  for (let i = 0; i < abc.length; i++) {
-                    const element = abc[i];
-                    if (detailsFilteredData.length === 0) {
-                      detailsFilteredData.push(element);
-                    } else {
-                      if (
-                        !(
-                          detailsFilteredData.filter(
-                            (obj) => obj.RVId === element.RVId
-                          ).length > 0
-                        )
-                      ) {
-                        detailsFilteredData.push(element);
-                      }
-                    }
-                  }
+                  // // creating var for details starts
+                  // let dataToPost = [];
+                  // for (let i = 0; i < thirdTableData.length; i++) {
+                  //   const element = thirdTableData[i];
+                  //   if (dataToPost.length === 0) {
+                  //     dataToPost.push({
+                  //       ...element,
+                  //       SrlNo: i + 1,
+                  //       Qty: 1,
+                  //       MtrlStockID: element.MtrlStockID,
+                  //     });
+                  //   } else {
+                  //     const filterData = dataToPost.filter(
+                  //       (obj) => obj.Cust_Docu_No === element.Cust_Docu_No
+                  //     );
+                  //     if (filterData.length > 0) {
+                  //       let changeRow = filterData[0];
+                  //       changeRow.Qty = changeRow.Qty + 1;
+                  //       dataToPost[changeRow.SrlNo - 1] = changeRow;
+                  //     } else {
+                  //       dataToPost.push({
+                  //         ...element,
+                  //         SrlNo: i + 1,
+                  //         Qty: 1,
+                  //         MtrlStockID: element.MtrlStockID,
+                  //       });
+                  //     }
+                  //   }
+                  // }
+                  // let detailsFilteredData = [];
+                  // const abc = dataToPost.filter((obj) => obj != undefined);
+                  // for (let i = 0; i < abc.length; i++) {
+                  //   const element = abc[i];
+                  //   if (detailsFilteredData.length === 0) {
+                  //     detailsFilteredData.push(element);
+                  //   } else {
+                  //     if (
+                  //       !(
+                  //         detailsFilteredData.filter(
+                  //           (obj) => obj.RVId === element.RVId
+                  //         ).length > 0
+                  //       )
+                  //     ) {
+                  //       detailsFilteredData.push(element);
+                  //     }
+                  //   }
+                  // }
                   for (let j = 0; j < detailsFilteredData.length; j++) {
                     const element = detailsFilteredData[j];
                     let MtrlData;
@@ -330,23 +407,19 @@ function PofilesMaterials(props) {
                       RV_No: element.RV_No,
                       RV_Srl: "",
                       Qty: element.Qty,
-                      TotalWeightCalculated: (
-                        parseFloat(element.Qty) *
-                        parseFloat(
-                          element.Scrap === 0
-                            ? element.Weight
-                            : element.ScrapWeight
-                        )
+                      // parseFloat(element.Qty) *
+                      TotalWeightCalculated: parseFloat(
+                        element.Scrap === 0
+                          ? element.Weight
+                          : element.ScrapWeight
                       )
                         // parseFloat(element.TotalCalculatedWeight)
                         .toFixed(3),
-                      TotalWeight: (
-                        parseFloat(element.Qty) *
-                        parseFloat(
-                          element.Scrap != 0
-                            ? element.Weight
-                            : element.ScrapWeight
-                        )
+                      // parseFloat(element.Qty) *
+                      TotalWeight: parseFloat(
+                        element.Scrap != 0
+                          ? element.Weight
+                          : element.ScrapWeight
                       )
                         // parseFloat(element.TotalWeight)
                         .toFixed(3),
@@ -354,7 +427,13 @@ function PofilesMaterials(props) {
                       RvId: element.RvID || 0,
                       Mtrl_Rv_id: element.Mtrl_Rv_id,
                     };
-                    // post to details
+
+                    console.log(
+                      "newRowMtrlIssueDetails",
+                      newRowMtrlIssueDetails
+                    );
+                    // post to details...
+
                     postRequest(
                       endpoints.insertMtrlIssueDetails,
                       newRowMtrlIssueDetails,
@@ -366,6 +445,8 @@ function PofilesMaterials(props) {
                       }
                     );
                   }
+                  // udpdating the mtrlstock...
+
                   for (let i = 0; i < thirdTableData.length; i++) {
                     const element = thirdTableData[i];
                     const mtrlstockData = {
