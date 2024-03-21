@@ -520,3 +520,48 @@ input[type="number"] {
 .input-disabled {
   cursor: no-drop;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.pagination li {
+  margin: 0 5px;
+  display: inline;
+}
+
+.pagination li a {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.pagination li a:hover {
+  background-color: #2b3a55;
+  color: #fff !important;
+}
+
+.pagination li.active a {
+  background-color: #2b3a55;
+  color: #fff;
+}
+
+.pagination__link--disabled {
+  pointer-events: none;
+  background-color: #ccc;
+  color: #666;
+}
+
+.pagination__link--disabled:hover {
+  background-color: #ccc;
+  color: #666;
+}

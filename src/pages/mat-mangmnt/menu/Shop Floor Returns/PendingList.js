@@ -4,6 +4,7 @@ import Table from "react-bootstrap/Table";
 import LocationModel from "./ReturnComponents/LocationModel";
 import ResizeModal from "./ReturnComponents/ResizeModal";
 import { useNavigate } from "react-router-dom";
+import ReactPaginate from "react-paginate";
 
 import BootstrapTable from "react-bootstrap-table-next";
 import { formatDate, getWeight } from "../../../../utils";
@@ -40,6 +41,11 @@ function PendingList(props) {
   const [secondTableSelectIndex, setSecondTableSelectIndex] = useState([]);
 
   const [filteredMachine, setFilteredMachine] = useState(null);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [perPage] = useState(500);
+  const [isSecondTableLoading, setIsSecondTableLoading] = useState(false);
+
+  const [isFirstRowSelected, setIsFirstRowSelected] = useState(false);
 
   const fetchData = () => {
     getRequest(endpoints.getFirstTableShopFloorReturn, (data) => {
@@ -78,6 +84,15 @@ function PendingList(props) {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const handlePageChange = (selectedPage) => {
+    setCurrentPage(selectedPage.selected);
+    setFirstRowSelected([]);
+    setSelectedSecondTableRows([]);
+    setSecondTable([]);
+  };
+
+  const pageCount = Math.ceil(firstTable.length / perPage);
 
   function statusFormatter(cell, row, rowIndex, formatExtraData) {
     return formatDate(new Date(cell), 3);
@@ -136,6 +151,10 @@ function PendingList(props) {
     },
   ];
 
+  const startIndex = currentPage * perPage;
+  const endIndex = startIndex + perPage;
+  const currentPageData = firstTable.slice(startIndex, endIndex);
+
   const columns2 = [
     {
       text: "NcPgmMtrlId",
@@ -187,11 +206,15 @@ function PendingList(props) {
     clickToSelect: true,
     bgColor: "#98A8F8",
     onSelect: (row, isSelect, rowIndex, e) => {
+      setIsFirstRowSelected(true);
       console.log("first row = ", row);
       setSecondTableSelectIndex([]);
       setFirstRowSelected(row);
       setSelectedSecondTableRows([]);
+      setSecondTable([]);
+
       let url1 = endpoints.getSecondTableShopFloorReturn + "?id=" + row.IssueID;
+      setIsSecondTableLoading(true);
       getRequest(url1, (data) => {
         data.forEach((sheet) => {
           if (sheet.NCPara1 <= sheet.Para1 && sheet.NCPara2 <= sheet.Para2) {
@@ -207,6 +230,7 @@ function PendingList(props) {
         });
 
         setSecondTable(data);
+        setIsSecondTableLoading(false);
         console.log("second table data = ", data);
       });
     },
@@ -650,7 +674,8 @@ function PendingList(props) {
             <BootstrapTable
               keyField="IssueID"
               columns={columns1}
-              data={firstTable}
+              // data={firstTable}
+              data={currentPageData}
               striped
               hover
               condensed
@@ -658,9 +683,35 @@ function PendingList(props) {
               headerClasses="header-class tableHeaderBGColor"
             ></BootstrapTable>
           </div>
+
+          <ReactPaginate
+            previousLabel={"Previous"}
+            nextLabel={"Next"}
+            breakLabel={"..."}
+            pageCount={pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={handlePageChange}
+            containerClassName={"pagination"}
+            previousLinkClassName={"pagination__link"}
+            nextLinkClassName={"pagination__link"}
+            disabledClassName={"pagination__link--disabled"}
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"}
+            previousClassName={
+              currentPage === 0 ? "pagination__link--disabled" : ""
+            }
+            nextClassName={
+              currentPage === pageCount - 1 ? "pagination__link--disabled" : ""
+            }
+          />
         </div>
         <div className="col-md-4 mt-3">
           <div style={{ height: "400px", overflowY: "scroll" }}>
+            {/* {isSecondTableLoading && <p>Loading...</p>}
+            {!isSecondTableLoading && secondTable.length === 0 && (
+              <p>No Data</p>
+            )} */}
             <BootstrapTable
               keyField="NcPgmMtrlId"
               columns={columns2}
@@ -670,6 +721,14 @@ function PendingList(props) {
               condensed
               selectRow={selectRow2}
               headerClasses="header-class tableHeaderBGColor"
+              // noDataIndication={isSecondTableLoading ? "Loading..." : "No Data"}
+              noDataIndication={
+                isFirstRowSelected
+                  ? isSecondTableLoading
+                    ? "Loading..."
+                    : "No Data"
+                  : null
+              }
             ></BootstrapTable>
           </div>
         </div>
