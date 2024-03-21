@@ -5,6 +5,7 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Typeahead } from "react-bootstrap-typeahead";
+import ReactPaginate from "react-paginate";
 
 const { getRequest, postRequest } = require("../../../../../api/apiinstance");
 const { endpoints } = require("../../../../../api/constants");
@@ -28,6 +29,9 @@ function SheetsClosedRVList() {
     TotalWeight: "",
     TotalCalculatedWeight: "",
   });
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const [perPage] = useState(1000);
 
   const fetchData = () => {
     getRequest(endpoints.getCustomers, (data) => {
@@ -62,6 +66,14 @@ function SheetsClosedRVList() {
     return formatDate(new Date(cell), 3);
   }
 
+  const pageCount = Math.ceil(tabledata.length / perPage);
+
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+
+  const offset = currentPage * perPage;
+  const currentPageData = tabledata.slice(offset, offset + perPage);
   const openButtonClick = () => {
     //console.log("data = ", data);
     //console.log("button click : ");
@@ -118,6 +130,8 @@ function SheetsClosedRVList() {
       sort: true,
     },
   ];
+
+  console.log("tableData", tabledata);
   return (
     <div>
       <>
@@ -157,23 +171,49 @@ function SheetsClosedRVList() {
               Close
             </button>
           </div>
-          <div
-            style={{ height: "420px", overflowY: "scroll" }}
-            className="col-md-7 col-sm-12"
-          >
-            {/* <BootstrapTable keyField="id" data={products} columns={columns} /> */}
-            <BootstrapTable
-              keyField="RvID"
-              //keyField="id"
-              columns={columns}
-              data={tabledata}
-              striped
-              hover
-              condensed
-              //pagination={paginationFactory()}
-              selectRow={selectRow}
-              headerClasses="header-class tableHeaderBGColor"
-            ></BootstrapTable>
+
+          <div className="col-md-7 col-sm-12">
+            <div style={{ height: "420px", overflowY: "scroll" }}>
+              {/* <BootstrapTable keyField="id" data={products} columns={columns} /> */}
+              <BootstrapTable
+                keyField="RvID"
+                //keyField="id"
+                columns={columns}
+                // data={tabledata}
+                data={currentPageData}
+                striped
+                hover
+                condensed
+                //pagination={paginationFactory()}
+                selectRow={selectRow}
+                headerClasses="header-class tableHeaderBGColor"
+              ></BootstrapTable>
+            </div>
+            <div>
+              <ReactPaginate
+                previousLabel={"Previous"}
+                nextLabel={"Next"}
+                breakLabel={"..."}
+                pageCount={pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={handlePageChange}
+                containerClassName={"pagination"}
+                previousLinkClassName={"pagination__link"}
+                nextLinkClassName={"pagination__link"}
+                disabledClassName={"pagination__link--disabled"}
+                subContainerClassName={"pages pagination"}
+                activeClassName={"active"}
+                previousClassName={
+                  currentPage === 0 ? "pagination__link--disabled" : ""
+                }
+                nextClassName={
+                  currentPage === pageCount - 1
+                    ? "pagination__link--disabled"
+                    : ""
+                }
+              />
+            </div>
           </div>
 
           <div className="col-md-5 col-sm-12">

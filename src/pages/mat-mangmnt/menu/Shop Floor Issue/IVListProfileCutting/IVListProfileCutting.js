@@ -4,6 +4,7 @@ import Table from "react-bootstrap/Table";
 import { useNavigate } from "react-router-dom";
 import { formatDate } from "../../../../../utils";
 import { toast } from "react-toastify";
+import ReactPaginate from "react-paginate";
 
 const { getRequest, postRequest } = require("../../../../api/apiinstance");
 const { endpoints } = require("../../../../api/constants");
@@ -13,6 +14,8 @@ function IVListProfileCutting(props) {
   const [tableData, setTableData] = useState([]);
   const [rowData, setRowData] = useState({});
   const [issueIDVal, setIssueIDVal] = useState("");
+  const [currentPage, setCurrentPage] = useState(0);
+  const [perPage] = useState(1000);
 
   const fetchData = () => {
     let url =
@@ -111,6 +114,15 @@ function IVListProfileCutting(props) {
     },
   };
 
+  const pageCount = Math.ceil(tableData.length / perPage);
+
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+
+  const offset = currentPage * perPage;
+  const currentPageData = tableData.slice(offset, offset + perPage);
+
   const openButton = () => {
     if (issueIDVal === "") {
       toast.error("Please select Part");
@@ -134,7 +146,8 @@ function IVListProfileCutting(props) {
                 keyField="IssueID"
                 //keyField="id"
                 columns={columns}
-                data={tableData}
+                // data={tableData}
+                data={currentPageData}
                 striped
                 hover
                 condensed
@@ -142,6 +155,32 @@ function IVListProfileCutting(props) {
                 selectRow={selectRow}
                 headerClasses="header-class tableHeaderBGColor"
               ></BootstrapTable>
+            </div>
+
+            <div>
+              <ReactPaginate
+                previousLabel={"Previous"}
+                nextLabel={"Next"}
+                breakLabel={"..."}
+                pageCount={pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={handlePageChange}
+                containerClassName={"pagination"}
+                previousLinkClassName={"pagination__link"}
+                nextLinkClassName={"pagination__link"}
+                disabledClassName={"pagination__link--disabled"}
+                subContainerClassName={"pages pagination"}
+                activeClassName={"active"}
+                previousClassName={
+                  currentPage === 0 ? "pagination__link--disabled" : ""
+                }
+                nextClassName={
+                  currentPage === pageCount - 1
+                    ? "pagination__link--disabled"
+                    : ""
+                }
+              />
             </div>
           </div>
 
