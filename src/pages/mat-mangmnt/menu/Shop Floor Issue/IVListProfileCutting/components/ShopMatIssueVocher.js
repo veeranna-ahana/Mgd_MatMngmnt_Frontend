@@ -226,6 +226,8 @@ function ShopMatIssueVocher() {
   const InputEventCombineShhet = (e) => {
     setCombineSheets(e.target.value);
   };
+
+  console.log("formHeader", formHeader);
   return (
     <div>
       <PrintIVListProfileCutting
@@ -247,7 +249,18 @@ function ShopMatIssueVocher() {
             <div className="col-md-6">
               {" "}
               <label className="form-label">&nbsp;</label>
-              <input className="" disabled value={formHeader.Issue_date} />
+              <input
+                className=""
+                disabled
+                // value={formHeader.Isssue_date}
+                value={
+                  formHeader.Isssue_date
+                    ? new Date(formHeader.Isssue_date).toLocaleDateString(
+                        "en-GB"
+                      )
+                    : ""
+                }
+              />
             </div>
           </div>
           <div className="row">
