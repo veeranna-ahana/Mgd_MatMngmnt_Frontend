@@ -39,6 +39,7 @@ export default function SecondTable(props) {
                   ? "rowSelectedClass"
                   : ""
               }
+              key={val.RVId}
             >
               <td>{key + 1}</td>
               <td>{val.PartId}</td>
