@@ -497,6 +497,10 @@ li.nav-item {
   background-color: #98a8f8 !important;
 }
 
+.rowSelectedLight {
+  background-color: #fffca9 !important;
+}
+
 .selected-row {
   background-color: #98a8f8 !important;
 }

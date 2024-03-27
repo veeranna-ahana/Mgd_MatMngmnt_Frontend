@@ -32,7 +32,7 @@ export default function ThirdTable(props) {
         </thead>
         <tbody>
           {props.thirdTableData.map((val, key) => (
-            <tr>
+            <tr key={key}>
               <td>{key + 1}</td>
               <td>{val.PartIdNew}</td>
               <td>

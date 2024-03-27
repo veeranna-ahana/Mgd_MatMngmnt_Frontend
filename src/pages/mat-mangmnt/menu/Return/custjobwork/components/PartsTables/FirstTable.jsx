@@ -23,6 +23,8 @@ export default function FirstTable(props) {
               className={
                 val.RvID === props.firstTableSelectedRow.RvID
                   ? "rowSelectedClass"
+                  : props.thirdTableRVIDs.includes(val.RV_No)
+                  ? "rowSelectedLight"
                   : ""
               }
             >
