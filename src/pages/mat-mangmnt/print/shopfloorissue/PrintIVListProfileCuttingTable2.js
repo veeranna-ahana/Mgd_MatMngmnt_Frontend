@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
 
   blockRightAlign2: {
-    width: "8%",
+    width: "10%",
     textAlign: "left",
     marginLeft: "10px",
     marginTop: "10px",
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica-Bold",
   },
   blockLeftAlign2: {
-    width: "20%",
+    width: "18%",
     marginLeft: "10px",
     marginTop: "10px",
     fontSize: "9",
@@ -268,7 +268,6 @@ const PrintIVListProfileCuttingTable2 = ({
           ______________________________________________________________________________________________
         </Text>
         {/* Issue By & Received By */}
-
         {/* <Text style={styles.blockWhole}>IV No : {formHeader.IV_No}</Text>
         <Text style={styles.blockLeftAlign}></Text>
         <Text style={styles.blockRightAlign}>
@@ -281,26 +280,26 @@ const PrintIVListProfileCuttingTable2 = ({
         </Text>
         <Text style={styles.emptyBlock}></Text>
         <Text style={styles.blockWhole}>Customer {formHeader.Cust_name} </Text> */}
-
         <View style={styles.blockRightAlign}>
           <Text style={{ fontFamily: "Helvetica-Bold" }}>IV No</Text>
           <Text style={styles.linegap}>Task No</Text>
           <Text style={styles.linegap}>Customer</Text>
         </View>
-
         <View style={styles.blockLeftAlign}>
           <Text>{formHeader.IV_No}</Text>
           <Text style={styles.linegap}>{formHeader.TaskNo}</Text>
           <Text style={styles.linegap}>{formHeader.Cust_name}</Text>
         </View>
-
         <View style={styles.blockRightAlign}>
           <Text>Date</Text>
           <Text style={styles.linegap}>Program No</Text>
         </View>
-
         <View style={styles.blockLeftAlign}>
-          <Text>{formHeader.Issue_date}</Text>
+          <Text>
+            {formHeader.Isssue_date
+              ? new Date(formHeader.Isssue_date).toLocaleDateString("en-GB")
+              : ""}
+          </Text>
           <Text style={styles.linegap}>{formHeader.NC_ProgramNo}</Text>
         </View>
         <Text style={styles.line1}>
@@ -317,58 +316,57 @@ const PrintIVListProfileCuttingTable2 = ({
           Process: {formHeader.MProcess}
         </Text>
         <Text style={styles.blockWhole}>Source : Custom</Text> */}
-
         <View style={styles.blockRightAlign2}>
           <Text>Material</Text>
           <Text style={styles.linegap}>Height</Text>
-          <Text style={styles.linegap}>Qty</Text>
-          <Text style={styles.linegap}>Source</Text>
+          <Text style={styles.linegap}>Qty Issued</Text>
+          {/* <Text style={styles.linegap}>Qty</Text> */}
+          {/* <Text style={styles.linegap}>Source</Text> */}
         </View>
+        ``
         <View style={styles.blockLeftAlign2}>
           <Text>{formHeader.Mtrl_Code}</Text>
           <Text style={styles.linegap}>{formHeader.Para3}</Text>
-          <Text style={styles.linegap}>{formHeader.Qty}</Text>
-          <Text style={styles.linegap}>{formHeader.CustMtrl}</Text>
-        </View>
+          {/* <Text style={styles.linegap}>{formHeader.Qty}</Text> */}
+          <Text style={styles.linegap}>{formHeader.QtyIssued}</Text>
 
+          {/* <Text style={styles.linegap}>{formHeader.CustMtrl}</Text> */}
+        </View>
         <View style={styles.blockRightAlign2}>
           <Text>Width</Text>
-          <Text style={styles.linegap}>Machine</Text>
+          <Text style={styles.linegap}>Machine</Text> 1
+          <Text style={styles.linegap}>Qty Received</Text>
         </View>
         <View style={styles.blockLeftAlign2}>
           <Text>{formHeader.Para2}</Text>
           <Text style={styles.linegap}>{formHeader.Machine}</Text>
+          <Text style={styles.linegap}>{formHeader.Qty}</Text>
         </View>
-
         <View style={styles.blockRightAlign2}>
           <Text>Length</Text>
           <Text style={styles.linegap}>Process</Text>
+          <Text style={styles.linegap}>Source</Text>
         </View>
         <View style={styles.blockLeftAlign2}>
           <Text>{formHeader.Para1}</Text>
           <Text style={styles.linegap}>{formHeader.MProcess}</Text>
+          <Text style={styles.linegap}>{formHeader.CustMtrl}</Text>
         </View>
-
         <Text style={styles.line1}>
           ______________________________________________________________________________________________
         </Text>
-
         <Text style={styles.mtrlID}>Mtrl ID </Text>
         <Text style={styles.para1}>Width </Text>
         <Text style={styles.para2}>Length </Text>
         <Text style={styles.used}>Used </Text>
         <Text style={styles.reject}>Reject </Text>
-
         <Text style={styles.line1}>
           ______________________________________________________________________________________________
         </Text>
-
         <Text style={styles.combine}>{combineSheets}</Text>
-
         {/* <Text style={styles.line1}>
           ______________________________________________________________________________________________
         </Text> */}
-
         {/* {tableData.map((item, index) => {
           return (
             <>
@@ -389,12 +387,10 @@ const PrintIVListProfileCuttingTable2 = ({
             </>
           );
         })} */}
-
         {/* <Text style={styles.combine}>{combineSheets}</Text> */}
         <Text style={styles.line1}>
           ______________________________________________________________________________________________
         </Text>
-
         {/* Issue By & Received By */}
         <Text style={styles.issuedByReceivedBy}>
           Issued By and Time {formHeader.Issue_time}
