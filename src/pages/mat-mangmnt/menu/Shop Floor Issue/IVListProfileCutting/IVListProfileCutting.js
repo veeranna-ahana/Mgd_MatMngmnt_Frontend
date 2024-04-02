@@ -194,7 +194,7 @@ function IVListProfileCutting(props) {
                             )
                           }*/
                   className="button-style"
-                  style={{ width: "155px" }}
+                  style={{ width: "55px" }}
                 >
                   Open
                 </button>
@@ -203,7 +203,7 @@ function IVListProfileCutting(props) {
                   id="btnclose"
                   type="submit"
                   onClick={() => nav("/MaterialManagement")}
-                  style={{ width: "155px" }}
+                  style={{ width: "55px" }}
                 >
                   Close
                 </button>
@@ -215,7 +215,7 @@ function IVListProfileCutting(props) {
                 </div>
                 <div className="col-md-8" style={{ marginTop: "8px" }}>
                   <input
-                    className="in-field"
+                     className="input-disabled mt-3"
                     disabled
                     value={rowData.Cust_Name}
                   />
@@ -227,7 +227,7 @@ function IVListProfileCutting(props) {
                   <label className="form-label">Issue Vr No</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="in-field" disabled value={rowData.IV_No} />
+                  <input  className="input-disabled mt-3" disabled value={rowData.IV_No} />
                 </div>
               </div>
               <div className="row">
@@ -236,7 +236,7 @@ function IVListProfileCutting(props) {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                    className="input-disabled mt-3"
                     disabled
                     value={rowData.Issue_date}
                   />
@@ -249,7 +249,7 @@ function IVListProfileCutting(props) {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                  className="input-disabled mt-3"
                     disabled
                     value={rowData.NC_ProgramNo}
                   />
@@ -260,7 +260,7 @@ function IVListProfileCutting(props) {
                   <label className="form-label">Task No</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="in-field" disabled value={rowData.TaskNo} />
+                  <input  className="input-disabled mt-3" disabled value={rowData.TaskNo} />
                 </div>
               </div>
 
@@ -271,7 +271,7 @@ function IVListProfileCutting(props) {
 
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                    className="input-disabled mt-3"
                     disabled
                     value={rowData.Operation}
                   />
@@ -283,7 +283,7 @@ function IVListProfileCutting(props) {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                    className="input-disabled mt-3"
                     disabled
                     value={rowData.Mtrl_Code}
                   />
@@ -295,7 +295,7 @@ function IVListProfileCutting(props) {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                    className="input-disabled mt-3"
                     disabled
                     value={rowData.QtyIssued}
                   />
@@ -307,7 +307,7 @@ function IVListProfileCutting(props) {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                    className="input-disabled mt-3"
                     value={rowData.QtyUsed}
                     disabled
                   />
@@ -319,7 +319,7 @@ function IVListProfileCutting(props) {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                   className="input-disabled mt-3"
                     disabled
                     value={rowData.QtyReturned}
                   />

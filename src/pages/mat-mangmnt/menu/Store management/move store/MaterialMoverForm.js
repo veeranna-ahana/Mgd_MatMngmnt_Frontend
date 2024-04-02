@@ -350,11 +350,15 @@ function MaterialMoverForm(props) {
       <h4 className="title"> Material Mover</h4>
 
       <div className="row">
-        <div className="d-flex justify-content-center">
+        <div className="d-flex ">
           <div
-            className={props.type === "location" ? "col-md-4 px-3" : "d-none"}
+            className={props.type === "location" ? "d-flex col-md-3 px-3" : "d-none"}
+            style={{gap:'5px'}}
           >
+            <div className="col-md-5">
             <label className="form-label">From Location</label>
+            </div>
+            
             {/* <select
                     className="ip-select"
                     name="customer"
@@ -370,24 +374,30 @@ function MaterialMoverForm(props) {
                       </option>
                     ))}
                   </select> */}
-            <Typeahead
+                  <div className="col-md-4 mt-2">
+                  <Typeahead
               id="basic-example"
               name="location"
               options={locationData}
               placeholder="Select Location"
               onChange={(label) => fromLocationEvent(label)}
-              className="mb-3"
+              // className="mb-10"
             />
+                  </div>
+           
           </div>
 
           <div
-            className={props.type === "location" ? "col-md-4 px-3" : "d-none"}
+            className={props.type === "location" ? " d-flex col-md-2 px-3" : "d-none"}
+            style={{gap:'5px'}}
           >
-            <div
-              // className={props.type === "customer" ? "col-md-4 px-3" : "d-none"}
-              style={{ marginBottom: "15px" }}
-            >
+            
+              <div className="col-md-4">
               <label className="form-label">Customer</label>
+              </div>
+             
+            
+              
               {/* <select
                     className="ip-select"
                     name="customer"
@@ -403,22 +413,32 @@ function MaterialMoverForm(props) {
                       </option>
                     ))}
                   </select> */}
-              <Typeahead
+                  <div className="col-md-7 mt-2">
+                  <Typeahead
                 id="basic-example"
                 name="customer"
                 options={CustDataForLocation}
                 placeholder="Select Customer"
                 onChange={(label) => changeCustomerForLocation(label)}
+                
               />
-            </div>
+                  </div>
+                 
+                  
+             
+           
             {/* cust dropdown */}
           </div>
 
           <div
-            className={props.type === "customer" ? "col-md-4 px-3" : "d-none"}
-            style={{ marginBottom: "15px" }}
+            className={props.type === "customer" ? "d-flex col-md-2 px-3" : "d-none"}
+            // style={{ marginBottom: "15px" }}
+            style={{gap:'5px'}}
           >
-            <label className="form-label">Customer</label>
+            <div className="col-md-4">
+              <label className="form-label">Customer</label>
+            </div>
+
             {/* <select
                     className="ip-select"
                     name="customer"
@@ -434,17 +454,23 @@ function MaterialMoverForm(props) {
                       </option>
                     ))}
                   </select> */}
-            <Typeahead
-              id="basic-example"
-              name="customer"
-              options={custdata}
-              placeholder="Select Customer"
-              onChange={(label) => changeCustomer(label)}
-            />
+            <div className="col-md-7 mt-2">
+              <Typeahead
+                id="basic-example"
+                name="customer"
+                options={custdata}
+                placeholder="Select Customer"
+                onChange={(label) => changeCustomer(label)}
+              />
+            </div>
+
           </div>
 
-          <div className="col-md-4 px-3">
-            <label className="form-label">To Location</label>
+          <div className="d-flex col-md-3 px-3" style={{gap:'5px'}}>
+            <div className="col-md-4">
+              <label className="form-label">To Location</label>
+            </div>
+
             {/* <select
                     className="ip-select"
                     name="customer"
@@ -460,20 +486,52 @@ function MaterialMoverForm(props) {
                       </option>
                     ))}
                   </select> */}
-            <Typeahead
-              id="basic-example"
-              name="location"
-              options={locationData}
-              placeholder="Select Location"
-              onChange={(label) => changeLocation(label)}
-              className="mb-3"
-            />
+            <div className="col-md-5 mt-2">
+              <Typeahead
+                id="basic-example"
+                name="location"
+                options={locationData}
+                placeholder="Select Location"
+                onChange={(label) => changeLocation(label)}
+                className="mb-3"
+              />
+            </div>
+
+          </div>
+
+          <div className="row col-md-4 ">
+          <div  >
+            <div className="d-flex justify-content-between" >
+              <button className="button-style " onClick={loadData}  >
+                Load Data
+              </button>{" "}
+              <button className="button-style " onClick={selectButton}>
+                Select
+              </button>
+              <button
+                className="button-style"
+                onClick={changeLocationButton}
+              >
+                Change Location
+              </button>
+              <button
+                className="button-style "
+                id="btnclose"
+                type="submit"
+                onClick={() => nav("/MaterialManagement")}
+              >
+                Close
+              </button>{" "}
+            </div>
           </div>
         </div>
+        </div>
       </div>
-      <div className="row">
-        <div className="d-flex justify-content-center">
-          <div className="col-md-9">
+
+
+     
+        {/* <div className="row ">
+          <div className="col-md-4">
             <div className="d-flex justify-content-between">
               <button className="button-style m-0" onClick={loadData}>
                 Load Data
@@ -497,8 +555,12 @@ function MaterialMoverForm(props) {
               </button>{" "}
             </div>
           </div>
-        </div>
-      </div>
+        </div> */}
+    
+
+
+
+
 
       {/* <div className="row">
         <div className="row ">

@@ -202,8 +202,11 @@ function ReturnListing(props) {
     <>
       <h4 className="title">Material Return Issue Voucher</h4>
       <div className="row">
-        <div className="col-md-8">
-          <label className="form-label">Select Customer</label>
+        <div className="d-flex col-md-6">
+          <div className="col-md-3">
+          <label className="form-label" style={{whiteSpace:'nowrap'}}>Select Customer</label>
+          </div>
+          
           {/* <select
             className="ip-select"
             name="pending"
@@ -219,6 +222,7 @@ function ReturnListing(props) {
               </option>
             ))}
           </select> */}
+          <div className="col-md-5 mt-2">
           <Typeahead
             id="basic-example"
             name="customer"
@@ -226,10 +230,94 @@ function ReturnListing(props) {
             placeholder="Select Customer"
             onChange={(label) => changeCustomer(label)}
           />
+          </div>
+
+          <div className="col-md-3 col-sm-12 ">
+          <div className="row">
+            <div className="col-md-1 col-sm-12 mt-1">
+              <input
+                className="form-check-input mt-2"
+                type="checkbox"
+                // checked={checkboxVal === "on" ? true : false}
+                id="filterCustCheckbox"
+                onChange={changeCheckbox}
+                disabled={!selectedCust}
+              />
+            </div>
+            <div className="col-md-2 col-sm-12">
+              <label className="form-label" style={{ whiteSpace: "nowrap" }}>
+                Filter Customer
+              </label>
+            </div>
+          </div>
         </div>
+
+        <div className="col-md-2">
+          <div className="col-md-4 ">
+            <button className="button-style"
+            style={{width:'65px'}}
+             onClick={openClick}>
+              Open IV
+            </button>
+          </div>
+        </div>
+        <div className="col-md-2 ">
+          <button
+            className="button-style "
+            id="btnclose"
+            type="submit"
+            onClick={() => nav("/MaterialManagement")}
+          >
+            Close
+          </button>
+        </div>
+          
+        </div>
+
+        <div className="row">
+        {/* <div className="col-md-2 col-sm-12 ">
+          <div className="row">
+            <div className="col-md-1 col-sm-12 mt-1">
+              <input
+                className="form-check-input mt-2"
+                type="checkbox"
+                // checked={checkboxVal === "on" ? true : false}
+                id="filterCustCheckbox"
+                onChange={changeCheckbox}
+                disabled={!selectedCust}
+              />
+            </div>
+            <div className="col-md-1 col-sm-12">
+              <label className="form-label" style={{ whiteSpace: "nowrap" }}>
+                Filter Customer
+              </label>
+            </div>
+          </div>
+        </div> */}
+
+        {/* <div className="col-md-2">
+          <div className="col-md-4 mt-2">
+            <button className="button-style"
+            style={{width:'65px'}}
+             onClick={openClick}>
+              Open IV
+            </button>
+          </div>
+        </div>
+        <div className="col-md-2 mt-2">
+          <button
+            className="button-style "
+            id="btnclose"
+            type="submit"
+            onClick={() => nav("/MaterialManagement")}
+          >
+            Close
+          </button>
+        </div> */}
       </div>
-      <div className="row">
-        <div className="col-md-4 col-sm-12 mt-3">
+      </div>
+      {/* <div className="row">
+        <div className="col-md-2 col-sm-12 ">
           <div className="row">
             <div className="col-md-1 col-sm-12 mt-1">
               <input
@@ -248,14 +336,16 @@ function ReturnListing(props) {
             </div>
           </div>
         </div>
-        <div className="col-md-4">
+        <div className="col-md-2">
           <div className="col-md-4 mt-2">
-            <button className="button-style" onClick={openClick}>
+            <button className="button-style"
+            style={{width:'65px'}}
+             onClick={openClick}>
               Open IV
             </button>
           </div>
         </div>
-        <div className="col-md-4 mt-2">
+        <div className="col-md-2 mt-2">
           <button
             className="button-style "
             id="btnclose"
@@ -265,7 +355,7 @@ function ReturnListing(props) {
             Close
           </button>
         </div>
-      </div>
+      </div> */}
 
       <div className="row">
         <div className="col-md-12 mt-4">

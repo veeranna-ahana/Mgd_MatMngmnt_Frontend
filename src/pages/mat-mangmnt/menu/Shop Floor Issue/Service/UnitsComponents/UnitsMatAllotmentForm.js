@@ -437,6 +437,7 @@ function UnitsMatAllotmentForm() {
   };
 
   let modalResponse = async (data) => {
+    alert("okkkk22")
     //await delay(500);
     //console.log("data = ", data);
     if (data === "yes") {
@@ -623,6 +624,7 @@ function UnitsMatAllotmentForm() {
   };
 
   let modalResponseok = async (data) => {
+
     if (data === "ok") {
       nav(
         "/MaterialManagement/ShopFloorIssue/IVListProfileCutting/Closed/ShopMatIssueVoucher",
@@ -630,6 +632,9 @@ function UnitsMatAllotmentForm() {
           state: { issueIDVal: issueidval },
         }
       );
+    }
+    else{
+      console.log("data is not ok");
     }
   };
   const issueToProduction = () => {
@@ -661,149 +666,222 @@ function UnitsMatAllotmentForm() {
         <h4 className="title">Material Allotment Form</h4>
 
         <div className="row">
-          <div className="col-md-6">
+          
+          <div className="d-flex col-md-3">
+            <div className="col-md-3">
             <label className="form-label">Task No</label>
-            <input type="text" value={formHeader.TaskNo} disabled />
+            </div>
+            <div className="col-md-6">
+            <input  className="input-disabled mt-1" type="text" value={formHeader.TaskNo} disabled />
+            </div>
           </div>
-          <div className="col-md-6">
-            <label className="form-label">Customer</label>
-            <input type="text" value={formHeader.customer} disabled />
-          </div>
-        </div>
 
-        <div className="row">
-          <div className="col-md-6">
-            <div style={{ marginBottom: "9px" }}>
+          <div className="d-flex col-md-3">
+            <div className="col-md-3">
+            <label className="form-label">Customer</label>
+            </div>
+            <div className="col-md-6">
+            <input className="input-disabled mt-1" type="text" value={formHeader.customer} disabled />
+            </div>
+            
+           
+          </div>
+          
+          <div className="d-flex col-md-3">
+            <div className="col-md-4">
               <label className="form-label">NC Program No</label>
-              <input
-                // className="form-label"
+              
+            </div>
+            <div className="col-md-6">
+            <input
+               className="input-disabled mt-1"
                 value={formHeader.NCProgramNo}
                 disabled
               />
             </div>
           </div>
-          <div className="col-md-6">
-            <div style={{ marginBottom: "9px" }}>
+
+          <div className="d-flex col-md-3">
+            <div className="col-md-4">
               <label className="form-label">Material Code</label>
-              <input
-                // className="form-label"
+              
+            </div>
+            <div className="col-md-6">
+            <input
+                className="input-disabled mt-1"
                 value={formHeader.Mtrl_Code}
                 disabled
               />
             </div>
           </div>
-        </div>
 
-        <div className="row">
-          <div className="col-md-3">
+          <div className="d-flex col-md-3">
+            <div className="col-md-3">
             <label className="form-label">Priority</label>
+            </div>
+            <div className="col-md-6">
             <input
-              // className="form-label"
+              className="input-disabled mt-1"
               value={formHeader.Priority}
               disabled
             />
-          </div>
-          <div className="col-md-3">
-            {/* <label className="form-label">Width</label> */}
-            <label className="form-label">Length</label>
-            <input value={formHeader.Para1} disabled />
+            </div>
           </div>
 
-          <div className="col-md-3">
+          <div className="d-flex col-md-3">
+            <div className="col-md-3">
+            <label className="form-label">Length</label>
+            </div>
+            <div className="col-md-6">
+            <input  
+            className="input-disabled mt-1"
+            value={formHeader.Para1} disabled />
+            </div>
+           
+            
+          </div>
+
+          <div className="d-flex col-md-3">
+            <div className="col-md-4">
             <label className="form-label">Machine</label>
-            <input value={formHeader.Machine} disabled />
+            </div>
+            <div className="col-md-6">
+            <input 
+             className="input-disabled mt-1"
+            value={formHeader.Machine} disabled />
+            </div>
           </div>
+
+          <div className="d-flex col-md-3">
+          <div className="col-md-4">
+          <label className="form-label">Quantity</label>
+          </div>
+           
+           <div className="col-md-6">
+           <input 
+              className="input-disabled mt-1"
+           value={formHeader.Qty} disabled />
+           </div>
+          
+          </div>
+
+          <div className="d-flex col-md-3">
+            <div className="col-md-3">
+            <label className="form-label">Status</label>
+            </div>
+            <div className="col-md-6">
+            <input 
+             className="input-disabled mt-1"
+            value={formHeader.PStatus} disabled />
+            </div>
+           
+           
+          </div>
+
+          <div className="d-flex col-md-3">
           <div className="col-md-3">
-            <label className="form-label">Quantity</label>
-            <input value={formHeader.Qty} disabled />
+          <label className="form-label">Width</label>
           </div>
+          <div className="col-md-6">
+          <input 
+          className="input-disabled mt-1"
+          value={formHeader.Para2} disabled />
+          </div>
+          
+          
         </div>
 
-        <div className="row">
-          <div className="col-md-3">
-            <label className="form-label">Status</label>
-            <input value={formHeader.PStatus} disabled />
-          </div>
-          <div className="col-md-3">
-            {/* <label className="form-label">Length</label> */}
-            <label className="form-label">Width</label>
-            <input value={formHeader.Para2} disabled />
-          </div>
-
-          <div className="col-md-3">
+        <div className="d-flex col-md-3">
+            <div className="col-md-4">
             <label className="form-label">Process</label>
+            </div>
+            <div className="col-md-6">
             <input
-              // className="form-label"
+              className="input-disabled mt-1"
               value={formHeader.MProcess}
               disabled
             />
+            </div>
           </div>
-          <div className="col-md-3">
+
+          <div className="d-flex col-md-3">
+            <div className="col-md-4">
             <label className="form-label">Allotted</label>
+            </div>
+            <div className="col-md-6">
             <input
-              // className="form-label"
+                className="input-disabled mt-1"
               value={formHeader.QtyAllotted}
               disabled
             />
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-md-4">
+
+          <div className="d-flex col-md-3">
+            <div className="col-md-3">
             <label className="form-label">Source</label>
-            <input
-              // className="form-label"
-              value={formHeader.CustMtrl}
-              disabled
-            />
+            </div>
+            <div className="col-md-6">
+            <input     className="input-disabled mt-1"  value={formHeader.CustMtrl} disabled />
+            </div>
+            
+           
           </div>
-          <div className="col-md-8">
-            <div className="row">
-              <div className="col-md-3 col-sm-12">
+
+          <div className="col-md-2 ">
                 <button
                   className="button-style "
                   //   disabled={true}
                   onClick={allotMaterial}
-                  style={{ width: "180px" }}
+                  // style={{ width: "100px" }}
                 >
                   Allot Material
                 </button>
               </div>
-              <div className="col-md-3 col-sm-12">
+
+              <div className="col-md-2 ">
                 <button
                   className="button-style "
                   onClick={CancelAllotMaterial}
-                  style={{ width: "180px" }}
+                  // style={{ width: "100px" }}
                   //   disabled={true}
                   //   onClick={addToStock}
                 >
                   Cancel Allot
                 </button>
               </div>
-              <div className="col-md-3 col-sm-12">
+
+              <div className="col-md-2 ">
                 <button
                   className="button-style "
                   //   disabled={true}
                   onClick={issueToProduction}
                   // style={{width:"180px"}}
-                  style={{ width: "185px" }}
+                 // style={{ width: "185px" }}
                 >
                   Issue to Production
                 </button>
               </div>
-              <div className="col-md-3 col-sm-12">
+
+              <div className="col-md-2 ">
                 <button
                   className="button-style "
                   id="btnclose"
                   type="submit"
                   onClick={() => nav("/MaterialManagement")}
-                  style={{ width: "180px" }}
+                 // style={{ width: "180px" }}
                 >
                   Close
                 </button>
               </div>
-            </div>
-          </div>
+
         </div>
+
+      
+
+        
+       
+        
 
         <div className="row mt-4">
           <div className="col-md-7">

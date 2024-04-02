@@ -399,29 +399,35 @@ function MonthlyReport() {
         {" "}
         <h4 className="title">Raw Material Month Report</h4>
         <div className="row">
-          <div className="col-md-2">
-            <label className="form-label">Select Month</label>
-            <input
-              type="month"
-              name="month"
-              defaultValue={`${yearrr}-${monthhh + 1}`}
-              onChange={InputEvent}
+          <div className="d-flex col-md-4">
+            <div className="col-md-3">
+
+              <label className="form-label">Select Month</label>
+            </div>
+            <div className="col-md-5">
+              <input
+                type="month"
+                name="month"
+                defaultValue={`${yearrr}-${monthhh + 1}`}
+                onChange={InputEvent}
               // placeholder="month,year"
-            />
+              />
+            </div>
+
           </div>
-          <div className="col-md-2"></div>
-          <div className="col-md-2">
-            <button className="button-style" onClick={loadData}>
+         
+          <div className="col-md-1">
+            <button className="button-style"  style={{width:"80px"}} onClick={loadData}>
               Load Data
             </button>
           </div>
 
-          <div className="col-md-2">
-            <button className="button-style" onClick={printReport}>
+          <div className="col-md-1">
+            <button className="button-style" style={{width:'80px'}} onClick={printReport}>
               Print Report
             </button>
           </div>
-          <div className="col-md-2">
+          <div className="col-md-1">
             <button
               className="button-style "
               id="btnclose"

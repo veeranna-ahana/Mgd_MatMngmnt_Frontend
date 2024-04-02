@@ -4,7 +4,7 @@ import BreadcrumbsComponent from "../components/BreadCumbsComponent";
 import Header from "../pages/Header";
 import Sidebar from "../pages/Sidebar";
 import SidebarComp from "./SideBarComp";
-
+ 
 function SharedLayout() {
   return (
     <>
@@ -23,14 +23,14 @@ function SharedLayout() {
               <div
                 style={{
                   position: "relative",
-                  top: "-16px",
+                  top: "-6px",
                   backgroundColor: "white",
                 }}
               >
                 <BreadcrumbsComponent />
               </div>
             </div>
-
+ 
             <div className="content">
               <Outlet />
             </div>
@@ -40,5 +40,5 @@ function SharedLayout() {
     </>
   );
 }
-
+ 
 export default SharedLayout;

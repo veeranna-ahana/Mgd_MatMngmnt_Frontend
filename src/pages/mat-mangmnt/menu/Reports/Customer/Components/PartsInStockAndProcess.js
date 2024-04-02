@@ -74,16 +74,18 @@ function PartsInStockAndProcess(props) {
 
   // const nav = useNavigate();
   return (
-    <div className="mt-3">
-      <div className="row-md-6 justify-content-center mt-1 mb-2">
-        <h5>
+    <div className="">
+      <div className="row-md-6 justify-content-center mt-1 ">
+        {/* <h5>
           <b>
             Issued : Issued for Production &nbsp;&nbsp;&nbsp;&nbsp; Used : Used
             in Production{" "}
           </b>
-        </h5>
+        </h5> */}
+        <label className="form-label ">Issued : Issued for Production &nbsp;&nbsp;&nbsp;&nbsp; Used : Used
+            in Production{" "}</label>
       </div>
-      <div className="row mt-4">
+      <div className="row mt-2">
         <div className="col-md-2">
           {/* <NavComp /> */}
           {treeData.map((node, i) => {

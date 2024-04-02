@@ -206,8 +206,11 @@ function SheetResizeForm() {
       <div>
         <h4 className="title">Sheet Resize Form</h4>
         <div className="row">
-          <div className="col-md-8">
+          <div className="d-flex col-md-10">
+            <div className="col-md-1">
             <label className="form-label">Customer</label>
+            </div>
+           
             {/* <select
             className="ip-select"
             name="customer"
@@ -223,7 +226,8 @@ function SheetResizeForm() {
               </option>
             ))}
           </select> */}
-            <Typeahead
+          <div className='col-md-4 mt-2'>
+          <Typeahead
               id="basic-example"
               name="customer"
               options={custdata}
@@ -235,7 +239,10 @@ function SheetResizeForm() {
               }}
             />
           </div>
-          <div className="col-md-2">
+
+           
+          </div>
+          <div className="col-md-1">
             <button
               className="button-style"
               onClick={resizeButton}
@@ -261,7 +268,7 @@ function SheetResizeForm() {
               Resize
             </button>
           </div>
-          <div className="col-md-2">
+          <div className="col-md-1">
             <button
               className="button-style "
               id="btnclose"
@@ -355,15 +362,12 @@ function SheetResizeForm() {
             hover
             condensed
             selectRow={selectRow}
-<<<<<<< HEAD
             headerClasses="header-class tableHeaderBGColor"
           ></BootstrapTable>
           {/* <Table bordered>
-=======
             headerClasses="header-class"
           ></BootstrapTable> */}
             {/* <Table bordered>
->>>>>>> fde7a6a1fded53021821a2cfcbdd3aa14bfbe56c
             <thead
               style={{
                 textAlign: "center",
