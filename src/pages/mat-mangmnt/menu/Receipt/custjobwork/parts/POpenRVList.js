@@ -126,8 +126,11 @@ function POpenRVList() {
       <>
         <h4 className="title">Customer : Parts Receipt List Received</h4>
         <div className="row">
-          <div className="col-md-7 mb-3">
+          <div className="d-flex col-md-7 mb-1">
+            <div className="col-md-2">
             <label className="form-label">Customer</label>
+            </div>
+           
             {/* <select
               className="ip-select"
               name="customer"
@@ -142,6 +145,9 @@ function POpenRVList() {
                 </option>
               ))}
             </select> */}
+            <div className="col-md-5 mt-2">
+
+           
             <Typeahead
               id="basic-example"
               name="customer"
@@ -149,6 +155,7 @@ function POpenRVList() {
               placeholder="Select Customer"
               onChange={(label) => changeCustomer(label)}
             />
+             </div>
           </div>
           <div className="col-md-5 text-center">
             <button
@@ -161,7 +168,7 @@ function POpenRVList() {
             </button>
           </div>
           <div
-            style={{ height: "420px", overflowY: "scroll" }}
+            style={{ height: "400px", overflowY: "scroll" }}
             className="col-md-7 col-sm-12"
           >
             <BootstrapTable
@@ -186,7 +193,7 @@ function POpenRVList() {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                    className="input-disabled mt-2"
                     value={data.ReceiptDate}
                     readOnly
                   />
@@ -197,7 +204,7 @@ function POpenRVList() {
                   <label className="form-label">RV No</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="in-field" value={data.RV_No} readOnly />
+                  <input className="input-disabled mt-2" value={data.RV_No} readOnly />
                 </div>
               </div>
               <div className="row">
@@ -205,7 +212,7 @@ function POpenRVList() {
                   <label className="form-label">RV Date</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="in-field" value={data.RV_Date} readOnly />
+                  <input className="input-disabled mt-2"value={data.RV_Date} readOnly />
                 </div>
               </div>
               <div className="row">
@@ -213,7 +220,7 @@ function POpenRVList() {
                   <label className="form-label">Cust Code</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="in-field" value={data.Cust_Code} readOnly />
+                  <input className="input-disabled mt-2" value={data.Cust_Code} readOnly />
                 </div>
               </div>
               <div className="row">
@@ -221,7 +228,7 @@ function POpenRVList() {
                   <label className="form-label">Customer</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="in-field" value={data.Customer} readOnly />
+                  <input className="input-disabled mt-2" value={data.Customer} readOnly />
                 </div>
               </div>
               <div className="row">
@@ -236,7 +243,7 @@ function POpenRVList() {
 
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                   className="input-disabled mt-2"
                     value={data.CustDocuNo}
                     readOnly
                   />
@@ -248,7 +255,7 @@ function POpenRVList() {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                    className="input-disabled mt-2"
                     value={data.TotalWeight}
                     readOnly
                   />
@@ -266,7 +273,7 @@ function POpenRVList() {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                   className="input-disabled mt-2"
                     value={data.TotalCalculatedWeight}
                     readOnly
                   />
@@ -277,14 +284,14 @@ function POpenRVList() {
                   <label className="form-label">RV Status</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="in-field" value={data.RVStatus} readOnly />
+                  <input className="input-disabled mt-2" value={data.RVStatus} readOnly />
                 </div>
               </div>
 
               <div className="row justify-content-center mt-4 mb-4">
                 <button
                   className="button-style "
-                  style={{ width: "150px" }}
+                  style={{ width: "55px" }}
                   //data.RvID
                   onClick={openButtonClick}
                 >

@@ -300,7 +300,7 @@ export default function LocationList() {
               </div>
               <div className="col-md-7">
                 <input
-                  className="in-field"
+                   className="input-disabled mt-2"
                   type="text"
                   name="location"
                   onChange={changeHandler}
@@ -316,7 +316,7 @@ export default function LocationList() {
               <div className="col-md-5">
                 <label className="form-label mt-2">Storage Type</label>{" "}
               </div>
-              <div className="col-md-7">
+              <div className="   col-md-7">
                 {/* {shape.length > 0 ? (
                   <Typeahead
                     id="basic-example"
@@ -333,7 +333,8 @@ export default function LocationList() {
                 {shape.length > 0 ? (
                   <select
                     name="storage"
-                    className="in-field border-top-0 border-start-0 border-end-0"
+                  //  className="in-field border-top-0 border-start-0 border-end-0  "
+                  className="input-disabled mt-2"
                     onChange={changeHandler}
                     value={inputData.storage}
                     style={{ width: "100%" }}
@@ -368,7 +369,7 @@ export default function LocationList() {
               </div>
               <div className="col-md-7">
                 <input
-                  className="in-field"
+                   className="input-disabled mt-2"
                   type="text"
                   name="capacity"
                   onChange={changeHandler}
@@ -384,7 +385,7 @@ export default function LocationList() {
               <div className="col-md-3 col-sm-12">
                 <button
                   className="button-style "
-                  style={{ width: "100px" }}
+                 // style={{ width: "100px" }}
                   onClick={addButton}
                 >
                   Add
@@ -393,7 +394,7 @@ export default function LocationList() {
               <div className="col-md-3 col-sm-12">
                 <button
                   className="button-style"
-                  style={{ width: "100px" }}
+                  //style={{ width: "100px" }}
                   onClick={deleteButton}
                 >
                   Delete
@@ -402,7 +403,7 @@ export default function LocationList() {
               <div className="col-md-3 col-sm-12">
                 <button
                   className="button-style "
-                  style={{ width: "100px" }}
+                 // style={{ width: "100px" }}
                   onClick={saveButton}
                 >
                   Save
@@ -411,7 +412,7 @@ export default function LocationList() {
               <div className="col-md-3 col-sm-12">
                 <button
                   className="button-style"
-                  style={{ width: "100px" }}
+                  //style={{ width: "100px" }}
                   id="btnclose"
                   type="submit"
                   onClick={() => nav("/MaterialManagement")}

@@ -181,9 +181,9 @@ function PNew() {
     const newArray = partArray.map((p) =>
       p.id === partUniqueId
         ? {
-            ...p,
-            partId: selected.length > 0 ? selected[0].PartId : "",
-          }
+          ...p,
+          partId: selected.length > 0 ? selected[0].PartId : "",
+        }
         : p
     );
 
@@ -716,69 +716,109 @@ function PNew() {
         <h4 className="title">Customer Parts Receipt Voucher</h4>
 
         <div className="row">
-          <div className="col-md-3">
-            <label className="form-label">Receipt Date</label>
-            <input
-              type="text"
-              name="receiptDate"
-              value={formHeader.receiptDate}
-              readOnly
-            />
+          <div className="d-flex col-md-2">
+            <div className="col-md-6">
+              <label className="form-label ">Receipt Date</label>
+            </div>
+
+            <div className="col-md-6">
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="receiptDate"
+                value={formHeader.receiptDate}
+                readOnly
+              />
+            </div>
+
           </div>
-          <div className="col-md-2">
-            <label className="form-label">RV No</label>
-            <input type="text" name="rvNo" value={formHeader.rvNo} readOnly />
+          <div className="d-flex col-md-2">
+            <div className="col-md-4">
+              <label className="form-label">RV No</label>
+            </div>
+            <div className="col-md-8">
+              <input className="input-disabled mt-1"
+                type="text" name="rvNo" value={formHeader.rvNo} readOnly />
+            </div>
+
+
           </div>
-          <div className="col-md-2">
-            <label className="form-label">RV Date</label>
-            <input
-              type="text"
-              name="rvDate"
-              value={formHeader.rvDate}
-              readOnly
-            />
+
+          <div className="d-flex col-md-2">
+
+            <div className="col-md-4">
+              <label className="form-label">RV Date</label>
+            </div>
+            <div className="col-md-8">
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="rvDate"
+                value={formHeader.rvDate}
+                readOnly
+              />
+            </div>
+
           </div>
-          <div className="col-md-2">
-            <label className="form-label">Status</label>
-            <input
-              type="text"
-              name="status"
-              value={formHeader.status}
-              readOnly
-            />
+
+          <div className="d-flex col-md-4">
+            <div className="col-md-4" >
+              <label className="form-label">Status</label>
+            </div>
+            <div className="col-md-8">
+
+              <input className="input-disabled mt-1"
+                type="text"
+                name="status"
+                value={formHeader.status}
+                readOnly
+              />
+
+            </div>
           </div>
-          <div className="col-md-3">
-            <label className="form-label">Weight</label>
-            <input
-              required="required"
-              type="number"
-              name="weight"
-              value={formHeader.weight}
-              onChange={InputHeaderEvent}
-              onKeyDown={blockInvalidChar}
-              min="0"
-              disabled={boolVal4}
-            />
+
+          <div className="d-flex col-md-2">
+            <div className="col-md-4">
+              <label className="form-label">Weight</label>
+            </div>
+            <div className="col-md-8">
+              <input
+                className="input-disabled mt-1"
+                required="required"
+                type="number"
+                name="weight"
+                value={formHeader.weight}
+                onChange={InputHeaderEvent}
+                onKeyDown={blockInvalidChar}
+                min="0"
+                disabled={boolVal4}
+              />
+            </div>
           </div>
+
+
         </div>
         <div className="row">
-          <div className="col-md-5 ">
+
+          <div className="d-flex col-md-4">
+
+            <div className="col-md-2">
+              <label className="form-label">Customer</label>
+            </div>
+
+            <div className="col-md-10  mt-2">
+              <Typeahead
+                id="basic-example"
+                options={custdata}
+                placeholder="Select Customer"
+                onChange={(label) => changeCustomer(label)}
+                disabled={boolVal2}
+              />
+            </div>
+          </div>
+          {/* <div className="col-md-5 ">
             <label className="form-label">Customer</label>
-            {/* <select
-              className="ip-select"
-              name="customer"
-              onChange={changeCustomer}
-              disabled={boolVal2}
-            >
-              <option value="" disabled selected>
-                Select Customer
-              </option>
-              {custdata.map((customer, index) => (
-                <option key={index} value={customer.Cust_Code}>
-                  {customer.Cust_name}
-                </option>
-              ))}
-            </select> */}
+            
 
             <Typeahead
               id="basic-example"
@@ -787,42 +827,71 @@ function PNew() {
               onChange={(label) => changeCustomer(label)}
               disabled={boolVal2}
             />
-          </div>
-          <div className="col-md-4">
-            <label className="form-label">Reference</label>
-            <input
-              type="text"
-              name="reference"
-              value={formHeader.reference}
-              onChange={InputHeaderEvent}
-              disabled={boolVal2 && boolVal4}
-            />
-          </div>
-          <div className="col-md-3">
-            <label className="form-label">Calculated Weight</label>
-            <input
-              type="number"
-              name="calculatedWeight"
-              value={calcWeightVal}
-              readOnly
-            />
-          </div>
-        </div>
-        <div className="row"></div>
+          </div> */}
 
-        <div className="row">
-          <div className="col-md-8 justify-content-center">
+          <div className="d-flex col-md-2" style={{gap:'5px'}}>
+            <div className="col-md-4">
+              <label className="form-label">Reference</label>
+            </div>
+            <div className="col-md-8">
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="reference"
+                value={formHeader.reference}
+                onChange={InputHeaderEvent}
+                disabled={boolVal2 && boolVal4}
+              />
+            </div>
+          </div>
+
+
+          <div className="d-flex col-md-4">
+            <div className="col-md-4">
+              <label className="form-label">Calculated Weight</label>
+            </div>
+
+            <div className="col-md-8">
+              <input
+                className="input-disabled mt-1"
+                type="number"
+                name="calculatedWeight"
+                value={calcWeightVal}
+                readOnly
+              />
+            </div>
+          </div>
+
+        </div>
+
+
+        <div className="row mt-2">
+
+          <div className="col-md-8  ">
+            <label className="form-label"></label>
+            <textarea
+              className="input-disabled mt-1"
+              id="exampleFormControlTextarea1"
+              rows="4"
+              style={{ width: "700px", height: "60px" }}
+              //className="form-control"
+              value={formHeader.address}
+              readOnly
+            ></textarea>
+          </div>
+
+          <div className="col-md-4 justify-content-center">
             <button
               className="button-style"
               onClick={saveButtonState}
-              style={{ marginLeft: "60px" }}
+
               disabled={boolVal4}
             >
               Save
             </button>
             <button
               className="button-style"
-              style={{ width: "196px" }}
+
               disabled={boolVal1 || boolVal4}
               onClick={allotRVButtonState}
             >
@@ -845,22 +914,15 @@ function PNew() {
               Close
             </button>
           </div>
-          <div className="col-md-4 mb-3 mt-4">
-            <label className="form-label"></label>
-            <textarea
-              id="exampleFormControlTextarea1"
-              rows="4"
-              style={{ width: "400px", height: "40px" }}
-              //className="form-control"
-              value={formHeader.address}
-              readOnly
-            ></textarea>
-          </div>
+
+
+
+
         </div>
       </div>
       <div className="row">
         <div
-          style={{ height: "330px", overflowY: "scroll" }}
+          style={{ height: "240px", overflowY: "scroll" }}
           className="col-md-8 col-sm-12"
         >
           <BootstrapTable
@@ -870,29 +932,48 @@ function PNew() {
             striped
             hover
             condensed
-            headerClasses="header-class "
+            headerClasses="header-class tableHeaderBGColor"
             selectRow={selectRow}
           ></BootstrapTable>
         </div>
 
-        <div className="col-md-4 col-sm-12">
+        <div className="col-md-4 ">
           <div className="ip-box form-bg">
-            <div className="row justify-content-center mt-2 mb-3">
-              <button
-                className="button-style "
-                style={{ width: "155px" }}
-                onClick={addNewPart}
-                disabled={boolVal1 || boolVal4}
+
+            <div className="row col-md-12 ">
+              <div
+                className="col-md-8 mt-1 "
               >
-                Add New
-              </button>
+                <button
+                  className="button-style  "
+                  style={{ width: '75px' }}
+                  onClick={addNewPart}
+                  disabled={boolVal1 || boolVal4}
+                >
+                  Add New
+                </button>
+              </div>
+
+              <div className="col-md-4 mt-1  ">
+                <button
+                  className="button-style "
+                  style={{ width: "55px" }}
+                  disabled={boolVal3 || boolVal4}
+                  onClick={deleteButtonState}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
+
+
             <div className="row">
               {/* <h5>Srl Details</h5> */}
-              <p className="form-title-deco mt-1">
+              {/* <p className="form-title-deco mt-1">
                 <h5>Serial Details</h5>
-              </p>
-              <div className="col-md-4 mt-2">
+              </p> */}
+              <label className="form-label" style={{ textDecoration: 'underline' }}>Serial Details</label>
+              <div className="col-md-4 mt-1">
                 <label className="form-label">Part ID</label>
               </div>
               {/* <div className="col-md-8 ">
@@ -933,7 +1014,7 @@ function PNew() {
               </div>
               <div className="col-md-8 ">
                 <input
-                  className="in-field"
+                  className="input-disabled mt-1"
                   type="number"
                   name="unitWeight"
                   value={inputPart.unitWeight}
@@ -951,7 +1032,7 @@ function PNew() {
               </div>
               <div className="col-md-8 ">
                 <input
-                  className="in-field"
+                  className="input-disabled mt-1"
                   type="number"
                   name="qtyReceived"
                   //value={tempVal}
@@ -969,7 +1050,7 @@ function PNew() {
               </div>
               <div className="col-md-8 ">
                 <input
-                  className="in-field"
+                  className="input-disabled mt-1"
                   type="number"
                   name="qtyAccepted"
                   value={inputPart.qtyAccepted}
@@ -980,13 +1061,15 @@ function PNew() {
                 />
               </div>
             </div>
+
+
             <div className="row">
               <div className="col-md-4 ">
-                <label className="form-label mt-1">QtyRejected</label>
+                <label className="form-label">QtyRejected</label>
               </div>
               <div className="col-md-8 ">
                 <input
-                  className="in-field"
+                  className="input-disabled mt-1"
                   type="number"
                   // value={inputPart.qtyReceived - inputPart.qtyAccepted}
                   value={
@@ -994,21 +1077,21 @@ function PNew() {
                     parseFloat(inputPart.qtyAccepted)
                   }
                   name="qtyRejected"
-                  readOnly
+                  disabled
                 />
               </div>
             </div>
 
-            <div className="row justify-content-center mt-3 mb-4">
+            {/* <div className="row justify-content-center mt-3 mb-4">
               <button
                 className="button-style "
-                style={{ width: "155px" }}
+                style={{ width: "55px" }}
                 disabled={boolVal3 || boolVal4}
                 onClick={deleteButtonState}
               >
                 Delete
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

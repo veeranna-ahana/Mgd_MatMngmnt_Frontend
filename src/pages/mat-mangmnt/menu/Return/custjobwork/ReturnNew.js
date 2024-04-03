@@ -52,9 +52,12 @@ function ReturnNew() {
   return (
     <>
       <h4 className="title m-0">Customer Material Information</h4>
-      <div className="row">
-        <div className="col-md-8">
+      <div className="row mb-2">
+        <div className=" d-flex col-md-8">
+          <div className="col-md-2">
           <label className="form-label m-0">Select Customer</label>
+          </div>
+          
           {/* <select className="ip-select" onChange={changeCustomer}>
             <option value="" disabled selected>
               Select Customer
@@ -65,6 +68,7 @@ function ReturnNew() {
               </option>
             ))}
           </select> */}
+          <div className="col-md-5 mt-2">
           <Typeahead
             id="basic-example"
             name="customer"
@@ -72,10 +76,12 @@ function ReturnNew() {
             placeholder="Select Customer"
             onChange={(label) => changeCustomer(label)}
           />
+          </div>
+          
         </div>
-        <div className="col-md-4 d-flex align-items-center justify-content-end">
+        <div className="col-md-4 d-flex align-items-center justify-content-end mt-1">
           <button
-            className="button-style m-0"
+            className="button-style "
             id="btnclose"
             type="submit"
             onClick={() => nav("/MaterialManagement")}
@@ -84,7 +90,7 @@ function ReturnNew() {
           </button>
         </div>
       </div>
-      <Tabs id="controlled-tab-example" className="mt-1">
+      <Tabs id="controlled-tab-example" className=" tab_font nav-tabs mt-1">
         <Tab eventKey="mat_rece" title="Profiles Material">
           <ProfilesMaterials
             custCode={custCode}

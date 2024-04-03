@@ -146,7 +146,7 @@ function ShopIssueIVList(props) {
                 <button
                   onClick={openButton}
                   className="col-md-6 button-style"
-                  style={{ width: "155px" }}
+                  style={{ width: "55px" }}
                 >
                   Open
                 </button>
@@ -155,7 +155,7 @@ function ShopIssueIVList(props) {
                   id="btnclose"
                   type="submit"
                   onClick={() => nav("/MaterialManagement")}
-                  style={{ width: "155px" }}
+                  style={{ width: "55px" }}
                 >
                   Close
                 </button>
@@ -166,7 +166,7 @@ function ShopIssueIVList(props) {
                 </div>
                 <div className="col-md-8">
                   <input
-                    className="in-field"
+                     className="input-disabled mt-3"
                     disabled
                     value={rowData.Cust_Name}
                   />
@@ -178,7 +178,7 @@ function ShopIssueIVList(props) {
                   <label className="form-label">Issue Vr No</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="in-field" disabled value={rowData.IV_No} />
+                  <input  className="input-disabled mt-3" disabled value={rowData.IV_No} />
                 </div>
               </div>
               <div className="row">
@@ -187,7 +187,7 @@ function ShopIssueIVList(props) {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                     className="input-disabled mt-3"
                     disabled
                     value={rowData.Issue_date}
                   />
@@ -200,7 +200,7 @@ function ShopIssueIVList(props) {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                   className="input-disabled mt-3"
                     disabled
                     value={rowData.NC_ProgramNo}
                   />
@@ -217,7 +217,7 @@ function ShopIssueIVList(props) {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                     className="input-disabled mt-3"
                     disabled
                     value={rowData.AssyName}
                   />
@@ -231,7 +231,7 @@ function ShopIssueIVList(props) {
 
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                    className="input-disabled mt-3"
                     disabled
                     value={rowData.Operation}
                   />
@@ -243,7 +243,7 @@ function ShopIssueIVList(props) {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                     className="input-disabled mt-3"
                     disabled
                     value={rowData.Mtrl_Code}
                   />
@@ -255,7 +255,7 @@ function ShopIssueIVList(props) {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                     className="input-disabled mt-3"
                     disabled
                     value={rowData.QtyIssued}
                   />
@@ -267,7 +267,7 @@ function ShopIssueIVList(props) {
                 </div>
                 <div className="col-md-8  ">
                   <input
-                    className="in-field"
+                    className="input-disabled mt-3"
                     disabled
                     value={rowData.QtyReturned}
                   />

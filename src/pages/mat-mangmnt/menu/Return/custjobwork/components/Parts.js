@@ -719,28 +719,39 @@ function Parts(props) {
           <div className="row">
             <div className="col-md-9 p-0">
               <div className="row">
-                <div className="col-md-4">
-                  <div className="rvNO">
+                <div className="  col-md-4">
+                  <div className=" d-flex rvNO">
+                    <div className="col-md-2">
                     <label className="form-label">RV No</label>
+                    </div>
+                    <div className="col-md-6">
                     <input
+                    className="input-disabled mt-1"
                       type="text"
                       name="rvNo"
                       disabled
                       value={rvNoval}
                       // className="in-field"
                     />
+                    </div>
+                    
                   </div>
                 </div>
                 <div className="col-md-8">
-                  <div className="customerRef">
+                  <div className="d-flex customerRef">
+                    <div className="col-md-2">
                     <label className="form-label">Customer Ref</label>
+                    </div>
+                    <div className="col-md-5">
                     <input
-                      // className="in-field"
+                     className="input-disabled mt-1 "
                       type="text"
                       name="customerRef"
                       disabled
                       value={custRefval}
                     />
+                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -749,7 +760,7 @@ function Parts(props) {
               <div className="d-flex align-items-center justify-content-end">
                 <button
                   className="button-style mx-0"
-                  style={{ width: "200px" }}
+                  // style={{ width: "200px" }}
                   // onClick={createReturnVoucherFunc}
                   onClick={(e) => {
                     createReturnVoucherValidationFunc();

@@ -433,27 +433,51 @@ function LocationStockReport() {
                   onChange={(label) => changeCustomer(label)}
                 />
               </div>
-              <div className="col-md-6">
-                <label className="form-label"> Location</label>
+
+
+              <div className="d-flex col-md-6 mt-1" style={{gap:'15px'}}>
+                <label className="form-label col-md-3"> Location</label>
                 <input
-                  className=""
+                className="input-disabled "
                   name="LocationNo"
                   value={selectedfirstRow.LocationNo}
                 />
               </div>
-              <div className="col-md-6">
+
+
+              <div className="d-flex col-md-6 mt-1" style={{gap:'15px'}}>
                 {" "}
-                <label className="form-label">Capacity</label>
+                <label className="form-label col-md-3">Capacity</label>
                 <input
-                  className=""
+                   className="input-disabled "
                   name="Capacity"
                   value={selectedfirstRow.Capacity}
+                />
+              </div>
+
+              <div className="d-flex col-md-6" style={{gap:'15px'}}>
+                
+                <label className="form-label col-md-3">Type</label>
+                <input
+                   className="input-disabled "
+                  name="StorageType"
+                  value={selectedfirstRow.StorageType}
+                />
+              </div>
+
+              <div className="d-flex col-md-6" style={{gap:'15px'}}>
+              
+                <label className="form-label col-md-3">Used</label>
+                <input
+                   className="input-disabled "
+                  name="CapacityUtilised"
+                  value={selectedfirstRow.CapacityUtilised}
                 />
               </div>
             </div>
             <div className="row">
               {" "}
-              <div className="col-md-6">
+              {/* <div className="col-md-6">
                 {" "}
                 <label className="form-label">Type</label>
                 <input
@@ -461,8 +485,8 @@ function LocationStockReport() {
                   name="StorageType"
                   value={selectedfirstRow.StorageType}
                 />
-              </div>
-              <div className="col-md-6">
+              </div> */}
+              {/* <div className="col-md-6">
                 {" "}
                 <label className="form-label">Used</label>
                 <input
@@ -470,13 +494,14 @@ function LocationStockReport() {
                   name="CapacityUtilised"
                   value={selectedfirstRow.CapacityUtilised}
                 />
-              </div>
+              </div> */}
             </div>
           </div>
 
           <div className="col-md-8">
             <h8 className="form-label">Show Stock</h8>
             <div className="row">
+
               <div className="col-md-4">
                 <div className="row">
                   {" "}
@@ -554,30 +579,25 @@ function LocationStockReport() {
                 </div>
               </div>
 
-              <div className="col-md-12">
+              {/* <div className="col-md-12">
                 <label className="form-label">Customer</label>
                 <input className="" value={selectedSecondRow.Customer} />
-              </div>
+              </div> */}
             </div>
+
             <div className="row">
-              <div className="col-md-12">
-                <label className="form-label">Material</label>
-                <input className="" value={selectedSecondRow.Mtrl_Code} />
+              <div className="d-flex col-md-4" style={{gap:'5px'}}>
+                <label className="form-label col-md-3">Material</label>
+                <input    className="input-disabled " value={selectedSecondRow.Mtrl_Code} />
               </div>
-            </div>
-            <div className="row">
-              {" "}
-              <div className="col-md-4">
-                <label className="form-label">Dim 1</label>
-                <input className="" value={selectedSecondRow.DynamicPara1} />
+
+              <div className="d-flex col-md-4" style={{gap:'5px'}}>
+                <label className="form-label col-md-3">Customer</label>
+                <input  className="input-disabled " value={selectedSecondRow.Customer} />
               </div>
-              <div className="col-md-4">
-                <label className="form-label">Dim 2</label>
-                <input className="" value={selectedSecondRow.DynamicPara2} />
-              </div>
-              <div className="col-md-4 mt-2">
-                <div className="row">
-                  <div className="col-md-1 col-sm-12">
+
+              <div className="row col-md-4">
+                  <div className="col-md-2 col-sm-12">
                     <input
                       className="form-check-input mt-3"
                       type="checkbox"
@@ -594,6 +614,41 @@ function LocationStockReport() {
                     <label className="form-label mt-1">Scrap</label>
                   </div>
                 </div>
+            </div>
+
+            <div className="row">
+              {" "}
+              <div className=" d-flex col-md-4" style={{gap:'5px'}}>
+                <label className="form-label col-md-3">Dim 1</label>
+                <input className="input-disabled " value={selectedSecondRow.DynamicPara1} />
+              </div>
+
+              <div className="d-flex col-md-4" style={{gap:'5px'}}>
+                <label className="form-label col-md-3">Dim 2</label>
+                <input className="input-disabled " value={selectedSecondRow.DynamicPara2} />
+              </div>
+
+              
+
+              <div className="col-md-4 mt-2">
+                {/* <div className="row">
+                  <div className="col-md-1 col-sm-12">
+                    <input
+                      className="form-check-input mt-3"
+                      type="checkbox"
+                      id="flexCheckDefault"
+                      name="updated"
+                      checked={selectedSecondRow.Scrap !== 0 ? true : false}
+                      //   value={inputPart.upDated}
+                      //disabled={boolVal3 | boolVal4}
+                      //   disabled={true}
+                      //   onChange={changeMaterialHandle}
+                    />
+                  </div>
+                  <div className="col-md-8 col-sm-12">
+                    <label className="form-label mt-1">Scrap</label>
+                  </div>
+                </div> */}
               </div>
             </div>
           </div>

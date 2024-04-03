@@ -242,19 +242,20 @@ function ShopFloorMaterialAllotment(props) {
   return (
     <div>
       <h4 className="title">Shop Floor Material Allotment</h4>
-      <div className="row-md-6 justify-content-center mt-1 mb-2">
-        <h4 style={{ marginLeft: "30px" }}>{props.formtype}</h4>
+      <div className="row col-md-8 ">
+        {/* <h4 style={{ marginLeft: "30px" }}>{props.formtype}</h4> */}
+        <label  className="col-md-2 ms-2">{props.formtype}</label>
         <button
-          className="button-style "
-          style={{ width: "155px" }}
+          className=" col-md-3 button-style "
+          style={{ width: "100px" }}
           onClick={allotMaterial}
           // disabled={boolVal1 | boolVal4}
         >
           Allot Material
         </button>
         <button
-          className="button-style ms-2"
-          style={{ width: "155px" }}
+          className="button-style  col-md-2"
+          style={{ width: "50px" }}
           id="btnclose"
           type="submit"
           onClick={() => nav("/MaterialManagement")}

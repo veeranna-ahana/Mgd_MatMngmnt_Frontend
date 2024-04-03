@@ -199,9 +199,9 @@ function PurchasePartsNew() {
       //p.id === "d28d67b2-6c32-4aae-a7b6-74dc985a3cff"
       p.id === partUniqueId
         ? {
-            ...p,
-            [name]: value,
-          }
+          ...p,
+          [name]: value,
+        }
         : p
     );
     setPartArray(newArray);
@@ -529,51 +529,96 @@ function PurchasePartsNew() {
         <h4 className="title">Customer Parts Receipt Voucher</h4>
 
         <div className="row">
-          <div className="col-md-3">
-            <label className="form-label">Receipt Date</label>
-            <input
-              type="text"
-              name="receiptDate"
-              value={formHeader.receiptDate}
-              readOnly
-            />
+
+          <div className="d-flex col-md-2">
+            <div className="col-md-6">
+              <label className="form-label ">Receipt Date</label>
+            </div>
+
+            <div className="col-md-6">
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="receiptDate"
+                value={formHeader.receiptDate}
+                readOnly
+              />
+            </div>
+
           </div>
-          <div className="col-md-2">
-            <label className="form-label">RV No</label>
-            <input type="text" name="rvNo" value={formHeader.rvNo} readOnly />
+
+          <div className="d-flex col-md-2">
+            <div className="col-md-4">
+              <label className="form-label">RV No</label>
+            </div>
+            <div className="col-md-8">
+              <input className="input-disabled mt-1"
+                type="text" name="rvNo" value={formHeader.rvNo} readOnly />
+            </div>
+
+
           </div>
-          <div className="col-md-2">
-            <label className="form-label">RV Date</label>
-            <input
-              type="text"
-              name="rvDate"
-              value={formHeader.rvDate}
-              readOnly
-            />
+
+
+          <div className="d-flex col-md-2">
+
+            <div className="col-md-4">
+              <label className="form-label">RV Date</label>
+            </div>
+            <div className="col-md-8">
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="rvDate"
+                value={formHeader.rvDate}
+                readOnly
+              />
+            </div>
+
           </div>
-          <div className="col-md-2">
-            <label className="form-label">Status</label>
-            <input
-              type="text"
-              name="status"
-              value={formHeader.status}
-              readOnly
-            />
+
+
+
+          <div className="d-flex col-md-4">
+            <div className="col-md-4" >
+              <label className="form-label">Status</label>
+            </div>
+            <div className="col-md-8">
+
+              <input className="input-disabled mt-1"
+                type="text"
+                name="status"
+                value={formHeader.status}
+                readOnly
+              />
+
+            </div>
           </div>
-          <div className="col-md-3">
-            <label className="form-label">Weight</label>
-            <input
-              type="text"
-              name="weight"
-              value={formHeader.weight}
-              onChange={InputHeaderEvent}
-              disabled={boolVal4}
-            />
+          
+
+          <div className="d-flex col-md-2">
+            <div className="col-md-4">
+              <label className="form-label">Weight</label>
+            </div>
+            <div className="col-md-8">
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="weight"
+                value={formHeader.weight}
+                onChange={InputHeaderEvent}
+                disabled={boolVal4}
+              />
+            </div>
           </div>
         </div>
         <div className="row">
-          <div className="col-md-5">
-            <label className="form-label">Customer</label>
+          <div className="d-flex col-md-4">
+          <div className="col-md-2">
+              <label className="form-label">Customer</label>
+            </div>
+
+            <div className="col-md-10 ">
             <select
               className="ip-select mt-1"
               name="customer"
@@ -590,34 +635,61 @@ function PurchasePartsNew() {
                 )
               )}
             </select>
+            </div>
+           
           </div>
-          <div className="col-md-4">
-            <label className="form-label">Reference</label>
-            <input
+          
+          
+          <div className="d-flex col-md-2" style={{gap:'5px'}}>
+            <div className="col-md-4">
+              <label className="form-label">Reference  </label>
+            </div>
+            <div className="col-md-8">
+              <input
+              className="input-disabled mt-1" 
               type="text"
               name="reference"
               value={formHeader.reference}
               onChange={InputHeaderEvent}
               disabled={boolVal2 & boolVal4}
-            />
+              />
+            </div>
           </div>
-          <div className="col-md-3">
-            <label className="form-label">Calculated Weight</label>
-            <input
-              type="text"
-              name="calculatedWeight"
-              value={calcWeightVal}
-              readOnly
-            />
+          
+          <div className="d-flex col-md-4">
+            <div className="col-md-4">
+              <label className="form-label">Calculated Weight</label>
+            </div>
+
+            <div className="col-md-8">
+              <input
+              className="input-disabled mt-1" 
+                type="number"
+                name="calculatedWeight"
+                value={calcWeightVal}
+                readOnly
+              />
+            </div>
           </div>
         </div>
 
         <div className="row">
-          <div className="col-md-8 justify-content-center">
+        <div className="col-md-8 ">
+            <textarea
+             className="input-disabled mt-1" 
+              id="exampleFormControlTextarea1"
+              rows="4"
+              style={{ width: "700px", height: "60px" }}
+              value={formHeader.address}
+              readOnly
+            ></textarea>
+          </div>
+
+          <div className="col-md-4 justify-content-center">
             <button
               className="button-style"
               // style={{ width: "196px" }}
-              style={{ marginLeft: "60px" }}
+              // style={{ marginLeft: "60px" }}
               onClick={saveButtonState}
               disabled={boolVal4}
             >
@@ -625,7 +697,7 @@ function PurchasePartsNew() {
             </button>
             <button
               className="button-style"
-              style={{ width: "196px" }}
+              // style={{ width: "196px" }}
               disabled={boolVal1 | boolVal4}
               onClick={allotRVButtonState}
             >
@@ -633,7 +705,7 @@ function PurchasePartsNew() {
             </button>
             <button
               className="button-style"
-              style={{ width: "196px" }}
+              // style={{ width: "196px" }}
               disabled={boolVal1 | boolVal4}
               onClick={deleteRVButton}
             >
@@ -648,15 +720,7 @@ function PurchasePartsNew() {
               Close
             </button>
           </div>
-          <div className="col-md-4 mb-3 mt-3">
-            <textarea
-              id="exampleFormControlTextarea1"
-              rows="4"
-              style={{ width: "400px", height: "40px" }}
-              value={formHeader.address}
-              readOnly
-            ></textarea>
-          </div>
+          
         </div>
       </div>
       <div className="row">
@@ -715,7 +779,7 @@ function PurchasePartsNew() {
             <div className="row justify-content-center mt-2 mb-3">
               <button
                 className="button-style "
-                style={{ width: "155px" }}
+                style={{ width: "75px" }}
                 onClick={addNewPart}
                 disabled={boolVal1 | boolVal4}
               >
@@ -728,7 +792,8 @@ function PurchasePartsNew() {
               </div>
               <div className="col-md-8">
                 <select
-                  className="ip-select dropdown-field"
+                  // className="ip-select dropdown-field"
+                  className="input-disabled mt-1" 
                   name="partId"
                   value={inputPart.partId}
                   onChange={changePartHandle}
@@ -749,7 +814,7 @@ function PurchasePartsNew() {
               </div>
               <div className="col-md-8 ">
                 <input
-                  className="in-field"
+                  className="input-disabled mt-1" 
                   type="text"
                   name="unitWeight"
                   value={inputPart.unitWeight}
@@ -765,7 +830,7 @@ function PurchasePartsNew() {
               </div>
               <div className="col-md-8 ">
                 <input
-                  className="in-field"
+                   className="input-disabled mt-1" 
                   type="text"
                   name="qtyReceived"
                   //value={tempVal}
@@ -779,7 +844,7 @@ function PurchasePartsNew() {
               </div>
               <div className="col-md-8 ">
                 <input
-                  className="in-field"
+                  className="input-disabled mt-1" 
                   type="text"
                   name="qtyAccepted"
                   value={inputPart.qtyAccepted}
@@ -794,7 +859,7 @@ function PurchasePartsNew() {
               </div>
               <div className="col-md-8 ">
                 <input
-                  className="in-field"
+                  className="input-disabled mt-1" 
                   type="text"
                   value={inputPart.qtyReceived - inputPart.qtyAccepted}
                   name="qtyRejected"
@@ -806,7 +871,7 @@ function PurchasePartsNew() {
             <div className="row justify-content-center mt-3 mb-4">
               <button
                 className="button-style "
-                style={{ width: "155px" }}
+                style={{ width: "55px" }}
                 disabled={boolVal3 | boolVal4}
                 onClick={deleteButtonState}
               >

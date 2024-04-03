@@ -585,95 +585,152 @@ function MaterialAllotmentMain() {
       <div>
         <h4 className="title">Material Allotment Form</h4>
         <div className="row">
-          <div className="col-md-4">
+          <div className="d-flex col-md-3">
+            <div className="col-md-3">
             <label className="form-label">Task No</label>
-            <input type="text" value={formHeader.TaskNo} disabled />
+            </div>
+            <div className="col-md-6">
+            <input  className="input-disabled mt-1" type="text" value={formHeader.TaskNo} disabled />
+            </div>
+            
+           
           </div>
-          <div className="col-md-6">
+          <div className="d-flex col-md-3">
+            <div className="col-md-3">
             <label className="form-label">Customer</label>
-            <input type="text" value={formHeader.customer} disabled />
+            </div>
+            <div className="col-md-6">
+            <input className="input-disabled mt-1" type="text" value={formHeader.customer} disabled />
+            </div>
+            
+           
           </div>
-        </div>
 
-        <div className="row">
-          <div className="col-md-4">
-            <div style={{ marginBottom: "9px" }}>
+
+
+          <div className="d-flex col-md-3">
+            <div className="col-md-4">
               <label className="form-label">NC Program No</label>
-              <input
-                // className="form-label"
+              
+            </div>
+            <div className="col-md-6">
+            <input
+               className="input-disabled mt-1"
                 value={formHeader.NCProgramNo}
                 disabled
               />
             </div>
           </div>
 
-          <div className="col-md-6">
-            <div style={{ marginBottom: "9px" }}>
+          <div className="d-flex col-md-3">
+            <div className="col-md-4">
               <label className="form-label">Material Code</label>
-              <input
-                // className="form-label"
+              
+            </div>
+            <div className="col-md-6">
+            <input
+                className="input-disabled mt-1"
                 value={formHeader.Mtrl_Code}
                 disabled
               />
             </div>
           </div>
-        </div>
 
-        <div className="row">
-          <div className="col-md-4">
+
+          <div className="d-flex col-md-3">
+            <div className="col-md-3">
             <label className="form-label">Priority</label>
+            </div>
+            <div className="col-md-6">
             <input
-              // className="form-label"
+              className="input-disabled mt-1"
               value={formHeader.Priority}
               disabled
             />
+            </div>
           </div>
 
-          <div className="col-md-3">
+          <div className="d-flex col-md-3">
+            <div className="col-md-3">
             <label className="form-label">Machine</label>
-            <input value={formHeader.Machine} disabled />
+            </div>
+            <div className="col-md-6">
+            <input 
+             className="input-disabled mt-1"
+            value={formHeader.Machine} disabled />
+            </div>
           </div>
 
-          <div className="col-md-3">
-            <label className="form-label">Quantity</label>
-            <input value={formHeader.Qty} disabled />
-          </div>
-        </div>
-
-        <div className="row">
+          <div className="d-flex col-md-3">
           <div className="col-md-4">
-            <label className="form-label">Status</label>
-            <input value={formHeader.PStatus} disabled />
+          <label className="form-label">Quantity</label>
+          </div>
+           
+           <div className="col-md-6">
+           <input 
+              className="input-disabled mt-1"
+           value={formHeader.Qty} disabled />
+           </div>
+          
           </div>
 
-          <div className="col-md-3">
+          <div className="d-flex col-md-3">
+            <div className="col-md-4">
+            <label className="form-label">Status</label>
+            </div>
+            <div className="col-md-6">
+            <input 
+             className="input-disabled mt-1"
+            value={formHeader.PStatus} disabled />
+            </div>
+           
+           
+          </div>
+
+          <div className="d-flex col-md-3">
+            <div className="col-md-3">
             <label className="form-label">Process</label>
+            </div>
+            <div className="col-md-6">
             <input
-              // className="form-label"
+              className="input-disabled mt-1"
               value={formHeader.Operation}
               disabled
             />
+            </div>
           </div>
 
-          <div className="col-md-3">
+          <div className="d-flex col-md-3">
+            <div className="col-md-3">
             <label className="form-label">Allotted</label>
+            </div>
+            <div className="col-md-6">
             <input
-              // className="form-label"
+                className="input-disabled mt-1"
               value={formHeader.QtyAllotted}
               disabled
             />
+            </div>
           </div>
-        </div>
 
-        <div className="row">
-          <div className="col-md-4">
+          <div className="d-flex col-md-3">
+            <div className="col-md-4">
             <label className="form-label">Source</label>
-            <input value="Customer" disabled />
+            </div>
+            <div className="col-md-6">
+            <input     className="input-disabled mt-1" value="Customer" disabled />
+            </div>
+            
+           
           </div>
 
-          <div className="col-md-3">
+          <div className="d-flex col-md-3">
+            <div className="col-md-4">
             <label className="form-label">Issue Now</label>
+            </div>
+            <div className="col-md-6">
             <input
+             className="input-disabled mt-1"
               type="number"
               min="0"
               onChange={issuenowchange}
@@ -681,7 +738,30 @@ function MaterialAllotmentMain() {
               onBlur={issuenowonblur}
               disabled={isAnyQtyAvailableZero() || firstTable.length === 0}
             />
+            </div>
+           
+           
           </div>
+
+        </div>
+
+
+        
+        </div>
+
+       
+         
+
+         
+
+         
+
+      
+
+        <div className="row">
+         
+
+          
 
           <div className="col-md-3">
             <button
@@ -694,7 +774,7 @@ function MaterialAllotmentMain() {
             </button>
           </div>
         </div>
-      </div>
+      
 
       <div style={{ height: "250px", overflowY: "scroll", marginTop: "10px" }}>
         {/* <BootstrapTable
@@ -750,7 +830,7 @@ function MaterialAllotmentMain() {
         <div className="col-md-8 justify-content-center mb-3">
           <button
             className="button-style"
-            style={{ width: "196px" }}
+            style={{ width: "150px" }}
             disabled={btnVisibility}
             onClick={releaseProduction}
           >
@@ -909,7 +989,7 @@ function MaterialAllotmentMain() {
               </div>
               <div className="col-md-8 ">
                 <input
-                  className="in-field"
+                 className="input-disabled mt-2"
                   type="text"
                   value={row2.RV_No}
                   disabled
@@ -924,7 +1004,7 @@ function MaterialAllotmentMain() {
 
               <div className="col-md-8" style={{ marginTop: "8px" }}>
                 <input
-                  className="in-field"
+                 className="input-disabled mt-2"
                   type="text"
                   value={row2.PartId}
                   disabled
@@ -941,7 +1021,7 @@ function MaterialAllotmentMain() {
 
               <div className="col-md-8 ">
                 <input
-                  className="in-field"
+                 className="input-disabled mt-2"
                   type="text"
                   name="qtyReceived"
                   // disabled="true"
@@ -960,7 +1040,7 @@ function MaterialAllotmentMain() {
 
               <div className="col-md-8 ">
                 <input
-                  className="in-field"
+                  className="input-disabled mt-2"
                   type="text"
                   value={row2.QtyAccepted}
                   disabled
@@ -977,7 +1057,7 @@ function MaterialAllotmentMain() {
 
               <div className="col-md-8 ">
                 <input
-                  className="in-field"
+                 className="input-disabled mt-2"
                   type="text"
                   value={row2.QtyIssued}
                   disabled
@@ -994,7 +1074,7 @@ function MaterialAllotmentMain() {
 
               <div className="col-md-8 ">
                 <input
-                  className="in-field"
+                  className="input-disabled mt-2"
                   type="text"
                   value={row2.issueNow}
                   disabled

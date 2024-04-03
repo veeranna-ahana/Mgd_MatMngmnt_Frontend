@@ -623,102 +623,141 @@ function OutwordMaterialIssueVocher(props) {
 
         <div>
           <div className="row">
-            <div className="col-md-3">
-              <label className="form-label">IV No & IV Date</label>
-              <input
-                type="text"
-                name="IvId"
-                value={`${formHeader.IV_No} | ${formHeader.IV_Date}`}
-                disabled
-                className="input-disabled"
-              />
-            </div>
-            <div className="col-md-3">
-              <label className="form-label">DC No & DC Date</label>
+            <div className="d-flex col-md-3">
+              <div className="col-md-5">
+                <label className="form-label">IV No & IV Date</label>
+              </div>
+              <div className="col-md-6">
+                <input
+                  type="text"
+                  name="IvId"
+                  value={`${formHeader.IV_No} | ${formHeader.IV_Date}`}
+                  disabled
+                  className="input-disabled mt-1"
 
-              <input
-                type="text"
-                name="IVDate"
-                value={
-                  formHeader.PkngDcNo
-                    ? `${formHeader.PkngDcNo} | ${formHeader.PkngDCDate}`
-                    : ""
-                }
-                disabled
-                className="input-disabled"
-              />
+                />
+              </div>
+
             </div>
-            <div className="col-md-3">
-              <label className="form-label">Status</label>
-              <input
-                type="text"
-                name="reference"
-                value={formHeader.IVStatus}
-                disabled
-                className="input-disabled"
-              />
+
+            <div className="d-flex col-md-3">
+              <div className="col-md-5">
+                <label className="form-label">DC No & DC Date</label>
+              </div>
+
+              <div className="col-md-7">
+                <input
+                  type="text"
+                  name="IVDate"
+                  value={
+                    formHeader.PkngDcNo
+                      ? `${formHeader.PkngDcNo} | ${formHeader.PkngDCDate}`
+                      : ""
+                  }
+                  disabled
+                  className="input-disabled mt-1"
+                />
+              </div>
+
             </div>
-            <div className="col-md-3">
-              <label className="form-label">Calculated Weight</label>
-              <input
-                name="Type"
-                value={formHeader.TotalCalculatedWeight}
-                disabled
-                className="input-disabled"
-              />
+
+
+            <div className="d-flex col-md-3">
+              <div className="col-md-3">
+                <label className="form-label">Status</label>
+              </div>
+              <div className="col-md-7">
+                <input
+                  type="text"
+                  name="reference"
+                  value={formHeader.IVStatus}
+                  disabled
+                  className="input-disabled mt-1"
+                />
+              </div>
+
             </div>
-            <div className="col-md-6">
-              <label className="form-label">Customer</label>
-              <input
-                type="text"
-                name="Customer"
-                value={formHeader.Customer}
-                disabled
-                className="input-disabled"
-              />
+
+            <div className="d-flex col-md-3">
+              <div className="col-md-5">
+                <label className="form-label">Calculated Weight</label>
+              </div>
+
+              <div className="col-md-6">
+                <input
+                  name="Type"
+                  value={formHeader.TotalCalculatedWeight}
+                  disabled
+                  className="input-disabled mt-1"
+                />
+              </div>
+
             </div>
-            <div className="col-md-3">
-              <label className="form-label">GST</label>
-              <input
-                type="text"
-                name="reference"
-                value={formHeader.CustGSTNo}
-                disabled
-                className="input-disabled"
-              />
+
+
+            <div className="d-flex col-md-6 mt-2">
+              <div className="col-md-2">
+                <label className="form-label">Customer</label>
+              </div>
+
+              <div className="col-md-10">
+                <input
+                  type="text"
+                  name="Customer"
+                  value={formHeader.Customer}
+                  disabled
+                  className="input-disabled mt-1"
+                />
+              </div>
+
             </div>
-            {/* <div className="col-md-3">
-              <label className="form-label">Calculated Weight</label>
-              <input
-                name="Type"
-                value={formHeader.TotalCalculatedWeight}
-                disabled
-                className="input-disabled"
-              />
-            </div> */}
-            <div className="col-md-3">
-              <label className="form-label">Actual Weight</label>
-              <input
-                type="number"
-                min="0"
-                name="TotalWeight"
-                defaultValue={formHeader.TotalWeight}
-                onChange={(e) => {
-                  InputHeaderEvent(e.target.name, parseFloat(e.target.value));
-                }}
-                disabled={
-                  formHeader.IVStatus === "Cancelled" ||
-                  formHeader.IVStatus === "Returned"
-                    ? true
-                    : false
-                }
-                className={
-                  formHeader.IVStatus === "Cancelled" ||
-                  formHeader.IVStatus === "Returned"
-                    ? "input-disabled"
-                    : ""
-                }
-              />
+            
+            <div className="d-flex col-md-3 mt-2">
+
+              <div className="col-md-3">
+                <label className="form-label">GST</label>
+              </div>
+              <div className="col-md-7">
+                <input
+                  type="text"
+                  name="reference"
+                  value={formHeader.CustGSTNo}
+                  disabled
+                  className="input-disabled mt-1"
+                />
+              </div>
+
+            </div>
+
+            <div className="d-flex col-md-3 mt-2">
+              <div className="col-md-5">
+                <label className="form-label">Actual Weight</label>
+              </div>
+              <div className="col-md-6">
+                <input
+                  type="number"
+                  min="0"
+                  name="TotalWeight"
+                  defaultValue={formHeader.TotalWeight}
+                  onChange={(e) => {
+                    InputHeaderEvent(e.target.name, parseFloat(e.target.value));
+                  }}
+                  disabled={
+                    formHeader.IVStatus === "Cancelled" ||
+                      formHeader.IVStatus === "Returned"
+                      ? true
+                      : false
+                  }
+                  className={
+                    formHeader.IVStatus === "Cancelled" ||
+                      formHeader.IVStatus === "Returned"
+                      ? "input-disabled"
+                      : ""
+                  }
+                />
+              </div>
+
+
             </div>
             <div className="col-md-6">
               <div className="d-flex flex-column">
@@ -746,13 +785,13 @@ function OutwordMaterialIssueVocher(props) {
                   }}
                   disabled={
                     formHeader.IVStatus === "Cancelled" ||
-                    formHeader.IVStatus === "Returned"
+                      formHeader.IVStatus === "Returned"
                       ? true
                       : false
                   }
                   className={
                     formHeader.IVStatus === "Cancelled" ||
-                    formHeader.IVStatus === "Returned"
+                      formHeader.IVStatus === "Returned"
                       ? "input-disabled"
                       : ""
                   }
@@ -771,13 +810,13 @@ function OutwordMaterialIssueVocher(props) {
             onClick={saveButtonState}
             disabled={
               formHeader.IVStatus === "Cancelled" ||
-              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+                (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
                 ? true
                 : false
             }
             className={
               formHeader.IVStatus === "Cancelled" ||
-              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+                (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
                 ? "button-style ms-3 input-disabled"
                 : "button-style ms-3"
             }
@@ -788,13 +827,13 @@ function OutwordMaterialIssueVocher(props) {
             onClick={cancelIV}
             disabled={
               formHeader.IVStatus === "Cancelled" ||
-              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+                (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
                 ? true
                 : false
             }
             className={
               formHeader.IVStatus === "Cancelled" ||
-              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+                (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
                 ? "button-style button-disabled"
                 : "button-style"
             }
@@ -805,13 +844,13 @@ function OutwordMaterialIssueVocher(props) {
             onClick={createDC}
             disabled={
               formHeader.IVStatus === "Cancelled" ||
-              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+                (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
                 ? true
                 : false
             }
             className={
               formHeader.IVStatus === "Cancelled" ||
-              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+                (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
                 ? "button-style button-disabled"
                 : "button-style"
             }
@@ -821,12 +860,14 @@ function OutwordMaterialIssueVocher(props) {
           <button
             onClick={printDC}
             disabled={
-              formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
+              formHeader.IVStatus === "Cancelled" ||
+                formHeader.IVStatus === "Returned"
                 ? false
                 : true
             }
             className={
-              formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
+              formHeader.IVStatus === "Cancelled" ||
+                formHeader.IVStatus === "Returned"
                 ? "button-style"
                 : "button-disabled button-style"
             }
@@ -901,13 +942,13 @@ function OutwordMaterialIssueVocher(props) {
                         }}
                         disabled={
                           formHeader.IVStatus === "Cancelled" ||
-                          formHeader.IVStatus === "Returned"
+                            formHeader.IVStatus === "Returned"
                             ? true
                             : false
                         }
                         className={
                           formHeader.IVStatus === "Cancelled" ||
-                          formHeader.IVStatus === "Returned"
+                            formHeader.IVStatus === "Returned"
                             ? "input-disabled"
                             : ""
                         }
@@ -921,46 +962,46 @@ function OutwordMaterialIssueVocher(props) {
                           id=""
                           disabled={
                             formHeader.IVStatus === "Cancelled" ||
-                            formHeader.IVStatus === "Returned"
+                              formHeader.IVStatus === "Returned"
                               ? true
                               : false
                           }
                           className={
                             formHeader.IVStatus === "Cancelled" ||
-                            formHeader.IVStatus === "Returned"
+                              formHeader.IVStatus === "Returned"
                               ? "input-disabled"
                               : ""
                           }
                           onClick={() => updateChange(key, 1, "UpDated")}
-                          // onChange={(e) => {
-                          //   // console.log("checkbox clicked", e.target.value);
+                        // onChange={(e) => {
+                        //   // console.log("checkbox clicked", e.target.value);
 
-                          //   const newArray = [];
+                        //   const newArray = [];
 
-                          //   for (let i = 0; i < outData.length; i++) {
-                          //     const element = outData[i];
+                        //   for (let i = 0; i < outData.length; i++) {
+                        //     const element = outData[i];
 
-                          //     if (i === key) {
-                          //       element.UpDated = 1;
-                          //     }
-                          //     console.log("element", element);
+                        //     if (i === key) {
+                        //       element.UpDated = 1;
+                        //     }
+                        //     console.log("element", element);
 
-                          //     newArray.push(element);
+                        //     newArray.push(element);
 
-                          //     // if(i===key){
+                        //     // if(i===key){
 
-                          //     // }else{
+                        //     // }else{
 
-                          //     //   setOutData([element])
-                          //     // }
-                          //   }
+                        //     //   setOutData([element])
+                        //     // }
+                        //   }
 
-                          //   console.log("new", newArray);
+                        //   console.log("new", newArray);
 
-                          //   setOutData(newArray);
+                        //   setOutData(newArray);
 
-                          //   // console.log("setOutData", outData[key].UpDated);
-                          // }}
+                        //   // console.log("setOutData", outData[key].UpDated);
+                        // }}
                         />
                       ) : (
                         <input
@@ -970,22 +1011,22 @@ function OutwordMaterialIssueVocher(props) {
                           checked
                           disabled={
                             formHeader.IVStatus === "Cancelled" ||
-                            formHeader.IVStatus === "Returned"
+                              formHeader.IVStatus === "Returned"
                               ? true
                               : false
                           }
                           className={
                             formHeader.IVStatus === "Cancelled" ||
-                            formHeader.IVStatus === "Returned"
+                              formHeader.IVStatus === "Returned"
                               ? "input-disabled"
                               : ""
                           }
                           onClick={() => updateChange(key, 0, "UpDated")}
 
-                          // onChange={(e) => {
-                          //   // console.log("checkbox clicked", e.target.value);
-                          //   // console.log("setOutData", outData);
-                          // }}
+                        // onChange={(e) => {
+                        //   // console.log("checkbox clicked", e.target.value);
+                        //   // console.log("setOutData", outData);
+                        // }}
                         />
                       )}
                     </td>

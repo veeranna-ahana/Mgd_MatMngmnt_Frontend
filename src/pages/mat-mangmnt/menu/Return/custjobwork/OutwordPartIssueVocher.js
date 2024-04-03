@@ -590,103 +590,140 @@ function OutwordPartIssueVocher(props) {
 
         <div>
           <div className="row">
-            <div className="col-md-3">
-              <label className="form-label">IV No & IV Date</label>
-              <input
-                type="text"
-                name="IvId"
-                value={`${formHeader.IV_No} | ${formHeader.IV_Date}`}
-                disabled
-                className="input-disabled"
-                // onChange={InputHeaderEvent}
-              />
-            </div>
-            <div className="col-md-3">
-              <label className="form-label">DC No & DC Date</label>
+            <div className="d-flex col-md-3">
+            <div className="col-md-5">
+                <label className="form-label">IV No & IV Date</label>
+              </div>
+              
+               <div className="col-md-6">
+                <input
+                  type="text"
+                  name="IvId"
+                  value={`${formHeader.IV_No} | ${formHeader.IV_Date}`}
+                  disabled
+                  className="input-disabled mt-1"
 
-              <input
-                type="text"
-                name="IVDate"
-                value={
-                  formHeader.PkngDcNo
-                    ? `${formHeader.PkngDcNo} | ${formHeader.PkngDCDate}`
-                    : ""
-                }
-                disabled
-                className="input-disabled"
-              />
+                />
+              </div>
             </div>
-            <div className="col-md-3">
-              <label className="form-label">Status</label>
-              <input
-                type="text"
-                name="reference"
-                value={formHeader.IVStatus}
-                disabled
-                className="input-disabled"
-              />
+
+            
+            <div className="d-flex col-md-3">
+              <div className="col-md-5">
+                <label className="form-label">DC No & DC Date</label>
+              </div>
+
+              <div className="col-md-7">
+                <input
+                  type="text"
+                  name="IVDate"
+                  value={
+                    formHeader.PkngDcNo
+                      ? `${formHeader.PkngDcNo} | ${formHeader.PkngDCDate}`
+                      : ""
+                  }
+                  disabled
+                  className="input-disabled mt-1"
+                />
+              </div>
+
             </div>
-            <div className="col-md-3">
-              <label className="form-label">Calculated Weight</label>
-              <input
-                name="Type"
-                value={formHeader.TotalCalculatedWeight}
-                disabled
-                className="input-disabled"
-              />
+            
+             <div className="d-flex col-md-3">
+              <div className="col-md-3">
+                <label className="form-label">Status</label>
+              </div>
+              <div className="col-md-7">
+                <input
+                  type="text"
+                  name="reference"
+                  value={formHeader.IVStatus}
+                  disabled
+                  className="input-disabled mt-1"
+                />
+              </div>
+
             </div>
-            <div className="col-md-6">
-              <label className="form-label">Customer</label>
-              <input
-                type="text"
-                name="Customer"
-                value={formHeader.Customer}
-                disabled
-                className="input-disabled"
-              />
+            
+             <div className="d-flex col-md-3">
+              <div className="col-md-5">
+                <label className="form-label">Calculated Weight</label>
+              </div>
+
+              <div className="col-md-6">
+                <input
+                  name="Type"
+                  value={formHeader.TotalCalculatedWeight}
+                  disabled
+                  className="input-disabled mt-1"
+                />
+              </div>
+
             </div>
-            <div className="col-md-3">
-              <label className="form-label">GST</label>
-              <input
-                type="text"
-                name="reference"
-                value={formHeader.CustGSTNo}
-                disabled
-                className="input-disabled"
-              />
+            <div className="d-flex col-md-6 mt-2">
+              <div className="col-md-2">
+                <label className="form-label">Customer</label>
+              </div>
+
+              <div className="col-md-10">
+                <input
+                  type="text"
+                  name="Customer"
+                  value={formHeader.Customer}
+                  disabled
+                  className="input-disabled mt-1"
+                />
+              </div>
+
             </div>
-            {/* <div className="col-md-3">
-              <label className="form-label">Calculated Weight</label>
-              <input
-                name="Type"
-                value={formHeader.TotalCalculatedWeight}
-                disabled
-                className="input-disabled"
-              />
-            </div> */}
-            <div className="col-md-3">
-              <label className="form-label">Actual Weight</label>
-              <input
-                type="number"
-                min="0"
-                name="TotalWeight"
-                defaultValue={formHeader.TotalWeight}
-                onChange={(e) => {
-                  InputHeaderEvent(e.target.name, parseFloat(e.target.value));
-                }}
-                disabled={
-                  formHeader.IVStatus === "Cancelled" ||
-                  formHeader.IVStatus === "Returned"
-                    ? true
-                    : false
-                }
-                className={
-                  formHeader.IVStatus === "Cancelled" ||
-                  formHeader.IVStatus === "Returned"
-                    ? "input-disabled"
-                    : ""
-                }
-              />
+
+
+             <div className="d-flex col-md-3 mt-2">
+
+              <div className="col-md-3">
+                <label className="form-label">GST</label>
+              </div>
+              <div className="col-md-7">
+                <input
+                  type="text"
+                  name="reference"
+                  value={formHeader.CustGSTNo}
+                  disabled
+                  className="input-disabled mt-1"
+                />
+              </div>
+
+            </div>
+            
+            <div className="d-flex col-md-3 mt-2">
+              <div className="col-md-5">
+                <label className="form-label">Actual Weight</label>
+              </div>
+              <div className="col-md-6">
+                <input
+                  type="number"
+                  min="0"
+                  name="TotalWeight"
+                  defaultValue={formHeader.TotalWeight}
+                  onChange={(e) => {
+                    InputHeaderEvent(e.target.name, parseFloat(e.target.value));
+                  }}
+                  disabled={
+                    formHeader.IVStatus === "Cancelled" ||
+                      formHeader.IVStatus === "Returned"
+                      ? true
+                      : false
+                  }
+                  className={
+                    formHeader.IVStatus === "Cancelled" ||
+                      formHeader.IVStatus === "Returned"
+                      ? "input-disabled"
+                      : ""
+                  }
+                />
+              </div>
+
+
             </div>
             <div className="col-md-6">
               <div className="d-flex flex-column">

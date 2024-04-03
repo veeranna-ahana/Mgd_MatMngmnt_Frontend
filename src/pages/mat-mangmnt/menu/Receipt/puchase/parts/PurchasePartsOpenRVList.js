@@ -136,7 +136,7 @@ function PurchasePartsOpenRVList() {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                    className="input-disabled mt-2" 
                     value={data.ReceiptDate}
                     readOnly
                   />
@@ -147,7 +147,7 @@ function PurchasePartsOpenRVList() {
                   <label className="form-label">RV No</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="in-field" value={data.RV_No} readOnly />
+                  <input  className="input-disabled mt-2" lassName="in-field" value={data.RV_No} readOnly />
                 </div>
               </div>
               <div className="row">
@@ -155,7 +155,7 @@ function PurchasePartsOpenRVList() {
                   <label className="form-label">RV Date</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="in-field" value={data.RV_Date} readOnly />
+                  <input  className="input-disabled mt-2"  value={data.RV_Date} readOnly />
                 </div>
               </div>
               <div className="row">
@@ -163,7 +163,7 @@ function PurchasePartsOpenRVList() {
                   <label className="form-label">Cust Code</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="in-field" value={data.Cust_Code} readOnly />
+                  <input  className="input-disabled mt-2"  value={data.Cust_Code} readOnly />
                 </div>
               </div>
               <div className="row">
@@ -171,7 +171,7 @@ function PurchasePartsOpenRVList() {
                   <label className="form-label">Customer</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="in-field" value={data.Customer} readOnly />
+                  <input  className="input-disabled mt-2"  value={data.Customer} readOnly />
                 </div>
               </div>
               <div className="row">
@@ -186,7 +186,7 @@ function PurchasePartsOpenRVList() {
 
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                     className="input-disabled mt-2" 
                     value={data.CustDocuNo}
                     readOnly
                   />
@@ -198,7 +198,7 @@ function PurchasePartsOpenRVList() {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                   className="input-disabled mt-2" 
                     value={data.TotalWeight}
                     readOnly
                   />
@@ -216,7 +216,7 @@ function PurchasePartsOpenRVList() {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="in-field"
+                     className="input-disabled mt-2" 
                     value={data.TotalCalculatedWeight}
                     readOnly
                   />
@@ -227,14 +227,14 @@ function PurchasePartsOpenRVList() {
                   <label className="form-label">RV Status</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="in-field" value={data.RVStatus} readOnly />
+                  <input  className="input-disabled mt-2"  value={data.RVStatus} readOnly />
                 </div>
               </div>
 
               <div className="row justify-content-center mt-4 mb-4">
                 <button
                   className="button-style "
-                  style={{ width: "155px" }}
+                  style={{ width: "55px" }}
                   //data.RvID
                   onClick={openButtonClick}
                 >

@@ -576,23 +576,24 @@ function PendingList(props) {
       <h4 className="title">Shop Floor Material Issue List</h4>
       <div className="row">
         <div className="col-md-3">
-          <h4 className="form-title">
+          {/* <h4 className="form-title">
             <b>Shop Floor Material Return Form</b>
-          </h4>
+          </h4> */}
+          <label className="form-label">Shop Floor Material Return Form</label>
           {/* <button className="button-style ">custname</button> */}
         </div>
         <div className="col-md-9">
           <button
             className="button-style mt-0"
             onClick={returnScrap}
-            style={{ width: "170px" }}
+           // style={{ width: "170px" }}
           >
             Return As Scrap
           </button>
           <button
             className="button-style"
             onClick={returnToStock}
-            style={{ width: "170px" }}
+            //style={{ width: "170px" }}
           >
             Return To Stock
           </button>
@@ -620,7 +621,7 @@ function PendingList(props) {
 
           <button
             className="button-style mt-0"
-            style={{ width: "170px" }}
+            //style={{ width: "170px" }}
             onClick={() => {
               if (selectedSecondTableRows.length === 0) {
                 toast.error("Select Material to return to Stock");
@@ -647,7 +648,7 @@ function PendingList(props) {
             id="btnclose"
             type="submit"
             onClick={() => nav("/MaterialManagement")}
-            style={{ width: "170px" }}
+           // style={{ width: "170px" }}
           >
             Close
           </button>
