@@ -18,6 +18,7 @@ function Parts(props) {
   let [firstTableData, setFirstTableData] = useState([]);
   let [secondTableData, setSecondTableData] = useState([]);
   let [thirdTableData, setThirdTableData] = useState([]);
+  const [thirdTableRVIDs, setThirdTableRVIDs] = useState([]);
 
   let [firstTableSelectedRow, setFirstTableSelectedRow] = useState([]);
 
@@ -169,6 +170,7 @@ function Parts(props) {
   // ];
 
   // console.log("firstTableSelectedRow", firstTableSelectedRow);
+
   const selectRowFirstFunc = (rowData) => {
     // mode: "checkbox",
     // clickToSelect: true,
@@ -382,14 +384,20 @@ function Parts(props) {
       // deleting the element if found
       const newThirdTableData = thirdTableData.filter(
         (el) =>
-          el.CustBOM_Id != rowData.CustBOM_Id &&
-          el.RV_No != rowData.RV_No &&
-          el.CustDocuNo != rowData.CustDocuNo &&
-          el.Id != rowData.Id &&
-          el.PartId != rowData.PartId &&
+          el.CustBOM_Id != rowData.CustBOM_Id ||
+          el.RV_No != rowData.RV_No ||
+          el.CustDocuNo != rowData.CustDocuNo ||
+          el.Id != rowData.Id ||
+          el.PartId != rowData.PartId ||
           el.RVId != rowData.RVId
       );
       // console.log("newthirdtabedata", newThirdTableData);
+      // console.log("thirdTableRVIDs remomve", thirdTableRVIDs);
+      // console.log("rowData remove", rowData);
+
+      let newArray = thirdTableRVIDs.filter((obj) => obj != rowData.RV_No);
+      // console.log("newArray", newArray);
+      setThirdTableRVIDs(newArray);
       setThirdTableData(newThirdTableData);
     } else {
       let returnNew =
@@ -433,6 +441,8 @@ function Parts(props) {
 
         // console.log("after some operation...", rowData);
 
+        thirdTableRVIDs.push(rowData.RV_No);
+        setThirdTableRVIDs(thirdTableRVIDs);
         setThirdTableData([...thirdTableData, rowData]);
       }
     }
@@ -771,6 +781,7 @@ function Parts(props) {
                     firstTableData={firstTableData}
                     firstTableSelectedRow={firstTableSelectedRow}
                     selectRowFirstFunc={selectRowFirstFunc}
+                    thirdTableRVIDs={thirdTableRVIDs}
                   />
 
                   {/* <BootstrapTable

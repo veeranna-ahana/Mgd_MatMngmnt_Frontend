@@ -65,8 +65,8 @@ const styles = StyleSheet.create({
     width: "40%",
   },
   totalFinal: {
-    width: "25%",
-    marginLeft: "5px",
+    // width: "25%",
+    // marginLeft: "5px",
     marginTop: "13px",
     marginBottom: "10px",
     fontSize: 10,
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
 
   weightFinal: {
     width: "8%",
-    marginLeft: "20px",
+    marginLeft: "15px",
     marginTop: "13px",
     marginBottom: "10px",
     fontSize: 10,
@@ -218,7 +218,7 @@ const PrintReportFullStockListTable = ({
                       style={{
                         display: "flex",
                         flexDirection: "row",
-                        justifyContent: "flex-end",
+                        // justifyContent: "flex-end",
                       }}
                     >
                       <Text style={styles.emptyblock1}></Text>

@@ -386,6 +386,39 @@ label {
 /* rbt-input-main form-control rbt-input */
 /* .tbody {
   font-size: 14px !important;
+}
+
+.title {
+  text-align: center;
+  height: 34px;
+  color: white;
+  background-color: #2b3a55;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.header-class {
+  font-size: 17px;
+  background-color: gray;
+  color: white;
+  position: sticky;
+  /* top: -1px; */
+  /* text-transform: capitalize;
+} */
+
+.rowSelectedClass {
+  background-color: #98a8f8 !important;
+}
+
+.rowSelectedLight {
+  background-color: #fffca9 !important;
+}
+
+.selected-row {
+  background-color: #98a8f8 !important;
+}
+
+/* .custom-table tbody tr.selected-row {
+  background-color: #98a8f8;
 } */
 
 .ip-box {

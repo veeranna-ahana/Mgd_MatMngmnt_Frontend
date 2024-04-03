@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   },
 
   blockRightAlign2: {
-    width: "8%",
+    width: "10%",
     textAlign: "left",
     marginLeft: "10px",
     marginTop: "10px",
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica-Bold",
   },
   blockLeftAlign2: {
-    width: "20%",
+    width: "18%",
     marginLeft: "10px",
     marginTop: "10px",
     fontSize: "9",
@@ -268,7 +268,12 @@ const PrintIVListProfileCuttingTable1 = ({ formHeader, tableData }) => (
         </View>
 
         <View style={styles.blockLeftAlign}>
-          <Text>{formHeader.Issue_date}</Text>
+          {/* <Text>{formHeader.Isssue_date}</Text> */}
+          <Text>
+            {formHeader.Isssue_date
+              ? new Date(formHeader.Isssue_date).toLocaleDateString("en-GB")
+              : ""}
+          </Text>
           <Text style={styles.linegap}>{formHeader.NC_ProgramNo}</Text>
         </View>
 
@@ -291,32 +296,39 @@ const PrintIVListProfileCuttingTable1 = ({ formHeader, tableData }) => (
         <View style={styles.blockRightAlign2}>
           <Text>Material</Text>
           <Text style={styles.linegap}>Height</Text>
-          <Text style={styles.linegap}>Qty</Text>
-          <Text style={styles.linegap}>Source</Text>
+          <Text style={styles.linegap}>Qty Issued</Text>
+          {/* <Text style={styles.linegap}>Qty Received</Text> */}
+
+          {/* <Text style={styles.linegap}>Source</Text> */}
         </View>
         <View style={styles.blockLeftAlign2}>
           <Text>{formHeader.Mtrl_Code}</Text>
           <Text style={styles.linegap}>{formHeader.Para3}</Text>
-          <Text style={styles.linegap}>{formHeader.Qty}</Text>
-          <Text style={styles.linegap}>{formHeader.CustMtrl}</Text>
+          {/* <Text style={styles.linegap}>{formHeader.Qty}</Text> */}
+          <Text style={styles.linegap}>{formHeader.QtyIssued}</Text>
+          {/* <Text style={styles.linegap}>{formHeader.CustMtrl}</Text> */}
         </View>
 
         <View style={styles.blockRightAlign2}>
           <Text>Width</Text>
           <Text style={styles.linegap}>Machine</Text>
+          <Text style={styles.linegap}>Qty Received</Text>
         </View>
         <View style={styles.blockLeftAlign2}>
           <Text>{formHeader.Para2}</Text>
           <Text style={styles.linegap}>{formHeader.Machine}</Text>
+          <Text style={styles.linegap}>{formHeader.Qty}</Text>
         </View>
 
         <View style={styles.blockRightAlign2}>
           <Text>Length</Text>
           <Text style={styles.linegap}>Process</Text>
+          <Text style={styles.linegap}>Source</Text>
         </View>
         <View style={styles.blockLeftAlign2}>
           <Text>{formHeader.Para1}</Text>
           <Text style={styles.linegap}>{formHeader.MProcess}</Text>
+          <Text style={styles.linegap}>{formHeader.CustMtrl}</Text>
         </View>
 
         {/* <Text style={styles.blockWhole}>Material : {formHeader.Mtrl_Code}</Text>
