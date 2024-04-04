@@ -591,23 +591,21 @@ function OutwordPartIssueVocher(props) {
         <div>
           <div className="row">
             <div className="d-flex col-md-3">
-            <div className="col-md-5">
+              <div className="col-md-5">
                 <label className="form-label">IV No & IV Date</label>
               </div>
-              
-               <div className="col-md-6">
+
+              <div className="col-md-6">
                 <input
                   type="text"
                   name="IvId"
                   value={`${formHeader.IV_No} | ${formHeader.IV_Date}`}
                   disabled
                   className="input-disabled mt-1"
-
                 />
               </div>
             </div>
 
-            
             <div className="d-flex col-md-3">
               <div className="col-md-5">
                 <label className="form-label">DC No & DC Date</label>
@@ -626,10 +624,9 @@ function OutwordPartIssueVocher(props) {
                   className="input-disabled mt-1"
                 />
               </div>
-
             </div>
-            
-             <div className="d-flex col-md-3">
+
+            <div className="d-flex col-md-3">
               <div className="col-md-3">
                 <label className="form-label">Status</label>
               </div>
@@ -642,10 +639,9 @@ function OutwordPartIssueVocher(props) {
                   className="input-disabled mt-1"
                 />
               </div>
-
             </div>
-            
-             <div className="d-flex col-md-3">
+
+            <div className="d-flex col-md-3">
               <div className="col-md-5">
                 <label className="form-label">Calculated Weight</label>
               </div>
@@ -658,7 +654,6 @@ function OutwordPartIssueVocher(props) {
                   className="input-disabled mt-1"
                 />
               </div>
-
             </div>
             <div className="d-flex col-md-6 mt-2">
               <div className="col-md-2">
@@ -674,12 +669,9 @@ function OutwordPartIssueVocher(props) {
                   className="input-disabled mt-1"
                 />
               </div>
-
             </div>
 
-
-             <div className="d-flex col-md-3 mt-2">
-
+            <div className="d-flex col-md-3 mt-2">
               <div className="col-md-3">
                 <label className="form-label">GST</label>
               </div>
@@ -692,9 +684,8 @@ function OutwordPartIssueVocher(props) {
                   className="input-disabled mt-1"
                 />
               </div>
-
             </div>
-            
+
             <div className="d-flex col-md-3 mt-2">
               <div className="col-md-5">
                 <label className="form-label">Actual Weight</label>
@@ -705,25 +696,28 @@ function OutwordPartIssueVocher(props) {
                   min="0"
                   name="TotalWeight"
                   defaultValue={formHeader.TotalWeight}
+                  onKeyDown={(e) => {
+                    if (e.which === 38 || e.which === 40) {
+                      e.preventDefault();
+                    }
+                  }}
                   onChange={(e) => {
                     InputHeaderEvent(e.target.name, parseFloat(e.target.value));
                   }}
                   disabled={
                     formHeader.IVStatus === "Cancelled" ||
-                      formHeader.IVStatus === "Returned"
+                    formHeader.IVStatus === "Returned"
                       ? true
                       : false
                   }
                   className={
                     formHeader.IVStatus === "Cancelled" ||
-                      formHeader.IVStatus === "Returned"
+                    formHeader.IVStatus === "Returned"
                       ? "input-disabled"
                       : ""
                   }
                 />
               </div>
-
-
             </div>
             <div className="col-md-6">
               <div className="d-flex flex-column">
@@ -909,6 +903,11 @@ function OutwordPartIssueVocher(props) {
                           //     : false
                           // }
                           defaultValue={parseFloat(val.TotalWeight).toFixed(3)}
+                          onKeyDown={(e) => {
+                            if (e.which === 38 || e.which === 40) {
+                              e.preventDefault();
+                            }
+                          }}
                           onChange={(e) => {
                             updateChange(
                               key,
