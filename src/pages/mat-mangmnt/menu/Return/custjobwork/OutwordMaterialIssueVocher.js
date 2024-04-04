@@ -634,10 +634,8 @@ function OutwordMaterialIssueVocher(props) {
                   value={`${formHeader.IV_No} | ${formHeader.IV_Date}`}
                   disabled
                   className="input-disabled mt-1"
-
                 />
               </div>
-
             </div>
 
             <div className="d-flex col-md-3">
@@ -658,9 +656,7 @@ function OutwordMaterialIssueVocher(props) {
                   className="input-disabled mt-1"
                 />
               </div>
-
             </div>
-
 
             <div className="d-flex col-md-3">
               <div className="col-md-3">
@@ -675,7 +671,6 @@ function OutwordMaterialIssueVocher(props) {
                   className="input-disabled mt-1"
                 />
               </div>
-
             </div>
 
             <div className="d-flex col-md-3">
@@ -691,9 +686,7 @@ function OutwordMaterialIssueVocher(props) {
                   className="input-disabled mt-1"
                 />
               </div>
-
             </div>
-
 
             <div className="d-flex col-md-6 mt-2">
               <div className="col-md-2">
@@ -709,11 +702,9 @@ function OutwordMaterialIssueVocher(props) {
                   className="input-disabled mt-1"
                 />
               </div>
-
             </div>
-            
-            <div className="d-flex col-md-3 mt-2">
 
+            <div className="d-flex col-md-3 mt-2">
               <div className="col-md-3">
                 <label className="form-label">GST</label>
               </div>
@@ -726,7 +717,6 @@ function OutwordMaterialIssueVocher(props) {
                   className="input-disabled mt-1"
                 />
               </div>
-
             </div>
 
             <div className="d-flex col-md-3 mt-2">
@@ -739,25 +729,28 @@ function OutwordMaterialIssueVocher(props) {
                   min="0"
                   name="TotalWeight"
                   defaultValue={formHeader.TotalWeight}
+                  onKeyDown={(e) => {
+                    if (e.which === 38 || e.which === 40) {
+                      e.preventDefault();
+                    }
+                  }}
                   onChange={(e) => {
                     InputHeaderEvent(e.target.name, parseFloat(e.target.value));
                   }}
                   disabled={
                     formHeader.IVStatus === "Cancelled" ||
-                      formHeader.IVStatus === "Returned"
+                    formHeader.IVStatus === "Returned"
                       ? true
                       : false
                   }
                   className={
                     formHeader.IVStatus === "Cancelled" ||
-                      formHeader.IVStatus === "Returned"
+                    formHeader.IVStatus === "Returned"
                       ? "input-disabled"
                       : ""
                   }
                 />
               </div>
-
-
             </div>
             <div className="col-md-6">
               <div className="d-flex flex-column">
@@ -785,13 +778,13 @@ function OutwordMaterialIssueVocher(props) {
                   }}
                   disabled={
                     formHeader.IVStatus === "Cancelled" ||
-                      formHeader.IVStatus === "Returned"
+                    formHeader.IVStatus === "Returned"
                       ? true
                       : false
                   }
                   className={
                     formHeader.IVStatus === "Cancelled" ||
-                      formHeader.IVStatus === "Returned"
+                    formHeader.IVStatus === "Returned"
                       ? "input-disabled"
                       : ""
                   }
@@ -810,13 +803,13 @@ function OutwordMaterialIssueVocher(props) {
             onClick={saveButtonState}
             disabled={
               formHeader.IVStatus === "Cancelled" ||
-                (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
                 ? true
                 : false
             }
             className={
               formHeader.IVStatus === "Cancelled" ||
-                (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
                 ? "button-style ms-3 input-disabled"
                 : "button-style ms-3"
             }
@@ -827,13 +820,13 @@ function OutwordMaterialIssueVocher(props) {
             onClick={cancelIV}
             disabled={
               formHeader.IVStatus === "Cancelled" ||
-                (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
                 ? true
                 : false
             }
             className={
               formHeader.IVStatus === "Cancelled" ||
-                (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
                 ? "button-style button-disabled"
                 : "button-style"
             }
@@ -844,13 +837,13 @@ function OutwordMaterialIssueVocher(props) {
             onClick={createDC}
             disabled={
               formHeader.IVStatus === "Cancelled" ||
-                (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
                 ? true
                 : false
             }
             className={
               formHeader.IVStatus === "Cancelled" ||
-                (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
                 ? "button-style button-disabled"
                 : "button-style"
             }
@@ -861,13 +854,13 @@ function OutwordMaterialIssueVocher(props) {
             onClick={printDC}
             disabled={
               formHeader.IVStatus === "Cancelled" ||
-                formHeader.IVStatus === "Returned"
+              formHeader.IVStatus === "Returned"
                 ? false
                 : true
             }
             className={
               formHeader.IVStatus === "Cancelled" ||
-                formHeader.IVStatus === "Returned"
+              formHeader.IVStatus === "Returned"
                 ? "button-style"
                 : "button-disabled button-style"
             }
@@ -924,6 +917,11 @@ function OutwordMaterialIssueVocher(props) {
                         type="number"
                         min="0"
                         defaultValue={parseFloat(val?.TotalWeight).toFixed(3)}
+                        onKeyDown={(e) => {
+                          if (e.which === 38 || e.which === 40) {
+                            e.preventDefault();
+                          }
+                        }}
                         onChange={(e) => {
                           // console.log("eeeeeeeeee", e.target.value);
 
@@ -942,13 +940,13 @@ function OutwordMaterialIssueVocher(props) {
                         }}
                         disabled={
                           formHeader.IVStatus === "Cancelled" ||
-                            formHeader.IVStatus === "Returned"
+                          formHeader.IVStatus === "Returned"
                             ? true
                             : false
                         }
                         className={
                           formHeader.IVStatus === "Cancelled" ||
-                            formHeader.IVStatus === "Returned"
+                          formHeader.IVStatus === "Returned"
                             ? "input-disabled"
                             : ""
                         }
@@ -962,46 +960,46 @@ function OutwordMaterialIssueVocher(props) {
                           id=""
                           disabled={
                             formHeader.IVStatus === "Cancelled" ||
-                              formHeader.IVStatus === "Returned"
+                            formHeader.IVStatus === "Returned"
                               ? true
                               : false
                           }
                           className={
                             formHeader.IVStatus === "Cancelled" ||
-                              formHeader.IVStatus === "Returned"
+                            formHeader.IVStatus === "Returned"
                               ? "input-disabled"
                               : ""
                           }
                           onClick={() => updateChange(key, 1, "UpDated")}
-                        // onChange={(e) => {
-                        //   // console.log("checkbox clicked", e.target.value);
+                          // onChange={(e) => {
+                          //   // console.log("checkbox clicked", e.target.value);
 
-                        //   const newArray = [];
+                          //   const newArray = [];
 
-                        //   for (let i = 0; i < outData.length; i++) {
-                        //     const element = outData[i];
+                          //   for (let i = 0; i < outData.length; i++) {
+                          //     const element = outData[i];
 
-                        //     if (i === key) {
-                        //       element.UpDated = 1;
-                        //     }
-                        //     console.log("element", element);
+                          //     if (i === key) {
+                          //       element.UpDated = 1;
+                          //     }
+                          //     console.log("element", element);
 
-                        //     newArray.push(element);
+                          //     newArray.push(element);
 
-                        //     // if(i===key){
+                          //     // if(i===key){
 
-                        //     // }else{
+                          //     // }else{
 
-                        //     //   setOutData([element])
-                        //     // }
-                        //   }
+                          //     //   setOutData([element])
+                          //     // }
+                          //   }
 
-                        //   console.log("new", newArray);
+                          //   console.log("new", newArray);
 
-                        //   setOutData(newArray);
+                          //   setOutData(newArray);
 
-                        //   // console.log("setOutData", outData[key].UpDated);
-                        // }}
+                          //   // console.log("setOutData", outData[key].UpDated);
+                          // }}
                         />
                       ) : (
                         <input
@@ -1011,22 +1009,22 @@ function OutwordMaterialIssueVocher(props) {
                           checked
                           disabled={
                             formHeader.IVStatus === "Cancelled" ||
-                              formHeader.IVStatus === "Returned"
+                            formHeader.IVStatus === "Returned"
                               ? true
                               : false
                           }
                           className={
                             formHeader.IVStatus === "Cancelled" ||
-                              formHeader.IVStatus === "Returned"
+                            formHeader.IVStatus === "Returned"
                               ? "input-disabled"
                               : ""
                           }
                           onClick={() => updateChange(key, 0, "UpDated")}
 
-                        // onChange={(e) => {
-                        //   // console.log("checkbox clicked", e.target.value);
-                        //   // console.log("setOutData", outData);
-                        // }}
+                          // onChange={(e) => {
+                          //   // console.log("checkbox clicked", e.target.value);
+                          //   // console.log("setOutData", outData);
+                          // }}
                         />
                       )}
                     </td>
