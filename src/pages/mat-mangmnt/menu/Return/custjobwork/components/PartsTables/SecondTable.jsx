@@ -11,7 +11,7 @@ export default function SecondTable(props) {
         condensed
         className="table-data border header-class table-striped"
       >
-        <thead className="text-white">
+        <thead className="tableHeaderBGColor">
           <tr>
             <th>SL No</th>
             <th>Part ID</th>
