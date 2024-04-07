@@ -27,6 +27,20 @@ function PofilesMaterials(props) {
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
   const [runningNo, setRunningNo] = useState([]);
 
+  const [sortConfigFirst, setSortConfigFirst] = useState({
+    key: null,
+    direction: null,
+  });
+
+  const [sortConfigSecond, setSortConfigSecond] = useState({
+    key: null,
+    direction: null,
+  });
+
+  const [sortConfigThird, setSortConfigThird] = useState({
+    key: null,
+    direction: null,
+  });
   const fetchData = () => {
     setFirstTableData([]);
     setSecondTableData([]);
@@ -96,6 +110,18 @@ function PofilesMaterials(props) {
   };
 
   useEffect(() => {
+    setSortConfigFirst({
+      key: null,
+      direction: null,
+    });
+    setSortConfigSecond({
+      key: null,
+      direction: null,
+    });
+    setSortConfigThird({
+      key: null,
+      direction: null,
+    });
     fetchData();
   }, [props.custCode]);
 
@@ -536,6 +562,8 @@ function PofilesMaterials(props) {
                 thirdTableData={thirdTableData}
                 setThirdTableData={setThirdTableData}
                 allData={allData}
+                sortConfigFirst={sortConfigFirst}
+                setSortConfigFirst={setSortConfigFirst}
               />
             </div>
           </div>
@@ -553,6 +581,8 @@ function PofilesMaterials(props) {
                 secondTableData={secondTableData}
                 selectRowSecondFun={selectRowSecondFun}
                 thirdTableData={thirdTableData}
+                sortConfigSecond={sortConfigSecond}
+                setSortConfigSecond={setSortConfigSecond}
               />
             </div>
           </div>
@@ -564,7 +594,11 @@ function PofilesMaterials(props) {
               }}
               className="border rounded bg-light"
             >
-              <ThirdTable thirdTableData={thirdTableData} />
+              <ThirdTable
+                thirdTableData={thirdTableData}
+                sortConfigThird={sortConfigThird}
+                setSortConfigThird={setSortConfigThird}
+              />
             </div>
           </div>
         </div>
