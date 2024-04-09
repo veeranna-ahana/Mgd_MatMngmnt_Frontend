@@ -10,6 +10,8 @@ import Table from "react-bootstrap/Table";
 import PrintPartsDC from "../../../print/return/PrintPartsDC";
 import { formatDate } from "../../../../../utils";
 
+import { FaArrowUp } from "react-icons/fa";
+
 // formatDate
 
 const { getRequest, postRequest } = require("../../../../api/apiinstance");
@@ -62,6 +64,11 @@ function OutwordPartIssueVocher(props) {
   });
 
   const [runningNo, setRunningNo] = useState([]);
+
+  const [sortConfig, setSortConfig] = useState({
+    key: null,
+    direction: null,
+  });
 
   async function fetchData() {
     //header data
@@ -580,6 +587,43 @@ function OutwordPartIssueVocher(props) {
     });
   };
 
+  const sortedData = () => {
+    let dataCopy = [...outData];
+
+    if (sortConfig.key) {
+      dataCopy.sort((a, b) => {
+        if (!parseFloat(a[sortConfig.key]) || !parseFloat(b[sortConfig.key])) {
+          // console.log("string");
+          if (a[sortConfig.key] < b[sortConfig.key]) {
+            return sortConfig.direction === "asc" ? -1 : 1;
+          }
+          if (a[sortConfig.key] > b[sortConfig.key]) {
+            return sortConfig.direction === "asc" ? 1 : -1;
+          }
+          return 0;
+        } else {
+          // console.log("number");
+          if (parseFloat(a[sortConfig.key]) < parseFloat(b[sortConfig.key])) {
+            return sortConfig.direction === "asc" ? -1 : 1;
+          }
+          if (parseFloat(a[sortConfig.key]) > parseFloat(b[sortConfig.key])) {
+            return sortConfig.direction === "asc" ? 1 : -1;
+          }
+          return 0;
+        }
+      });
+    }
+
+    return dataCopy;
+  };
+
+  const requestSort = (key) => {
+    let direction = "asc";
+    if (sortConfig.key === key && sortConfig.direction === "asc") {
+      direction = "desc";
+    }
+    setSortConfig({ key, direction });
+  };
   return (
     <>
       {/* new */}
@@ -875,16 +919,72 @@ function OutwordPartIssueVocher(props) {
                 <thead className="tableHeaderBGColor">
                   <tr>
                     <th>SL No</th>
-                    <th>PartId / Part Name</th>
-                    <th>Qty Returned</th>
-                    <th>Unit Weight</th>
-                    <th>Total Weight</th>
+                    <th
+                      onClick={() => requestSort("PartId")}
+                      className="cursor"
+                    >
+                      PartId / Part Name
+                      <FaArrowUp
+                        className={
+                          sortConfig.key === "PartId"
+                            ? sortConfig.direction === "desc"
+                              ? "rotateClass"
+                              : ""
+                            : "displayNoneClass"
+                        }
+                      />
+                    </th>
+                    <th
+                      onClick={() => requestSort("QtyReturned")}
+                      className="cursor"
+                    >
+                      Qty Returned
+                      <FaArrowUp
+                        className={
+                          sortConfig.key === "QtyReturned"
+                            ? sortConfig.direction === "desc"
+                              ? "rotateClass"
+                              : ""
+                            : "displayNoneClass"
+                        }
+                      />
+                    </th>
+                    <th
+                      onClick={() => requestSort("UnitWt")}
+                      className="cursor"
+                    >
+                      Unit Weight
+                      <FaArrowUp
+                        className={
+                          sortConfig.key === "UnitWt"
+                            ? sortConfig.direction === "desc"
+                              ? "rotateClass"
+                              : ""
+                            : "displayNoneClass"
+                        }
+                      />
+                    </th>
+                    <th
+                      onClick={() => requestSort("TotalWeight")}
+                      className="cursor"
+                    >
+                      Total Weight
+                      <FaArrowUp
+                        className={
+                          sortConfig.key === "TotalWeight"
+                            ? sortConfig.direction === "desc"
+                              ? "rotateClass"
+                              : ""
+                            : "displayNoneClass"
+                        }
+                      />
+                    </th>
                     <th>Remarks</th>
                     <th>Updated</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {outData.map((val, key) => (
+                  {sortedData().map((val, key) => (
                     <tr>
                       <td>{key + 1}</td>
                       <td>{val.PartId}</td>

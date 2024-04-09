@@ -36,6 +36,21 @@ function Parts(props) {
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
   const [runningNo, setRunningNo] = useState([]);
 
+  const [sortConfigFirst, setSortConfigFirst] = useState({
+    key: null,
+    direction: null,
+  });
+
+  const [sortConfigSecond, setSortConfigSecond] = useState({
+    key: null,
+    direction: null,
+  });
+
+  const [sortConfigThird, setSortConfigThird] = useState({
+    key: null,
+    direction: null,
+  });
+
   const fetchData = () => {
     setFirstTableData([]);
     setSecondTableData([]);
@@ -101,6 +116,18 @@ function Parts(props) {
   };
 
   useEffect(() => {
+    setSortConfigFirst({
+      key: null,
+      direction: null,
+    });
+    setSortConfigSecond({
+      key: null,
+      direction: null,
+    });
+    setSortConfigThird({
+      key: null,
+      direction: null,
+    });
     //setPropsValue(props.custCode);
     fetchData();
     //console.log("S props value = ", propsValue);
@@ -722,36 +749,34 @@ function Parts(props) {
                 <div className="  col-md-4">
                   <div className=" d-flex rvNO">
                     <div className="col-md-2">
-                    <label className="form-label">RV No</label>
+                      <label className="form-label">RV No</label>
                     </div>
                     <div className="col-md-6">
-                    <input
-                    className="input-disabled mt-1"
-                      type="text"
-                      name="rvNo"
-                      disabled
-                      value={rvNoval}
-                      // className="in-field"
-                    />
+                      <input
+                        className="input-disabled mt-1"
+                        type="text"
+                        name="rvNo"
+                        disabled
+                        value={rvNoval}
+                        // className="in-field"
+                      />
                     </div>
-                    
                   </div>
                 </div>
                 <div className="col-md-8">
                   <div className="d-flex customerRef">
                     <div className="col-md-2">
-                    <label className="form-label">Customer Ref</label>
+                      <label className="form-label">Customer Ref</label>
                     </div>
                     <div className="col-md-5">
-                    <input
-                     className="input-disabled mt-1 "
-                      type="text"
-                      name="customerRef"
-                      disabled
-                      value={custRefval}
-                    />
+                      <input
+                        className="input-disabled mt-1 "
+                        type="text"
+                        name="customerRef"
+                        disabled
+                        value={custRefval}
+                      />
                     </div>
-                    
                   </div>
                 </div>
               </div>
@@ -782,6 +807,8 @@ function Parts(props) {
                     firstTableSelectedRow={firstTableSelectedRow}
                     selectRowFirstFunc={selectRowFirstFunc}
                     thirdTableRVIDs={thirdTableRVIDs}
+                    setSortConfigFirst={setSortConfigFirst}
+                    sortConfigFirst={sortConfigFirst}
                   />
 
                   {/* <BootstrapTable
@@ -804,6 +831,8 @@ function Parts(props) {
                     secondTableData={secondTableData}
                     selectRowSecondFunc={selectRowSecondFunc}
                     thirdTableData={thirdTableData}
+                    setSortConfigSecond={setSortConfigSecond}
+                    sortConfigSecond={sortConfigSecond}
                   />
 
                   {/* <BootstrapTable
@@ -860,6 +889,8 @@ function Parts(props) {
                   <ThirdTable
                     thirdTableData={thirdTableData}
                     setThirdTableData={setThirdTableData}
+                    sortConfigThird={sortConfigThird}
+                    setSortConfigThird={setSortConfigThird}
                   />
 
                   {/* <BootstrapTable
