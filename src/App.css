@@ -402,7 +402,7 @@ label {
   color: white;
   position: sticky;
   /* top: -1px; */
-  /* text-transform: capitalize;
+/* text-transform: capitalize;
 } */
 
 .rowSelectedClass {
@@ -611,7 +611,6 @@ td {
 .in-field {
   font-size: 12px;
   height: 22px;
- 
 }
 
 .input-disabled {
@@ -693,3 +692,25 @@ li.nav-item {
   position: sticky;
   
 } 
+thead th {
+  border: 1px solid white;
+  transition: 0.2s ease-in-out;
+}
+/* thead th.cursor {
+} */
+thead th.cursor:hover {
+  border-color: gray;
+  color: rgb(216, 216, 216);
+  cursor: pointer;
+}
+tbody td {
+  border: 1px solid white;
+}
+
+.rotateClass {
+  transform: rotate(180deg) !important;
+}
+
+.displayNoneClass {
+  opacity: 0;
+}

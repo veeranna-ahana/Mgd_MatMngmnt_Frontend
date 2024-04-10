@@ -10,6 +10,8 @@ import Table from "react-bootstrap/Table";
 import PrintPartsDC from "../../../print/return/PrintPartsDC";
 import { formatDate } from "../../../../../utils";
 
+import { FaArrowUp } from "react-icons/fa";
+
 // formatDate
 
 const { getRequest, postRequest } = require("../../../../api/apiinstance");
@@ -62,6 +64,11 @@ function OutwordPartIssueVocher(props) {
   });
 
   const [runningNo, setRunningNo] = useState([]);
+
+  const [sortConfig, setSortConfig] = useState({
+    key: null,
+    direction: null,
+  });
 
   async function fetchData() {
     //header data
@@ -580,6 +587,43 @@ function OutwordPartIssueVocher(props) {
     });
   };
 
+  const sortedData = () => {
+    let dataCopy = [...outData];
+
+    if (sortConfig.key) {
+      dataCopy.sort((a, b) => {
+        if (!parseFloat(a[sortConfig.key]) || !parseFloat(b[sortConfig.key])) {
+          // console.log("string");
+          if (a[sortConfig.key] < b[sortConfig.key]) {
+            return sortConfig.direction === "asc" ? -1 : 1;
+          }
+          if (a[sortConfig.key] > b[sortConfig.key]) {
+            return sortConfig.direction === "asc" ? 1 : -1;
+          }
+          return 0;
+        } else {
+          // console.log("number");
+          if (parseFloat(a[sortConfig.key]) < parseFloat(b[sortConfig.key])) {
+            return sortConfig.direction === "asc" ? -1 : 1;
+          }
+          if (parseFloat(a[sortConfig.key]) > parseFloat(b[sortConfig.key])) {
+            return sortConfig.direction === "asc" ? 1 : -1;
+          }
+          return 0;
+        }
+      });
+    }
+
+    return dataCopy;
+  };
+
+  const requestSort = (key) => {
+    let direction = "asc";
+    if (sortConfig.key === key && sortConfig.direction === "asc") {
+      direction = "desc";
+    }
+    setSortConfig({ key, direction });
+  };
   return (
     <>
       {/* new */}
@@ -591,23 +635,21 @@ function OutwordPartIssueVocher(props) {
         <div>
           <div className="row">
             <div className="d-flex col-md-3">
-            <div className="col-md-5">
+              <div className="col-md-5">
                 <label className="form-label">IV No & IV Date</label>
               </div>
-              
-               <div className="col-md-6">
+
+              <div className="col-md-6">
                 <input
                   type="text"
                   name="IvId"
                   value={`${formHeader.IV_No} | ${formHeader.IV_Date}`}
                   disabled
                   className="input-disabled mt-1"
-
                 />
               </div>
             </div>
 
-            
             <div className="d-flex col-md-3">
               <div className="col-md-5">
                 <label className="form-label">DC No & DC Date</label>
@@ -626,10 +668,9 @@ function OutwordPartIssueVocher(props) {
                   className="input-disabled mt-1"
                 />
               </div>
-
             </div>
-            
-             <div className="d-flex col-md-3">
+
+            <div className="d-flex col-md-3">
               <div className="col-md-3">
                 <label className="form-label">Status</label>
               </div>
@@ -642,10 +683,9 @@ function OutwordPartIssueVocher(props) {
                   className="input-disabled mt-1"
                 />
               </div>
-
             </div>
-            
-             <div className="d-flex col-md-3">
+
+            <div className="d-flex col-md-3">
               <div className="col-md-5">
                 <label className="form-label">Calculated Weight</label>
               </div>
@@ -658,7 +698,6 @@ function OutwordPartIssueVocher(props) {
                   className="input-disabled mt-1"
                 />
               </div>
-
             </div>
             <div className="d-flex col-md-6 mt-2">
               <div className="col-md-2">
@@ -674,12 +713,9 @@ function OutwordPartIssueVocher(props) {
                   className="input-disabled mt-1"
                 />
               </div>
-
             </div>
 
-
-             <div className="d-flex col-md-3 mt-2">
-
+            <div className="d-flex col-md-3 mt-2">
               <div className="col-md-3">
                 <label className="form-label">GST</label>
               </div>
@@ -692,9 +728,8 @@ function OutwordPartIssueVocher(props) {
                   className="input-disabled mt-1"
                 />
               </div>
-
             </div>
-            
+
             <div className="d-flex col-md-3 mt-2">
               <div className="col-md-5">
                 <label className="form-label">Actual Weight</label>
@@ -705,25 +740,28 @@ function OutwordPartIssueVocher(props) {
                   min="0"
                   name="TotalWeight"
                   defaultValue={formHeader.TotalWeight}
+                  onKeyDown={(e) => {
+                    if (e.which === 38 || e.which === 40) {
+                      e.preventDefault();
+                    }
+                  }}
                   onChange={(e) => {
                     InputHeaderEvent(e.target.name, parseFloat(e.target.value));
                   }}
                   disabled={
                     formHeader.IVStatus === "Cancelled" ||
-                      formHeader.IVStatus === "Returned"
+                    formHeader.IVStatus === "Returned"
                       ? true
                       : false
                   }
                   className={
                     formHeader.IVStatus === "Cancelled" ||
-                      formHeader.IVStatus === "Returned"
+                    formHeader.IVStatus === "Returned"
                       ? "input-disabled"
                       : ""
                   }
                 />
               </div>
-
-
             </div>
             <div className="col-md-6">
               <div className="d-flex flex-column">
@@ -881,16 +919,72 @@ function OutwordPartIssueVocher(props) {
                 <thead className="tableHeaderBGColor">
                   <tr>
                     <th>SL No</th>
-                    <th>PartId / Part Name</th>
-                    <th>Qty Returned</th>
-                    <th>Unit Weight</th>
-                    <th>Total Weight</th>
+                    <th
+                      onClick={() => requestSort("PartId")}
+                      className="cursor"
+                    >
+                      PartId / Part Name
+                      <FaArrowUp
+                        className={
+                          sortConfig.key === "PartId"
+                            ? sortConfig.direction === "desc"
+                              ? "rotateClass"
+                              : ""
+                            : "displayNoneClass"
+                        }
+                      />
+                    </th>
+                    <th
+                      onClick={() => requestSort("QtyReturned")}
+                      className="cursor"
+                    >
+                      Qty Returned
+                      <FaArrowUp
+                        className={
+                          sortConfig.key === "QtyReturned"
+                            ? sortConfig.direction === "desc"
+                              ? "rotateClass"
+                              : ""
+                            : "displayNoneClass"
+                        }
+                      />
+                    </th>
+                    <th
+                      onClick={() => requestSort("UnitWt")}
+                      className="cursor"
+                    >
+                      Unit Weight
+                      <FaArrowUp
+                        className={
+                          sortConfig.key === "UnitWt"
+                            ? sortConfig.direction === "desc"
+                              ? "rotateClass"
+                              : ""
+                            : "displayNoneClass"
+                        }
+                      />
+                    </th>
+                    <th
+                      onClick={() => requestSort("TotalWeight")}
+                      className="cursor"
+                    >
+                      Total Weight
+                      <FaArrowUp
+                        className={
+                          sortConfig.key === "TotalWeight"
+                            ? sortConfig.direction === "desc"
+                              ? "rotateClass"
+                              : ""
+                            : "displayNoneClass"
+                        }
+                      />
+                    </th>
                     <th>Remarks</th>
                     <th>Updated</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {outData.map((val, key) => (
+                  {sortedData().map((val, key) => (
                     <tr>
                       <td>{key + 1}</td>
                       <td>{val.PartId}</td>
@@ -909,6 +1003,11 @@ function OutwordPartIssueVocher(props) {
                           //     : false
                           // }
                           defaultValue={parseFloat(val.TotalWeight).toFixed(3)}
+                          onKeyDown={(e) => {
+                            if (e.which === 38 || e.which === 40) {
+                              e.preventDefault();
+                            }
+                          }}
                           onChange={(e) => {
                             updateChange(
                               key,

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
+import { FaArrowUp } from "react-icons/fa";
+
 // import { dateToShort, formatDate } from "../../../../../utils";
 // import Swal from "sweetalert2";
 import { useLocation } from "react-router-dom";
@@ -38,6 +40,10 @@ function OutwordMaterialIssueVocher(props) {
   let [dcID, setdcID] = useState("");
   let [dcRegister, setdcRegister] = useState({});
 
+  const [sortConfig, setSortConfig] = useState({
+    key: null,
+    direction: null,
+  });
   const [outData, setOutData] = useState([]);
   // const [upData, setUpData] = useState();
 
@@ -613,6 +619,45 @@ function OutwordMaterialIssueVocher(props) {
     //setBoolVal4(true);
     //setBoolVal6(false);
   };
+
+  const sortedData = () => {
+    let dataCopy = [...outData];
+
+    if (sortConfig.key) {
+      dataCopy.sort((a, b) => {
+        if (!parseFloat(a[sortConfig.key]) || !parseFloat(b[sortConfig.key])) {
+          // console.log("string");
+          if (a[sortConfig.key] < b[sortConfig.key]) {
+            return sortConfig.direction === "asc" ? -1 : 1;
+          }
+          if (a[sortConfig.key] > b[sortConfig.key]) {
+            return sortConfig.direction === "asc" ? 1 : -1;
+          }
+          return 0;
+        } else {
+          // console.log("number");
+          if (parseFloat(a[sortConfig.key]) < parseFloat(b[sortConfig.key])) {
+            return sortConfig.direction === "asc" ? -1 : 1;
+          }
+          if (parseFloat(a[sortConfig.key]) > parseFloat(b[sortConfig.key])) {
+            return sortConfig.direction === "asc" ? 1 : -1;
+          }
+          return 0;
+        }
+      });
+    }
+
+    return dataCopy;
+  };
+
+  const requestSort = (key) => {
+    let direction = "asc";
+    if (sortConfig.key === key && sortConfig.direction === "asc") {
+      direction = "desc";
+    }
+    setSortConfig({ key, direction });
+  };
+
   return (
     <>
       {/* new */}
@@ -634,10 +679,8 @@ function OutwordMaterialIssueVocher(props) {
                   value={`${formHeader.IV_No} | ${formHeader.IV_Date}`}
                   disabled
                   className="input-disabled mt-1"
-
                 />
               </div>
-
             </div>
 
             <div className="d-flex col-md-3">
@@ -658,9 +701,7 @@ function OutwordMaterialIssueVocher(props) {
                   className="input-disabled mt-1"
                 />
               </div>
-
             </div>
-
 
             <div className="d-flex col-md-3">
               <div className="col-md-3">
@@ -675,7 +716,6 @@ function OutwordMaterialIssueVocher(props) {
                   className="input-disabled mt-1"
                 />
               </div>
-
             </div>
 
             <div className="d-flex col-md-3">
@@ -691,9 +731,7 @@ function OutwordMaterialIssueVocher(props) {
                   className="input-disabled mt-1"
                 />
               </div>
-
             </div>
-
 
             <div className="d-flex col-md-6 mt-2">
               <div className="col-md-2">
@@ -709,11 +747,9 @@ function OutwordMaterialIssueVocher(props) {
                   className="input-disabled mt-1"
                 />
               </div>
-
             </div>
-            
-            <div className="d-flex col-md-3 mt-2">
 
+            <div className="d-flex col-md-3 mt-2">
               <div className="col-md-3">
                 <label className="form-label">GST</label>
               </div>
@@ -726,7 +762,6 @@ function OutwordMaterialIssueVocher(props) {
                   className="input-disabled mt-1"
                 />
               </div>
-
             </div>
 
             <div className="d-flex col-md-3 mt-2">
@@ -739,25 +774,28 @@ function OutwordMaterialIssueVocher(props) {
                   min="0"
                   name="TotalWeight"
                   defaultValue={formHeader.TotalWeight}
+                  onKeyDown={(e) => {
+                    if (e.which === 38 || e.which === 40) {
+                      e.preventDefault();
+                    }
+                  }}
                   onChange={(e) => {
                     InputHeaderEvent(e.target.name, parseFloat(e.target.value));
                   }}
                   disabled={
                     formHeader.IVStatus === "Cancelled" ||
-                      formHeader.IVStatus === "Returned"
+                    formHeader.IVStatus === "Returned"
                       ? true
                       : false
                   }
                   className={
                     formHeader.IVStatus === "Cancelled" ||
-                      formHeader.IVStatus === "Returned"
+                    formHeader.IVStatus === "Returned"
                       ? "input-disabled"
                       : ""
                   }
                 />
               </div>
-
-
             </div>
             <div className="col-md-6">
               <div className="d-flex flex-column">
@@ -785,13 +823,13 @@ function OutwordMaterialIssueVocher(props) {
                   }}
                   disabled={
                     formHeader.IVStatus === "Cancelled" ||
-                      formHeader.IVStatus === "Returned"
+                    formHeader.IVStatus === "Returned"
                       ? true
                       : false
                   }
                   className={
                     formHeader.IVStatus === "Cancelled" ||
-                      formHeader.IVStatus === "Returned"
+                    formHeader.IVStatus === "Returned"
                       ? "input-disabled"
                       : ""
                   }
@@ -810,13 +848,13 @@ function OutwordMaterialIssueVocher(props) {
             onClick={saveButtonState}
             disabled={
               formHeader.IVStatus === "Cancelled" ||
-                (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
                 ? true
                 : false
             }
             className={
               formHeader.IVStatus === "Cancelled" ||
-                (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
                 ? "button-style ms-3 input-disabled"
                 : "button-style ms-3"
             }
@@ -827,13 +865,13 @@ function OutwordMaterialIssueVocher(props) {
             onClick={cancelIV}
             disabled={
               formHeader.IVStatus === "Cancelled" ||
-                (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
                 ? true
                 : false
             }
             className={
               formHeader.IVStatus === "Cancelled" ||
-                (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
                 ? "button-style button-disabled"
                 : "button-style"
             }
@@ -844,13 +882,13 @@ function OutwordMaterialIssueVocher(props) {
             onClick={createDC}
             disabled={
               formHeader.IVStatus === "Cancelled" ||
-                (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
                 ? true
                 : false
             }
             className={
               formHeader.IVStatus === "Cancelled" ||
-                (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
                 ? "button-style button-disabled"
                 : "button-style"
             }
@@ -861,13 +899,13 @@ function OutwordMaterialIssueVocher(props) {
             onClick={printDC}
             disabled={
               formHeader.IVStatus === "Cancelled" ||
-                formHeader.IVStatus === "Returned"
+              formHeader.IVStatus === "Returned"
                 ? false
                 : true
             }
             className={
               formHeader.IVStatus === "Cancelled" ||
-                formHeader.IVStatus === "Returned"
+              formHeader.IVStatus === "Returned"
                 ? "button-style"
                 : "button-disabled button-style"
             }
@@ -897,16 +935,83 @@ function OutwordMaterialIssueVocher(props) {
               <thead className="tableHeaderBGColor">
                 <tr>
                   <th>SL No</th>
-                  <th>Description</th>
-                  <th>Material </th>
-                  <th>Qty</th>
-                  <th>Weight</th>
-                  <th>Total Weight</th>
+                  <th
+                    onClick={() => requestSort("MtrlDescription")}
+                    className="cursor"
+                  >
+                    Description
+                    <FaArrowUp
+                      className={
+                        sortConfig.key === "MtrlDescription"
+                          ? sortConfig.direction === "desc"
+                            ? "rotateClass"
+                            : ""
+                          : "displayNoneClass"
+                      }
+                    />
+                  </th>
+                  <th
+                    onClick={() => requestSort("Material")}
+                    className="cursor"
+                  >
+                    Material
+                    <FaArrowUp
+                      className={
+                        sortConfig.key === "Material"
+                          ? sortConfig.direction === "desc"
+                            ? "rotateClass"
+                            : ""
+                          : "displayNoneClass"
+                      }
+                    />
+                  </th>
+                  <th onClick={() => requestSort("Qty")} className="cursor">
+                    Qty
+                    <FaArrowUp
+                      className={
+                        sortConfig.key === "Qty"
+                          ? sortConfig.direction === "desc"
+                            ? "rotateClass"
+                            : ""
+                          : "displayNoneClass"
+                      }
+                    />
+                  </th>
+                  <th
+                    onClick={() => requestSort("TotalWeightCalculated")}
+                    className="cursor"
+                  >
+                    Weight
+                    <FaArrowUp
+                      className={
+                        sortConfig.key === "TotalWeightCalculated"
+                          ? sortConfig.direction === "desc"
+                            ? "rotateClass"
+                            : ""
+                          : "displayNoneClass"
+                      }
+                    />
+                  </th>
+                  <th
+                    onClick={() => requestSort("TotalWeight")}
+                    className="cursor"
+                  >
+                    Total Weight
+                    <FaArrowUp
+                      className={
+                        sortConfig.key === "TotalWeight"
+                          ? sortConfig.direction === "desc"
+                            ? "rotateClass"
+                            : ""
+                          : "displayNoneClass"
+                      }
+                    />
+                  </th>
                   <th>Updated</th>
                 </tr>
               </thead>
               <tbody>
-                {outData?.map((val, key) => (
+                {sortedData().map((val, key) => (
                   <tr>
                     <td>{key + 1}</td>
                     <td>{val.MtrlDescription}</td>
@@ -924,6 +1029,11 @@ function OutwordMaterialIssueVocher(props) {
                         type="number"
                         min="0"
                         defaultValue={parseFloat(val?.TotalWeight).toFixed(3)}
+                        onKeyDown={(e) => {
+                          if (e.which === 38 || e.which === 40) {
+                            e.preventDefault();
+                          }
+                        }}
                         onChange={(e) => {
                           // console.log("eeeeeeeeee", e.target.value);
 
@@ -942,13 +1052,13 @@ function OutwordMaterialIssueVocher(props) {
                         }}
                         disabled={
                           formHeader.IVStatus === "Cancelled" ||
-                            formHeader.IVStatus === "Returned"
+                          formHeader.IVStatus === "Returned"
                             ? true
                             : false
                         }
                         className={
                           formHeader.IVStatus === "Cancelled" ||
-                            formHeader.IVStatus === "Returned"
+                          formHeader.IVStatus === "Returned"
                             ? "input-disabled"
                             : ""
                         }
@@ -962,46 +1072,46 @@ function OutwordMaterialIssueVocher(props) {
                           id=""
                           disabled={
                             formHeader.IVStatus === "Cancelled" ||
-                              formHeader.IVStatus === "Returned"
+                            formHeader.IVStatus === "Returned"
                               ? true
                               : false
                           }
                           className={
                             formHeader.IVStatus === "Cancelled" ||
-                              formHeader.IVStatus === "Returned"
+                            formHeader.IVStatus === "Returned"
                               ? "input-disabled"
                               : ""
                           }
                           onClick={() => updateChange(key, 1, "UpDated")}
-                        // onChange={(e) => {
-                        //   // console.log("checkbox clicked", e.target.value);
+                          // onChange={(e) => {
+                          //   // console.log("checkbox clicked", e.target.value);
 
-                        //   const newArray = [];
+                          //   const newArray = [];
 
-                        //   for (let i = 0; i < outData.length; i++) {
-                        //     const element = outData[i];
+                          //   for (let i = 0; i < outData.length; i++) {
+                          //     const element = outData[i];
 
-                        //     if (i === key) {
-                        //       element.UpDated = 1;
-                        //     }
-                        //     console.log("element", element);
+                          //     if (i === key) {
+                          //       element.UpDated = 1;
+                          //     }
+                          //     console.log("element", element);
 
-                        //     newArray.push(element);
+                          //     newArray.push(element);
 
-                        //     // if(i===key){
+                          //     // if(i===key){
 
-                        //     // }else{
+                          //     // }else{
 
-                        //     //   setOutData([element])
-                        //     // }
-                        //   }
+                          //     //   setOutData([element])
+                          //     // }
+                          //   }
 
-                        //   console.log("new", newArray);
+                          //   console.log("new", newArray);
 
-                        //   setOutData(newArray);
+                          //   setOutData(newArray);
 
-                        //   // console.log("setOutData", outData[key].UpDated);
-                        // }}
+                          //   // console.log("setOutData", outData[key].UpDated);
+                          // }}
                         />
                       ) : (
                         <input
@@ -1011,22 +1121,22 @@ function OutwordMaterialIssueVocher(props) {
                           checked
                           disabled={
                             formHeader.IVStatus === "Cancelled" ||
-                              formHeader.IVStatus === "Returned"
+                            formHeader.IVStatus === "Returned"
                               ? true
                               : false
                           }
                           className={
                             formHeader.IVStatus === "Cancelled" ||
-                              formHeader.IVStatus === "Returned"
+                            formHeader.IVStatus === "Returned"
                               ? "input-disabled"
                               : ""
                           }
                           onClick={() => updateChange(key, 0, "UpDated")}
 
-                        // onChange={(e) => {
-                        //   // console.log("checkbox clicked", e.target.value);
-                        //   // console.log("setOutData", outData);
-                        // }}
+                          // onChange={(e) => {
+                          //   // console.log("checkbox clicked", e.target.value);
+                          //   // console.log("setOutData", outData);
+                          // }}
                         />
                       )}
                     </td>

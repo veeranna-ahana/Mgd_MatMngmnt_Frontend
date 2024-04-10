@@ -271,11 +271,11 @@ export const customerSidebar = [
           },
         ],
       },
-      {
-        title: "Purchase  Planned for future",
-        path: "/MaterialManagement/Return/PurchasePlannedForFuture",
-        icon: <BiIcons.BiPurchaseTag />,
-      },
+      // {
+      //   title: "Purchase  Planned for future",
+      //   path: "/MaterialManagement/Return/PurchasePlannedForFuture",
+      //   icon: <BiIcons.BiPurchaseTag />,
+      // },
     ],
   },
   {
