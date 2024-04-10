@@ -13,18 +13,18 @@ function DeleteSerialYesNoModal(props) {
     <>
       <Modal show={modalOpen} onHide={handleNo}>
         <Modal.Header closeButton>
-          <Modal.Title>Please Confirm Before Proceed</Modal.Title>
+          <Modal.Title style={{fontSize:'14px'}}>  Please Confirm Before Proceed</Modal.Title>
         </Modal.Header>
         <Modal.Body>{message}</Modal.Body>
         <Modal.Footer>
           <Button
             variant="secondary"
             onClick={handleYes}
-            style={{ backgroundColor: " #2b3a55" }}
+            style={{ backgroundColor: " #2b3a55" ,fontSize:'12px'}}
           >
             Yes
           </Button>
-          <Button variant="secondary" onClick={handleNo}>
+          <Button variant="secondary" onClick={handleNo} style={{fontSize:'12px'}}>
             No
           </Button>
         </Modal.Footer>

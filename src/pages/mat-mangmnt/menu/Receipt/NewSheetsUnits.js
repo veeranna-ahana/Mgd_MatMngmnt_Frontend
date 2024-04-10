@@ -2262,7 +2262,7 @@ function NewSheetsUnits(props) {
                   {/* <p className="form-title-deco mt-1">
                     <h5>Serial Details</h5>
                   </p> */}
-                  <label className="form-label" style={{textDecoration: 'underline'}}>Serial Details</label>
+                  <label className="form-label" style={{textDecoration: 'underline', fontSize:'14px'}}>Serial Details</label>
                   <div className="row">
                     <div className="col-md-4 mt-2">
                       <label className="form-label">Mtrl Code</label>
@@ -2649,7 +2649,7 @@ function NewSheetsUnits(props) {
                   {/* <p className="form-title-deco mt-2">
                     <h5>Quantity Details</h5>
                   </p> */}
-                  <label className="form-label" style={{textDecoration: 'underline'}}>Quantity Details</label>
+                  <label className="form-label" style={{textDecoration: 'underline',fontSize:'14px'}}>Quantity Details</label>
                   <div className="row">
                     <div className="col-md-3 col-sm-12">
                       <label className="form-label mt-1">Received</label>

@@ -84,22 +84,22 @@ function CreateYesNoModal(props) {
     <>
       <Modal show={show} onHide={handleNo}>
         <Modal.Header closeButton>
-          <Modal.Title>Please Confirm</Modal.Title>
+          <Modal.Title style={{fontSize:'14px'}}>Please Confirm</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body style={{fontSize:'12px'}}>
           Have you entered all details and inspected the parts received? No
           changes are permitted after this
         </Modal.Body>
         <Modal.Footer>
           <Button
             variant="secondary"
-            style={{ backgroundColor: "#2b3a55" }}
+            style={{ backgroundColor: "#2b3a55", fontSize:'12px' }}
             onClick={handleYes}
             // className="button_style"
           >
             Yes
           </Button>
-          <Button variant="secondary" onClick={handleNo}>
+          <Button variant="secondary" onClick={handleNo} style={{fontSize:'12px'}}>
             No
           </Button>
         </Modal.Footer>

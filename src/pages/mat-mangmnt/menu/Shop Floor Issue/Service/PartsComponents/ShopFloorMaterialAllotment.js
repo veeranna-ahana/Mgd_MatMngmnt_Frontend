@@ -268,7 +268,7 @@ function ShopFloorMaterialAllotment(props) {
           {/* <NavComp /> */}
           {treeData?.map((node, i) => {
             const machine = node.machine;
-            const label = <span className="node">{machine}</span>;
+            const label = <span className="node" style={{fontSize:'12px'}}>{machine}</span>;
             return (
               <TreeView
                 key={machine + "|" + i}
@@ -277,7 +277,7 @@ function ShopFloorMaterialAllotment(props) {
                 onClick={() => treeViewclickMachine(machine)}
               >
                 {node.process?.map((pro) => {
-                  const label2 = <span className="node">{pro.MProcess}</span>;
+                  const label2 = <span className="node" style={{fontSize:'12px'}}>{pro.MProcess}</span>;
                   return (
                     <TreeView
                       nodeLabel={label2}
@@ -289,7 +289,7 @@ function ShopFloorMaterialAllotment(props) {
                     >
                       {pro.material?.map((mat) => {
                         const label3 = (
-                          <span className="node">{mat.Mtrl_Code}</span>
+                          <span className="node" style={{fontSize:'12px'}}>{mat.Mtrl_Code}</span>
                         );
                         return (
                           <TreeView

@@ -685,6 +685,13 @@ li.nav-item {
   margin-left: 5px !important;
 }
 
+.header-class {
+  font-size: 17px;
+  background-color: gray;
+  color: white;
+  position: sticky;
+  
+} 
 thead th {
   border: 1px solid white;
   transition: 0.2s ease-in-out;

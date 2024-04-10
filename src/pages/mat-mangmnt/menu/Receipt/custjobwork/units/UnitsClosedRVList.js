@@ -156,6 +156,14 @@ function UnitsClosedRVList() {
           <div className="col-md-5 text-center">
             <button
               className="button-style "
+              style={{ width: "55px" }}
+              //data.RvID
+              onClick={openButtonClick}
+            >
+              Open
+            </button>
+            <button
+              className="button-style "
               id="btnclose"
               type="submit"
               onClick={() => nav("/MaterialManagement")}
@@ -190,7 +198,7 @@ function UnitsClosedRVList() {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                   className="input-disabled mt-2" 
+                    className="input-disabled mt-2"
                     value={data.ReceiptDate}
                     readOnly
                   />
@@ -201,7 +209,7 @@ function UnitsClosedRVList() {
                   <label className="form-label">RV No</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="input-disabled mt-2"  value={data.RV_No} readOnly />
+                  <input className="input-disabled mt-2" value={data.RV_No} readOnly />
                 </div>
               </div>
               <div className="row">
@@ -270,7 +278,7 @@ function UnitsClosedRVList() {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                   className="input-disabled mt-2"
+                    className="input-disabled mt-2"
                     value={data.TotalCalculatedWeight}
                     readOnly
                   />
@@ -285,16 +293,7 @@ function UnitsClosedRVList() {
                 </div>
               </div>
 
-              <div className="row justify-content-center mt-4 mb-4">
-                <button
-                  className="button-style "
-                  style={{ width: "55px" }}
-                  //data.RvID
-                  onClick={openButtonClick}
-                >
-                  Open
-                </button>
-              </div>
+
             </div>
           </div>
         </div>

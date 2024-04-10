@@ -75,15 +75,15 @@ function ReturnCancelIVModal(props) {
     <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>
+          <Modal.Title style={{fontSize:'14px'}}>
             Cancel IV {props.IV_NO} and {props.IV_ID}
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body style={{fontSize:'12px'}}>
           Current IV cancelled and stock added to Material Stock
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleClose} style={{fontSize:'12px'}}>
             Ok
           </Button>
         </Modal.Footer>

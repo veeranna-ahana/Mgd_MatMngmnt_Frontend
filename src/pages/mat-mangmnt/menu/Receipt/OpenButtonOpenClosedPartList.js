@@ -201,87 +201,163 @@ function OpenButtonOpenClosedPartList() {
         <h4 className="title">Customer Parts Receipt Voucher</h4>
 
         <div className="row">
-          <div className="col-md-3">
-            <label className="form-label">Receipt Date</label>
-            <input
-              type="text"
-              name="receiptDate"
-              value={formHeader.ReceiptDate}
-              readOnly
-            />
+          <div className="d-flex col-md-3">
+            <div className="col-md-4">
+              <label className="form-label">Receipt Date</label>
+            </div>
+            <div className="col-md-6">
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="receiptDate"
+               // value={formHeader.receiptDate}
+                readOnly
+              />
+            </div>
+
+
           </div>
-          <div className="col-md-2">
-            <label className="form-label">RV No</label>
-            <input type="text" name="rvNo" value={formHeader.RV_No} readOnly />
+
+
+          <div className="d-flex col-md-2">
+            <div className="col-md-4">
+              <label className="form-label">RV No</label>
+            </div>
+            <div className="col-md-8">
+              <input className="input-disabled mt-1"
+                type="text" name="rvNo" value={formHeader.RV_No} readOnly />
+            </div>
           </div>
-          <div className="col-md-2">
-            <label className="form-label">RV Date</label>
-            <input
-              type="text"
-              name="rvDate"
-              value={formHeader.RV_Date}
-              readOnly
-            />
+
+          <div className="d-flex col-md-2">
+
+            <div className="col-md-4">
+              <label className="form-label">RV Date</label>
+            </div>
+            <div className="col-md-8">
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="rvDate"
+               // value={formHeader.rvDate}
+                readOnly
+              />
+            </div>
+
+
           </div>
-          <div className="col-md-2">
-            <label className="form-label">Status</label>
-            <input
-              type="text"
-              name="status"
-              value={formHeader.RVStatus}
-              readOnly
-            />
+
+
+          <div className="d-flex col-md-2">
+            <div className="col-md-3" >
+              <label className="form-label">Status</label>
+            </div>
+            <div className="col-md-7">
+
+              <input 
+              className="input-disabled mt-1"
+                type="text"
+                name="status"
+                value={formHeader.RVStatus}
+                readOnly
+              />
+
+            </div>
           </div>
-          <div className="col-md-3">
-            <label className="form-label">Weight</label>
+
+
+          <div className="d-flex col-md-2">
+          <div className="col-md-9">
+              <label className="form-label">Weight</label>
+            </div>
+            <div className="col-md-8">
             <input
+             className="input-disabled mt-1"
               type="text"
               name="weight"
               value={formHeader.TotalWeight}
               disabled={boolVal}
             />
+            </div>
+          
           </div>
+
         </div>
+
+
         <div className="row">
-          <div className="col-md-5">
+        
+          <div className="d-flex col-md-5">
+            <div className="col-md-2">
             <label className="form-label">Customer</label>
-            <select
+            </div>
+           
+           <div className="col-md-10">
+           <select
               className="ip-select mt-1"
               name="customer"
+              //onChange={changeCustomer}
               disabled={boolVal}
             >
-              <option value={formHeader.Cust_Code} disabled selected>
+             <option value={formHeader.Cust_Code} disabled selected>
                 {formHeader.Customer}
               </option>
-              {/* {custdata.map((customer, index) => (
-                <option key={index} value={customer.Cust_Code}>
-                  {customer.Cust_name}
-                </option>
-              ))} */}
             </select>
+           </div>
+            
           </div>
-          <div className="col-md-4">
+
+          <div className="d-flex col-md-4">
+          <div className="col-md-2">
             <label className="form-label">Reference</label>
+            </div>
+
+            <div  className="col-md-9">
             <input
+             className="input-disabled mt-1"
               type="text"
               name="reference"
               value={formHeader.CustDocuNo}
               disabled={boolVal}
             />
+            </div>
+           
           </div>
-          <div className="col-md-3">
+
+          
+          <div className="d-flex col-md-3">
+            <div className="col-md-6">
             <label className="form-label">Calculated Weight</label>
+            </div>
+            <div  className="col-md-5">
             <input
-              type="text"
+            className="input-disabled mt-1"
+              type="number"
               name="calculatedWeight"
               value={formHeader.TotalCalculatedWeight}
+             
               readOnly
             />
+            </div>
+           
+           
           </div>
         </div>
 
         <div className="row ">
-          <div className="col-md-8 justify-content-center">
+
+        <div className="col-md-8">
+            <textarea
+            className="input-disabled mt-1"
+              id="exampleFormControlTextarea1"
+              rows="4"
+              style={{ width: "700px", height: "40px" }}
+              value={formHeader.address}
+              readOnly
+            ></textarea>
+          </div>
+
+          <div className="col-md-4 justify-content-center">
             <button
               className="button-style"
               style={{ marginLeft: "60px" }}
@@ -304,21 +380,12 @@ function OpenButtonOpenClosedPartList() {
               Close
             </button>
           </div>
-          <div className="col-md-4 mb-3 mt-3">
-            <label className="form-label"></label>
-            <textarea
-              id="exampleFormControlTextarea1"
-              rows="4"
-              style={{ width: "400px", height: "40px" }}
-              value={formHeader.address}
-              readOnly
-            ></textarea>
-          </div>
+          
         </div>
       </div>
       <div className="row">
         <div
-          style={{ height: "330px", overflowY: "scroll" }}
+          style={{ height: "300px", overflowY: "scroll" }}
           className="col-md-8 col-sm-12"
         >
           <BootstrapTable
@@ -332,22 +399,34 @@ function OpenButtonOpenClosedPartList() {
             selectRow={selectRow}
           ></BootstrapTable>
         </div>
+        
         <div className="col-md-4 col-sm-12">
           <div className="ip-box form-bg">
-            <div className="row justify-content-center mt-2 mb-3">
+            <div className="row mt-2 ">
+            <div className="col-md-4"></div>
               <button
                 className="button-style "
-                style={{ width: "155px" }}
+                style={{ width: "75px" }}
                 disabled={boolVal}
               >
                 Add New
               </button>
+
+                 
+              <button
+                className="button-style "
+                style={{ width: "75px" }}
+                disabled={boolVal}
+              >
+                Delete
+              </button>
             </div>
             <div className="row">
               {/* <label className="form-label">Srl Details</label> */}
-              <p className="form-title-deco mt-1">
+              {/* <p className="form-title-deco mt-1">
                 <h5>Serial Details</h5>
-              </p>
+              </p> */}
+               <label className="form-label" style={{ textDecoration: 'underline' }}>Serial Details</label>
               <div className="col-md-4 ">
                 <label className="form-label mt-1">Part ID</label>
               </div>
@@ -369,7 +448,7 @@ function OpenButtonOpenClosedPartList() {
                 </select> */}
 
                 <Typeahead
-                  className="in-field"
+                  className="input-disabled mt-1"
                   id="partId"
                   labelKey="PartId"
                   options={mtrlDetails}
@@ -385,7 +464,7 @@ function OpenButtonOpenClosedPartList() {
               </div>
               <div className="col-md-8">
                 <input
-                  className="in-field"
+                  className="input-disabled mt-1"
                   type="text"
                   name="unitWeight"
                   value={inputPart.unitWeight}
@@ -399,7 +478,7 @@ function OpenButtonOpenClosedPartList() {
               </div>
               <div className="col-md-8 ">
                 <input
-                  className="in-field"
+                  className="input-disabled mt-1"
                   type="text"
                   name="qtyReceived"
                   //value={tempVal}
@@ -414,7 +493,7 @@ function OpenButtonOpenClosedPartList() {
               </div>
               <div className="col-md-8 ">
                 <input
-                  className="in-field"
+                  className="input-disabled mt-1"
                   type="text"
                   name="qtyAccepted"
                   value={inputPart.qtyAccepted}
@@ -429,7 +508,7 @@ function OpenButtonOpenClosedPartList() {
               </div>
               <div className="col-md-8 ">
                 <input
-                  className="in-field"
+                  className="input-disabled mt-1"
                   type="text"
                   value={inputPart.qtyReceived - inputPart.qtyAccepted}
                   name="qtyRejected"
@@ -438,15 +517,7 @@ function OpenButtonOpenClosedPartList() {
               </div>
             </div>
 
-            <div className="row justify-content-center mt-3 mb-4">
-              <button
-                className="button-style "
-                style={{ width: "155px" }}
-                disabled={boolVal}
-              >
-                Delete
-              </button>
-            </div>
+            
           </div>
         </div>
       </div>

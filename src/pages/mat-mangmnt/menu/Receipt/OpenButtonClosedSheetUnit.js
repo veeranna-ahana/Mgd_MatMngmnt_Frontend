@@ -433,97 +433,173 @@ function OpenButtonClosedSheetUnit() {
         <h4 className="title">Material Receipt Voucher</h4>
 
         <div className="row">
-          <div className="col-md-3">
-            <label className="form-label">Receipt Date</label>
-            <input
-              type="text"
-              name="receiptDate"
-              value={formHeader.ReceiptDate}
-              readOnly
-            />
+
+          <div className="d-flex col-md-3">
+            <div className="col-md-4">
+              <label className="form-label">Receipt Date</label>
+            </div>
+            <div className="col-md-6">
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="receiptDate"
+                value={formHeader.ReceiptDate}
+                readOnly
+              />
+            </div>
+
+
           </div>
-          <div className="col-md-2">
-            <label className="form-label">RV No</label>
-            <input type="text" name="rvNo" value={formHeader.RV_No} readOnly />
+
+
+          <div className="d-flex col-md-2">
+            <div className="col-md-4">
+              <label className="form-label">RV No</label>
+            </div>
+            <div className="col-md-8">
+              <input className="input-disabled mt-1"
+                type="text" name="rvNo" value={formHeader.RV_No} readOnly />
+            </div>
           </div>
-          <div className="col-md-2">
-            <label className="form-label">RV Date</label>
-            <input
-              type="text"
-              name="rvDate"
-              value={formHeader.RV_Date}
-              readOnly
-            />
-            {/* value={currDate} */}
+
+
+
+          <div className="d-flex col-md-2">
+
+            <div className="col-md-4">
+              <label className="form-label">RV Date</label>
+            </div>
+            <div className="col-md-8">
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="rvDate"
+                value={formHeader.RV_Date}
+                readOnly
+              />
+            </div>
+
+
           </div>
-          <div className="col-md-2">
-            <label className="form-label">Status</label>
-            <input
-              type="text"
-              name="status"
-              value={formHeader.RVStatus}
-              readOnly
-            />
+
+
+
+          <div className="d-flex col-md-2">
+            <div className="col-md-3" >
+              <label className="form-label">Status</label>
+            </div>
+            <div className="col-md-7">
+
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="status"
+                value={formHeader.RVStatus}
+                readOnly
+              />
+
+            </div>
           </div>
-          <div className="col-md-3">
-            <label className="form-label">Weight</label>
-            <input
-              type="text"
-              name="weight"
-              required
-              value={formHeader.TotalWeight}
-              disabled={boolVal}
+
+
+          <div className="d-flex col-md-2">
+            <div className="col-md-9">
+              <label className="form-label">Weight</label>
+            </div>
+            <div className="col-md-8">
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="weight"
+                value={formHeader.TotalWeight}
+                disabled={boolVal}
               // onChange={InputHeaderEvent}
-            />
+              />
+            </div>
+
           </div>
         </div>
         <div className="row">
-          <div className="col-md-5">
-            <label className="form-label">Customer</label>
-            <select
-              className="ip-select mt-1"
-              name="customer"
-              disabled={boolVal}
-              // onChange={changeCustomer}
-            >
-              <option value={formHeader.Cust_Code} disabled selected>
-                {formHeader.Customer}
-              </option>
 
-              {/* {customers.map((customer, index) => (
-                  <option value={customer.Cust_Code}>
-                    {customer.Cust_name}
-                  </option>
-                ))} */}
-            </select>
+
+          <div className="d-flex col-md-5">
+            <div className="col-md-2">
+              <label className="form-label">Customer</label>
+            </div>
+
+            <div className="col-md-10">
+              <select
+                className="ip-select mt-1"
+                name="customer"
+                //onChange={changeCustomer}
+                disabled={boolVal}
+              >
+                <option value={formHeader.Cust_Code} disabled selected>
+                  {formHeader.Customer}
+                </option>
+              </select>
+            </div>
+
           </div>
-          <div className="col-md-4">
-            <label className="form-label">Reference</label>
-            <input
-              type="text"
-              name="reference"
-              value={formHeader.CustDocuNo}
-              disabled={boolVal}
+
+
+
+          <div className="d-flex col-md-4">
+            <div className="col-md-2">
+              <label className="form-label">Reference</label>
+            </div>
+
+            <div className="col-md-9">
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="reference"
+                value={formHeader.CustDocuNo}
+                disabled={boolVal}
               // onChange={InputHeaderEvent}
-            />
+              />
+            </div>
+
           </div>
-          <div className="col-md-3">
-            <label className="form-label">Calculated Weight</label>
-            <input
-              type="text"
-              name="calculatedWeight"
-              value={formHeader.TotalCalculatedWeight}
-              readOnly
-            />
+
+          
+
+          <div className="d-flex col-md-3">
+            <div className="col-md-6">
+              <label className="form-label">Calculated Weight</label>
+            </div>
+            <div className="col-md-5">
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="calculatedWeight"
+                value={formHeader.TotalCalculatedWeight}
+
+                readOnly
+              />
+            </div>
+
+
           </div>
         </div>
-        <div className="row"></div>
+        
 
         <div className="row ">
-          <div className="col-md-8 justify-content-center">
+
+        <div className="col-md-8">
+            <textarea
+              className="input-disabled mt-1"
+              id="exampleFormControlTextarea1"
+              rows="4"
+              style={{ width: "700px", height: "40px" }}
+              value={formHeader.address}
+              readOnly
+            ></textarea>
+          </div>
+          <div className="col-md-4 justify-content-center">
             <button
               className="button-style"
-              style={{ marginLeft: "70px" }}
+
               disabled={boolVal}
             >
               Save
@@ -546,16 +622,7 @@ function OpenButtonClosedSheetUnit() {
               Close
             </button>
           </div>
-          <div className="col-md-4 mb-3 mt-4">
-            <label className="form-label"></label>
-            <textarea
-              id="exampleFormControlTextarea1"
-              rows="4"
-              style={{ width: "400px", height: "40px" }}
-              value={formHeader.address}
-              readOnly
-            ></textarea>
-          </div>
+         
         </div>
         <div className="row">
           <div
@@ -598,7 +665,7 @@ function OpenButtonClosedSheetUnit() {
                 <div className="col-md-6 col-sm-12">
                   <button
                     className="button-style "
-                    style={{ width: "155px" }}
+                    style={{ width: "85px" }}
                     disabled={boolVal}
                   >
                     Add to stock
@@ -607,7 +674,7 @@ function OpenButtonClosedSheetUnit() {
                 <div className="col-md-6 col-sm-12">
                   <button
                     className="button-style "
-                    style={{ width: "155px" }}
+                    style={{ width: "95px" }}
                     disabled={boolVal}
                   >
                     Remove stock
@@ -619,16 +686,19 @@ function OpenButtonClosedSheetUnit() {
                 <div className="col-md-12 col-sm-12">
                   <div className="ip-box form-bg">
                     <div className="row">
-                      <p className="form-title-deco mt-2">
+                      {/* <p className="form-title-deco mt-2">
                         <h5>Serial Details</h5>
-                      </p>
+                      </p> */}
+                          <label className="form-label" style={{ textDecoration: 'underline', fontSize:'14px' }}>Serial Details</label>
 
                       <div className="col-md-4">
                         <label className="form-label">Mtrl Code</label>
                       </div>
                       <div className="col-md-8" style={{ marginTop: "8px" }}>
                         <select
-                          className="ip-select dropdown-field"
+                          // className="ip-select dropdown-field"
+                          style={{width:'133px'}}
+                        className="input-disabled mt-1"
                           disabled={boolVal}
                           value={inputPart.mtrlCode}
                           name="mtrlCode"
@@ -684,7 +754,8 @@ function OpenButtonClosedSheetUnit() {
                           <div className="col-md-6">
                             <input
                               type="number"
-                              className="in-field"
+                            
+                              className="input-disabled mt-1"
                               name="dynamicPara1"
                               value={inputPart.dynamicPara1}
                               disabled
@@ -702,7 +773,7 @@ function OpenButtonClosedSheetUnit() {
                           <div className="col-md-6">
                             <input
                               type="number"
-                              className="in-field"
+                              className="input-disabled mt-1"
                               name="dynamicPara2"
                               value={inputPart.dynamicPara2}
                               min="0"
@@ -725,7 +796,7 @@ function OpenButtonClosedSheetUnit() {
                           <div className="col-md-6">
                             <input
                               type="number"
-                              className="in-field"
+                              className="input-disabled mt-1"
                               name="dynamicPara1"
                               value={inputPart.dynamicPara1}
                               disabled
@@ -743,7 +814,7 @@ function OpenButtonClosedSheetUnit() {
                           <div className="col-md-6">
                             <input
                               type="number"
-                              className="in-field"
+                              className="input-disabled mt-1"
                               name="dynamicPara2"
                               value={inputPart.dynamicPara2}
                               min="0"
@@ -766,7 +837,7 @@ function OpenButtonClosedSheetUnit() {
                           <div className="col-md-6">
                             <input
                               type="number"
-                              className="in-field"
+                              className="input-disabled mt-1"
                               name="dynamicPara1"
                               value={inputPart.dynamicPara1}
                               disabled
@@ -791,7 +862,7 @@ function OpenButtonClosedSheetUnit() {
                           <div className="col-md-6">
                             <input
                               type="number"
-                              className="in-field"
+                              className="input-disabled mt-1"
                               name="dynamicPara1"
                               value={inputPart.dynamicPara1}
                               disabled
@@ -809,7 +880,7 @@ function OpenButtonClosedSheetUnit() {
                           <div className="col-md-6">
                             <input
                               type="number"
-                              className="in-field"
+                              className="input-disabled mt-1"
                               name="dynamicPara2"
                               value={inputPart.dynamicPara2}
                               min="0"
@@ -828,7 +899,7 @@ function OpenButtonClosedSheetUnit() {
                           <div className="col-md-6">
                             <input
                               type="number"
-                              className="in-field"
+                              className="input-disabled mt-1"
                               name="dynamicPara3"
                               value={inputPart.dynamicPara3}
                               min="0"
@@ -851,7 +922,7 @@ function OpenButtonClosedSheetUnit() {
                           <div className="col-md-6">
                             <input
                               type="number"
-                              className="in-field"
+                              className="input-disabled mt-1"
                               name="dynamicPara1"
                               value={inputPart.dynamicPara1}
                               disabled
@@ -874,7 +945,7 @@ function OpenButtonClosedSheetUnit() {
                           <div className="col-md-6">
                             <input
                               type="number"
-                              className="in-field"
+                              className="input-disabled mt-1"
                               name="dynamicPara1"
                               value={inputPart.dynamicPara1}
                               disabled
@@ -888,16 +959,17 @@ function OpenButtonClosedSheetUnit() {
                       </div>
                     )}
                     <div className="col-md-12 mt-3 ">
-                      <p className="form-title-deco">
+                      {/* <p className="form-title-deco">
                         <h5>Quantity Details</h5>
-                      </p>
+                      </p> */}
+                          <label className="form-label" style={{ textDecoration: 'underline', fontSize:'14px' }}>Quantity Details</label>
                       <div className="row">
                         <div className="col-md-3">
                           <label className="form-label mt-2">Received</label>
                         </div>
                         <div className="col-md-4">
                           <input
-                            className="in-field"
+                          className="input-disabled mt-1"
                             disabled={boolVal}
                             value={(inputPart.qty = Math.floor(inputPart.qty))}
                           />
@@ -909,7 +981,7 @@ function OpenButtonClosedSheetUnit() {
                             style={{ display: "flex", gap: "5px" }}
                           >
                             <input
-                              className="form-check-input mt-3"
+                              className="form-check-input mt-2"
                               type="checkbox"
                               id="flexCheckDefault"
                               disabled={boolVal}
@@ -917,8 +989,8 @@ function OpenButtonClosedSheetUnit() {
                               checked={inputPart.inspected == 1 ? true : false}
                               value={inputPart.inspected}
                             />
-                             
-                            <label className="form-label mt-1">Inspected</label>
+
+                            <label className="form-label ">Inspected</label>
                           </div>
                         </div>
                       </div>
@@ -928,7 +1000,7 @@ function OpenButtonClosedSheetUnit() {
                         </div>
                         <div className="col-md-4">
                           <input
-                            className="in-field"
+                           className="input-disabled mt-1"
                             disabled={boolVal}
                             value={
                               (inputPart.accepted = Math.floor(
@@ -944,14 +1016,14 @@ function OpenButtonClosedSheetUnit() {
                             style={{ display: "flex", gap: "5px" }}
                           >
                             <input
-                              className="form-check-input mt-3"
+                              className="form-check-input mt-2"
                               type="checkbox"
                               checked={inputPart.updated === 1 ? true : false}
                               value=""
                               id="flexCheckDefault"
                               disabled={boolVal}
                             />
-                             <label className="form-label mt-1">Updated</label>
+                            <label className="form-label ">Updated</label>
                           </div>
                         </div>
                       </div>
@@ -967,7 +1039,7 @@ function OpenButtonClosedSheetUnit() {
                         </div>
                         <div className="col-md-6 mt-1">
                           <input
-                            className="in-field"
+                          className="input-disabled mt-1"
                             disabled={boolVal}
                             value={inputPart.totalWeightCalculated}
                           />
@@ -979,7 +1051,7 @@ function OpenButtonClosedSheetUnit() {
                         </div>
                         <div className="col-md-6 ">
                           <input
-                            className="in-field"
+                           className="input-disabled mt-1"
                             disabled={boolVal}
                             value={inputPart.totalWeight}
                           />
@@ -991,7 +1063,10 @@ function OpenButtonClosedSheetUnit() {
                         </div>
                         <div className="col-md-6 mt-2">
                           <select
-                            className="ip-select dropdown-field"
+                            // className="ip-select dropdown-field"
+                            className="input-disabled mt-1"
+                         
+                          style={{width:'140px'}}
                             disabled={boolVal}
                           >
                             <option value={inputPart.locationNo}>
@@ -1007,7 +1082,7 @@ function OpenButtonClosedSheetUnit() {
               <div className="row justify-content-center mt-3 mb-4">
                 <button
                   className="button-style "
-                  style={{ width: "155px" }}
+                  style={{ width: "75px" }}
                   disabled={boolVal}
                 >
                   Delete

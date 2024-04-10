@@ -238,14 +238,16 @@ function ShopMatIssueVocher() {
         setIsPrintModalOpen={setIsPrintModalOpen}
         combineSheets={combineSheets}
       />
-      <h4 className="title">Shop Material Issue Voucher</h4>
+      <h4 className="title">Shop Material Issue Voucher </h4>
       <div className="row">
-        <div className="col-md-4">
+
+        {/* <div className="col-md-4">
           <div className="row">
             <div className="col-md-6">
               <label className="form-label"> IV No</label>
               <input className="" disabled value={formHeader.IV_No} />
             </div>
+
             <div className="col-md-6">
               {" "}
               <label className="form-label">&nbsp;</label>
@@ -263,6 +265,8 @@ function ShopMatIssueVocher() {
               />
             </div>
           </div>
+
+
           <div className="row">
             {" "}
             <div className="col-md-6">
@@ -270,11 +274,13 @@ function ShopMatIssueVocher() {
               <label className="form-label">Program No</label>
               <input className="" disabled value={formHeader.NC_ProgramNo} />
             </div>
+
             <div className="col-md-6">
               {" "}
               <label className="form-label">&nbsp;</label>
               <input className="" disabled value={formHeader.TaskNo} />
             </div>
+
           </div>
           <div className="row">
             {" "}
@@ -301,8 +307,9 @@ function ShopMatIssueVocher() {
               <input className="" disabled value={formHeader.CustMtrl} />
             </div>
           </div>
-        </div>
-        <div className="col-md-4">
+        </div> */}
+
+        {/* <div className="col-md-4">
           {" "}
           <div className="row">
             <div className="col-md-12">
@@ -343,8 +350,9 @@ function ShopMatIssueVocher() {
               <input className="" disabled value={formHeader.QtyIssued} />
             </div>
           </div>
-        </div>
-        <div className="col-md-4">
+        </div> */}
+
+        {/* <div className="col-md-4">
           {" "}
           <div className="row mt-4">
             <div className="col-md-6 col-sm-12">
@@ -363,6 +371,7 @@ function ShopMatIssueVocher() {
               </button>
             </div>
           </div>
+
           <div className="row mt-4">
             {" "}
             <div
@@ -395,8 +404,251 @@ function ShopMatIssueVocher() {
               </div>
             </div>
           </div>
+        </div> */}
+
+
+        <div className="d-flex col-md-3">
+          <div className="col-md-3">
+            <label className="form-label"> IV No</label>
+          </div>
+          <div className="col-md-8">
+            <input className="input-disabled mt-1" disabled value={formHeader.IV_No} />
+          </div>
         </div>
+
+        <div className="d-flex col-md-3">
+          <div className="col-md-3">
+            <label className="form-label">Date</label>
+
+          </div>
+          <div className="col-md-8">
+            <input
+            className="input-disabled mt-1"
+              disabled
+              // value={formHeader.Isssue_date}
+              value={
+                formHeader.Isssue_date
+                  ? new Date(formHeader.Isssue_date).toLocaleDateString(
+                    "en-GB"
+                  )
+                  : ""
+              }
+            />
+          </div>
+        </div>
+
+        <div className="d-flex col-md-3">
+          <div className="col-md-4">
+            <label className="form-label">Program No</label>
+
+          </div>
+          <div className="col-md-8">
+            <input className="input-disabled mt-1" disabled value={formHeader.NC_ProgramNo} />
+          </div>
+        </div>
+
+
+        <div className="d-flex col-md-3">
+          <div className="col-md-3">
+            <label className="form-label">&nbsp;</label>
+
+          </div>
+          <div className="col-md-6">
+            <input className="input-disabled mt-1" disabled value={formHeader.TaskNo} />
+          </div>
+        </div>
+
+
+
+
+        <div className="d-flex col-md-3">
+          <div className="col-md-3">
+            <label className="form-label">Operation</label>
+          </div>
+          <div className="col-md-8">
+            <input className="input-disabled mt-1" disabled value={formHeader.Operation} />
+          </div>
+        </div>
+
+        <div className="d-flex col-md-3">
+          <div className="col-md-3">
+            <label className="form-label">&nbsp;</label>
+
+          </div>
+          <div className="col-md-8">
+            <input className="input-disabled mt-1" disabled value={formHeader.MProcess} />
+          </div>
+        </div>
+
+        <div className="d-flex col-md-6">
+          <div className="col-md-2">
+            <label className="form-label">Customer</label>
+
+          </div>
+          <div className="col-md-9">
+            <input className="input-disabled mt-1" disabled value={formHeader.Cust_name} />
+          </div>
+        </div>
+
+        <div className="d-flex col-md-3">
+          <div className="col-md-3">
+            <label className="form-label">Source</label>
+
+          </div>
+          <div className="col-md-8">
+            <input className="input-disabled mt-1" disabled value={formHeader.CustMtrl} />
+          </div>
+        </div>
+
+        <div className="d-flex col-md-3">
+          <div className="col-md-3">
+            <label className="form-label">Material</label>
+
+          </div>
+          <div className="col-md-8">
+            <input className="input-disabled mt-1" disabled value={formHeader.Mtrl_Code} />
+          </div>
+        </div>
+
+
+        <div className="d-flex col-md-3">
+          <div className="col-md-4">
+            <label className="form-label">Length</label>
+
+
+          </div>
+          <div className="col-md-8">
+            <input className="input-disabled mt-1" disabled value={formHeader.Para1} />
+          </div>
+        </div>
+
+        <div className="d-flex col-md-3">
+          <div className="col-md-3">
+
+            <label className="form-label">Width</label>
+
+          </div>
+          <div className="col-md-6">
+            <input className="input-disabled mt-1" disabled value={formHeader.Para2} />
+          </div>
+        </div>
+
+        <div className="d-flex col-md-3">
+          <div className="col-md-3">
+            <label className="form-label">Height</label>
+
+
+          </div>
+          <div className="col-md-8">
+            <input className="input-disabled mt-1" disabled value={formHeader.Para3} />
+          </div>
+        </div>
+
+        <div className="d-flex col-md-3">
+          <div className="col-md-3">
+            <label className="form-label">Machine</label>
+
+          </div>
+          <div className="col-md-8">
+            <input className="input-disabled mt-1" disabled value={formHeader.Machine} />
+          </div>
+        </div>
+
+
+        <div className="d-flex col-md-3">
+          <div className="col-md-4">
+
+            <label className="form-label">Qty Required</label>
+          </div>
+          <div className="col-md-8">
+            <input className="input-disabled mt-1" disabled value={formHeader.Qty} />
+          </div>
+        </div>
+
+
+        <div className="d-flex col-md-3">
+          <div className="col-md-3">
+            <label className="form-label">Qty Issued</label>
+
+          </div>
+          <div className="col-md-6">
+            <input className="input-disabled mt-1" disabled value={formHeader.QtyIssued} />
+          </div>
+        </div>
+
+        <div className="d-flex col-md-12 mt-2">
+
+
+          <div
+            className="d-flex col-md-2 mt-2"
+            style={{ gap: "10px" }}
+          >
+            <input
+              className="form-check-input mt-2"
+              type="checkbox"
+              id="flexCheckDefault"
+              name="updated"
+              //   value={inputPart.upDated}
+              //disabled={boolVal3 | boolVal4}
+              //   disabled={true}
+              onChange={checkboxChange}
+            />
+            <label className="form-label mt-1">No Details</label>
+          </div>
+
+          <div className="d-flex col-md-8" style={{gap:'5px'}}>
+            <div className="col-md-2">
+              <label className="form-label">Combined Sheets</label>
+            </div>
+            <div>
+              <textarea
+                style={{ height: "40px", width:'500px'}}
+                onChange={InputEventCombineShhet}
+                value={combineSheets}
+              ></textarea>
+            </div>
+
+          </div>
+
+          <div className="d-flex col-md-3">
+            <button className="button-style col-md-2 " onClick={printButton}
+              style={{ width: "50px" }}
+            >
+              Print
+            </button>
+
+
+            <button
+              className="button-style col-md-2"
+              id="btnclose"
+              type="submit"
+              style={{ width: "50px" }}
+              onClick={() => nav("/MaterialManagement")}
+            >
+              Close
+            </button>
+          </div>
+
+
+          {/* <div className="d-flex col-md-4" style={{gap:'70px'}}>
+            <div className="col-md-3">
+              <label className="form-label">Combined Sheets</label>
+            </div>
+            <div>
+              <textarea
+                style={{ height: "40px", width: '450px' }}
+                onChange={InputEventCombineShhet}
+                value={combineSheets}
+              ></textarea>
+            </div>
+
+          </div> */}
+
+        </div>
+
+
       </div>
+
       <div
         style={{
           height: "400px",

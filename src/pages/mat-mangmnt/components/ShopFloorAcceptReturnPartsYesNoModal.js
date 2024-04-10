@@ -91,10 +91,10 @@ function ShopFloorAcceptReturnPartsYesNoModal(props) {
 
       <Modal show={showYN} onHide={handleNo}>
         <Modal.Header closeButton>
-          <Modal.Title>Please Confirm</Modal.Title>
+          <Modal.Title style={{fontSize:'14px'}}>Please Confirm</Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>
+        <Modal.Body style={{fontSize:'12px'}}>
           All returned quantity will be taken on stock, for rejecting parts use
           Material receipt voucher. Proceed ?
         </Modal.Body>
@@ -102,7 +102,7 @@ function ShopFloorAcceptReturnPartsYesNoModal(props) {
         <Modal.Footer>
           <button
             className="button-style "
-            style={{ width: "50px" }}
+            style={{ width: "50px", fontSize:'12px' }}
             onClick={handleYes}
           >
             Yes
@@ -110,7 +110,7 @@ function ShopFloorAcceptReturnPartsYesNoModal(props) {
 
           <button
             className="button-style"
-            style={{ width: "50px", backgroundColor: "gray" }}
+            style={{ width: "50px", backgroundColor: "gray", fontSize:'12px' }}
             onClick={handleNo}
           >
             No

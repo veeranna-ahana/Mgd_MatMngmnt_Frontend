@@ -121,7 +121,7 @@ function ShopIssueIVList(props) {
   return (
     <div>
       <>
-        <h4 className="title">Parts Issue Vouchers List</h4>
+        <h4 className="title">Parts Issue Vouchers List </h4>
         <div className="row">
           <div className="col-md-7 col-sm-12">
             <div style={{ height: "420px", overflowY: "scroll" }}>

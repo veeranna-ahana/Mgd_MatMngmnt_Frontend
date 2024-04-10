@@ -102,6 +102,14 @@ export default function PurchaseUnitsDraftRVList() {
           <div className="col-md-5 mb-2 text-center">
             <button
               className="button-style "
+              style={{ width: "55px" }}
+              //data.RvID
+              onClick={openButtonClick}
+            >
+              Open
+            </button>
+            <button
+              className="button-style "
               id="btnclose"
               type="submit"
               onClick={() => nav("/MaterialManagement")}
@@ -137,7 +145,7 @@ export default function PurchaseUnitsDraftRVList() {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                     className="input-disabled mt-2" 
+                    className="input-disabled mt-2"
                     value={data.ReceiptDate}
                     readOnly
                   />
@@ -148,7 +156,7 @@ export default function PurchaseUnitsDraftRVList() {
                   <label className="form-label">RV No</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input  className="input-disabled mt-2"  value={data.RV_No} readOnly />
+                  <input className="input-disabled mt-2" value={data.RV_No} readOnly />
                 </div>
               </div>
               <div className="row">
@@ -156,7 +164,7 @@ export default function PurchaseUnitsDraftRVList() {
                   <label className="form-label">RV Date</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input  className="input-disabled mt-2"  value={data.RV_Date} readOnly />
+                  <input className="input-disabled mt-2" value={data.RV_Date} readOnly />
                 </div>
               </div>
               <div className="row">
@@ -164,7 +172,7 @@ export default function PurchaseUnitsDraftRVList() {
                   <label className="form-label">Cust Code</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input  className="input-disabled mt-2"  value={data.Cust_Code} readOnly />
+                  <input className="input-disabled mt-2" value={data.Cust_Code} readOnly />
                 </div>
               </div>
               <div className="row">
@@ -172,7 +180,7 @@ export default function PurchaseUnitsDraftRVList() {
                   <label className="form-label">Customer</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input  className="input-disabled mt-2"  value={data.Customer} readOnly />
+                  <input className="input-disabled mt-2" value={data.Customer} readOnly />
                 </div>
               </div>
               <div className="row">
@@ -187,7 +195,7 @@ export default function PurchaseUnitsDraftRVList() {
 
                 <div className="col-md-8 ">
                   <input
-                     className="input-disabled mt-2" 
+                    className="input-disabled mt-2"
                     value={data.CustDocuNo}
                     readOnly
                   />
@@ -199,7 +207,7 @@ export default function PurchaseUnitsDraftRVList() {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                     className="input-disabled mt-2" 
+                    className="input-disabled mt-2"
                     value={data.TotalWeight}
                     readOnly
                   />
@@ -217,7 +225,7 @@ export default function PurchaseUnitsDraftRVList() {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                     className="input-disabled mt-2" 
+                    className="input-disabled mt-2"
                     value={data.TotalCalculatedWeight}
                     readOnly
                   />
@@ -228,20 +236,11 @@ export default function PurchaseUnitsDraftRVList() {
                   <label className="form-label">RV Status</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input  className="input-disabled mt-2"  value={data.RVStatus} readOnly />
+                  <input className="input-disabled mt-2" value={data.RVStatus} readOnly />
                 </div>
               </div>
 
-              <div className="row justify-content-center mt-4 mb-4">
-                <button
-                  className="button-style "
-                  style={{ width: "55px" }}
-                  //data.RvID
-                  onClick={openButtonClick}
-                >
-                  Open
-                </button>
-              </div>
+
             </div>
           </div>
         </div>

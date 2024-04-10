@@ -583,7 +583,7 @@ function MaterialAllotmentMain() {
   return (
     <div>
       <div>
-        <h4 className="title">Material Allotment Form</h4>
+        <h4 className="title">Material Allotment Form  </h4>
         <div className="row">
           <div className="d-flex col-md-3">
             <div className="col-md-3">
@@ -760,10 +760,10 @@ function MaterialAllotmentMain() {
 
         <div className="row">
          
-
+<div className="col-md-11"></div>
           
 
-          <div className="col-md-3">
+          <div className="col-md-1">
             <button
               className="button-style "
               id="btnclose"
@@ -789,7 +789,7 @@ function MaterialAllotmentMain() {
            headerClasses="header-class tableHeaderBGColor"
         ></BootstrapTable> */}
 
-        <Table className="table custom-table" striped bordered hover>
+        <Table className="table custom-table " striped bordered hover>
           <thead className="header-class">
             <tr>
               <th>Part Id</th>

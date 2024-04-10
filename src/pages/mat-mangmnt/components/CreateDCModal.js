@@ -14,11 +14,11 @@ function CreateDCModal(props) {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Create Return Vocher</Modal.Title>
+          <Modal.Title style={{fontSize:'14px'}}>Create Return Vocher</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Vocher Created</Modal.Body>
+        <Modal.Body style={{fontSize:'12px'}}>Vocher Created</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleClose} style={{fontSize:'12px'}}>
             okay
           </Button>
           

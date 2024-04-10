@@ -785,6 +785,15 @@ function PurchasePartsNew() {
               >
                 Add New
               </button>
+
+              <button
+                className="button-style "
+                style={{ width: "55px" }}
+                disabled={boolVal3 | boolVal4}
+                onClick={deleteButtonState}
+              >
+                Delete
+              </button>
             </div>
             <div className="row">
               <div className="col-md-4 ">
@@ -868,7 +877,7 @@ function PurchasePartsNew() {
               </div>
             </div>
 
-            <div className="row justify-content-center mt-3 mb-4">
+            {/* <div className="row justify-content-center mt-3 mb-4">
               <button
                 className="button-style "
                 style={{ width: "55px" }}
@@ -877,7 +886,7 @@ function PurchasePartsNew() {
               >
                 Delete
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

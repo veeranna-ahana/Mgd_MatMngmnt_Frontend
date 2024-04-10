@@ -203,7 +203,7 @@ function CreateDCSaveClearCancelModal(props) {
     <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>DC Number Updater</Modal.Title>
+          <Modal.Title style={{fontSize:'14px'}}>DC Number Updater</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
