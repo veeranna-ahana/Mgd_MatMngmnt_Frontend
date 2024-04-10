@@ -685,3 +685,11 @@ input::-webkit-inner-spin-button {
 li.nav-item {
   margin-left: 5px !important;
 }
+
+.header-class {
+  font-size: 17px;
+  background-color: gray;
+  color: white;
+  position: sticky;
+  
+} 

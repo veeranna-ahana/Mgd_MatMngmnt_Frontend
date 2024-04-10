@@ -253,40 +253,106 @@ function ProductionMatIssueParts() {
       />
 
       <h4 className="title">Production Material Issue :Parts</h4>
+
       <div className="table_top_style">
         <div className="row">
-          <div className="col-md-3">
+
+          <div className="d-flex col-md-3">
+            <div className="col-md-4">
             <label className="form-label">Issue Vr No</label>
-            <input className="" value={formHeader.IV_No} disabled />
+            </div>
+           <div className="col-md-6">
+           <input className="input-disabled mt-1"
+                         
+                          style={{width:'140px'}} value={formHeader.IV_No} disabled />
+           </div>
+           
           </div>
-          <div className="col-md-3">
+
+          <div className="d-flex col-md-3">
+            <div className="col-md-5">
             <label className="form-label">Assembly Name</label>
-            <input className="" value={formHeader.AssyName} disabled />
+            </div>
+            
+            <div className="col-md-6">
+            <input className="input-disabled mt-1" value={formHeader.AssyName} disabled />
+            </div>
+          
           </div>
-          <div className="col-md-3">
+
+          <div className="d-flex col-md-3">
+            <div className="col-md-5">
             <label className="form-label">Allotted</label>
-            <input className="" value={formHeader.QtyIssued} disabled />
+            </div>
+            <div className="col-md-6">
+            <input className="input-disabled mt-1" value={formHeader.QtyIssued} disabled />
+            </div>
+
+            
+           
           </div>
-          <div className="col-md-3">
-            <button className="button-style" onClick={printButton}>
+
+          <div className="d-flex col-md-3">
+            <div className="col-md-3">
+            <label className="form-label">Vr Date</label>
+            </div>
+            <div  className="col-md-6">
+            <input className="input-disabled mt-1" value={formHeader.Issue_date} disabled />
+            </div>
+          </div>
+
+
+          <div className="d-flex col-md-3">
+            <div className="col-md-4">
+            <label className="form-label">Operation</label>
+            </div>
+            <div  className="col-md-6">
+            <input className="input-disabled mt-1" value={formHeader.Operation} disabled />
+            </div>
+          </div>
+
+          <div className="d-flex col-md-3">
+            <div className="col-md-5">
+            <label className="form-label">Returned</label>
+            </div>
+
+            <div className="col-md-6">
+            <input className="input-disabled mt-1" value={formHeader.QtyReturned} disabled />
+            </div>
+          </div>
+
+          <div className="d-flex col-md-3">
+            <div className="col-md-5">
+            <label className="form-label">Program No</label>
+            </div>
+            <div className="col-md-6">
+            <input className="input-disabled mt-1" value={formHeader.NCProgramNo} disabled />
+            </div>
+          </div>
+
+          <div className="d-flex col-md-3">
+            <div className="col-md-3">
+            <label className="form-label">Material</label>
+            </div>
+            <div className="col-md-6">
+            <input className="input-disabled mt-1" value={formHeader.Mtrl_Code} disabled />
+            </div>
+          </div>
+
+          <div className="d-flex col-md-6">
+            <div className="col-md-2">
+            <label className="form-label">Customer</label>
+            </div>
+            <div className="col-md-9">
+            <input className="input-disabled mt-1" value={formHeader.Cust_name} disabled />
+            </div>
+          </div>
+
+          <div className="d-flex col-md-4">
+          <button className="button-style" onClick={printButton}>
               Print
             </button>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-3">
-            <label className="form-label">Vr Date</label>
-            <input className="" value={formHeader.Issue_date} disabled />
-          </div>
-          <div className="col-md-3">
-            <label className="form-label">Operation</label>
-            <input className="" value={formHeader.Operation} disabled />
-          </div>
-          <div className="col-md-3">
-            <label className="form-label">Returned</label>
-            <input className="" value={formHeader.QtyReturned} disabled />
-          </div>
-          <div className="col-md-3">
+
             <button
               className="button-style "
               onClick={cancelButton}
@@ -309,19 +375,7 @@ function ProductionMatIssueParts() {
             >
               Cancel
             </button>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-3">
-            <label className="form-label">Program No</label>
-            <input className="" value={formHeader.NCProgramNo} disabled />
-          </div>
-          <div className="col-md-6">
-            <label className="form-label">Material</label>
-            <input className="" value={formHeader.Mtrl_Code} disabled />
-          </div>
 
-          <div className="col-md-3">
             <button
               className="button-style "
               onClick={acceptReturn}
@@ -334,14 +388,9 @@ function ProductionMatIssueParts() {
             >
               Accept Return
             </button>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-9">
-            <label className="form-label">Customer</label>
-            <input className="" value={formHeader.Cust_name} disabled />
-          </div>
-          <div className="col-md-3">
+
+
+
             <button
               className="button-style "
               id="btnclose"
@@ -350,9 +399,38 @@ function ProductionMatIssueParts() {
             >
               Close
             </button>{" "}
+         
+
           </div>
+
+          
+
+        </div>
+        <div className="row">
+          
+
+
+        
+
+
+
+        </div>
+
+
+        <div className="row">
+         
+
+          
+        </div>
+        <div className="row">
+          
+
+          
+
         </div>
       </div>
+
+
       <div>
         <div
           style={{ height: "400px", overflowY: "scroll", marginTop: "30px" }}

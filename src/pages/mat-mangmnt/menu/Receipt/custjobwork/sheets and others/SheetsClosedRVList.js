@@ -139,9 +139,9 @@ function SheetsClosedRVList() {
         <div className="row">
           <div className="d-flex col-md-7 mb-1">
             <div className="col-md-2">
-            <label className="form-label">Customer</label>
+              <label className="form-label">Customer</label>
             </div>
-           
+
             {/* <select
               className="ip-select"
               name="customer"
@@ -157,17 +157,25 @@ function SheetsClosedRVList() {
               ))}
             </select> */}
             <div className="col-md-5 mt-2" >
-            <Typeahead
-              id="basic-example"
-              name="customer"
-              options={custdata}
-              placeholder="Select Customer"
-              onChange={(label) => changeCustomer(label)}
-            />
+              <Typeahead
+                id="basic-example"
+                name="customer"
+                options={custdata}
+                placeholder="Select Customer"
+                onChange={(label) => changeCustomer(label)}
+              />
             </div>
-            
+
           </div>
           <div className="col-md-5 text-center">
+            <button
+              className="button-style "
+              style={{ width: "55px" }}
+              //data.RvID
+              onClick={openButtonClick}
+            >
+              Open
+            </button>
             <button
               className="button-style "
               id="btnclose"
@@ -280,7 +288,7 @@ function SheetsClosedRVList() {
 
                 <div className="col-md-8 ">
                   <input
-                   className="input-disabled mt-2"
+                    className="input-disabled mt-2"
                     value={data.CustDocuNo}
                     readOnly
                   />
@@ -292,7 +300,7 @@ function SheetsClosedRVList() {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                   className="input-disabled mt-2"
+                    className="input-disabled mt-2"
                     value={data.TotalWeight}
                     readOnly
                   />
@@ -325,16 +333,7 @@ function SheetsClosedRVList() {
                 </div>
               </div>
 
-              <div className="row justify-content-center mt-4 mb-4">
-                <button
-                  className="button-style "
-                  style={{ width: "55px" }}
-                  //data.RvID
-                  onClick={openButtonClick}
-                >
-                  Open
-                </button>
-              </div>
+
             </div>
           </div>
         </div>

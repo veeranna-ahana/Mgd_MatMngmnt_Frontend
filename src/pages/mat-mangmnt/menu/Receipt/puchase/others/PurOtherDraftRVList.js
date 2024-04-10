@@ -189,23 +189,31 @@ export default function PurOtherDraftRVList(props) {
           {/* <div className="col-md-7 text-center"></div> */}
           <div className="d-flex col-md-7">
             <div className="col-md-2">
-            <label className="form-label">Customer</label>
+              <label className="form-label">Customer</label>
             </div>
             <div className="col-md-6">
-            <select
-              className="ip-select"
-              name="customer"
-              disabled={true}
+              <select
+                className="ip-select"
+                name="customer"
+                disabled={true}
               //onChange={changeCustomer}
-            >
-              <option value={data.customer} disabled selected>
-                {data.Customer}
-              </option>
-            </select>
+              >
+                <option value={data.customer} disabled selected>
+                  {data.Customer}
+                </option>
+              </select>
             </div>
-            
+
           </div>
           <div className="col-md-5 mb-2 text-center">
+            <button
+              className="button-style "
+              style={{ width: "55px" }}
+              //data.RvID
+              onClick={openButtonClick}
+            >
+              Open
+            </button>
             <button
               className="button-style "
               id="btnclose"
@@ -243,7 +251,7 @@ export default function PurOtherDraftRVList(props) {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="input-disabled mt-2" 
+                    className="input-disabled mt-2"
                     value={data.ReceiptDate}
                     readOnly
                   />
@@ -254,7 +262,7 @@ export default function PurOtherDraftRVList(props) {
                   <label className="form-label">RV No</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input  className="input-disabled mt-2"  value={data.RV_No} readOnly />
+                  <input className="input-disabled mt-2" value={data.RV_No} readOnly />
                 </div>
               </div>
               <div className="row">
@@ -262,7 +270,7 @@ export default function PurOtherDraftRVList(props) {
                   <label className="form-label">RV Date</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input  className="input-disabled mt-2"  value={data.RV_Date} readOnly />
+                  <input className="input-disabled mt-2" value={data.RV_Date} readOnly />
                 </div>
               </div>
               <div className="row">
@@ -270,7 +278,7 @@ export default function PurOtherDraftRVList(props) {
                   <label className="form-label">Cust Code</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input  className="input-disabled mt-2"  value={data.Cust_Code} readOnly />
+                  <input className="input-disabled mt-2" value={data.Cust_Code} readOnly />
                 </div>
               </div>
               <div className="row">
@@ -278,7 +286,7 @@ export default function PurOtherDraftRVList(props) {
                   <label className="form-label">Customer</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input  className="input-disabled mt-2"  value={data.Customer} readOnly />
+                  <input className="input-disabled mt-2" value={data.Customer} readOnly />
                 </div>
               </div>
               <div className="row">
@@ -288,7 +296,7 @@ export default function PurOtherDraftRVList(props) {
 
                 <div className="col-md-8 ">
                   <input
-                     className="input-disabled mt-2" 
+                    className="input-disabled mt-2"
                     value={data.CustDocuNo}
                     readOnly
                   />
@@ -300,7 +308,7 @@ export default function PurOtherDraftRVList(props) {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="input-disabled mt-2" 
+                    className="input-disabled mt-2"
                     value={data.TotalWeight}
                     readOnly
                   />
@@ -318,7 +326,7 @@ export default function PurOtherDraftRVList(props) {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="input-disabled mt-2" 
+                    className="input-disabled mt-2"
                     value={data.TotalCalculatedWeight}
                     readOnly
                   />
@@ -329,20 +337,11 @@ export default function PurOtherDraftRVList(props) {
                   <label className="form-label">RV Status</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input  className="input-disabled mt-2"  value={data.RVStatus} readOnly />
+                  <input className="input-disabled mt-2" value={data.RVStatus} readOnly />
                 </div>
               </div>
 
-              <div className="row justify-content-center mt-4 mb-4">
-                <button
-                  className="button-style "
-                  style={{ width: "55px" }}
-                  //data.RvID
-                  onClick={openButtonClick}
-                >
-                  Open
-                </button>
-              </div>
+
             </div>
           </div>
         </div>

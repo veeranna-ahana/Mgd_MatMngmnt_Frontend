@@ -404,9 +404,9 @@ function CreateDCYesNoModal(props) {
 
       <Modal show={props.showCreateDC} onHide={handleNo}>
         <Modal.Header closeButton>
-          <Modal.Title>Create DC</Modal.Title>
+          <Modal.Title style={{fontSize:'14px'}}>Create DC</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body style={{fontSize:'12px'}}>
           You cannot cancel this DC once created, be very sure before you
           proceed.
           <br />
@@ -416,11 +416,11 @@ function CreateDCYesNoModal(props) {
           <button
             className="button-style"
             onClick={handleYes}
-            style={{ width: "10%" }}
+            style={{ width: "10%", fontSize:'12px' }}
           >
             Yes
           </button>
-          <button className="btn btn-secondary" onClick={handleNo}>
+          <button className="btn btn-secondary" onClick={handleNo} style={{fontSize:'12px'}}>
             No
           </button>
           {/* <Button variant="primary" onClick={handleYes}>

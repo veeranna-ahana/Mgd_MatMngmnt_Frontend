@@ -158,6 +158,16 @@ function POpenRVList() {
              </div>
           </div>
           <div className="col-md-5 text-center">
+
+          <button
+                  className="button-style "
+                  style={{ width: "55px" }}
+                  //data.RvID
+                  onClick={openButtonClick}
+                >
+                  Open
+                </button>
+                
             <button
               className="button-style "
               id="btnclose"
@@ -288,16 +298,7 @@ function POpenRVList() {
                 </div>
               </div>
 
-              <div className="row justify-content-center mt-4 mb-4">
-                <button
-                  className="button-style "
-                  style={{ width: "55px" }}
-                  //data.RvID
-                  onClick={openButtonClick}
-                >
-                  Open
-                </button>
-              </div>
+              
             </div>
           </div>
         </div>

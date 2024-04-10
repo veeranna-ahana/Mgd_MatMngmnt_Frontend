@@ -941,8 +941,9 @@ function PNew() {
           <div className="ip-box form-bg">
 
             <div className="row col-md-12 ">
+              <div className="col-md-4"></div>
               <div
-                className="col-md-8 mt-1 "
+                className="col-md-4 mt-1 "
               >
                 <button
                   className="button-style  "
@@ -972,7 +973,7 @@ function PNew() {
               {/* <p className="form-title-deco mt-1">
                 <h5>Serial Details</h5>
               </p> */}
-              <label className="form-label" style={{ textDecoration: 'underline' }}>Serial Details</label>
+              <label className="form-label" style={{ textDecoration: 'underline', fontSize:'14px' }}>Serial Details</label>
               <div className="col-md-4 mt-1">
                 <label className="form-label">Part ID</label>
               </div>

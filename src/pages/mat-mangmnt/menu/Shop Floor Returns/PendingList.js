@@ -659,7 +659,7 @@ function PendingList(props) {
           {/* <SideComponent /> */}
           {treeData.map((node, i) => {
             const machine = node.Machine;
-            const label = <span className="node">{machine}</span>;
+            const label = <span className="node" style={{fontSize:'12px'}}>{machine}</span>;
             return (
               <TreeView
                 key={machine + "|" + i}
