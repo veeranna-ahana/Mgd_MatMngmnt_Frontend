@@ -204,7 +204,15 @@ const styles = StyleSheet.create({
 });
 
 const PrintIVListServicePartTable = ({ formHeader, tableData }) => {
-  let previousPartId = null;
+  // let previousPartId = null;
+
+  const groupedTableData = tableData.reduce((acc, item) => {
+    if (!acc[item.PartId]) {
+      acc[item.PartId] = [];
+    }
+    acc[item.PartId].push(item);
+    return acc;
+  }, {});
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -292,13 +300,12 @@ const PrintIVListServicePartTable = ({ formHeader, tableData }) => {
             ______________________________________________________________________________________________
           </Text>
           {/* Table Row */}
-          {tableData.map((item, index) => {
+          {/* {tableData.map((item, index) => {
             const renderPartId = item.PartId !== previousPartId;
             previousPartId = item.PartId;
             return (
               <>
-                {/* <Text style={styles.partIDVal}>{item.PartId}</Text> */}
-
+                
                 <Text style={styles.partIDVal}>
                   {renderPartId && item.PartId}
                 </Text>
@@ -309,15 +316,41 @@ const PrintIVListServicePartTable = ({ formHeader, tableData }) => {
                 <Text style={styles.issuedVal}>{item.QtyIssued}</Text>
                 <Text style={styles.usedVal}></Text>
                 <Text style={styles.returnedVal}></Text>
-                {/* <Text style={styles.line2}>
-                  ______________________________________________________________________________________________
-                </Text> */}
+                
                 {tableData[index + 1]?.PartId !== item.PartId && (
                   <Text style={styles.line2}>
                     ______________________________________________________________________________________________
                   </Text>
                 )}
               </>
+            );
+          })} */}
+          {Object.values(groupedTableData).map((group, groupIndex) => {
+            return (
+              <React.Fragment key={groupIndex}>
+                {group.map((item, itemIndex) => {
+                  const renderPartId = itemIndex === 0;
+                  return (
+                    <React.Fragment key={itemIndex}>
+                      <Text style={styles.partIDVal}>
+                        {renderPartId && item.PartId}
+                      </Text>
+                      <Text style={styles.rvNOVal}>
+                        {item.RV_No}({item.CustDocuNo})
+                      </Text>
+                      <Text style={styles.issuedVal}>{item.QtyIssued}</Text>
+                      <Text style={styles.usedVal}></Text>
+                      <Text style={styles.returnedVal}></Text>
+                    </React.Fragment>
+                  );
+                })}
+
+                {groupIndex < Object.values(groupedTableData).length - 1 && (
+                  <Text style={styles.line2}>
+                    ______________________________________________________________________________________________
+                  </Text>
+                )}
+              </React.Fragment>
             );
           })}
 
