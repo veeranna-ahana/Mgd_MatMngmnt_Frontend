@@ -1,9 +1,12 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { PDFViewer, StyleSheet, Image } from "@react-pdf/renderer";
 import { useLocation } from "react-router-dom";
 import PrintIVListProfileCuttingTable1 from "./PrintIVListProfileCuttingTable1";
 import PrintIVListProfileCuttingTable2 from "./PrintIVListProfileCuttingTable2";
 import Modal from "react-bootstrap/Modal";
+
+const { getRequest, postRequest } = require("../../../api/apiinstance");
+const { endpoints } = require("../../../api/constants");
 
 const styles = StyleSheet.create({
   page: {
@@ -46,10 +49,26 @@ function PrintIVListProfileCutting({
   //   location.state.noDetails
   // );
 
+  const [PDFData, setPDFData] = useState({});
+
   const handleClose = () => {
     setIsPrintModalOpen(false);
   };
   // console.log("formHeader", formHeader);
+
+  function fetchPDFData() {
+    let url1 = endpoints.getPDFData;
+    getRequest(url1, async (res) => {
+      // console.log("res", res);
+      setPDFData(res[0]);
+    });
+  }
+
+  useEffect(() => {
+    fetchPDFData();
+  }, []);
+
+  // console.log("PDFData", PDFData);
 
   return (
     <Modal show={isOpen} onHide={handleClose} fullscreen>
@@ -70,6 +89,7 @@ function PrintIVListProfileCutting({
 
                 formHeader={formHeader}
                 tableData={tableData}
+                PDFData={PDFData}
               />
             ) : (
               <PrintIVListProfileCuttingTable2
@@ -80,6 +100,7 @@ function PrintIVListProfileCutting({
                 formHeader={formHeader}
                 tableData={tableData}
                 combineSheets={combineSheets}
+                PDFData={PDFData}
               />
             )}
           </PDFViewer>

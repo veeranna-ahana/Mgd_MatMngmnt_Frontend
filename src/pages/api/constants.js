@@ -187,11 +187,13 @@ export const endpoints = {
 
   //shopfloorPartIssueRegister
   updateStatusShopfloorPartIssueRegister: `${API}/shopfloorPartIssueRegister/updateStatusShopfloorPartIssueRegister`,
+  getPDFData: `${API}/shopfloorPartIssueRegister/getPDFData`,
 
   insertShopfloorPartIssueRegister: `${API}/shopfloorPartIssueRegister/insertShopfloorPartIssueRegister`,
 
   //shopfloorUnitIssueRegister
   getMaterialAllotmentTable1: `${API}/shopfloorUnitIssueRegister/getMaterialAllotmentTable1`,
+  getPDFData: `${API}/shopfloorUnitIssueRegister/getPDFData`,
 
   //shopfloorMaterialIssueRegister
   insertShopfloorMaterialIssueRegister: `${API}/shopfloorMaterialIssueRegister/insertShopfloorMaterialIssueRegister`,

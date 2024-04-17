@@ -13,7 +13,7 @@ import MLLogo from "../../../../../src/ML-LOGO.png";
 
 const styles = StyleSheet.create({
   page: {
-    fontSize: 11,
+    fontSize: "9px",
     flexDirection: "column",
     //  margin: "30px"
   },
@@ -33,23 +33,32 @@ const styles = StyleSheet.create({
 
   title1: {
     width: "100%",
-    marginLeft: "127px",
-    fontSize: 15,
-    fontWeight: "bold",
-    textDecoration: "underline",
-    fontFamily: "Helvetica-Bold",
-    alignSelf: "center",
-  },
-  title2: {
-    width: "100%",
     marginTop: "6px",
-    marginLeft: "130px",
-    fontSize: 13,
+    marginLeft: "160px",
+    fontSize: "13px",
     fontWeight: "bolder",
     textDecoration: "underline",
     fontFamily: "Helvetica-Bold",
     // alignSelf: "center",
   },
+
+  title2: {
+    width: "100%",
+    marginLeft: "140px",
+    fontSize: "11px",
+    fontWeight: "bold",
+    // textDecoration: "underline",
+    fontFamily: "Helvetica-Bold",
+    // alignSelf: "center",
+  },
+
+  Heading: {
+    textAlign: "center",
+    flexDirection: "row",
+    width: "500px",
+    padding: "1px",
+  },
+
   line1: {
     marginTop: "10px",
     fontWeight: "bold",
@@ -68,14 +77,14 @@ const styles = StyleSheet.create({
     textAlign: "left",
     marginLeft: "10px",
     marginTop: "10px",
-    fontSize: "9",
+    fontSize: "9px",
     fontFamily: "Helvetica-Bold",
   },
   blockLeftAlign: {
     width: "30%",
     marginLeft: "10px",
     marginTop: "10px",
-    fontSize: "9",
+    fontSize: "9px",
     // fontFamily: "Helvetica-Bold",
   },
 
@@ -84,14 +93,14 @@ const styles = StyleSheet.create({
     textAlign: "left",
     marginLeft: "10px",
     marginTop: "10px",
-    fontSize: "9",
+    fontSize: "9px",
     fontFamily: "Helvetica-Bold",
   },
   blockLeftAlign2: {
     width: "18%",
     marginLeft: "10px",
     marginTop: "10px",
-    fontSize: "9",
+    fontSize: "9px",
   },
 
   emptyBlock: {
@@ -101,7 +110,7 @@ const styles = StyleSheet.create({
     width: "100%",
     marginLeft: "10px",
     marginTop: "10px",
-    fontSize: "9",
+    fontSize: "9px",
     // fontFamily: "Helvetica-Bold",
   },
 
@@ -113,42 +122,42 @@ const styles = StyleSheet.create({
     width: "30%",
     marginLeft: "10px",
     marginTop: "5px",
-    fontSize: 10,
+    fontSize: "9px",
     fontFamily: "Helvetica-Bold",
   },
   para1: {
     width: "10%",
     marginLeft: "10px",
     marginTop: "5px",
-    fontSize: 10,
+    fontSize: "9px",
     fontFamily: "Helvetica-Bold",
   },
   para2: {
     width: "10%",
     marginLeft: "5px",
     marginTop: "5px",
-    fontSize: 10,
+    fontSize: "9px",
     fontFamily: "Helvetica-Bold",
   },
   used: {
     width: "10%",
     marginLeft: "5px",
     marginTop: "5px",
-    fontSize: 10,
+    fontSize: "9px",
     fontFamily: "Helvetica-Bold",
   },
   reject: {
     width: "10%",
     marginLeft: "5px",
     marginTop: "5px",
-    fontSize: 10,
+    fontSize: "9px",
     fontFamily: "Helvetica-Bold",
   },
 
   mtrlVal: {
     width: "30%",
     marginLeft: "10px",
-    fontSize: 10,
+    fontSize: "9px",
     fontWeight: "bold",
     marginTop: "5px",
   },
@@ -159,32 +168,32 @@ const styles = StyleSheet.create({
   para1Val: {
     width: "10%",
     marginLeft: "5px",
-    fontSize: 10,
+    fontSize: "9px",
     marginTop: "5px",
   },
   para2Val: {
     width: "10%",
     marginLeft: "5px",
-    fontSize: 10,
+    fontSize: "9px",
     marginTop: "5px",
   },
   usedVal: {
     width: "10%",
     marginLeft: "15px",
-    fontSize: 10,
+    fontSize: "9px",
     marginTop: "5px",
   },
   rejectVal: {
     width: "10%",
     marginLeft: "15px",
-    fontSize: 10,
+    fontSize: "9px",
     marginTop: "5px",
   },
   issuedByReceivedBy: {
     width: "45%",
     marginLeft: "10px",
     marginTop: "10px",
-    fontSize: 11,
+    fontSize: "9px",
     // textDecoration: "underline",
   },
   lastText: {
@@ -204,19 +213,23 @@ const styles = StyleSheet.create({
     marginTop: "5px",
     marginLeft: "20%",
     width: "60%",
-    fontSize: "9",
+    fontSize: "9px",
     alignSelf: "center",
   },
 
   issueTime: {
     width: "10%",
     marginLeft: "15px",
-    fontSize: 10,
+    fontSize: "9px",
     marginTop: "5px",
   },
 });
 
-const PrintIVListProfileCuttingTable1 = ({ formHeader, tableData }) => (
+const PrintIVListProfileCuttingTable1 = ({
+  formHeader,
+  tableData,
+  PDFData,
+}) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.tableContainer}>
@@ -227,26 +240,40 @@ const PrintIVListProfileCuttingTable1 = ({ formHeader, tableData }) => (
 
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Image src={MLLogo} style={styles.logoImage} />
+
           <View>
-            <Text style={styles.title1}>
-              Magod Laser Machining Pvt Ltd : Jigani
-            </Text>
-            <Text style={styles.title2}>Material : Floor Issue</Text>
-            <Text style={{ ...styles.companyInfo, marginLeft: "90px" }}>
-              GSTIN: 29AABCM1970H1ZE, CIN: U28900KA1995PTC018437
-            </Text>
-            <Text style={{ ...styles.companyInfo, marginLeft: "50px" }}>
-              #71 & 72, Phase II, KIADB Indl Area, Jigani, Anekal Taluk,
-              Bengaluru - 560105
-            </Text>
-            <Text style={{ ...styles.companyInfo }}>
-              +91-80-42291005, +91-8110-414313, info@magodlaser.in,
-              https://www.magodlaser.in/
-            </Text>
+            <View style={{ justifyContent: "center" }}>
+              <Text style={[styles.title1, { textDecoration: "underline" }]}>
+                Material : Floor Issue
+              </Text>
+            </View>
+
+            <View style={{ justifyContent: "center" }}>
+              <Text style={styles.title2}>{PDFData.RegisteredName}</Text>
+            </View>
+            <View style={{ justifyContent: "center" }}>
+              <Text style={{ ...styles.companyInfo, marginLeft: "100px" }}>
+                GSTIN: {PDFData.GST_No}, CIN: {PDFData.CIN_No}
+              </Text>
+            </View>
+
+            <View style={{ justifyContent: "center" }}>
+              <Text style={{ ...styles.companyInfo, marginLeft: "70px" }}>
+                {PDFData.RegistredOfficeAddress}
+              </Text>
+            </View>
+
+            <View style={{ justifyContent: "center" }}>
+              <Text style={{ ...styles.companyInfo }}>
+                {PDFData.PhonePrimary} {PDFData.PhoneSecondary}
+                {PDFData.Email}
+                {PDFData.URL}
+              </Text>
+            </View>
           </View>
         </View>
         <Text style={styles.line1}>
-          ______________________________________________________________________________________________
+          ___________________________________________________________________________________________________________________
         </Text>
         {/* Issue By & Received By */}
 
@@ -290,7 +317,7 @@ const PrintIVListProfileCuttingTable1 = ({ formHeader, tableData }) => (
         <Text style={styles.emptyBlock}></Text>
         <Text style={styles.blockWhole}>Customer: {formHeader.Cust_name} </Text> */}
         <Text style={styles.line1}>
-          ______________________________________________________________________________________________
+          ___________________________________________________________________________________________________________________
         </Text>
 
         <View style={styles.blockRightAlign2}>
@@ -342,9 +369,8 @@ const PrintIVListProfileCuttingTable1 = ({ formHeader, tableData }) => (
         </Text>
         <Text style={styles.blockWhole}>Source : Custom</Text> */}
         <Text style={styles.line1}>
-          ______________________________________________________________________________________________
+          ___________________________________________________________________________________________________________________
         </Text>
-
         <Text style={styles.mtrlID}>Mtrl ID </Text>
         <Text style={styles.para1}>Width </Text>
         <Text style={styles.para2}>Length </Text>
@@ -352,7 +378,7 @@ const PrintIVListProfileCuttingTable1 = ({ formHeader, tableData }) => (
         <Text style={styles.reject}>Reject </Text>
 
         <Text style={styles.line2}>
-          ______________________________________________________________________________________________
+          ___________________________________________________________________________________________________________________
         </Text>
         {/* Table Row */}
         {tableData.map((item, index) => {
@@ -372,7 +398,7 @@ const PrintIVListProfileCuttingTable1 = ({ formHeader, tableData }) => (
           );
         })}
         <Text style={styles.line1}>
-          ______________________________________________________________________________________________
+          ___________________________________________________________________________________________________________________
         </Text>
 
         {/* Issue By & Received By */}
