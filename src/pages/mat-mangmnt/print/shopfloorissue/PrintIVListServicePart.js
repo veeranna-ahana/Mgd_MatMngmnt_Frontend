@@ -1,8 +1,11 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { PDFViewer, StyleSheet } from "@react-pdf/renderer";
 import { useLocation } from "react-router-dom";
 import PrintIVListServicePartTable from "./PrintIVListServicePartTable";
 import Modal from "react-bootstrap/Modal";
+
+const { getRequest, postRequest } = require("../../../api/apiinstance");
+const { endpoints } = require("../../../api/constants");
 
 const styles = StyleSheet.create({
   page: {
@@ -22,6 +25,7 @@ function PrintIVListServicePart({
   tableData,
   setIsPrintModalOpen,
 }) {
+  const [PDFData, setPDFData] = useState({});
   const location = useLocation();
   // console.log(
   //   "Second formheader = ",
@@ -34,6 +38,18 @@ function PrintIVListServicePart({
     setIsPrintModalOpen(false);
   };
 
+  function fetchPDFData() {
+    let url1 = endpoints.getPDFData;
+    getRequest(url1, async (res) => {
+      // console.log("res", res);
+      setPDFData(res[0]);
+    });
+  }
+
+  useEffect(() => {
+    fetchPDFData();
+  }, []);
+
   return (
     <Modal show={isOpen} onHide={handleClose} fullscreen>
       <Modal.Header closeButton>
@@ -45,6 +61,7 @@ function PrintIVListServicePart({
             <PrintIVListServicePartTable
               formHeader={formHeader}
               tableData={tableData}
+              PDFData={PDFData}
             />
           </PDFViewer>
         </Fragment>
