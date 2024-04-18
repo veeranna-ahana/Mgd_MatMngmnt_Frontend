@@ -18,6 +18,8 @@ const { getRequest, postRequest } = require("../../../../api/apiinstance");
 const { endpoints } = require("../../../../api/constants");
 
 function OutwordPartIssueVocher(props) {
+  const todayDate = new Date();
+
   const [printOpen, setPrintOpen] = useState(false);
 
   const nav = useNavigate();
@@ -37,6 +39,11 @@ function OutwordPartIssueVocher(props) {
 
   let [dcID, setdcID] = useState("");
   let [dcRegister, setdcRegister] = useState({});
+
+  const [sortConfig, setSortConfig] = useState({
+    key: null,
+    direction: null,
+  });
 
   const [outData, setOutData] = useState([]);
   // const [upData, setUpData] = useState();
@@ -63,12 +70,8 @@ function OutwordPartIssueVocher(props) {
     RV_Remarks: "",
   });
 
-  const [runningNo, setRunningNo] = useState([]);
-
-  const [sortConfig, setSortConfig] = useState({
-    key: null,
-    direction: null,
-  });
+  const [formData, setFormData] = useState({ unitName: "Jigani" });
+  const [runningNoData, setRunningNoData] = useState([]);
 
   async function fetchData() {
     //header data
@@ -210,37 +213,72 @@ function OutwordPartIssueVocher(props) {
     setFormHeader({ ...formHeader, IVStatus: "Cancelled" });
   };
 
-  const getRunningNo = async () => {
-    let SrlType = "Outward_DCNo";
-    let yyyy = formatDate(new Date(), 6).toString();
-    let UnitName = "Jigani";
-    const insertRunningNoVal = {
-      UnitName: UnitName,
-      SrlType: SrlType,
-      ResetPeriod: "Year",
-      ResetValue: "0",
-      EffectiveFrom_date: `${yyyy}-01-01`,
-      Reset_date: `${yyyy}-12-31`,
-      Running_No: "0",
-      UnitIntial: "0",
-      Prefix: "",
-      Suffix: "",
-      Length: "4",
-      Period: yyyy,
-    };
+  // const getRunningNo = async () => {
+  //   let SrlType = "Outward_DCNo";
+  //   let yyyy = formatDate(new Date(), 6).toString();
+  //   let UnitName = "Jigani";
+  //   const insertRunningNoVal = {
+  //     UnitName: UnitName,
+  //     SrlType: SrlType,
+  //     ResetPeriod: "Year",
+  //     ResetValue: "0",
+  //     EffectiveFrom_date: `${yyyy}-01-01`,
+  //     Reset_date: `${yyyy}-12-31`,
+  //     Running_No: "0",
+  //     UnitIntial: "0",
+  //     Prefix: "",
+  //     Suffix: "",
+  //     Length: "4",
+  //     Period: yyyy,
+  //   };
 
-    // var runningNo = [];
+  //   // var runningNo = [];
+  //   postRequest(
+  //     endpoints.getAndInsertRunningNo,
+  //     insertRunningNoVal,
+  //     (runningNo) => {
+  //       // console.log("post done", runningNo);
+  //       setRunningNo(runningNo);
+  //       // runningNo = runningNo;
+  //     }
+  //   );
+  //   // await delay(30);
+  //   // console.log("runningNo", runningNo);
+  // };
+
+  const getDCNo = async () => {
+    // console.log("todayDate", todayDate);
+
+    let Period = `${todayDate.getFullYear()}`;
+
+    // console.log("Period", Period);
+
+    const srlType = "Outward_DCNo";
+    const ResetPeriod = "Year";
+    const ResetValue = 0;
+    const Length = 4;
+    const EffectiveFrom_date = `${todayDate.getFullYear() + "-01-01"}`;
+    const Reset_date = `${todayDate.getFullYear() + "-12-31"}`;
+    // const prefix = "";
+
     postRequest(
-      endpoints.getAndInsertRunningNo,
-      insertRunningNoVal,
-      (runningNo) => {
-        // console.log("post done", runningNo);
-        setRunningNo(runningNo);
-        // runningNo = runningNo;
+      endpoints.insertAndGetRunningNo,
+      {
+        Period: Period,
+        unitName: formData.unitName,
+        srlType: srlType,
+        ResetPeriod: ResetPeriod,
+        ResetValue: ResetValue,
+        Length: Length,
+        EffectiveFrom_date: EffectiveFrom_date,
+        Reset_date: Reset_date,
+        // prefix: prefix,
+      },
+      (res) => {
+        setRunningNoData(res.runningNoData);
+        console.log("getDCNo Response", res);
       }
     );
-    // await delay(30);
-    // console.log("runningNo", runningNo);
   };
 
   let createDC = (e) => {
@@ -264,7 +302,8 @@ function OutwordPartIssueVocher(props) {
     }
 
     if (flag) {
-      getRunningNo();
+      // getRunningNo();
+      getDCNo();
       setShowCreateDC(true);
       // saveButtonState(e);
     } else {
@@ -624,6 +663,7 @@ function OutwordPartIssueVocher(props) {
     }
     setSortConfig({ key, direction });
   };
+
   return (
     <>
       {/* new */}
@@ -1218,7 +1258,7 @@ function OutwordPartIssueVocher(props) {
         // handleSave={handleSave}
         createDcResponse={createDcResponse}
         saveButtonState={saveButtonState}
-        runningNo={runningNo}
+        runningNoData={runningNoData}
       />
     </>
   );
