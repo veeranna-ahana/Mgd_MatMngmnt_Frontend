@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import CreateDCSaveClearCancelModal from "./CreateDCSaveClearCancelModal";
@@ -9,35 +9,54 @@ const { getRequest, postRequest } = require("../../api/apiinstance");
 const { endpoints } = require("../../api/constants");
 
 function CreateDCYesNoModal(props) {
+  const toastId = useRef(null);
+
   // const {props. showCreateDC, props.setShowCreateDC, handleShow, createDcResponse } = props;
   // const [show, setShow] = useState(false);
   // const handleClose = () => props.setShowCreateDC(false);
 
   const handleSave = (e) => {
     props.saveButtonState(e);
+    toastId.createDC = toast.loading("Creating the DC");
 
-    // console.log("props.runningNo[0].Running_No", props.runningNo[0].Running_No);
-    let newNo = parseInt(props.runningNo[0].Running_No) + 1;
-    // console.log("newNo", newNo);
-    //let no = "23/000" + newNo;
-    // let series = "";
-    // //add prefix zeros
-    // for (
-    //   let i = 0;
-    //   i < parseInt(obj.Length) - newNo.toString().length;
-    //   i++
-    // ) {
-    //   series = series + "0";
-    // }
-    // series = series + "" + newNo;
-    let series = newNo;
-    //get last 2 digit of year
+    let newNo = (parseInt(props.runningNoData.Running_No) + 1).toString();
+    let series = "";
+
+    for (let i = 0; i < props.runningNoData.Length; i++) {
+      if (newNo.length < props.runningNoData.Length) {
+        newNo = 0 + newNo;
+      }
+    }
+    series =
+      (props.runningNoData.Prefix || "") +
+      newNo +
+      (props.runningNoData.Suffix || "");
+
     let yy = formatDate(new Date(), 6).toString().substring(2);
     let no = yy + "/" + series;
 
-    // console.log("nnnnnnnnnoooooooooooooooo", no);
-    // console.log("no = ", no);
-    //toast.success("No = ", no);
+    // // console.log("props.runningNo[0].Running_No", props.runningNo[0].Running_No);
+    // let newNo = parseInt(props.runningNo[0].Running_No) + 1;
+    // // console.log("newNo", newNo);
+    // //let no = "23/000" + newNo;
+    // // let series = "";
+    // // //add prefix zeros
+    // // for (
+    // //   let i = 0;
+    // //   i < parseInt(obj.Length) - newNo.toString().length;
+    // //   i++
+    // // ) {
+    // //   series = series + "0";
+    // // }
+    // // series = series + "" + newNo;
+    // let series = newNo;
+    // //get last 2 digit of year
+    // let yy = formatDate(new Date(), 6).toString().substring(2);
+    // let no = yy + "/" + series;
+
+    // // console.log("nnnnnnnnnoooooooooooooooo", no);
+    // // console.log("no = ", no);
+    // //toast.success("No = ", no);
 
     //get cust data
     let url1 =
@@ -143,11 +162,15 @@ function CreateDCYesNoModal(props) {
 
           //update the running no
           const inputData = {
-            SrlType: "Outward_DCNo",
-            Period: formatDate(new Date(), 6),
-            RunningNo: newNo,
+            runningNoData: props.runningNoData,
+
+            newRunningNo: newNo,
+
+            // SrlType: "Outward_DCNo",
+            // Period: formatDate(new Date(), 6),
+            // RunningNo: newNo,
           };
-          postRequest(endpoints.updateRunningNo, inputData, (data) => {});
+          postRequest(endpoints.getAndUpdateRunningNo, inputData, (data) => {});
         }
 
         //console.log("dc details = ", dcdetails);
@@ -180,6 +203,7 @@ function CreateDCYesNoModal(props) {
     // props.setFormHeader
 
     // props.setReturnValueFunc();
+    toast.dismiss(toastId.createDC);
     toast.success("DC Created Successfully");
     // props.setFormHeader({
     //   ...props.formHeader,
@@ -404,9 +428,9 @@ function CreateDCYesNoModal(props) {
 
       <Modal show={props.showCreateDC} onHide={handleNo}>
         <Modal.Header closeButton>
-          <Modal.Title style={{fontSize:'14px'}}>Create DC</Modal.Title>
+          <Modal.Title style={{ fontSize: "14px" }}>Create DC</Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{fontSize:'12px'}}>
+        <Modal.Body style={{ fontSize: "12px" }}>
           You cannot cancel this DC once created, be very sure before you
           proceed.
           <br />
@@ -416,11 +440,15 @@ function CreateDCYesNoModal(props) {
           <button
             className="button-style"
             onClick={handleYes}
-            style={{ width: "10%", fontSize:'12px' }}
+            style={{ width: "10%", fontSize: "12px" }}
           >
             Yes
           </button>
-          <button className="btn btn-secondary" onClick={handleNo} style={{fontSize:'12px'}}>
+          <button
+            className="btn btn-secondary"
+            onClick={handleNo}
+            style={{ fontSize: "12px" }}
+          >
             No
           </button>
           {/* <Button variant="primary" onClick={handleYes}>

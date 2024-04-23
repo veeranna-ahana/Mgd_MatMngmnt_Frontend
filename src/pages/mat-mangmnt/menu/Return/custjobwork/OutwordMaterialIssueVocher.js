@@ -19,6 +19,8 @@ const { getRequest, postRequest } = require("../../../../api/apiinstance");
 const { endpoints } = require("../../../../api/constants");
 
 function OutwordMaterialIssueVocher(props) {
+  const todayDate = new Date();
+
   const [printOpen, setPrintOpen] = useState(false);
 
   const [show, setShow] = useState(false);
@@ -70,7 +72,8 @@ function OutwordMaterialIssueVocher(props) {
     RV_Remarks: "",
   });
 
-  const [runningNo, setRunningNo] = useState([]);
+  const [formData, setFormData] = useState({ unitName: "Jigani" });
+  const [runningNoData, setRunningNoData] = useState([]);
 
   // function statusFormatter(cell, row, rowIndex, formatExtraData) {
   //   if (!cell) return;
@@ -250,37 +253,72 @@ function OutwordMaterialIssueVocher(props) {
     // setBoolVal2(true);
   };
 
-  const getRunningNo = async () => {
-    let SrlType = "Outward_DCNo";
-    let yyyy = formatDate(new Date(), 6).toString();
-    let UnitName = "Jigani";
-    const insertRunningNoVal = {
-      UnitName: UnitName,
-      SrlType: SrlType,
-      ResetPeriod: "Year",
-      ResetValue: "0",
-      EffectiveFrom_date: `${yyyy}-01-01`,
-      Reset_date: `${yyyy}-12-31`,
-      Running_No: "0",
-      UnitIntial: "0",
-      Prefix: "",
-      Suffix: "",
-      Length: "4",
-      Period: yyyy,
-    };
+  // const getRunningNo = async () => {
+  //   let SrlType = "Outward_DCNo";
+  //   let yyyy = formatDate(new Date(), 6).toString();
+  //   let UnitName = "Jigani";
+  //   const insertRunningNoVal = {
+  //     UnitName: UnitName,
+  //     SrlType: SrlType,
+  //     ResetPeriod: "Year",
+  //     ResetValue: "0",
+  //     EffectiveFrom_date: `${yyyy}-01-01`,
+  //     Reset_date: `${yyyy}-12-31`,
+  //     Running_No: "0",
+  //     UnitIntial: "0",
+  //     Prefix: "",
+  //     Suffix: "",
+  //     Length: "4",
+  //     Period: yyyy,
+  //   };
 
-    // var runningNo = [];
+  //   // var runningNo = [];
+  //   postRequest(
+  //     endpoints.getAndInsertRunningNo,
+  //     insertRunningNoVal,
+  //     (runningNo) => {
+  //       // console.log("post done", runningNo);
+  //       setRunningNo(runningNo);
+  //       // runningNo = runningNo;
+  //     }
+  //   );
+  //   // await delay(30);
+  //   // console.log("runningNo", runningNo);
+  // };
+
+  const getDCNo = async () => {
+    // console.log("todayDate", todayDate);
+
+    let Period = `${todayDate.getFullYear()}`;
+
+    // console.log("Period", Period);
+
+    const srlType = "Outward_DCNo";
+    const ResetPeriod = "Year";
+    const ResetValue = 0;
+    const Length = 4;
+    const EffectiveFrom_date = `${todayDate.getFullYear() + "-01-01"}`;
+    const Reset_date = `${todayDate.getFullYear() + "-12-31"}`;
+    // const prefix = "";
+
     postRequest(
-      endpoints.getAndInsertRunningNo,
-      insertRunningNoVal,
-      (runningNo) => {
-        // console.log("post done", runningNo);
-        setRunningNo(runningNo);
-        // runningNo = runningNo;
+      endpoints.insertAndGetRunningNo,
+      {
+        Period: Period,
+        unitName: formData.unitName,
+        srlType: srlType,
+        ResetPeriod: ResetPeriod,
+        ResetValue: ResetValue,
+        Length: Length,
+        EffectiveFrom_date: EffectiveFrom_date,
+        Reset_date: Reset_date,
+        // prefix: prefix,
+      },
+      (res) => {
+        setRunningNoData(res.runningNoData);
+        console.log("getDCNo Response", res);
       }
     );
-    // await delay(30);
-    // console.log("runningNo", runningNo);
   };
 
   let createDC = (e) => {
@@ -308,7 +346,8 @@ function OutwordMaterialIssueVocher(props) {
     }
 
     if (flag) {
-      getRunningNo();
+      // getRunningNo();
+      getDCNo();
       setShowCreateDC(true);
       // saveButtonState(e);
     } else {
@@ -783,14 +822,10 @@ function OutwordMaterialIssueVocher(props) {
                     InputHeaderEvent(e.target.name, parseFloat(e.target.value));
                   }}
                   disabled={
-                    formHeader.IVStatus === "Cancelled" ||
-                    formHeader.IVStatus === "Returned"
-                      ? true
-                      : false
+                    formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
                   }
                   className={
-                    formHeader.IVStatus === "Cancelled" ||
-                    formHeader.IVStatus === "Returned"
+                    formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
                       ? "input-disabled"
                       : ""
                   }
@@ -822,14 +857,10 @@ function OutwordMaterialIssueVocher(props) {
                     InputHeaderEvent(e.target.name, e.target.value);
                   }}
                   disabled={
-                    formHeader.IVStatus === "Cancelled" ||
-                    formHeader.IVStatus === "Returned"
-                      ? true
-                      : false
+                    formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
                   }
                   className={
-                    formHeader.IVStatus === "Cancelled" ||
-                    formHeader.IVStatus === "Returned"
+                    formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
                       ? "input-disabled"
                       : ""
                   }
@@ -847,15 +878,11 @@ function OutwordMaterialIssueVocher(props) {
             // className="button-style ms-3"
             onClick={saveButtonState}
             disabled={
-              formHeader.IVStatus === "Cancelled" ||
-              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
-                ? true
-                : false
+              formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
             }
             className={
-              formHeader.IVStatus === "Cancelled" ||
-              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
-                ? "button-style ms-3 input-disabled"
+              formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
+                ? "button-style ms-3 button-disabled"
                 : "button-style ms-3"
             }
           >
@@ -864,14 +891,10 @@ function OutwordMaterialIssueVocher(props) {
           <button
             onClick={cancelIV}
             disabled={
-              formHeader.IVStatus === "Cancelled" ||
-              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
-                ? true
-                : false
+              formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
             }
             className={
-              formHeader.IVStatus === "Cancelled" ||
-              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+              formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
                 ? "button-style button-disabled"
                 : "button-style"
             }
@@ -881,14 +904,10 @@ function OutwordMaterialIssueVocher(props) {
           <button
             onClick={createDC}
             disabled={
-              formHeader.IVStatus === "Cancelled" ||
-              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
-                ? true
-                : false
+              formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
             }
             className={
-              formHeader.IVStatus === "Cancelled" ||
-              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+              formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
                 ? "button-style button-disabled"
                 : "button-style"
             }
@@ -898,16 +917,12 @@ function OutwordMaterialIssueVocher(props) {
           <button
             onClick={printDC}
             disabled={
-              formHeader.IVStatus === "Cancelled" ||
-              formHeader.IVStatus === "Returned"
-                ? false
-                : true
+              formHeader.IVStatus === "Cancelled" || !formHeader.PkngDcNo
             }
             className={
-              formHeader.IVStatus === "Cancelled" ||
-              formHeader.IVStatus === "Returned"
-                ? "button-style"
-                : "button-disabled button-style"
+              formHeader.IVStatus === "Cancelled" || !formHeader.PkngDcNo
+                ? "button-style button-disabled"
+                : "button-style"
             }
           >
             Print DC
@@ -1052,13 +1067,11 @@ function OutwordMaterialIssueVocher(props) {
                         }}
                         disabled={
                           formHeader.IVStatus === "Cancelled" ||
-                          formHeader.IVStatus === "Returned"
-                            ? true
-                            : false
+                          formHeader.PkngDcNo
                         }
                         className={
                           formHeader.IVStatus === "Cancelled" ||
-                          formHeader.IVStatus === "Returned"
+                          formHeader.PkngDcNo
                             ? "input-disabled"
                             : ""
                         }
@@ -1072,13 +1085,11 @@ function OutwordMaterialIssueVocher(props) {
                           id=""
                           disabled={
                             formHeader.IVStatus === "Cancelled" ||
-                            formHeader.IVStatus === "Returned"
-                              ? true
-                              : false
+                            formHeader.PkngDcNo
                           }
                           className={
                             formHeader.IVStatus === "Cancelled" ||
-                            formHeader.IVStatus === "Returned"
+                            formHeader.PkngDcNo
                               ? "input-disabled"
                               : ""
                           }
@@ -1121,13 +1132,11 @@ function OutwordMaterialIssueVocher(props) {
                           checked
                           disabled={
                             formHeader.IVStatus === "Cancelled" ||
-                            formHeader.IVStatus === "Returned"
-                              ? true
-                              : false
+                            formHeader.PkngDcNo
                           }
                           className={
                             formHeader.IVStatus === "Cancelled" ||
-                            formHeader.IVStatus === "Returned"
+                            formHeader.PkngDcNo
                               ? "input-disabled"
                               : ""
                           }
@@ -1188,7 +1197,7 @@ function OutwordMaterialIssueVocher(props) {
         // handleSave={handleSave}
         createDcResponse={createDcResponse}
         saveButtonState={saveButtonState}
-        runningNo={runningNo}
+        runningNoData={runningNoData}
       />
 
       <PrintMaterialDC

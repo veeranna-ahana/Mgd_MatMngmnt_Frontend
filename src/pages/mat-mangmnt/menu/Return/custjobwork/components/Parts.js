@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
 import BootstrapTable from "react-bootstrap-table-next";
 import { formatDate } from "../../../../../../utils";
@@ -13,6 +13,9 @@ const { getRequest, postRequest } = require("../../../../../api/apiinstance");
 const { endpoints } = require("../../../../../api/constants");
 
 function Parts(props) {
+  const todayDate = new Date();
+  const toastId = useRef(null);
+
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
   let [firstTableData, setFirstTableData] = useState([]);
@@ -34,7 +37,8 @@ function Parts(props) {
   let [custRefval, setCustRefVal] = useState("");
 
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
-  const [runningNo, setRunningNo] = useState([]);
+  const [formData, setFormData] = useState({ unitName: "Jigani" });
+  const [runningNoData, setRunningNoData] = useState([]);
 
   const [sortConfigFirst, setSortConfigFirst] = useState({
     key: null,
@@ -82,38 +86,38 @@ function Parts(props) {
     }
   };
 
-  const getRunningNo = async () => {
-    let SrlType = "MaterialReturnIV";
-    let yyyy = formatDate(new Date(), 6).toString();
-    let UnitName = "Jigani";
-    const insertRunningNoVal = {
-      UnitName: UnitName,
-      SrlType: SrlType,
-      ResetPeriod: "Year",
-      ResetValue: "0",
-      EffectiveFrom_date: `${yyyy}-01-01`,
-      Reset_date: `${yyyy}-12-31`,
-      Running_No: "0",
-      UnitIntial: "0",
-      Prefix: "",
-      Suffix: "",
-      Length: "4",
-      Period: yyyy,
-    };
+  // const getRunningNo = async () => {
+  //   let SrlType = "MaterialReturnIV";
+  //   let yyyy = formatDate(new Date(), 6).toString();
+  //   let UnitName = "Jigani";
+  //   const insertRunningNoVal = {
+  //     UnitName: UnitName,
+  //     SrlType: SrlType,
+  //     ResetPeriod: "Year",
+  //     ResetValue: "0",
+  //     EffectiveFrom_date: `${yyyy}-01-01`,
+  //     Reset_date: `${yyyy}-12-31`,
+  //     Running_No: "0",
+  //     UnitIntial: "0",
+  //     Prefix: "",
+  //     Suffix: "",
+  //     Length: "4",
+  //     Period: yyyy,
+  //   };
 
-    // var runningNo = [];
-    postRequest(
-      endpoints.getAndInsertRunningNo,
-      insertRunningNoVal,
-      (runningNo) => {
-        // console.log("post done", runningNo);
-        setRunningNo(runningNo);
-        // runningNo = runningNo;
-      }
-    );
-    // await delay(30);
-    // console.log("runningNo", runningNo);
-  };
+  //   // var runningNo = [];
+  //   postRequest(
+  //     endpoints.getAndInsertRunningNo,
+  //     insertRunningNoVal,
+  //     (runningNo) => {
+  //       // console.log("post done", runningNo);
+  //       setRunningNo(runningNo);
+  //       // runningNo = runningNo;
+  //     }
+  //   );
+  //   // await delay(30);
+  //   // console.log("runningNo", runningNo);
+  // };
 
   useEffect(() => {
     setSortConfigFirst({
@@ -518,11 +522,46 @@ function Parts(props) {
     // setThirdTableData(thirdTableData);
   };
 
+  const getDCNo = async () => {
+    // console.log("todayDate", todayDate);
+
+    let Period = `${todayDate.getFullYear()}`;
+
+    // console.log("Period", Period);
+
+    const srlType = "MaterialReturnIV";
+    const ResetPeriod = "Year";
+    const ResetValue = 0;
+    const Length = 4;
+    const EffectiveFrom_date = `${todayDate.getFullYear() + "-01-01"}`;
+    const Reset_date = `${todayDate.getFullYear() + "-12-31"}`;
+    // const prefix = "";
+
+    postRequest(
+      endpoints.insertAndGetRunningNo,
+      {
+        Period: Period,
+        unitName: formData.unitName,
+        srlType: srlType,
+        ResetPeriod: ResetPeriod,
+        ResetValue: ResetValue,
+        Length: Length,
+        EffectiveFrom_date: EffectiveFrom_date,
+        Reset_date: Reset_date,
+        // prefix: prefix,
+      },
+      (res) => {
+        setRunningNoData(res.runningNoData);
+        console.log("getDCNo Response", res);
+      }
+    );
+  };
+
   const createReturnVoucherValidationFunc = () => {
     if (props.custCode) {
       if (firstTableSelectedRow.length > 0 || secondTableData.length > 0) {
         if (thirdTableData.length > 0) {
-          getRunningNo();
+          getDCNo();
           setConfirmModalOpen(true);
         } else {
           toast.warning(
@@ -541,85 +580,47 @@ function Parts(props) {
     if (props.custCode) {
       if (firstTableSelectedRow.length > 0 || secondTableData.length > 0) {
         if (thirdTableData.length > 0) {
-          // ..............
-          // ..........................
-          //get running no and assign to RvNo
-          // let SrlType = "MaterialReturnIV";
-          // let yyyy = formatDate(new Date(), 6).toString();
-          // let UnitName = "Jigani";
-          // const url =
-          //   endpoints.getRunningNo +
-          //   `?SrlType=${SrlType}&Period=${yyyy}&UnitName=${UnitName}`;
-          // let runningNoArr = [];
-          // getRequest(url, (runningNo) => {
-          //   runningNoArr = runningNo;
-          //   console.log("first", runningNo);
-          // });
-
-          // await delay(30);
-          // // console.log("no insert", runningNoArr);
-
-          // if (runningNoArr.length === 0) {
-          //   // console.log("need to insert");
-          //   const insertRunningNoVal = {
-          //     UnitName: UnitName,
-          //     SrlType: SrlType,
-          //     ResetPeriod: "Year",
-          //     ResetValue: "0",
-          //     EffectiveFrom_date: `${yyyy}-01-01`,
-          //     Reset_date: `${yyyy}-12-31`,
-          //     Running_No: "0",
-          //     UnitIntial: "0",
-          //     Prefix: "",
-          //     Suffix: "",
-          //     Length: "4",
-          //     Period: yyyy,
-          //   };
-
-          //   postRequest(
-          //     endpoints.insertRunningNo,
-          //     insertRunningNoVal,
-          //     (insertRunningNoData) => {
-          //       // console.log("insertRunningNoData", insertRunningNoData);
-          //     }
-          //   );
-
-          //   getRequest(url, (runningNo) => {
-          //     runningNoArr = runningNo;
-          //     console.log("second", runningNo);
-          //   });
-          // }
-
-          // await delay(30);
-
-          if (runningNo.length > 0) {
-            let newNo = parseInt(runningNo[0].Running_No) + 1;
-            //let no = "23/000" + newNo;
+          if (runningNoData.Id) {
+            toastId.createReturnVoucher = toast.loading(
+              "Creating the Return Voucher"
+            );
+            let newNo = (parseInt(runningNoData.Running_No) + 1).toString();
             let series = "";
 
-            if (newNo < 1000) {
-              //add prefix zeros
-              for (
-                let i = 0;
-                i < parseInt(runningNo[0].Length) - newNo.toString().length;
-                i++
-              ) {
-                series = series + "0";
+            for (let i = 0; i < runningNoData.Length; i++) {
+              if (newNo.length < runningNoData.Length) {
+                newNo = 0 + newNo;
               }
-              series = series + "" + newNo;
-            } else {
-              series = newNo;
             }
-
-            //console.log("series = ", series);
-            //get last 2 digit of year
+            series =
+              (runningNoData.Prefix || "") +
+              newNo +
+              (runningNoData.Suffix || "");
             let yy = formatDate(new Date(), 6).toString().substring(2);
             let no = yy + "/" + series;
 
-            // console.log("noonono", no);
-
+            // let newNo = parseInt(runningNo[0].Running_No) + 1;
+            // //let no = "23/000" + newNo;
+            // let series = "";
+            // if (newNo < 1000) {
+            //   //add prefix zeros
+            //   for (
+            //     let i = 0;
+            //     i < parseInt(runningNo[0].Length) - newNo.toString().length;
+            //     i++
+            //   ) {
+            //     series = series + "0";
+            //   }
+            //   series = series + "" + newNo;
+            // } else {
+            //   series = newNo;
+            // }
+            // //console.log("series = ", series);
+            // //get last 2 digit of year
+            // let yy = formatDate(new Date(), 6).toString().substring(2);
+            // let no = yy + "/" + series;
+            // // console.log("noonono", no);
             setIVNOVal(no);
-
             let newRowMaterialIssueRegister = {
               IV_No: no,
               IV_Date: formatDate(new Date(), 5),
@@ -639,7 +640,6 @@ function Parts(props) {
               Dc_ID: 0,
               Type: "Parts",
             };
-
             // console.log("newwwwwwwwwww.....", newRowMaterialIssueRegister);
             //insert first table
             postRequest(
@@ -650,7 +650,6 @@ function Parts(props) {
                 //console.log("data = ", data);
                 if (data.affectedRows !== 0) {
                   // console.log("Record inserted 1 : materialIssueRegister");
-
                   for (let i = 0; i < thirdTableData.length; i++) {
                     let newRowPartIssueDetails = {
                       Iv_Id: data.insertId,
@@ -668,7 +667,6 @@ function Parts(props) {
                       QtyReturned: thirdTableData[i].QtyReturnedNew,
                       Remarks: thirdTableData[i].Remarks,
                     };
-
                     postRequest(
                       endpoints.insertPartIssueDetails,
                       newRowPartIssueDetails,
@@ -676,7 +674,6 @@ function Parts(props) {
                         // console.log("Part issue details inserted");
                       }
                     );
-
                     //update qtyReturned add
                     let updateQty = {
                       Id: thirdTableData[i].Id,
@@ -694,24 +691,29 @@ function Parts(props) {
               }
             );
             const inputData = {
-              SrlType: "MaterialReturnIV",
-              Period: formatDate(new Date(), 6),
-              RunningNo: newNo,
+              runningNoData: runningNoData,
+
+              newRunningNo: newNo,
+              // SrlType: "MaterialReturnIV",
+              // Period: formatDate(new Date(), 6),
+              // RunningNo: newNo,
             };
             postRequest(
-              endpoints.updateRunningNo,
+              endpoints.getAndUpdateRunningNo,
               inputData,
               async (updateRunningNoData) => {
-                // console.log(
-                //   "updateRunningNoData",
-                //   updateRunningNoData
-                // );
-                // toast.success(
-                //   "Data inserted successfully..."
-                // );
+                if (updateRunningNoData.flag) {
+                  console.log(
+                    "updateRunningNoData",
+                    updateRunningNoData.message
+                  );
+                  toast.dismiss(toastId.createReturnVoucher);
 
-                setSrlMaterialType("part");
-                setShow(true);
+                  setSrlMaterialType("part");
+                  setShow(true);
+                } else {
+                  toast.error("unable to update running no");
+                }
               }
             );
             // console.log("srlivid = ", srlIVID);

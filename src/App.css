@@ -690,8 +690,7 @@ li.nav-item {
   background-color: gray;
   color: white;
   position: sticky;
-  
-} 
+}
 thead th {
   border: 1px solid white;
   transition: 0.2s ease-in-out;
@@ -713,4 +712,18 @@ tbody td {
 
 .displayNoneClass {
   opacity: 0;
+}
+
+.input-disabled {
+  /* color: white !important; */
+  /* background-color: rgb(224, 224, 224) !important; */
+
+  cursor: no-drop;
+}
+
+.button-disabled {
+  color: white !important;
+  background-color: rgb(173, 173, 173) !important;
+
+  cursor: no-drop;
 }

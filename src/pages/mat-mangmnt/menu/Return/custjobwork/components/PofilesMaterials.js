@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
 import { formatDate, get_Iv_DetailsEntry } from "../../../../../../utils";
 import CreateReturnNewModal from "../../../../components/CreateReturnNewModal";
@@ -11,6 +11,9 @@ const { getRequest, postRequest } = require("../../../../../api/apiinstance");
 const { endpoints } = require("../../../../../api/constants");
 
 function PofilesMaterials(props) {
+  const todayDate = new Date();
+  const toastId = useRef(null);
+
   const [show, setShow] = useState(false);
   const [srlMaterialType, setSrlMaterialType] = useState("");
   const [srlIVID, setSrlIVID] = useState("");
@@ -25,7 +28,8 @@ function PofilesMaterials(props) {
   let [firstTableSelectedRow, setFirstTableSelectedRow] = useState([]);
   let [allData, setAllData] = useState([]);
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
-  const [runningNo, setRunningNo] = useState([]);
+  const [formData, setFormData] = useState({ unitName: "Jigani" });
+  const [runningNoData, setRunningNoData] = useState([]);
 
   const [sortConfigFirst, setSortConfigFirst] = useState({
     key: null,
@@ -81,30 +85,65 @@ function PofilesMaterials(props) {
     }
   };
 
-  const getRunningNo = async () => {
-    let SrlType = "MaterialReturnIV";
-    let yyyy = formatDate(new Date(), 6).toString();
-    let UnitName = "Jigani";
-    const insertRunningNoVal = {
-      UnitName: UnitName,
-      SrlType: SrlType,
-      ResetPeriod: "Year",
-      ResetValue: "0",
-      EffectiveFrom_date: `${yyyy}-01-01`,
-      Reset_date: `${yyyy}-12-31`,
-      Running_No: "0",
-      UnitIntial: "0",
-      Prefix: "",
-      Suffix: "",
-      Length: "4",
-      Period: yyyy,
-    };
+  // const getRunningNo = async () => {
+  //   let SrlType = "MaterialReturnIV";
+  //   let yyyy = formatDate(new Date(), 6).toString();
+  //   let UnitName = "Jigani";
+  //   const insertRunningNoVal = {
+  //     UnitName: UnitName,
+  //     SrlType: SrlType,
+  //     ResetPeriod: "Year",
+  //     ResetValue: "0",
+  //     EffectiveFrom_date: `${yyyy}-01-01`,
+  //     Reset_date: `${yyyy}-12-31`,
+  //     Running_No: "0",
+  //     UnitIntial: "0",
+  //     Prefix: "",
+  //     Suffix: "",
+  //     Length: "4",
+  //     Period: yyyy,
+  //   };
+
+  //   postRequest(
+  //     endpoints.getAndInsertRunningNo,
+  //     insertRunningNoVal,
+  //     (runningNo) => {
+  //       setRunningNo(runningNo);
+  //     }
+  //   );
+  // };
+
+  const getDCNo = async () => {
+    // console.log("todayDate", todayDate);
+
+    let Period = `${todayDate.getFullYear()}`;
+
+    // console.log("Period", Period);
+
+    const srlType = "MaterialReturnIV";
+    const ResetPeriod = "Year";
+    const ResetValue = 0;
+    const Length = 4;
+    const EffectiveFrom_date = `${todayDate.getFullYear() + "-01-01"}`;
+    const Reset_date = `${todayDate.getFullYear() + "-12-31"}`;
+    // const prefix = "";
 
     postRequest(
-      endpoints.getAndInsertRunningNo,
-      insertRunningNoVal,
-      (runningNo) => {
-        setRunningNo(runningNo);
+      endpoints.insertAndGetRunningNo,
+      {
+        Period: Period,
+        unitName: formData.unitName,
+        srlType: srlType,
+        ResetPeriod: ResetPeriod,
+        ResetValue: ResetValue,
+        Length: Length,
+        EffectiveFrom_date: EffectiveFrom_date,
+        Reset_date: Reset_date,
+        // prefix: prefix,
+      },
+      (res) => {
+        setRunningNoData(res.runningNoData);
+        console.log("getDCNo Response", res);
       }
     );
   };
@@ -169,7 +208,8 @@ function PofilesMaterials(props) {
     if (props.custCode) {
       if (firstTableSelectedRow.length > 0 || secondTableData.length > 0) {
         if (thirdTableData.length > 0) {
-          getRunningNo();
+          // getRunningNo();
+          getDCNo();
           setConfirmModalOpen(true);
         } else {
           toast.warning(
@@ -188,27 +228,41 @@ function PofilesMaterials(props) {
     if (props.custCode) {
       if (firstTableSelectedRow.length > 0 || secondTableData.length > 0) {
         if (thirdTableData.length > 0) {
-          if (runningNo.length > 0) {
-            let newNo = parseInt(runningNo[0].Running_No) + 1;
+          if (runningNoData.Id) {
+            toastId.createReturnVoucher = toast.loading(
+              "Creating the Return Voucher"
+            );
+
+            let newNo = (parseInt(runningNoData.Running_No) + 1).toString();
             let series = "";
-            if (newNo < 1000) {
-              //add prefix zeros
-              for (
-                let i = 0;
-                i < parseInt(runningNo[0].Length) - newNo.toString().length;
-                i++
-              ) {
-                series = series + "0";
+
+            for (let i = 0; i < runningNoData.Length; i++) {
+              if (newNo.length < runningNoData.Length) {
+                newNo = 0 + newNo;
               }
-              series = series + "" + newNo;
-            } else {
-              series = newNo;
             }
+            series =
+              (runningNoData.Prefix || "") +
+              newNo +
+              (runningNoData.Suffix || "");
+
+            // if (newNo < 1000) {
+            //   //add prefix zeros
+            //   for (
+            //     let i = 0;
+            //     i < parseInt(runningNo[0].Length) - newNo.toString().length;
+            //     i++
+            //   ) {
+            //     series = series + "0";
+            //   }
+            //   series = series + "" + newNo;
+            // } else {
+            //   series = newNo;
+            // }
             //adding last 2 digit of year
             let yy = formatDate(new Date(), 6).toString().substring(2);
             let no = yy + "/" + series;
             setIVNOVal(no);
-
             // creating the merged array for details
             let dataToPost = [];
             for (let i = 0; i < thirdTableData.length; i++) {
@@ -279,9 +333,7 @@ function PofilesMaterials(props) {
                 }
               }
             }
-
             console.log("detailsFilteredData", detailsFilteredData);
-
             // creating var for register starts
             // calculating the total weights for selected materials in third table for register
             let RVTotalWeight = 0;
@@ -289,7 +341,6 @@ function PofilesMaterials(props) {
             for (let i = 0; i < detailsFilteredData.length; i++) {
               const element = detailsFilteredData[i];
               // console.log("element...", element);
-
               if (element.Scrap != 0) {
                 RVTotalCalWeight =
                   RVTotalCalWeight + parseFloat(element.ScrapWeight);
@@ -325,7 +376,6 @@ function PofilesMaterials(props) {
               Dc_ID: 0,
               Type: thirdTableData[0].Type,
             };
-
             console.log(
               "newRowMaterialIssueRegister",
               newRowMaterialIssueRegister
@@ -419,14 +469,13 @@ function PofilesMaterials(props) {
                       ) +
                       " /** " +
                       element.Cust_Docu_No;
-
                     let newRowMtrlIssueDetails = {
                       Iv_Id: respRegister.insertId,
                       Srl: j + 1,
                       IV_Date: null,
-                      IV_No: "",
+                      IV_No: no || "",
                       Cust_Code: props.custCode,
-                      Customer: "",
+                      Customer: props.custName || "",
                       MtrlDescription: mtrlDescription,
                       Mtrl_Code: element.Mtrl_Code,
                       Material: element.Material,
@@ -455,13 +504,11 @@ function PofilesMaterials(props) {
                       RvId: element.RvID || 0,
                       Mtrl_Rv_id: element.Mtrl_Rv_id,
                     };
-
                     console.log(
                       "newRowMtrlIssueDetails",
                       newRowMtrlIssueDetails
                     );
                     // post to details...
-
                     postRequest(
                       endpoints.insertMtrlIssueDetails,
                       newRowMtrlIssueDetails,
@@ -474,7 +521,6 @@ function PofilesMaterials(props) {
                     );
                   }
                   // udpdating the mtrlstock...
-
                   for (let i = 0; i < thirdTableData.length; i++) {
                     const element = thirdTableData[i];
                     const mtrlstockData = {
@@ -486,17 +532,30 @@ function PofilesMaterials(props) {
                       endpoints.updateIssueIVNo,
                       mtrlstockData,
                       async (mtrlUpdateData) => {
+                        // console.log("doneeeeeeeeee");
                         const inputData = {
-                          SrlType: "MaterialReturnIV",
-                          Period: formatDate(new Date(), 6),
-                          RunningNo: newNo,
+                          runningNoData: runningNoData,
+
+                          newRunningNo: newNo,
+
+                          // SrlType: "MaterialReturnIV",
+                          // Period: formatDate(new Date(), 6),
                         };
                         postRequest(
-                          endpoints.updateRunningNo,
+                          endpoints.getAndUpdateRunningNo,
                           inputData,
                           async (updateRunningNoData) => {
-                            setSrlMaterialType("material");
-                            setShow(true);
+                            if (updateRunningNoData.flag) {
+                              console.log(
+                                "updateRunningNoData",
+                                updateRunningNoData.message
+                              );
+                              toast.dismiss(toastId.createReturnVoucher);
+                              setSrlMaterialType("material");
+                              setShow(true);
+                            } else {
+                              toast.error("unable to update running no");
+                            }
                           }
                         );
                       }
