@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import CreateDCSaveClearCancelModal from "./CreateDCSaveClearCancelModal";
@@ -9,12 +9,15 @@ const { getRequest, postRequest } = require("../../api/apiinstance");
 const { endpoints } = require("../../api/constants");
 
 function CreateDCYesNoModal(props) {
+  const toastId = useRef(null);
+
   // const {props. showCreateDC, props.setShowCreateDC, handleShow, createDcResponse } = props;
   // const [show, setShow] = useState(false);
   // const handleClose = () => props.setShowCreateDC(false);
 
   const handleSave = (e) => {
     props.saveButtonState(e);
+    toastId.createDC = toast.loading("Creating the DC");
 
     let newNo = (parseInt(props.runningNoData.Running_No) + 1).toString();
     let series = "";
@@ -200,6 +203,7 @@ function CreateDCYesNoModal(props) {
     // props.setFormHeader
 
     // props.setReturnValueFunc();
+    toast.dismiss(toastId.createDC);
     toast.success("DC Created Successfully");
     // props.setFormHeader({
     //   ...props.formHeader,

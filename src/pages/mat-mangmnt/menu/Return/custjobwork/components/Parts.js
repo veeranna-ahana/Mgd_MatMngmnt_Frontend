@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
 import BootstrapTable from "react-bootstrap-table-next";
 import { formatDate } from "../../../../../../utils";
@@ -14,6 +14,7 @@ const { endpoints } = require("../../../../../api/constants");
 
 function Parts(props) {
   const todayDate = new Date();
+  const toastId = useRef(null);
 
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -580,6 +581,9 @@ function Parts(props) {
       if (firstTableSelectedRow.length > 0 || secondTableData.length > 0) {
         if (thirdTableData.length > 0) {
           if (runningNoData.Id) {
+            toastId.createReturnVoucher = toast.loading(
+              "Creating the Return Voucher"
+            );
             let newNo = (parseInt(runningNoData.Running_No) + 1).toString();
             let series = "";
 
@@ -703,6 +707,7 @@ function Parts(props) {
                     "updateRunningNoData",
                     updateRunningNoData.message
                   );
+                  toast.dismiss(toastId.createReturnVoucher);
 
                   setSrlMaterialType("part");
                   setShow(true);

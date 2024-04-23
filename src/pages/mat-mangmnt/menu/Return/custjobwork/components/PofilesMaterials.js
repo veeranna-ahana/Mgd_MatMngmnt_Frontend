@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
 import { formatDate, get_Iv_DetailsEntry } from "../../../../../../utils";
 import CreateReturnNewModal from "../../../../components/CreateReturnNewModal";
@@ -12,6 +12,7 @@ const { endpoints } = require("../../../../../api/constants");
 
 function PofilesMaterials(props) {
   const todayDate = new Date();
+  const toastId = useRef(null);
 
   const [show, setShow] = useState(false);
   const [srlMaterialType, setSrlMaterialType] = useState("");
@@ -228,6 +229,10 @@ function PofilesMaterials(props) {
       if (firstTableSelectedRow.length > 0 || secondTableData.length > 0) {
         if (thirdTableData.length > 0) {
           if (runningNoData.Id) {
+            toastId.createReturnVoucher = toast.loading(
+              "Creating the Return Voucher"
+            );
+
             let newNo = (parseInt(runningNoData.Running_No) + 1).toString();
             let series = "";
 
@@ -545,6 +550,7 @@ function PofilesMaterials(props) {
                                 "updateRunningNoData",
                                 updateRunningNoData.message
                               );
+                              toast.dismiss(toastId.createReturnVoucher);
                               setSrlMaterialType("material");
                               setShow(true);
                             } else {
