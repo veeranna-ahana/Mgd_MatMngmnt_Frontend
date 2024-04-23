@@ -822,14 +822,10 @@ function OutwordMaterialIssueVocher(props) {
                     InputHeaderEvent(e.target.name, parseFloat(e.target.value));
                   }}
                   disabled={
-                    formHeader.IVStatus === "Cancelled" ||
-                    formHeader.IVStatus === "Returned"
-                      ? true
-                      : false
+                    formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
                   }
                   className={
-                    formHeader.IVStatus === "Cancelled" ||
-                    formHeader.IVStatus === "Returned"
+                    formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
                       ? "input-disabled"
                       : ""
                   }
@@ -861,14 +857,10 @@ function OutwordMaterialIssueVocher(props) {
                     InputHeaderEvent(e.target.name, e.target.value);
                   }}
                   disabled={
-                    formHeader.IVStatus === "Cancelled" ||
-                    formHeader.IVStatus === "Returned"
-                      ? true
-                      : false
+                    formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
                   }
                   className={
-                    formHeader.IVStatus === "Cancelled" ||
-                    formHeader.IVStatus === "Returned"
+                    formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
                       ? "input-disabled"
                       : ""
                   }
@@ -886,15 +878,11 @@ function OutwordMaterialIssueVocher(props) {
             // className="button-style ms-3"
             onClick={saveButtonState}
             disabled={
-              formHeader.IVStatus === "Cancelled" ||
-              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
-                ? true
-                : false
+              formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
             }
             className={
-              formHeader.IVStatus === "Cancelled" ||
-              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
-                ? "button-style ms-3 input-disabled"
+              formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
+                ? "button-style ms-3 button-disabled"
                 : "button-style ms-3"
             }
           >
@@ -903,14 +891,10 @@ function OutwordMaterialIssueVocher(props) {
           <button
             onClick={cancelIV}
             disabled={
-              formHeader.IVStatus === "Cancelled" ||
-              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
-                ? true
-                : false
+              formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
             }
             className={
-              formHeader.IVStatus === "Cancelled" ||
-              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+              formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
                 ? "button-style button-disabled"
                 : "button-style"
             }
@@ -920,14 +904,10 @@ function OutwordMaterialIssueVocher(props) {
           <button
             onClick={createDC}
             disabled={
-              formHeader.IVStatus === "Cancelled" ||
-              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
-                ? true
-                : false
+              formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
             }
             className={
-              formHeader.IVStatus === "Cancelled" ||
-              (formHeader.PkngDcNo && formHeader.IVStatus === "Returned")
+              formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
                 ? "button-style button-disabled"
                 : "button-style"
             }
@@ -937,16 +917,12 @@ function OutwordMaterialIssueVocher(props) {
           <button
             onClick={printDC}
             disabled={
-              formHeader.IVStatus === "Cancelled" ||
-              formHeader.IVStatus === "Returned"
-                ? false
-                : true
+              formHeader.IVStatus === "Cancelled" || !formHeader.PkngDcNo
             }
             className={
-              formHeader.IVStatus === "Cancelled" ||
-              formHeader.IVStatus === "Returned"
-                ? "button-style"
-                : "button-disabled button-style"
+              formHeader.IVStatus === "Cancelled" || !formHeader.PkngDcNo
+                ? "button-style button-disabled"
+                : "button-style"
             }
           >
             Print DC
@@ -1091,13 +1067,11 @@ function OutwordMaterialIssueVocher(props) {
                         }}
                         disabled={
                           formHeader.IVStatus === "Cancelled" ||
-                          formHeader.IVStatus === "Returned"
-                            ? true
-                            : false
+                          formHeader.PkngDcNo
                         }
                         className={
                           formHeader.IVStatus === "Cancelled" ||
-                          formHeader.IVStatus === "Returned"
+                          formHeader.PkngDcNo
                             ? "input-disabled"
                             : ""
                         }
@@ -1111,13 +1085,11 @@ function OutwordMaterialIssueVocher(props) {
                           id=""
                           disabled={
                             formHeader.IVStatus === "Cancelled" ||
-                            formHeader.IVStatus === "Returned"
-                              ? true
-                              : false
+                            formHeader.PkngDcNo
                           }
                           className={
                             formHeader.IVStatus === "Cancelled" ||
-                            formHeader.IVStatus === "Returned"
+                            formHeader.PkngDcNo
                               ? "input-disabled"
                               : ""
                           }
@@ -1160,13 +1132,11 @@ function OutwordMaterialIssueVocher(props) {
                           checked
                           disabled={
                             formHeader.IVStatus === "Cancelled" ||
-                            formHeader.IVStatus === "Returned"
-                              ? true
-                              : false
+                            formHeader.PkngDcNo
                           }
                           className={
                             formHeader.IVStatus === "Cancelled" ||
-                            formHeader.IVStatus === "Returned"
+                            formHeader.PkngDcNo
                               ? "input-disabled"
                               : ""
                           }
