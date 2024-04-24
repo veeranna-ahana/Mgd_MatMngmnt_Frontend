@@ -489,9 +489,9 @@ function OpenButtonDraftSheetUnit(props) {
     const newArray = materialArray.map((p) =>
       p.id === partUniqueId
         ? {
-          ...p,
-          [name]: value,
-        }
+            ...p,
+            [name]: value,
+          }
         : p
     );
     setMaterialArray(newArray);
@@ -903,7 +903,7 @@ function OpenButtonDraftSheetUnit(props) {
             postRequest(
               endpoints.updateHeaderMaterialReceiptRegister,
               formHeader,
-              (data) => { }
+              (data) => {}
             );
 
             //update material array:
@@ -911,13 +911,13 @@ function OpenButtonDraftSheetUnit(props) {
               //p.id === "d28d67b2-6c32-4aae-a7b6-74dc985a3cff"
               p.id === id
                 ? {
-                  ...p,
-                  [name]: formattedValue,
-                  qty: inputPart.qty,
-                  // inspected: inputPart.inspected,
-                  inspected: inputPart.inspected == true ? 1 : 0,
-                  totalWeightCalculated: inputPart.totalWeightCalculated,
-                }
+                    ...p,
+                    [name]: formattedValue,
+                    qty: inputPart.qty,
+                    // inspected: inputPart.inspected,
+                    inspected: inputPart.inspected == true ? 1 : 0,
+                    totalWeightCalculated: inputPart.totalWeightCalculated,
+                  }
                 : p
             );
             setMaterialArray(newArray);
@@ -959,13 +959,13 @@ function OpenButtonDraftSheetUnit(props) {
       //p.id === "d28d67b2-6c32-4aae-a7b6-74dc985a3cff"
       p.id === id
         ? {
-          ...p,
-          [name]: formattedValue,
-          qty: inputPart.qty,
-          // inspected: inputPart.inspected == "on" ? 1 : 0,
-          inspected: inputPart.inspected == true ? 1 : 0,
-          // inspected: inputPart.inspected,
-        }
+            ...p,
+            [name]: formattedValue,
+            qty: inputPart.qty,
+            // inspected: inputPart.inspected == "on" ? 1 : 0,
+            inspected: inputPart.inspected == true ? 1 : 0,
+            // inspected: inputPart.inspected,
+          }
         : p
     );
     setMaterialArray(newArray);
@@ -1604,8 +1604,6 @@ function OpenButtonDraftSheetUnit(props) {
                 readOnly
               />
             </div>
-
-
           </div>
 
           <div className="d-flex col-md-2">
@@ -1613,13 +1611,17 @@ function OpenButtonDraftSheetUnit(props) {
               <label className="form-label">RV No</label>
             </div>
             <div className="col-md-8">
-              <input className="input-disabled mt-1"
-                type="text" name="rvNo" value={formHeader.rvNo} readOnly />
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="rvNo"
+                value={formHeader.rvNo}
+                readOnly
+              />
             </div>
           </div>
 
           <div className="d-flex col-md-2">
-
             <div className="col-md-4">
               <label className="form-label">RV Date</label>
             </div>
@@ -1632,16 +1634,13 @@ function OpenButtonDraftSheetUnit(props) {
                 readOnly
               />
             </div>
-
           </div>
 
-
           <div className="d-flex col-md-2">
-            <div className="col-md-3" >
+            <div className="col-md-3">
               <label className="form-label">Status</label>
             </div>
             <div className="col-md-7">
-
               <input
                 className="input-disabled mt-1"
                 type="text"
@@ -1649,96 +1648,85 @@ function OpenButtonDraftSheetUnit(props) {
                 value={formHeader.status}
                 readOnly
               />
-
             </div>
           </div>
 
-          
           <div className="d-flex col-md-2">
-          <div className="col-md-9">
+            <div className="col-md-9">
               <label className="form-label">Weight</label>
             </div>
             <div className="col-md-8">
-            <input
-             className="input-disabled mt-1"
-              type="number"
-              onKeyDown={blockInvalidChar}
-              min="0"
-              name="weight"
-              value={formHeader.weight}
-              onChange={InputHeaderEvent}
-              disabled={boolVal4}
-            />
+              <input
+                className="input-disabled mt-1"
+                type="number"
+                onKeyDown={blockInvalidChar}
+                min="0"
+                name="weight"
+                value={formHeader.weight}
+                onChange={InputHeaderEvent}
+                disabled={boolVal4}
+              />
             </div>
-            
           </div>
         </div>
         <div className="row">
-          
-           <div className="d-flex col-md-5">
+          <div className="d-flex col-md-5">
             <div className="col-md-2">
-            <label className="form-label">Customer</label>
+              <label className="form-label">Customer</label>
             </div>
-           
-           <div className="col-md-10">
-           <select
-              className="ip-select mt-1"
-              name="customer"
-              //onChange={changeCustomer}
-              disabled={true}
-            >
-              <option value={formHeader.customer} disabled selected>
-                {formHeader.customerName}
-              </option>
-            </select>
-           </div>
-            
+
+            <div className="col-md-10">
+              <select
+                className="ip-select mt-1"
+                name="customer"
+                //onChange={changeCustomer}
+                disabled={true}
+              >
+                <option value={formHeader.customer} disabled selected>
+                  {formHeader.customerName}
+                </option>
+              </select>
+            </div>
           </div>
 
-          
           <div className="d-flex col-md-4">
             <div className="col-md-2">
-            <label className="form-label">Reference</label>
+              <label className="form-label">Reference</label>
             </div>
-          
-          <div className="col-md-9">
-          <input
-           className="input-disabled mt-1"
-              type="text"
-              name="reference"
-              value={formHeader.reference}
-              onChange={InputHeaderEvent}
-              disabled={boolVal2 && boolVal4}
-            />
+
+            <div className="col-md-9">
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="reference"
+                value={formHeader.reference}
+                onChange={InputHeaderEvent}
+                disabled={boolVal2 && boolVal4}
+              />
+            </div>
           </div>
-            
-          </div>
-         
+
           <div className="d-flex col-md-3">
             <div className="col-md-6">
-            <label className="form-label">Calculated Weight</label>
+              <label className="form-label">Calculated Weight</label>
             </div>
-            <div  className="col-md-5">
-            <input
-            className="input-disabled mt-1"
-              type="number"
-              name="calculatedWeight"
-              value={formHeader.calcWeight}
-              // value={calcWeightVal}
-              readOnly
-            />
+            <div className="col-md-5">
+              <input
+                className="input-disabled mt-1"
+                type="number"
+                name="calculatedWeight"
+                value={formHeader.calcWeight}
+                // value={calcWeightVal}
+                readOnly
+              />
             </div>
-           
-           
           </div>
         </div>
 
         <div className="row">
-
-          
-        <div className="col-md-8">
+          <div className="col-md-8">
             <textarea
-            className="input-disabled mt-1"
+              className="input-disabled mt-1"
               id="exampleFormControlTextarea1"
               rows="4"
               style={{ width: "700px", height: "40px" }}
@@ -1782,7 +1770,6 @@ function OpenButtonDraftSheetUnit(props) {
               Close
             </button>
           </div>
-          
         </div>
         <div className="row">
           <div className="col-md-8 col-sm-12">
@@ -1855,7 +1842,12 @@ function OpenButtonDraftSheetUnit(props) {
                   {/* <p className="form-title-deco mt-2">
                     <h5>Serial Details</h5>
                   </p> */}
-                   <label className="form-label" style={{ textDecoration: 'underline' }}>Serial Details</label>
+                  <label
+                    className="form-label"
+                    style={{ textDecoration: "underline" }}
+                  >
+                    Serial Details
+                  </label>
                   <div className="row">
                     <div className="col-md-4">
                       <label className="form-label">Mtrl Code</label>
@@ -1943,7 +1935,7 @@ function OpenButtonDraftSheetUnit(props) {
                         </div>
                         <div className="col-md-6">
                           <input
-                             className="input-disabled mt-1"
+                            className="input-disabled mt-1"
                             name="dynamicPara1"
                             disabled
                             min="0"
@@ -1959,7 +1951,7 @@ function OpenButtonDraftSheetUnit(props) {
                         </div>
                         <div className="col-md-6">
                           <input
-                          className="input-disabled mt-1"
+                            className="input-disabled mt-1"
                             name="dynamicPara2"
                             min="0"
                             disabled
@@ -1975,7 +1967,7 @@ function OpenButtonDraftSheetUnit(props) {
                         </div>
                         <div className="col-md-6 ">
                           <input
-                              className="input-disabled mt-1"
+                            className="input-disabled mt-1"
                             name="dynamicPara3"
                             min="0"
                             disabled
@@ -2252,7 +2244,7 @@ function OpenButtonDraftSheetUnit(props) {
                     </div>
                     <div className="col-md-4 col-sm-12">
                       <input
-                          className="input-disabled mt-1"
+                        className="input-disabled mt-1"
                         type="number"
                         name="qty"
                         // value={(inputPart.qty = Math.floor(inputPart.qty))}
@@ -2294,7 +2286,7 @@ function OpenButtonDraftSheetUnit(props) {
                     </div>
                     <div className="col-md-4 col-sm-12">
                       <input
-                         className="input-disabled mt-1"
+                        className="input-disabled mt-1"
                         type="number"
                         name="accepted"
                         onKeyDown={blockInvalidQtyChar}
@@ -2342,7 +2334,7 @@ function OpenButtonDraftSheetUnit(props) {
                     </div>
                     <div className="col-md-6">
                       <input
-                         className="input-disabled mt-1"
+                        className="input-disabled mt-1"
                         name="totalWeightCalculated"
                         value={inputPart.totalWeightCalculated}
                         disabled={true}
