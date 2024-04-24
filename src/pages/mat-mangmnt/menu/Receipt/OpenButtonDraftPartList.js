@@ -693,35 +693,35 @@ function OpenButtonDraftPartList() {
         <div className="row">
           <div className="d-flex col-md-3">
             <div className="col-md-4">
-            <label className="form-label">Receipt Date</label>
+              <label className="form-label">Receipt Date</label>
             </div>
             <div className="col-md-6">
-            <input
-            className="input-disabled mt-1"
-              type="text"
-              name="receiptDate"
-              value={formHeader.receiptDate}
-              readOnly
-            />
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="receiptDate"
+                value={formHeader.receiptDate}
+                readOnly
+              />
             </div>
-            
-           
           </div>
 
-
           <div className="d-flex col-md-2">
-          <div className="col-md-4">
+            <div className="col-md-4">
               <label className="form-label">RV No</label>
             </div>
             <div className="col-md-8">
-              <input className="input-disabled mt-1"
-                type="text" name="rvNo" value={formHeader.rvNo} readOnly />
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="rvNo"
+                value={formHeader.rvNo}
+                readOnly
+              />
             </div>
           </div>
 
-
           <div className="d-flex col-md-2">
-
             <div className="col-md-4">
               <label className="form-label">RV Date</label>
             </div>
@@ -734,115 +734,100 @@ function OpenButtonDraftPartList() {
                 readOnly
               />
             </div>
-
           </div>
 
-
           <div className="d-flex col-md-2">
-            <div className="col-md-3" >
+            <div className="col-md-3">
               <label className="form-label">Status</label>
             </div>
             <div className="col-md-7">
-
-              <input 
-              className="input-disabled mt-1"
+              <input
+                className="input-disabled mt-1"
                 type="text"
                 name="status"
                 value={formHeader.status}
                 readOnly
               />
-
             </div>
           </div>
 
-
           <div className="d-flex col-md-2">
-          <div className="col-md-9">
+            <div className="col-md-9">
               <label className="form-label">Weight</label>
             </div>
             <div className="col-md-8">
-            <input
-             className="input-disabled mt-1"
-              type="number"
-              onKeyDown={blockInvalidChar}
-              min="0"
-              name="weight"
-              value={formHeader.weight}
-              onChange={InputHeaderEvent}
-              disabled={boolVal4}
-            />
+              <input
+                className="input-disabled mt-1"
+                type="number"
+                onKeyDown={blockInvalidChar}
+                min="0"
+                name="weight"
+                value={formHeader.weight}
+                onChange={InputHeaderEvent}
+                disabled={boolVal4}
+              />
             </div>
-            
           </div>
-
-
         </div>
 
         <div className="row">
-
           <div className="d-flex col-md-5">
             <div className="col-md-2">
-            <label className="form-label">Customer</label>
+              <label className="form-label">Customer</label>
             </div>
-           
-           <div className="col-md-10">
-           <select
-              className="ip-select mt-1"
-              name="customer"
-              //onChange={changeCustomer}
-              disabled={boolVal1}
-            >
-              <option value={formHeader.customer} disabled selected>
-                {formHeader.customerName}
-              </option>
-            </select>
-           </div>
-            
+
+            <div className="col-md-10">
+              <select
+                className="ip-select mt-1"
+                name="customer"
+                //onChange={changeCustomer}
+                disabled={boolVal1}
+              >
+                <option value={formHeader.customer} disabled selected>
+                  {formHeader.customerName}
+                </option>
+              </select>
+            </div>
           </div>
 
           <div className="d-flex col-md-4">
             <div className="col-md-2">
-            <label className="form-label">Reference</label>
+              <label className="form-label">Reference</label>
             </div>
-          
-          <div className="col-md-9">
-          <input
-           className="input-disabled mt-1"
-              type="text"
-              name="reference"
-              value={formHeader.reference}
-              onChange={InputHeaderEvent}
-              disabled={boolVal2 && boolVal4}
-            />
+
+            <div className="col-md-9">
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="reference"
+                value={formHeader.reference}
+                onChange={InputHeaderEvent}
+                disabled={boolVal2 && boolVal4}
+              />
+            </div>
           </div>
-            
-          </div>
-          
+
           <div className="d-flex col-md-3">
             <div className="col-md-6">
-            <label className="form-label">Calculated Weight</label>
+              <label className="form-label">Calculated Weight</label>
             </div>
-            <div  className="col-md-5">
-            <input
-            className="input-disabled mt-1"
-              type="number"
-              name="calculatedWeight"
-              value={formHeader.calcWeight}
-              // value={calcWeightVal}
-              readOnly
-            />
+            <div className="col-md-5">
+              <input
+                className="input-disabled mt-1"
+                type="number"
+                name="calculatedWeight"
+                value={formHeader.calcWeight}
+                // value={calcWeightVal}
+                readOnly
+              />
             </div>
-           
-           
           </div>
         </div>
 
         <div className="row ">
-
-
-        <div className="col-md-8">
+          <div className="col-md-8">
             <textarea
-            className="input-disabled mt-1"
+              className="input-disabled mt-1"
               id="exampleFormControlTextarea1"
               rows="4"
               style={{ width: "700px", height: "40px" }}
@@ -885,7 +870,6 @@ function OpenButtonDraftPartList() {
               Close
             </button>
           </div>
-          
         </div>
       </div>
       <div className="row">
@@ -908,8 +892,7 @@ function OpenButtonDraftPartList() {
         <div className="col-md-4 col-sm-12 ">
           <div className="ip-box form-bg ">
             <div className="row  mt-2">
-
-<div className="col-md-4"></div>
+              <div className="col-md-4"></div>
               <button
                 className="button-style "
                 style={{ width: "75px" }}
@@ -920,7 +903,6 @@ function OpenButtonDraftPartList() {
                 Add New
               </button>
 
-              
               <button
                 className="button-style "
                 style={{ width: "75px" }}
@@ -929,14 +911,18 @@ function OpenButtonDraftPartList() {
               >
                 Delete
               </button>
-          
             </div>
             <div className="row">
               {/* <label className="form-label">Srl Details</label> */}
               {/* <p className="form-title-deco mt-1">
                 <h5>Serial Details</h5>
               </p> */}
-               <label className="form-label" style={{ textDecoration: 'underline' }}>Serial Details</label>
+              <label
+                className="form-label"
+                style={{ textDecoration: "underline" }}
+              >
+                Serial Details
+              </label>
               <div className="col-md-4">
                 <label className="form-label mt-2">Part ID</label>
                 {/* </div>
@@ -962,7 +948,7 @@ function OpenButtonDraftPartList() {
               </div> */}
               <div className="col-md-8">
                 <Typeahead
-                   className="input-disabled mt-1"
+                  className="input-disabled mt-1"
                   id="partId"
                   labelKey="PartId"
                   options={mtrlDetails}
@@ -979,7 +965,7 @@ function OpenButtonDraftPartList() {
               </div>
               <div className="col-md-8 ">
                 <input
-                   className="input-disabled mt-1"
+                  className="input-disabled mt-1"
                   type="number"
                   name="unitWeight"
                   value={inputPart.unitWeight}
@@ -1033,7 +1019,7 @@ function OpenButtonDraftPartList() {
               </div>
               <div className="col-md-8 ">
                 <input
-                   className="input-disabled mt-1"
+                  className="input-disabled mt-1"
                   type="number"
                   // value={inputPart.qtyReceived - inputPart.qtyAccepted}
                   value={
@@ -1046,8 +1032,6 @@ function OpenButtonDraftPartList() {
               </div>
               <div className="col-md-8 "></div>
             </div>
-
-           
           </div>
         </div>
       </div>
