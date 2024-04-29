@@ -181,9 +181,9 @@ function PNew() {
     const newArray = partArray.map((p) =>
       p.id === partUniqueId
         ? {
-          ...p,
-          partId: selected.length > 0 ? selected[0].PartId : "",
-        }
+            ...p,
+            partId: selected.length > 0 ? selected[0].PartId : "",
+          }
         : p
     );
 
@@ -531,7 +531,7 @@ function PNew() {
       toast.error("QtyAccepted should be less than or equal to QtyReceived");
     } else {
       if (saveUpdateCount === 0) {
-        formHeader.receiptDate = formatDate(new Date(), 4);
+        formHeader.receiptDate = formatDate(new Date(), 10);
         formHeader.rvDate = currDate;
         setFormHeader(formHeader);
         await delay(500);
@@ -716,12 +716,12 @@ function PNew() {
         <h4 className="title">Customer Parts Receipt Voucher</h4>
 
         <div className="row">
-          <div className="d-flex col-md-2">
-            <div className="col-md-6">
+          <div className="d-flex col-md-3">
+            <div className="col-md-4">
               <label className="form-label ">Receipt Date</label>
             </div>
 
-            <div className="col-md-6">
+            <div className="col-md-8">
               <input
                 className="input-disabled mt-1"
                 type="text"
@@ -730,22 +730,23 @@ function PNew() {
                 readOnly
               />
             </div>
-
           </div>
           <div className="d-flex col-md-2">
             <div className="col-md-4">
               <label className="form-label">RV No</label>
             </div>
             <div className="col-md-8">
-              <input className="input-disabled mt-1"
-                type="text" name="rvNo" value={formHeader.rvNo} readOnly />
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="rvNo"
+                value={formHeader.rvNo}
+                readOnly
+              />
             </div>
-
-
           </div>
 
           <div className="d-flex col-md-2">
-
             <div className="col-md-4">
               <label className="form-label">RV Date</label>
             </div>
@@ -758,27 +759,25 @@ function PNew() {
                 readOnly
               />
             </div>
-
           </div>
 
-          <div className="d-flex col-md-4">
-            <div className="col-md-4" >
+          <div className="d-flex col-md-2">
+            <div className="col-md-4">
               <label className="form-label">Status</label>
             </div>
             <div className="col-md-8">
-
-              <input className="input-disabled mt-1"
+              <input
+                className="input-disabled mt-1"
                 type="text"
                 name="status"
                 value={formHeader.status}
                 readOnly
               />
-
             </div>
           </div>
 
           <div className="d-flex col-md-2">
-            <div className="col-md-4">
+            <div className="col-md-9">
               <label className="form-label">Weight</label>
             </div>
             <div className="col-md-8">
@@ -795,18 +794,14 @@ function PNew() {
               />
             </div>
           </div>
-
-
         </div>
         <div className="row">
-
-          <div className="d-flex col-md-4">
-
+          <div className="d-flex col-md-5">
             <div className="col-md-2">
               <label className="form-label">Customer</label>
             </div>
 
-            <div className="col-md-10  mt-2">
+            <div className="col-md-10 mt-2">
               <Typeahead
                 id="basic-example"
                 options={custdata}
@@ -829,11 +824,11 @@ function PNew() {
             />
           </div> */}
 
-          <div className="d-flex col-md-2" style={{gap:'5px'}}>
-            <div className="col-md-4">
+          <div className="d-flex col-md-4">
+            <div className="col-md-2">
               <label className="form-label">Reference</label>
             </div>
-            <div className="col-md-8">
+            <div className="col-md-9">
               <input
                 className="input-disabled mt-1"
                 type="text"
@@ -845,13 +840,12 @@ function PNew() {
             </div>
           </div>
 
-
-          <div className="d-flex col-md-4">
-            <div className="col-md-4">
+          <div className="d-flex col-md-3">
+            <div className="col-md-6">
               <label className="form-label">Calculated Weight</label>
             </div>
 
-            <div className="col-md-8">
+            <div className="col-md-5">
               <input
                 className="input-disabled mt-1"
                 type="number"
@@ -861,12 +855,9 @@ function PNew() {
               />
             </div>
           </div>
-
         </div>
 
-
         <div className="row mt-2">
-
           <div className="col-md-8  ">
             <label className="form-label"></label>
             <textarea
@@ -884,14 +875,12 @@ function PNew() {
             <button
               className="button-style"
               onClick={saveButtonState}
-
               disabled={boolVal4}
             >
               Save
             </button>
             <button
               className="button-style"
-
               disabled={boolVal1 || boolVal4}
               onClick={allotRVButtonState}
             >
@@ -914,15 +903,11 @@ function PNew() {
               Close
             </button>
           </div>
-
-
-
-
         </div>
       </div>
       <div className="row">
         <div
-          style={{ height: "240px", overflowY: "scroll" }}
+          style={{ height: "250px", overflowY: "scroll" }}
           className="col-md-8 col-sm-12"
         >
           <BootstrapTable
@@ -938,16 +923,13 @@ function PNew() {
         </div>
 
         <div className="col-md-4 ">
-          <div className="ip-box form-bg">
-
+          <div className="ip-box form-bg" style={{ height: "250px" }}>
             <div className="row col-md-12 ">
               <div className="col-md-4"></div>
-              <div
-                className="col-md-4 mt-1 "
-              >
+              <div className="col-md-4 mt-1 ">
                 <button
                   className="button-style  "
-                  style={{ width: '75px' }}
+                  style={{ width: "75px" }}
                   onClick={addNewPart}
                   disabled={boolVal1 || boolVal4}
                 >
@@ -967,13 +949,17 @@ function PNew() {
               </div>
             </div>
 
-
             <div className="row">
               {/* <h5>Srl Details</h5> */}
               {/* <p className="form-title-deco mt-1">
                 <h5>Serial Details</h5>
               </p> */}
-              <label className="form-label" style={{ textDecoration: 'underline', fontSize:'14px' }}>Serial Details</label>
+              <label
+                className="form-label"
+                style={{ textDecoration: "underline" }}
+              >
+                Serial Details
+              </label>
               <div className="col-md-4 mt-1">
                 <label className="form-label">Part ID</label>
               </div>
@@ -999,6 +985,7 @@ function PNew() {
               <div className="col-md-8">
                 <Typeahead
                   className="in-field"
+                  style={{ height: "25px" }}
                   id="partId"
                   labelKey="PartId"
                   options={mtrlDetails}
@@ -1062,7 +1049,6 @@ function PNew() {
                 />
               </div>
             </div>
-
 
             <div className="row">
               <div className="col-md-4 ">

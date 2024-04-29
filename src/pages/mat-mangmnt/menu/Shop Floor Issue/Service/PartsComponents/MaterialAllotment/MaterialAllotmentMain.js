@@ -764,7 +764,7 @@ function MaterialAllotmentMain() {
         </div>
       </div>
 
-      <div style={{ height: "250px", overflowY: "scroll", marginTop: "10px" }}>
+      <div style={{ height: "220px", overflowY: "scroll" }}>
         {/* <BootstrapTable
           keyField="id"
           columns={columns1}
@@ -814,7 +814,7 @@ function MaterialAllotmentMain() {
         </Table>
       </div>
 
-      <div className="row mt-4">
+      <div className="row mt-2">
         <div className="col-md-8 justify-content-center mb-3">
           <button
             className="button-style"
@@ -827,7 +827,7 @@ function MaterialAllotmentMain() {
         </div>
 
         <div className="col-md-7">
-          <div style={{ height: "300px", overflowY: "scroll" }}>
+          <div style={{ height: "250px", overflowY: "scroll" }}>
             <Table className="table custom-table" striped bordered hover>
               <thead className="header-class">
                 <tr>
@@ -970,7 +970,7 @@ function MaterialAllotmentMain() {
         </div>
 
         <div className="col-md-5">
-          <div className="ip-box form-bg mb-4">
+          <div className="ip-box form-bg mb-4" style={{ height: "250px" }}>
             <div className="row">
               <div className="col-md-4 mt-2 ">
                 <label className="form-label">RV No</label>

@@ -141,7 +141,7 @@ function ShopIssueIVList(props) {
           </div>
 
           <div className="col-md-5 col-sm-12">
-            <div className="ip-box form-bg">
+            <div className="ip-box form-bg" style={{ height: "420px" }}>
               <div className="row justify-content-center mt-2">
                 <button
                   onClick={openButton}
@@ -166,7 +166,7 @@ function ShopIssueIVList(props) {
                 </div>
                 <div className="col-md-8">
                   <input
-                     className="input-disabled mt-3"
+                    className="input-disabled mt-3"
                     disabled
                     value={rowData.Cust_Name}
                   />
@@ -178,7 +178,11 @@ function ShopIssueIVList(props) {
                   <label className="form-label">Issue Vr No</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input  className="input-disabled mt-3" disabled value={rowData.IV_No} />
+                  <input
+                    className="input-disabled mt-3"
+                    disabled
+                    value={rowData.IV_No}
+                  />
                 </div>
               </div>
               <div className="row">
@@ -187,7 +191,7 @@ function ShopIssueIVList(props) {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                     className="input-disabled mt-3"
+                    className="input-disabled mt-3"
                     disabled
                     value={rowData.Issue_date}
                   />
@@ -200,7 +204,7 @@ function ShopIssueIVList(props) {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                   className="input-disabled mt-3"
+                    className="input-disabled mt-3"
                     disabled
                     value={rowData.NC_ProgramNo}
                   />
@@ -217,7 +221,7 @@ function ShopIssueIVList(props) {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                     className="input-disabled mt-3"
+                    className="input-disabled mt-3"
                     disabled
                     value={rowData.AssyName}
                   />
@@ -243,7 +247,7 @@ function ShopIssueIVList(props) {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                     className="input-disabled mt-3"
+                    className="input-disabled mt-3"
                     disabled
                     value={rowData.Mtrl_Code}
                   />
@@ -255,7 +259,7 @@ function ShopIssueIVList(props) {
                 </div>
                 <div className="col-md-8 ">
                   <input
-                     className="input-disabled mt-3"
+                    className="input-disabled mt-3"
                     disabled
                     value={rowData.QtyIssued}
                   />

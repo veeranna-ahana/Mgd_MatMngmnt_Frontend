@@ -99,7 +99,7 @@ function OpenButtonOpenSheetUnit() {
       location.state.id;
     getRequest(url, (data) => {
       formHeader.rvId = data.RvID;
-      formHeader.receiptDate = formatDate(new Date(data.ReceiptDate), 4);
+      formHeader.receiptDate = formatDate(new Date(data.ReceiptDate), 10);
       formHeader.rvNo = data.RV_No;
       formHeader.rvDate = formatDate(new Date(data.RV_Date), 3);
       formHeader.status = data.RVStatus;
@@ -848,6 +848,7 @@ function OpenButtonOpenSheetUnit() {
             // Sheet
             setPara1Label("Width");
             setPara2Label("Length");
+            setPara3Label("");
             setUnitLabel1("mm");
             setUnitLabel2("mm");
             setSheetRowSelect(true);
@@ -859,6 +860,7 @@ function OpenButtonOpenSheetUnit() {
             // Plate
             setPara1Label("Length");
             setPara2Label("Width");
+            setPara3Label("");
             setUnitLabel1("mm");
             setUnitLabel2("mm");
             setPlateRowSelect(true);
@@ -868,6 +870,8 @@ function OpenButtonOpenSheetUnit() {
 
           if (obj.ShapeID === 3 || obj.ShapeID === 4 || obj.ShapeID === 5) {
             setPara1Label("Length");
+            setPara2Label("");
+            setPara3Label("");
             setUnitLabel1("mm");
             setTubeRowSelect(true);
           } else {
@@ -877,6 +881,8 @@ function OpenButtonOpenSheetUnit() {
           if (obj.ShapeID === 6 || obj.ShapeID === 7) {
             // Titles, Strip
             setPara1Label("");
+            setPara2Label("");
+            setPara3Label("");
             setUnitLabel1("");
             setTilesStripRowSelect(true);
           } else {
@@ -899,6 +905,8 @@ function OpenButtonOpenSheetUnit() {
           if (obj.ShapeID === 9) {
             // Cylinder
             setPara1Label("Volume");
+            setPara2Label("");
+            setPara3Label("");
             setUnitLabel1("CubicMtr");
             setCylinderRowSelect(true);
           } else {
@@ -908,6 +916,8 @@ function OpenButtonOpenSheetUnit() {
           if (obj.ShapeID === 10) {
             // Units
             setPara1Label("Qty");
+            setPara2Label("");
+            setPara3Label("");
             setUnitLabel1("Nos");
             setUnitRowSelect(true);
           } else {
@@ -1063,7 +1073,7 @@ function OpenButtonOpenSheetUnit() {
               className="input-disabled mt-1"
               id="exampleFormControlTextarea1"
               rows="4"
-              style={{ width: "700px", height: "40px" }}
+              style={{ width: "700px", height: "60px" }}
               value={formHeader.address}
               readOnly
             ></textarea>
@@ -1098,7 +1108,7 @@ function OpenButtonOpenSheetUnit() {
         </div>
         <div className="row">
           <div
-            style={{ height: "420px", overflowY: "scroll" }}
+            style={{ height: "380px", overflowY: "scroll" }}
             className="col-md-8 col-sm-12"
           >
             <BootstrapTable
@@ -1120,11 +1130,8 @@ function OpenButtonOpenSheetUnit() {
               <Tables theadData={getHeadings()} tbodyData={data3} />
             </div> 
           </div> */}
-          <div
-            className="col-md-4 col-sm-12"
-            style={{ overflowY: "scroll", height: "420px" }}
-          >
-            <div className="ip-box form-bg">
+          <div className="col-md-4 col-sm-12" style={{ overflowY: "scroll" }}>
+            <div className="ip-box form-bg" style={{ height: "380px" }}>
               {/* <div className="row justify-content-center mt-2">
                 <button
                   className="button-style "
@@ -1158,6 +1165,12 @@ function OpenButtonOpenSheetUnit() {
               </div>
               <div className="row">
                 <div className="ip-box form-bg">
+                  <label
+                    className="form-label"
+                    style={{ textDecoration: "underline" }}
+                  >
+                    Serial Details
+                  </label>
                   {/* <div className="row">
                     <p className="form-title-deco mt-2">
                       <h5>Serial Details</h5>
@@ -1236,12 +1249,6 @@ function OpenButtonOpenSheetUnit() {
                     {/* <p className="form-title-deco mt-2">
                       <h5>Serial Details</h5>
                     </p> */}
-                    <label
-                      className="form-label"
-                      style={{ textDecoration: "underline", fontSize: "14px" }}
-                    >
-                      Serial Details
-                    </label>
 
                     <div className="col-md-4">
                       <label className="form-label">Mtrl Code</label>
@@ -1265,14 +1272,14 @@ function OpenButtonOpenSheetUnit() {
 
                   {sheetRowSelect && (
                     <div>
-                      <div className="row mt-3">
+                      <div className="row mt-1">
                         <div className="col-md-4">
                           <label className="form-label">{para1Label}</label>
                         </div>
                         <div className="col-md-6">
                           <input
                             type="number"
-                            className="input-disabled mt-1"
+                            className="input-disabled mt-2"
                             name="dynamicPara1"
                             value={inputPart.dynamicPara1}
                             disabled
@@ -1306,14 +1313,14 @@ function OpenButtonOpenSheetUnit() {
 
                   {plateRowSelect && (
                     <div>
-                      <div className="row mt-3">
+                      <div className="row mt-1">
                         <div className="col-md-4">
                           <label className="form-label">{para1Label}</label>
                         </div>
                         <div className="col-md-6">
                           <input
                             type="number"
-                            className="input-disabled mt-1"
+                            className="input-disabled mt-2"
                             name="dynamicPara1"
                             value={inputPart.dynamicPara1}
                             disabled
@@ -1347,14 +1354,14 @@ function OpenButtonOpenSheetUnit() {
 
                   {tubeRowSelect && (
                     <div>
-                      <div className="row mt-3">
+                      <div className="row mt-1">
                         <div className="col-md-4">
                           <label className="form-label">{para1Label}</label>
                         </div>
                         <div className="col-md-6">
                           <input
                             type="number"
-                            className="input-disabled mt-1"
+                            className="input-disabled mt-2"
                             name="dynamicPara1"
                             value={inputPart.dynamicPara1}
                             disabled
@@ -1372,14 +1379,14 @@ function OpenButtonOpenSheetUnit() {
 
                   {blockRowSelect && (
                     <div>
-                      <div className="row mt-3">
+                      <div className="row mt-1">
                         <div className="col-md-4">
                           <label className="form-label">{para1Label}</label>
                         </div>
                         <div className="col-md-6">
                           <input
                             type="number"
-                            className="input-disabled mt-1"
+                            className="input-disabled mt-2"
                             name="dynamicPara1"
                             value={inputPart.dynamicPara1}
                             disabled
@@ -1432,14 +1439,14 @@ function OpenButtonOpenSheetUnit() {
 
                   {cylinderRowSelect && (
                     <div>
-                      <div className="row mt-3">
+                      <div className="row mt-1">
                         <div className="col-md-3">
                           <label className="form-label">{para1Label}</label>
                         </div>
                         <div className="col-md-6">
                           <input
                             type="number"
-                            className="input-disabled mt-1"
+                            className="input-disabled mt-2"
                             name="dynamicPara1"
                             value={inputPart.dynamicPara1}
                             disabled
@@ -1455,14 +1462,14 @@ function OpenButtonOpenSheetUnit() {
 
                   {unitRowSelect && (
                     <div>
-                      <div className="row mt-3">
+                      <div className="row mt-1">
                         <div className="col-md-4">
                           <label className="form-label">{para1Label}</label>
                         </div>
                         <div className="col-md-6">
                           <input
                             type="number"
-                            className="input-disabled mt-1"
+                            className="input-disabled mt-2"
                             name="dynamicPara1"
                             value={inputPart.dynamicPara1}
                             disabled
@@ -1476,13 +1483,13 @@ function OpenButtonOpenSheetUnit() {
                     </div>
                   )}
 
-                  <div className="col-md-12  mt-3">
+                  <div className="col-md-12 ">
                     {/* <p className="form-title-deco">
                       <h5>Quantity Details</h5>
                     </p> */}
                     <label
                       className="form-label"
-                      style={{ textDecoration: "underline", fontSize: "14px" }}
+                      style={{ textDecoration: "underline" }}
                     >
                       Quantity Details
                     </label>
@@ -1492,7 +1499,7 @@ function OpenButtonOpenSheetUnit() {
                       </div>
                       <div className="col-md-4 col-sm-12">
                         <input
-                          className="input-disabled mt-1"
+                          className="input-disabled mt-2"
                           disabled={boolVal}
                           value={(inputPart.qty = Math.floor(inputPart.qty))}
                         />
@@ -1524,7 +1531,7 @@ function OpenButtonOpenSheetUnit() {
                       </div>
                       <div className="col-md-4">
                         <input
-                          className="input-disabled mt-1"
+                          className="input-disabled mt-2"
                           disabled={boolVal}
                           value={
                             (inputPart.accepted = Math.floor(
@@ -1600,7 +1607,7 @@ function OpenButtonOpenSheetUnit() {
                   </div>
                 </div>
               </div>
-              <div className="row justify-content-center mt-2 mb-4">
+              {/* <div className="row justify-content-center mt-2 mb-4">
                 <button
                   className="button-style "
                   style={{ width: "75px" }}
@@ -1608,7 +1615,7 @@ function OpenButtonOpenSheetUnit() {
                 >
                   Delete
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

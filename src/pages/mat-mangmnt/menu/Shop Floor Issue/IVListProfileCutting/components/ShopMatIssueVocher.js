@@ -633,7 +633,7 @@ function ShopMatIssueVocher() {
             </div>
           </div>
 
-          <div className="d-flex col-md-3">
+          <div className="d-flex col-md-2">
             <button
               className="button-style col-md-2 "
               onClick={printButton}
@@ -671,7 +671,7 @@ function ShopMatIssueVocher() {
 
       <div
         style={{
-          height: "400px",
+          height: "300px",
           overflowY: "scroll",
           border: "solid #c0c4c2 1px",
           marginTop: "20px",
