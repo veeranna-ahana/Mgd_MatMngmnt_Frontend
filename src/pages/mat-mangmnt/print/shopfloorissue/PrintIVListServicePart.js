@@ -26,6 +26,7 @@ function PrintIVListServicePart({
   setIsPrintModalOpen,
 }) {
   const [PDFData, setPDFData] = useState({});
+  const [logoBase64, setLogoBase64] = useState(null);
   const location = useLocation();
   // console.log(
   //   "Second formheader = ",
@@ -45,6 +46,10 @@ function PrintIVListServicePart({
       setPDFData(res[0]);
     });
   }
+
+  useEffect(() => {
+    fetchPDFData();
+  }, []);
 
   useEffect(() => {
     fetchPDFData();

@@ -147,10 +147,8 @@ export default function SheetsDraftRVList() {
                 onChange={(label) => changeCustomer(label)}
               />
             </div>
-
           </div>
           <div className="col-md-5 text-center">
-
             <button
               className="button-style "
               style={{ width: "55px" }}
@@ -169,7 +167,7 @@ export default function SheetsDraftRVList() {
             </button>
           </div>
           <div
-            style={{ height: "420px", overflowY: "scroll" }}
+            style={{ height: "350px", overflowY: "scroll" }}
             className="col-md-7 col-sm-12"
           >
             {/* <BootstrapTable keyField="id" data={products} columns={columns} /> */}
@@ -188,7 +186,7 @@ export default function SheetsDraftRVList() {
           </div>
 
           <div className="col-md-5 col-sm-12">
-            <div className="ip-box form-bg">
+            <div className="ip-box form-bg" style={{ height: "350px" }}>
               <div className="row">
                 <div className="col-md-4 mt-1 ">
                   <label className="form-label">Receipt Date</label>
@@ -206,7 +204,11 @@ export default function SheetsDraftRVList() {
                   <label className="form-label">RV No</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="input-disabled mt-2" value={data.RV_No} readOnly />
+                  <input
+                    className="input-disabled mt-2"
+                    value={data.RV_No}
+                    readOnly
+                  />
                 </div>
               </div>
               <div className="row">
@@ -214,7 +216,11 @@ export default function SheetsDraftRVList() {
                   <label className="form-label">RV Date</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="input-disabled mt-2" value={data.RV_Date} readOnly />
+                  <input
+                    className="input-disabled mt-2"
+                    value={data.RV_Date}
+                    readOnly
+                  />
                 </div>
               </div>
               <div className="row">
@@ -222,7 +228,11 @@ export default function SheetsDraftRVList() {
                   <label className="form-label">Cust Code</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="input-disabled mt-2" value={data.Cust_Code} readOnly />
+                  <input
+                    className="input-disabled mt-2"
+                    value={data.Cust_Code}
+                    readOnly
+                  />
                 </div>
               </div>
               <div className="row">
@@ -230,7 +240,11 @@ export default function SheetsDraftRVList() {
                   <label className="form-label">Customer</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="input-disabled mt-2" value={data.Customer} readOnly />
+                  <input
+                    className="input-disabled mt-2"
+                    value={data.Customer}
+                    readOnly
+                  />
                 </div>
               </div>
               <div className="row">
@@ -286,11 +300,13 @@ export default function SheetsDraftRVList() {
                   <label className="form-label">RV Status</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="input-disabled mt-2" value={data.RVStatus} readOnly />
+                  <input
+                    className="input-disabled mt-2"
+                    value={data.RVStatus}
+                    readOnly
+                  />
                 </div>
               </div>
-
-             
             </div>
           </div>
         </div>

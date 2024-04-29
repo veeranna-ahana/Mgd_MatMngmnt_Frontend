@@ -18,9 +18,9 @@ function OkModal(props) {
     <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Please Confirm</Modal.Title>
+          <Modal.Title style={{ fontSize: "14px" }}>Please Confirm</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{modalMessage}</Modal.Body>
+        <Modal.Body style={{ fontSize: "12px" }}>{modalMessage}</Modal.Body>
         <Modal.Footer>
           {/* <Button variant="secondary" onClick={handleClose}> */}
           <button

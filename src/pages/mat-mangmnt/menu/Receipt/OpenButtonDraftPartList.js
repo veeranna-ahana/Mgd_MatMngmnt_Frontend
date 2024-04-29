@@ -89,7 +89,7 @@ function OpenButtonDraftPartList() {
       location.state.id;
     getRequest(url, (data) => {
       formHeader.rvId = data.RvID;
-      formHeader.receiptDate = formatDate(new Date(data.ReceiptDate), 4);
+      formHeader.receiptDate = formatDate(new Date(data.ReceiptDate), 10);
       formHeader.rvNo = data.RV_No;
       formHeader.rvDate = formatDate(new Date(data.RV_Date), 3);
       formHeader.status = data.RVStatus;
@@ -824,13 +824,13 @@ function OpenButtonDraftPartList() {
           </div>
         </div>
 
-        <div className="row ">
+        <div className="row mt-2">
           <div className="col-md-8">
             <textarea
               className="input-disabled mt-1"
               id="exampleFormControlTextarea1"
               rows="4"
-              style={{ width: "700px", height: "40px" }}
+              style={{ width: "700px", height: "60px" }}
               value={formHeader.address}
               readOnly
             ></textarea>
@@ -874,7 +874,7 @@ function OpenButtonDraftPartList() {
       </div>
       <div className="row">
         <div
-          style={{ height: "300px", overflowY: "scroll" }}
+          style={{ height: "250px", overflowY: "scroll" }}
           className="col-md-8 col-sm-12"
         >
           <BootstrapTable
@@ -890,7 +890,7 @@ function OpenButtonDraftPartList() {
         </div>
 
         <div className="col-md-4 col-sm-12 ">
-          <div className="ip-box form-bg ">
+          <div className="ip-box form-bg " style={{ height: "250px" }}>
             <div className="row  mt-2">
               <div className="col-md-4"></div>
               <button

@@ -59,14 +59,14 @@ code {
 
 .side-nav-main-title {
   display: none;
-  font-size: 15px !important;
+  font-size: 14px !important;
 }
 .side-nav-main-icon {
   font-size: 1.2rem;
 }
 
 .side-nav:hover .side-nav-main-icon {
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .side-nav-sub-menu {
@@ -224,4 +224,11 @@ code {
 
 .dropdown-item {
   font-size: 12px !important;
+}
+
+button:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
 }

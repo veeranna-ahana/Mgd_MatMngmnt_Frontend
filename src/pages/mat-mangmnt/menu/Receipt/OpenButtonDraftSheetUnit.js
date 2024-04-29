@@ -204,7 +204,7 @@ function OpenButtonDraftSheetUnit(props) {
       location.state.id;
     getRequest(url, (data) => {
       formHeader.rvId = data.RvID;
-      formHeader.receiptDate = formatDate(new Date(data.ReceiptDate), 4);
+      formHeader.receiptDate = formatDate(new Date(data.ReceiptDate), 10);
       formHeader.rvNo = data.RV_No;
       formHeader.rvDate = formatDate(new Date(data.RV_Date), 3);
       formHeader.status = data.RVStatus;
@@ -1010,8 +1010,8 @@ function OpenButtonDraftSheetUnit(props) {
           obj.shapeMtrlId = obj.ShapeMtrlID;
           obj.shapeID = obj.ShapeID;
           obj.dynamicPara1 = obj.DynamicPara1;
-          obj.dynamicPara2 = obj.DynamicPara1;
-          obj.dynamicPara3 = obj.DynamicPara1;
+          obj.dynamicPara2 = obj.DynamicPara2;
+          obj.dynamicPara3 = obj.DynamicPara3;
           obj.qty = obj.Qty;
           obj.inspected = obj.Inspected;
           obj.accepted = obj.Accepted;
@@ -1136,78 +1136,6 @@ function OpenButtonDraftSheetUnit(props) {
     },
   };
 
-  // const addToStock = async () => {
-  //   if (Object.keys(mtrlStock).length === 0) {
-  //     toast.error("Please Select Material");
-  //   } else {
-  //     const newRow = {
-  //       //mtrlStockId :
-  //       mtrlRvId: mtrlStock.Mtrl_Rv_id,
-  //       custCode: mtrlStock.Cust_Code,
-  //       customer: formHeader.customerName,
-  //       custDocuNo: "",
-  //       rvNo: formHeader.rvNo,
-  //       mtrlCode: mtrlStock.Mtrl_Code,
-  //       shapeID: mtrlStock.shapeID,
-  //       shape: "",
-  //       material: mtrlStock.material,
-  //       dynamicPara1: mtrlStock.dynamicPara1,
-  //       dynamicPara2: mtrlStock.dynamicPara2,
-  //       dynamicPara3: mtrlStock.dynamicPara3,
-  //       dynamicPara4: "0.00",
-  //       locked: 0,
-  //       scrap: 0,
-  //       issue: 0,
-  //       weight: formHeader.weight,
-  //       scrapWeight: "0.00",
-  //       srl: mtrlStock.Srl,
-  //       ivNo: "",
-  //       ncProgramNo: "",
-  //       locationNo: mtrlStock.locationNo,
-  //       accepted: mtrlStock.accepted,
-  //     };
-
-  //     postRequest(endpoints.insertMtrlStockList, newRow, async (data) => {
-  //       if (data.affectedRows !== 0) {
-  //         //enable remove stock buttons
-  //         toast.success("Stock Added Successfully");
-
-  //         setBoolValStock("on");
-
-  //         setRmvBtn(true);
-  //         setAddBtn(false);
-  //       } else {
-  //         toast.error("Stock Not Added");
-  //       }
-  //     });
-
-  //     //update updated status = 1
-  //     let updateObj = {
-  //       id: mtrlStock.Mtrl_Rv_id,
-  //       upDated: 1,
-  //     };
-
-  //     console.log("updateObj", updateObj);
-  //     postRequest(
-  //       endpoints.updateMtrlReceiptDetailsUpdated,
-  //       updateObj,
-  //       async (data) => {
-  //         console.log("updated = 1");
-  //       }
-  //     );
-  //     // update checkbox
-  //     for (let i = 0; i < materialArray.length; i++) {
-  //       // if (materialArray[i].mtrlCode == mtrlStock.Mtrl_Code) {
-  //       if (materialArray[i].id === mtrlStock.id) {
-  //         materialArray[i].updated = 1;
-  //       }
-  //     }
-  //     await delay(500);
-  //     setMaterialArray(materialArray);
-  //     setInputPart({ ...inputPart, updated: 1 });
-  //   }
-  // };
-
   const addToStock = async () => {
     if (Object.keys(mtrlStock).length === 0) {
       toast.error("Please Select Material");
@@ -1225,6 +1153,10 @@ function OpenButtonDraftSheetUnit(props) {
         const finalWeight = Math.round(weight * 0.000001 * 100) / 100;
 
         console.log("finalWeight", finalWeight);
+
+        console.log("mtrlStock.dynamicPara1", mtrlStock.dynamicPara1);
+        console.log("mtrlStock.dynamicPara2", mtrlStock.dynamicPara2);
+        console.log("mtrlStock.dynamicPara3", mtrlStock.dynamicPara3);
 
         const newRow = {
           //mtrlStockId :
@@ -1253,6 +1185,8 @@ function OpenButtonDraftSheetUnit(props) {
           accepted: mtrlStock.accepted,
           // qtyAccepted: mtrlStock.qtyAccepted,
         };
+
+        console.log("newRow", newRow);
 
         postRequest(endpoints.insertMtrlStockList, newRow, async (data) => {
           if (data.affectedRows !== 0) {
@@ -1542,6 +1476,8 @@ function OpenButtonDraftSheetUnit(props) {
 
   console.log("Input Part", inputPart);
 
+  console.log("mtrlStock", mtrlStock);
+
   const filterMaterials = () => {
     if (location?.state?.type === "sheets") {
       return mtrlDetails.filter(
@@ -1729,7 +1665,7 @@ function OpenButtonDraftSheetUnit(props) {
               className="input-disabled mt-1"
               id="exampleFormControlTextarea1"
               rows="4"
-              style={{ width: "700px", height: "40px" }}
+              style={{ width: "700px", height: "60px" }}
               value={formHeader.address}
               readOnly
             ></textarea>
@@ -1773,7 +1709,7 @@ function OpenButtonDraftSheetUnit(props) {
         </div>
         <div className="row">
           <div className="col-md-8 col-sm-12">
-            <div style={{ height: "420px", overflowY: "scroll" }}>
+            <div style={{ height: "400px", overflowY: "scroll" }}>
               <BootstrapTable
                 keyField="id"
                 columns={columns}
@@ -1788,14 +1724,14 @@ function OpenButtonDraftSheetUnit(props) {
           </div>
           <div
             className="col-md-4 col-sm-12"
-            style={{ overflowY: "scroll", height: "420px" }}
+            style={{ overflowY: "scroll", height: "400px" }}
           >
             <div className="ip-box form-bg">
-              <div className="row justify-content-center mt-2">
+              <div className="row justify-content-center ">
                 <div className="col-md-6 col-sm-12">
                   <button
                     className="button-style "
-                    style={{ width: "80px" }}
+                    style={{ width: "100px" }}
                     disabled={boolVal4}
                     onClick={addNewMaterial}
                   >
@@ -1805,7 +1741,7 @@ function OpenButtonDraftSheetUnit(props) {
                 <div className="col-md-6 col-sm-12">
                   <button
                     className="button-style "
-                    style={{ width: "95px" }}
+                    style={{ width: "100px" }}
                     disabled={boolVal4}
                     onClick={deleteButtonState}
                   >
@@ -1818,7 +1754,7 @@ function OpenButtonDraftSheetUnit(props) {
                 <div className="col-md-6 col-sm-12">
                   <button
                     className="button-style "
-                    style={{ width: "80px" }}
+                    style={{ width: "100px" }}
                     disabled={rmvBtn || boolVal6}
                     onClick={addToStock}
                   >
@@ -1828,7 +1764,7 @@ function OpenButtonDraftSheetUnit(props) {
                 <div className="col-md-6 col-sm-12">
                   <button
                     className="button-style "
-                    style={{ width: "95px" }}
+                    style={{ width: "100px" }}
                     disabled={addBtn || boolVal6}
                     onClick={removeStock}
                   >
@@ -1929,13 +1865,13 @@ function OpenButtonDraftSheetUnit(props) {
 
                   {materialArray.length === 0 && (
                     <div>
-                      <div className="row mt-3">
+                      <div className="row mt-1">
                         <div className="col-md-4">
                           <label className="form-label">Para 1</label>
                         </div>
                         <div className="col-md-6">
                           <input
-                            className="input-disabled mt-1"
+                            className="input-disabled mt-2"
                             name="dynamicPara1"
                             disabled
                             min="0"
@@ -1982,14 +1918,14 @@ function OpenButtonDraftSheetUnit(props) {
 
                   {sheetRowSelect && materialArray.length !== 0 && (
                     <div>
-                      <div className="row mt-3">
+                      <div className="row mt-1">
                         <div className="col-md-4">
                           <label className="form-label">{para1Label}</label>
                         </div>
                         <div className="col-md-6">
                           <input
                             type="number"
-                            className="input-disabled mt-1"
+                            className="input-disabled mt-2"
                             name="dynamicPara1"
                             value={inputPart.dynamicPara1}
                             disabled={boolVal5 || materialArray.length === 0}
@@ -2031,14 +1967,14 @@ function OpenButtonDraftSheetUnit(props) {
 
                   {plateRowSelect && materialArray.length !== 0 && (
                     <div>
-                      <div className="row mt-3">
+                      <div className="row mt-1">
                         <div className="col-md-4">
                           <label className="form-label">{para1Label}</label>
                         </div>
                         <div className="col-md-6">
                           <input
                             type="number"
-                            className="input-disabled mt-1"
+                            className="input-disabled mt-2"
                             name="dynamicPara1"
                             value={inputPart.dynamicPara1}
                             disabled={boolVal5}
@@ -2080,14 +2016,14 @@ function OpenButtonDraftSheetUnit(props) {
 
                   {tubeRowSelect && materialArray.length !== 0 && (
                     <div>
-                      <div className="row mt-3">
+                      <div className="row mt-1">
                         <div className="col-md-4">
                           <label className="form-label">{para1Label}</label>
                         </div>
                         <div className="col-md-6">
                           <input
                             type="number"
-                            className="input-disabled mt-1"
+                            className="input-disabled mt-2"
                             name="dynamicPara1"
                             value={inputPart.dynamicPara1}
                             disabled={boolVal5}
@@ -2111,14 +2047,14 @@ function OpenButtonDraftSheetUnit(props) {
 
                   {blockRowSelect && materialArray.length !== 0 && (
                     <div>
-                      <div className="row mt-3">
+                      <div className="row mt-1">
                         <div className="col-md-4">
                           <label className="form-label">{para1Label}</label>
                         </div>
                         <div className="col-md-6">
                           <input
                             type="number"
-                            className="input-disabled mt-1"
+                            className="input-disabled mt-2"
                             name="dynamicPara1"
                             value={inputPart.dynamicPara1}
                             disabled={boolVal5}
@@ -2183,14 +2119,14 @@ function OpenButtonDraftSheetUnit(props) {
 
                   {cylinderRowSelect && materialArray.length !== 0 && (
                     <div>
-                      <div className="row mt-3">
+                      <div className="row mt-1">
                         <div className="col-md-4">
                           <label className="form-label">{para1Label}</label>
                         </div>
                         <div className="col-md-6">
                           <input
                             type="number"
-                            className="input-disabled mt-1"
+                            className="input-disabled mt-2"
                             name="dynamicPara1"
                             value={inputPart.dynamicPara1}
                             disabled={boolVal5}
@@ -2210,14 +2146,14 @@ function OpenButtonDraftSheetUnit(props) {
 
                   {unitRowSelect && materialArray.length !== 0 && (
                     <div>
-                      <div className="row mt-3">
+                      <div className="row mt-1">
                         <div className="col-md-4">
                           <label className="form-label">{para1Label}</label>
                         </div>
                         <div className="col-md-6">
                           <input
                             type="number"
-                            className="input-disabled mt-1"
+                            className="input-disabled mt-2"
                             name="dynamicPara1"
                             value={inputPart.dynamicPara1}
                             disabled={boolVal5}
@@ -2235,16 +2171,19 @@ function OpenButtonDraftSheetUnit(props) {
                     </div>
                   )}
 
-                  <p className="form-title-deco">
-                    <h5>Quantity Details</h5>
-                  </p>
+                  <label
+                    className="form-label"
+                    style={{ textDecoration: "underline" }}
+                  >
+                    Quantity Details
+                  </label>
                   <div className="row">
                     <div className="col-md-3 col-sm-12">
                       <label className="form-label mt-1">Received</label>
                     </div>
                     <div className="col-md-4 col-sm-12">
                       <input
-                        className="input-disabled mt-1"
+                        className="input-disabled mt-2"
                         type="number"
                         name="qty"
                         // value={(inputPart.qty = Math.floor(inputPart.qty))}
@@ -2286,7 +2225,7 @@ function OpenButtonDraftSheetUnit(props) {
                     </div>
                     <div className="col-md-4 col-sm-12">
                       <input
-                        className="input-disabled mt-1"
+                        className="input-disabled mt-2"
                         type="number"
                         name="accepted"
                         onKeyDown={blockInvalidQtyChar}
@@ -2366,6 +2305,7 @@ function OpenButtonDraftSheetUnit(props) {
                       <select
                         // className="ip-select dropdown-field"
                         className="input-disabled mt-1"
+                        style={{ width: "140px" }}
                         min="0"
                         onChange={(e) => {
                           changeMaterialHandle(e, inputPart.id);
