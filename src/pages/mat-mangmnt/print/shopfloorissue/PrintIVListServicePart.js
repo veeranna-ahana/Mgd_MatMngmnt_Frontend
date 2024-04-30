@@ -51,10 +51,6 @@ function PrintIVListServicePart({
     fetchPDFData();
   }, []);
 
-  useEffect(() => {
-    fetchPDFData();
-  }, []);
-
   return (
     <Modal show={isOpen} onHide={handleClose} fullscreen>
       <Modal.Header closeButton>
