@@ -12,7 +12,26 @@ import { formatDate } from "../../../../utils";
 import MLLogo from "../../../../../src/ML-LOGO.png";
 
 //function PrintMaterialDCTable() {
+
+let headerFontSize = "13px";
+let subheaderFontsize = "11px";
+let fontSize = "9px";
 const styles = StyleSheet.create({
+  pageStyling: {
+    padding: "2%",
+    // paddingTop: "3%",
+    fontSize: fontSize,
+    fontFamily: "Helvetica",
+  },
+  globalPadding: { padding: "0.6%" },
+  footerRowPadding: { padding: "3px" },
+  // globalPadding: { padding: "0.6%" },
+  fontBold: {
+    //   fontWeight: "bold",
+    fontSize: fontSize,
+    fontFamily: "Helvetica-Bold",
+  },
+
   insideBox: { borderBottom: "1px", padding: "0.6%" },
   page: {
     fontSize: 11,
@@ -97,7 +116,7 @@ const PrintReportFullStockListTable = ({
   fullStockScrapTable,
 }) => (
   <Document>
-    <Page size="A4" style={{ padding: "3%", fontSize: "11" }}>
+    <Page size="A4" style={{ ...styles.pageStyling }}>
       {/* <View>
         <Text style={{ padding: "1%" }}></Text>
       </View> */}
@@ -118,10 +137,20 @@ const PrintReportFullStockListTable = ({
               alignItems: "center",
             }}
           >
-            <Text style={{ fontWeight: "700" }}>
+            <Text
+              style={{
+                borderBottom: "1px",
+                ...styles.fontBold,
+                fontSize: headerFontSize,
+              }}
+            >
+              Material Stock List as On : {formatDate(new Date(), 7)}
+            </Text>
+
+            <Text style={{ ...styles.fontBold, fontSize: subheaderFontsize }}>
               Magod Laser Machining Pvt. Ltd.
             </Text>
-            <Text style={{ fontWeight: "700" }}>
+            <Text style={{ ...styles.fontBold }}>
               GSTIN: 29AABCM1970H1ZE, CIN: U28900KA1995PTC018437
             </Text>
             <Text>
@@ -132,7 +161,6 @@ const PrintReportFullStockListTable = ({
               +91-80-42291005, +91-8110-414313, info@magodlaser.in,
               https://www.magodlaser.in/
             </Text>
-            <Text>Material Stock List as On : {formatDate(new Date(), 7)}</Text>
           </View>
           <Text style={{ padding: "3%" }}></Text>
         </View>
@@ -140,9 +168,11 @@ const PrintReportFullStockListTable = ({
         <View style={{ border: "1px" }}>
           {/* Cust */}
           <View style={styles.insideBox}>
-            <Text style={{ fontWeight: "bold" }}>Customer Name:</Text>
+            <Text style={{ ...styles.fontBold }}>Customer Name:</Text>
             <View style={{ paddingLeft: "1%" }}>
-              <Text style={styles.title1}>{customerDetails.customerName}</Text>
+              <Text style={{ ...styles.title1, ...styles.fontBold }}>
+                {customerDetails.customerName}
+              </Text>
               <Text style={styles.title1}>{customerDetails.address}</Text>
               <Text style={styles.title1}>{customerDetails.city}</Text>
             </View>
@@ -150,7 +180,9 @@ const PrintReportFullStockListTable = ({
 
           {/* material stock */}
           <View style={styles.insideBox}>
-            <Text style={styles.title1}>Material Stock Details</Text>
+            <Text style={{ ...styles.title1, ...styles.fontBold }}>
+              Material Stock Details
+            </Text>
 
             {/*  */}
 
@@ -158,7 +190,9 @@ const PrintReportFullStockListTable = ({
               return (
                 <>
                   <View style={{ ...styles.insideBox }}>
-                    <Text style={styles.title1}>{item.material}</Text>
+                    <Text style={{ ...styles.title1, ...styles.fontBold }}>
+                      {item.material}
+                    </Text>
                     <View
                       style={{
                         ...styles.insideBox,
@@ -167,15 +201,24 @@ const PrintReportFullStockListTable = ({
                         paddingTop: "0%",
                       }}
                     >
-                      <Text style={styles.material}>Material</Text>
-                      <Text style={styles.para}>Width</Text>
-                      <Text style={styles.para}>Length</Text>
-                      <Text style={styles.para}>Qty</Text>
-                      <Text style={styles.para}>Weight</Text>
-                      <Text style={styles.para}>Status</Text>
-                      {/* <Text style={styles.line1}>
-                    _________________________________________________________________________________________
-                  </Text> */}
+                      <Text style={{ ...styles.material, ...styles.fontBold }}>
+                        Material
+                      </Text>
+                      <Text style={{ ...styles.para, ...styles.fontBold }}>
+                        Width
+                      </Text>
+                      <Text style={{ ...styles.para, ...styles.fontBold }}>
+                        Length
+                      </Text>
+                      <Text style={{ ...styles.para, ...styles.fontBold }}>
+                        Qty
+                      </Text>
+                      <Text style={{ ...styles.para, ...styles.fontBold }}>
+                        Weight
+                      </Text>
+                      <Text style={{ ...styles.para, ...styles.fontBold }}>
+                        Status
+                      </Text>
                     </View>
 
                     <View
@@ -222,12 +265,14 @@ const PrintReportFullStockListTable = ({
                       }}
                     >
                       <Text style={styles.emptyblock1}></Text>
-                      <Text style={styles.totalFinal}>
+                      <Text
+                        style={{ ...styles.totalFinal, ...styles.fontBold }}
+                      >
                         Total Quantity and Weight :
                       </Text>
                       <Text style={styles.qtyFinal}>{item.totqty}</Text>
                       <Text style={styles.weightFinal}>
-                        {item.totwt.toFixed(2)}
+                        {item.totwt.toFixed(3)}
                       </Text>
                       {/* <Text style={styles.line1}>
                       _________________________________________________________________________________________
