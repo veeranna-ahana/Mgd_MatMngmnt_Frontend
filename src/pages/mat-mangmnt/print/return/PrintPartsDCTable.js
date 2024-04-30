@@ -175,7 +175,7 @@ export default function PrintPartsDCTable(props) {
                   >
                     <View style={{ borderBottom: "1px" }}>
                       <Text style={{ ...styles.fontBold }}>
-                        Material / Scarp Sheets Return Challan
+                        Material / Scrap Sheets Return Challan
                       </Text>
                     </View>
                     <Text style={{ ...styles.fontBold }}>
@@ -549,7 +549,7 @@ export default function PrintPartsDCTable(props) {
 //               >
 //                 <View style={{ borderBottom: "1px" }}>
 //                   <Text style={{ ...styles.fontBold }}>
-//                     Material / Scarp Sheets Return Challan
+//                     Material / Scrap Sheets Return Challan
 //                   </Text>
 //                 </View>
 //                 <Text style={{ ...styles.fontBold }}>
