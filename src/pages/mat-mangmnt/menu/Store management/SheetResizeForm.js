@@ -208,9 +208,9 @@ function SheetResizeForm() {
         <div className="row">
           <div className="d-flex col-md-10">
             <div className="col-md-1">
-            <label className="form-label">Customer</label>
+              <label className="form-label">Customer</label>
             </div>
-           
+
             {/* <select
             className="ip-select"
             name="customer"
@@ -226,21 +226,19 @@ function SheetResizeForm() {
               </option>
             ))}
           </select> */}
-          <div className='col-md-4 mt-2'>
-          <Typeahead
-              id="basic-example"
-              name="customer"
-              options={custdata}
-              placeholder="Select Customer"
-              onChange={(label) => {
-                if (label.length !== 0) {
-                  changeCustomer(label[0].Cust_Code);
-                }
-              }}
-            />
-          </div>
-
-           
+            <div className="col-md-4 mt-2">
+              <Typeahead
+                id="basic-example"
+                name="customer"
+                options={custdata}
+                placeholder="Select Customer"
+                onChange={(label) => {
+                  if (label.length !== 0) {
+                    changeCustomer(label[0].Cust_Code);
+                  }
+                }}
+              />
+            </div>
           </div>
           <div className="col-md-1">
             <button
@@ -286,7 +284,7 @@ function SheetResizeForm() {
               condensed
               className="table-data border header-class table-striped"
             >
-              <thead className="text-white">
+              <thead className="tableHeaderBGColor">
                 <tr>
                   <th>Mtrl Stock</th>
                   <th>Mtrl Code</th>
