@@ -204,7 +204,7 @@ export default function ResizeModal(props) {
         // );
 
         if (weightCalculated >= 0) {
-          tableData[i].Weight = weightCalculated.toFixed(2);
+          tableData[i].Weight = weightCalculated.toFixed(3);
         } else {
           tableData[i].Weight = 0.0;
         }
@@ -347,40 +347,16 @@ export default function ResizeModal(props) {
   };
 
   const modalYesNoResponse = (msg) => {
-    // console.log("msg = ", msg);
     if (msg == "yes") {
-      // console.log("selectedTableRows........", location?.state?.selectedTableRows);
-      // console.log("resizeTableData........", tableData);
-      // console.log("location data...........", location.state);
       //insert mtrl stock list
       for (let i = 0; i < props?.selectedTableRows.length; i++) {
         const element0 = props?.selectedTableRows[i];
         let counter = 1;
-
-        // console.log("forrrr111111111..", element0);
         for (let j = 0; j < tableData.length; j++) {
           const element1 = tableData[j];
-          // console.log("forrrr111111111..", element0);
-          // console.log("forrrr222222222222..", element1);
-
-          // console.log("paraaaaaaaaa.......", paraData3);
 
           for (let k = 1; k < parseInt(element1.InStock) + 1; k++) {
-            // console.log(
-            //   `meterial + ${i + 1} ...... quantity + ${
-            //     element1.InStock
-            //   }........ counter number + ${counter}`
-            // );
-
-            // console.log(
-            //   `meterial + ${i + 1} ...... quantity + ${
-            //     element1.InStock
-            //   }........ counter number + ${counter}`
-            // );
-            // counter = counter + 1;
             // new....
-
-            // const element = array[k];
 
             let urlGet =
               endpoints.getDataByMtrlStockIdResize +
@@ -392,9 +368,7 @@ export default function ResizeModal(props) {
               if (selectData.length > 0) {
                 let paraData3 = {
                   MtrlStockID: `${element0.MtrlStockID}/P${counter}`,
-                  // element0.MtrlStockID + "/P" + counter,
                   MtrlStockIDOld: element0.MtrlStockID,
-
                   Mtrl_Rv_id: selectData[0].Mtrl_Rv_id,
                   Cust_Code: selectData[0].Cust_Code,
                   Customer: selectData[0].Customer,
@@ -410,55 +384,22 @@ export default function ResizeModal(props) {
                   Locked: 0,
                   Scrap: 0,
                   Issue: 0,
-                  Weight: element1.Weight,
+                  Weight: (
+                    parseFloat(element1.Weight) /
+                    parseInt(element1.InStock || 1)
+                  ).toFixed(3),
                   ScrapWeight: selectData[0].ScrapWeight,
                   IV_No: selectData[0].IV_No,
                   NCProgramNo: null,
                   LocationNo: element1.Location,
-
-                  // DynamicPara1: element0.DynamicPara1,
-                  // DynamicPara2: element0.DynamicPara2,
-                  // DynamicPara3: 0,
-                  // DynamicPara4: 0,
-                  // LocationNo: element0.Location,
-                  // Weight: element0.Weight,
-                  // MtrlStockID: element1.MtrlStockID + "/P" + (i + 1),
-                  // MtrlStockIDOld: element1.MtrlStockID,
                 };
 
-                // console.log(
-                //   `meterial + ${i + 1} ...... quantity + ${
-                //     element1.InStock
-                //   }........ counter number + ${counter}`
-                // );
-
-                // console.log("paraData...", paraData3);
-
-                // new
-
-                // console.log(
-                //   `meterial + ${i + 1} ...... quantity + ${
-                //     element1.InStock
-                //   }........ counter number + ${counter}`
-                // );
-
-                // console.log(
-                //   `material... + ${i + 1}, quantity... ${
-                //     element1.InStock
-                //   }, counter.... ${counter}`
-                // );
-
-                // console.log("paraa", paraData3);
                 postRequest(
                   endpoints.insertByMtrlStockIDResize,
                   paraData3,
                   (data) => {
                     if (data.affectedRows > 0) {
-                      // flagTest.push(1);
-                      // setFlagTest([...flagTest, 1]);
-                      // console.log("test...");
                     }
-                    // console.log("inserted stock list.....", flagTest);
                   }
                 );
 
@@ -471,34 +412,15 @@ export default function ResizeModal(props) {
         }
       }
 
-      // //update stock list
-      // for (let i = 0; i < location?.state?.selectedTableRows.length; i++) {
-      //   let paraData3 = {
-      //     LocationNo: "ScrapYard",
-      //     MtrlStockID: location?.state?.selectedTableRows[i].ShapeMtrlID,
-      //   };
-      //   postRequest(endpoints.updateMtrlStockLock3, paraData3, (data) => {
-      //     // console.log("updated stock list");
-      //   });
-      // }
-
-      // update the old mtrl...
-
       // new
       for (let j = 0; j < props?.selectedTableRows.length; j++) {
         const element = props?.selectedTableRows[j];
-
-        // console.log("element", element.MtrlStockID);
-
         let paraData3 = {
           LocationNo: "ScrapYard",
           MtrlStockID: element.MtrlStockID,
         };
         postRequest(endpoints.updateMtrlStockLock3, paraData3, (data) => {
-          // console.log("updated stock list", data);
           if (data.affectedRows > 0) {
-            // flagTest.push(2);
-            // setFlagTest([...flagTest, 2]);
           }
         });
       }
@@ -511,31 +433,6 @@ export default function ResizeModal(props) {
         props.changeCustomer(props.selectedCust);
         handleClose();
       }, 300);
-      // setTimeout(() => {
-      //   // document.getElementById("result").innerHTML = "Hello, I am here";
-      //   // nav("/MaterialManagement/StoreManagement/ResizeSheets", {
-      //   //   state: {
-      //   //     selectedCust: formHeader.selectedCust,
-      //   //     // type: "storeresize",
-      //   //   },
-      //   // });
-      //   props.setSelectedTableRows([]);
-      //   props.changeCustomer(props.selectedCust);
-      //   handleClose();
-      // }, 500);
-
-      //
-      // flagTest.push(5);
-      // console.log("flagTest", flagTest.length);
-      // if (flagTest.sort().reverse()[0] === 0) {
-      //   toast.error("Error while inserting new material");
-      // } else if (flagTest.sort().reverse()[0] === 1) {
-      //   toast.error("Error while udating the material");
-      // } else if (flagTest.sort().reverse()[0] === 2) {
-      //   toast.success("Resize Successfull");
-      // } else {
-      //   toast.error("Uncaught error while updating Material");
-      // }
     }
   };
 
