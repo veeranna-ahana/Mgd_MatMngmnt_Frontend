@@ -13,32 +13,29 @@ import MLLogo from "../../../../../src/ML-LOGO.png";
 import { formatDate } from "../../../../utils";
 
 //function PrintMaterialDCTable() {
+
+let headerFontSize = "13px";
+let subheaderFontsize = "11px";
+let fontSize = "9px";
+
 const styles = StyleSheet.create({
-  insideBox: { borderBottom: "1px", padding: "0.6%" },
-  page: {
-    fontSize: 11,
-    flexDirection: "column",
+  pageStyling: {
+    padding: "2%",
+    // paddingTop: "3%",
+    fontSize: fontSize,
+    fontFamily: "Helvetica",
   },
-  tableContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+  globalPadding: { padding: "0.6%" },
+  footerRowPadding: { padding: "3px" },
+  // globalPadding: { padding: "0.6%" },
+  fontBold: {
+    //   fontWeight: "bold",
+    fontSize: fontSize,
+    fontFamily: "Helvetica-Bold",
   },
 
-  topspace: {
-    width: "100%",
-    marginTop: "70px",
-  },
-  betweenspace: {
-    width: "100%",
-    marginTop: "20px",
-  },
-  titleFull: {
-    padding: "5px",
-    paddingLeft: "15px",
-    width: "100%",
-    fontWeight: "bold",
-    fontSize: "14px",
-  },
+  insideBox: { borderBottom: "1px", padding: "0.6%" },
+
   line1: {
     width: "100%",
     paddingLeft: "15px",
@@ -46,66 +43,30 @@ const styles = StyleSheet.create({
   invno: {
     width: "10%",
     marginLeft: "18px",
-    marginTop: "10px",
-    fontSize: 10,
-    fontWeight: "bold",
+    // marginTop: "10px",
+    // fontSize: 10,
+    // fontWeight: "bold",
   },
   customer: {
     width: "40%",
     marginLeft: "25px",
-    marginTop: "10px",
-    fontSize: 10,
-    fontWeight: "bold",
+    // marginTop: "10px",
+    // fontSize: 10,
+    // fontWeight: "bold",
   },
   material: {
     width: "20%",
     marginLeft: "5px",
-    marginTop: "10px",
-    fontSize: 10,
-    fontWeight: "bold",
+    // marginTop: "10px",
+    // fontSize: 10,
+    // fontWeight: "bold",
   },
   weight: {
     width: "20%",
     marginLeft: "5px",
-    marginTop: "10px",
-    fontSize: 10,
-    fontWeight: "bold",
-  },
-  invnoval: {
-    width: "10%",
-    marginLeft: "18px",
-    marginTop: "2px",
-    fontSize: 8,
-    fontWeight: "bold",
-  },
-  customerval: {
-    width: "40%",
-    marginLeft: "25px",
-    marginTop: "2px",
-    fontSize: 8,
-    fontWeight: "bold",
-  },
-  materialval: {
-    width: "20%",
-    marginLeft: "5px",
-    marginTop: "2px",
-    fontSize: 8,
-    fontWeight: "bold",
-  },
-  weightval: {
-    width: "20%",
-    marginLeft: "5px",
-    marginTop: "2px",
-    fontSize: 8,
-    fontWeight: "bold",
-  },
-  titleFull3: {
-    padding: "5px",
-    paddingLeft: "35px",
-    width: "100%",
-    fontWeight: "bold",
-    fontSize: "12px",
-    textDecoration: "underline",
+    // marginTop: "10px",
+    // fontSize: 10,
+    // fontWeight: "bold",
   },
 });
 
@@ -113,7 +74,7 @@ const styles = StyleSheet.create({
 //}
 const PrintDailyReportInvoiceTable = ({ tableData, date }) => (
   <Document>
-    <Page size="A4" style={{ padding: "3%", fontSize: "11" }}>
+    <Page size="A4" style={{ ...styles.pageStyling }}>
       <View>
         {/* Top */}
         <View
@@ -131,10 +92,20 @@ const PrintDailyReportInvoiceTable = ({ tableData, date }) => (
               alignItems: "center",
             }}
           >
-            <Text style={{ fontWeight: "700" }}>
+            <Text
+              style={{
+                borderBottom: "1px",
+                ...styles.fontBold,
+                fontSize: headerFontSize,
+              }}
+            >
+              Daily Invoice Material Dispatch List :
+              {formatDate(new Date(date), 3)}
+            </Text>
+            <Text style={{ ...styles.fontBold, fontSize: subheaderFontsize }}>
               Magod Laser Machining Pvt. Ltd.
             </Text>
-            <Text style={{ fontWeight: "700" }}>
+            <Text style={{ ...styles.fontBold }}>
               GSTIN: 29AABCM1970H1ZE, CIN: U28900KA1995PTC018437
             </Text>
             <Text>
@@ -144,11 +115,6 @@ const PrintDailyReportInvoiceTable = ({ tableData, date }) => (
             <Text>
               +91-80-42291005, +91-8110-414313, info@magodlaser.in,
               https://www.magodlaser.in/
-            </Text>
-            <Text>
-              {" "}
-              Daily Invoice Material Dispatch List :{" "}
-              {formatDate(new Date(date), 3)}
             </Text>
           </View>
           <Text style={{ padding: "3%" }}></Text>
@@ -164,27 +130,32 @@ const PrintDailyReportInvoiceTable = ({ tableData, date }) => (
                 justifyContent: "space-between",
               }}
             >
-              <Text style={styles.invno}>Invoice No</Text>
-              <Text style={styles.customer}>Customer</Text>
-              <Text style={styles.material}>Material</Text>
-              <Text style={styles.weight}>Weight</Text>
+              <Text style={{ ...styles.invno, ...styles.fontBold }}>
+                Invoice No
+              </Text>
+              <Text style={{ ...styles.customer, ...styles.fontBold }}>
+                Customer
+              </Text>
+              <Text style={{ ...styles.material, ...styles.fontBold }}>
+                Material
+              </Text>
+              <Text style={{ ...styles.weight, ...styles.fontBold }}>
+                Weight
+              </Text>
             </View>
           </View>
 
           {tableData.map((item, index) => {
             return (
               <>
-                {/* <Text style={styles.line1}>
-                  _________________________________________________________________________________________
-                </Text> */}
-
                 <View
                   style={{
                     ...styles.insideBox,
+                    ...styles.fontBold,
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "center",
-                    fontWeight: "bold",
+                    // fontWeight: "bold",
                     padding: "1%",
                   }}
                 >
@@ -207,16 +178,13 @@ const PrintDailyReportInvoiceTable = ({ tableData, date }) => (
                             display: "flex",
                             flexDirection: "row",
                             justifyContent: "space-between",
+                            marginTop: "3px",
                           }}
                         >
-                          <Text style={styles.invnoval}>{item.Inv_No}</Text>
-                          <Text style={styles.customerval}>
-                            {item.Cust_Name}
-                          </Text>
-                          <Text style={styles.materialval}>
-                            {item.Material}
-                          </Text>
-                          <Text style={styles.weightval}>{item.SrlWt}</Text>
+                          <Text style={styles.invno}>{item.Inv_No}</Text>
+                          <Text style={styles.customer}>{item.Cust_Name}</Text>
+                          <Text style={styles.material}>{item.Material}</Text>
+                          <Text style={styles.weight}>{item.SrlWt}</Text>
                         </View>
                       </>
                     );
@@ -236,12 +204,12 @@ const PrintDailyReportInvoiceTable = ({ tableData, date }) => (
                       marginTop: "0.6%",
                     }}
                   >
-                    <Text style={styles.invnoval}></Text>
-                    <Text style={styles.customerval}></Text>
-                    <Text style={styles.materialval}>Total</Text>
-                    <Text style={styles.weightval}>
-                      {item.totwt.toFixed(2)}
+                    <Text style={styles.invno}></Text>
+                    <Text style={styles.customer}></Text>
+                    <Text style={{ ...styles.material, ...styles.fontBold }}>
+                      Total
                     </Text>
+                    <Text style={styles.weight}>{item.totwt.toFixed(3)}</Text>
                   </View>
 
                   {/* <Text style={styles.line1}>
