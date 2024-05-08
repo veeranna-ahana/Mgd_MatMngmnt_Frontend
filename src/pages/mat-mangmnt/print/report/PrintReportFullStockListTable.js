@@ -110,11 +110,7 @@ const styles = StyleSheet.create({
 
 //return <div>PrintMaterialDCTable</div>;
 //}
-const PrintReportFullStockListTable = ({
-  customerDetails,
-  fullStockTable,
-  fullStockScrapTable,
-}) => (
+const PrintReportFullStockListTable = (props) => (
   <Document>
     <Page size="A4" style={{ ...styles.pageStyling }}>
       {/* <View>
@@ -148,18 +144,16 @@ const PrintReportFullStockListTable = ({
             </Text>
 
             <Text style={{ ...styles.fontBold, fontSize: subheaderFontsize }}>
-              Magod Laser Machining Pvt. Ltd.
+              {props.PDFData.RegisteredName}
             </Text>
             <Text style={{ ...styles.fontBold }}>
-              GSTIN: 29AABCM1970H1ZE, CIN: U28900KA1995PTC018437
+              GST: {props.PDFData.GST_No} CIN: {props.PDFData.CIN_No}
             </Text>
+            <Text>{props.PDFData.RegistredOfficeAddress}</Text>
+
             <Text>
-              #71 & 72, Phase II, KIADB Indl Area, Jigani, Anekal Taluk,
-              Bengaluru - 560105
-            </Text>
-            <Text>
-              +91-80-42291005, +91-8110-414313, info@magodlaser.in,
-              https://www.magodlaser.in/
+              {props.PDFData.PhonePrimary}, {props.PDFData.PhoneSecondary},{" "}
+              {props.PDFData.Email}, {props.PDFData.URL}
             </Text>
           </View>
           <Text style={{ padding: "3%" }}></Text>
@@ -171,10 +165,10 @@ const PrintReportFullStockListTable = ({
             <Text style={{ ...styles.fontBold }}>Customer Name:</Text>
             <View style={{ paddingLeft: "1%" }}>
               <Text style={{ ...styles.title1, ...styles.fontBold }}>
-                {customerDetails.customerName}
+                {props.customerDetails.customerName}
               </Text>
-              <Text style={styles.title1}>{customerDetails.address}</Text>
-              <Text style={styles.title1}>{customerDetails.city}</Text>
+              <Text style={styles.title1}>{props.customerDetails.address}</Text>
+              <Text style={styles.title1}>{props.customerDetails.city}</Text>
             </View>
           </View>
 
@@ -186,7 +180,7 @@ const PrintReportFullStockListTable = ({
 
             {/*  */}
 
-            {fullStockTable.map((item, index) => {
+            {props.fullStockTable.map((item, index) => {
               return (
                 <>
                   <View style={{ ...styles.insideBox }}>

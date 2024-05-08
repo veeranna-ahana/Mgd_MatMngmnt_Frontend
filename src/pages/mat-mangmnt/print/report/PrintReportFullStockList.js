@@ -1,10 +1,13 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { PDFViewer } from "@react-pdf/renderer";
 import { useLocation } from "react-router-dom";
 import PrintReportFullStockListTable from "./PrintReportFullStockListTable";
 import Modal from "react-bootstrap/Modal";
+import { postRequest } from "../../../api/apiinstance";
+import { endpoints } from "../../../api/constants";
 
 function PrintReportFullStockList(props) {
+  const [PDFData, setPDFData] = useState({});
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
   const location = useLocation();
   // console.log(
@@ -18,6 +21,16 @@ function PrintReportFullStockList(props) {
   //   //location.state.totalweight1
   // );
   const handleClose = () => props.setPrintFullStockListOpen(false);
+
+  function fetchPDFData() {
+    postRequest(endpoints.getPDFData, {}, (res) => {
+      setPDFData(res[0]);
+    });
+  }
+
+  useEffect(() => {
+    fetchPDFData();
+  }, []);
 
   return (
     <>
@@ -36,6 +49,7 @@ function PrintReportFullStockList(props) {
                 customerDetails={props.customerDetails}
                 fullStockTable={props.fullStockTable}
                 fullStockScrapTable={props.fullStockScrapTable}
+                PDFData={PDFData}
               />
             </PDFViewer>
           </Fragment>
