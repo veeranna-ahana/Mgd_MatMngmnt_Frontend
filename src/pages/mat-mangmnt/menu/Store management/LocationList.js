@@ -34,18 +34,22 @@ export default function LocationList() {
     {
       text: "LocationNo",
       dataField: "LocationNo",
+      sort: true,
     },
     {
       text: "StorageType",
       dataField: "StorageType",
+      sort: true,
     },
     {
       text: "Capacity",
       dataField: "Capacity",
+      sort: true,
     },
     {
       text: "CapacityUtilised",
       dataField: "CapacityUtilised",
+      sort: true,
     },
   ];
 
@@ -274,6 +278,15 @@ export default function LocationList() {
     }
   };
   // console.log("selectedRow...", selectedRow?.id ? true : false);
+
+  const [sort, setSort] = React.useState({
+    dataField: "id",
+    order: "asc",
+  });
+
+  const onSortChange = (dataField, order) => {
+    setSort({ dataField, order });
+  };
   return (
     <>
       <h4 className="title">Material Storage Location Manager</h4>
@@ -289,6 +302,8 @@ export default function LocationList() {
               condensed
               selectRow={selectRow}
               headerClasses="header-class tableHeaderBGColor"
+              sort={sort}
+              onSortChange={onSortChange}
             ></BootstrapTable>
           </div>
         </div>
@@ -300,7 +315,7 @@ export default function LocationList() {
               </div>
               <div className="col-md-7">
                 <input
-                   className="input-disabled mt-2"
+                  className="input-disabled mt-2"
                   type="text"
                   name="location"
                   onChange={changeHandler}
@@ -333,8 +348,8 @@ export default function LocationList() {
                 {shape.length > 0 ? (
                   <select
                     name="storage"
-                  //  className="in-field border-top-0 border-start-0 border-end-0  "
-                  className="input-disabled mt-2"
+                    //  className="in-field border-top-0 border-start-0 border-end-0  "
+                    className="input-disabled mt-2"
                     onChange={changeHandler}
                     value={inputData.storage}
                     style={{ width: "100%" }}
@@ -369,7 +384,7 @@ export default function LocationList() {
               </div>
               <div className="col-md-7">
                 <input
-                   className="input-disabled mt-2"
+                  className="input-disabled mt-2"
                   type="text"
                   name="capacity"
                   onChange={changeHandler}
@@ -385,7 +400,7 @@ export default function LocationList() {
               <div className="col-md-3 col-sm-12">
                 <button
                   className="button-style "
-                 // style={{ width: "100px" }}
+                  // style={{ width: "100px" }}
                   onClick={addButton}
                 >
                   Add
@@ -403,7 +418,7 @@ export default function LocationList() {
               <div className="col-md-3 col-sm-12">
                 <button
                   className="button-style "
-                 // style={{ width: "100px" }}
+                  // style={{ width: "100px" }}
                   onClick={saveButton}
                 >
                   Save
