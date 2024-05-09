@@ -12,110 +12,41 @@ import { formatDate } from "../../../../utils";
 import MLLogo from "../../../../../src/ML-LOGO.png";
 
 //function PrintMaterialDCTable() {
+
+let headerFontSize = "13px";
+let subheaderFontsize = "11px";
+let fontSize = "9px";
 const styles = StyleSheet.create({
+  pageStyling: {
+    padding: "2%",
+    // paddingTop: "3%",
+    fontSize: fontSize,
+    fontFamily: "Helvetica",
+  },
+  globalPadding: { padding: "0.6%" },
+  footerRowPadding: { padding: "3px" },
+  // globalPadding: { padding: "0.6%" },
+  fontBold: {
+    //   fontWeight: "bold",
+    fontSize: fontSize,
+    fontFamily: "Helvetica-Bold",
+  },
   insideBox: { borderBottom: "1px", padding: "0.6%" },
   fontBold: {
     //   fontWeight: "bold",
     fontSize: "10px",
     fontFamily: "Helvetica-Bold",
   },
-  pageStyling: { padding: "2%", fontSize: "10px", fontFamily: "Helvetica" },
-  tableContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-  },
-  // row: {
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  // },
-  // description: {
-  //   width: "60%",
-  // },
-  // xyz: {
-  //   width: "40%",
-  // },
-  // tableTitle: {
-  //   textDecoration: "underline",
-  //   marginLeft: "200px",
-  //   marginTop: "20px",
-  // },
-  // title2: {
-  //   textDecoration: "underline",
-  //   marginLeft: "220px",
-  // },
-  // shiftperiod: {
-  //   marginLeft: "140px",
-  //   marginTop: "20px",
-  // },
-  // boxdata: {
-  //   border: "1px",
-  //   padding: "10px",
-  //   marginTop: "40px",
-  //   width: "550px",
-  //   marginLeft: "50px",
-  //   marginRight: "100px",
-  // },
-  // tableview: {
-  //   marginLeft: "60px",
-  //   width: "430px",
-  // },
-  // Headingrow: {
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   borderBottom: "1px",
-  //   marginTop: "20px",
-  //   marginLeft: "60px",
-  //   width: "430px",
-  // },
-  // machineHeading: {
-  //   width: "30%",
-  // },
-  // operatorHeading: {
-  //   width: "30%",
-  // },
-  // remarksHeading: {
-  //   width: "40%",
-  // },
 
   topspace: {
     width: "100%",
     marginTop: "100px",
   },
-  titleFull: {
-    //border: "1px",
-    padding: "5px",
-    width: "100%",
-    fontWeight: "bold",
-    //fontSize: "11px",
-  },
-  titleFull1: {
-    //border: "1px",
-    padding: "5px",
-    width: "100%",
-    //fontSize: "10px",
-  },
-  titleLeft1: {
-    //border: "1px",
-    padding: "5px",
-    width: "40%",
-    //fontSize: "10px",
-  },
 
-  titleMiddle1: {
-    //border: "1px",
-    padding: "5px",
-    width: "30%",
-    //fontSize: "10px",
-  },
   titleMiddle2: {
     padding: "5px",
     // width: "30%",
     //fontSize: "12px",
-  },
-  titleRight1: {
-    //border: "1px",
-    padding: "5px",
-    width: "30%",
   },
 
   tableCol1: {
@@ -125,7 +56,7 @@ const styles = StyleSheet.create({
   tableCol2: {
     padding: "5px",
     width: "60%",
-    fontWeight: "bold",
+    // fontWeight: "bold",
   },
   tableCol3: {
     padding: "5px",
@@ -173,12 +104,23 @@ export default function PrintPartsDCTable(props) {
                       alignItems: "center",
                     }}
                   >
-                    <View style={{ borderBottom: "1px" }}>
-                      <Text style={{ ...styles.fontBold }}>
+                    <View>
+                      <Text
+                        style={{
+                          borderBottom: "1px",
+                          ...styles.fontBold,
+                          fontSize: headerFontSize,
+                        }}
+                      >
                         Material / Scrap Sheets Return Challan
                       </Text>
                     </View>
-                    <Text style={{ ...styles.fontBold }}>
+                    <Text
+                      style={{
+                        ...styles.fontBold,
+                        fontSize: subheaderFontsize,
+                      }}
+                    >
                       {props.PDFData.RegisteredName}
                     </Text>
                     <Text style={{ ...styles.fontBold }}>
