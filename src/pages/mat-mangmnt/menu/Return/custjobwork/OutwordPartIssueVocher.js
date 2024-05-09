@@ -194,6 +194,7 @@ function OutwordPartIssueVocher(props) {
         // console.log("data = ", data);
         if (data.affectedRows !== 0) {
           toast.success("Record Updated Successfully");
+          fetchData();
         } else {
           toast.error("Record Not Updated");
         }

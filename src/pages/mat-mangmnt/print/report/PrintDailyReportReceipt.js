@@ -1,11 +1,15 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { PDFViewer } from "@react-pdf/renderer";
 import PrintMaterialDCTable from "./PrintDailyReportReceiptTable";
 import { useLocation } from "react-router-dom";
 import PrintDailyReportReceiptTable from "./PrintDailyReportReceiptTable";
 import { Modal } from "react-bootstrap";
 
+import { postRequest } from "../../../api/apiinstance";
+import { endpoints } from "../../../api/constants";
 function PrintDailyReportReceipt(props) {
+  const [PDFData, setPDFData] = useState({});
+
   const location = useLocation();
   // console.log(
   //   "date = ",
@@ -18,6 +22,16 @@ function PrintDailyReportReceipt(props) {
   //   location.state.totalweight
   // );
   const handleClose = () => props.setReceiptReportPrint(false);
+
+  function fetchPDFData() {
+    postRequest(endpoints.getPDFData, {}, (res) => {
+      setPDFData(res[0]);
+    });
+  }
+
+  useEffect(() => {
+    fetchPDFData();
+  }, []);
 
   return (
     <>
@@ -35,6 +49,7 @@ function PrintDailyReportReceipt(props) {
                 totqty={props.totqty}
                 totalweight={props.totalweight}
                 //dcRegister={location.state.dcRegister}
+                PDFData={PDFData}
               />
             </PDFViewer>
           </Fragment>

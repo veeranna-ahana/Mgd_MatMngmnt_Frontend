@@ -13,110 +13,70 @@ import MLLogo from "../../../../../src/ML-LOGO.png";
 import { formatDate } from "../../../../utils";
 
 //function PrintMaterialDCTable() {
+
+let headerFontSize = "13px";
+let subheaderFontsize = "11px";
+let fontSize = "9px";
 const styles = StyleSheet.create({
+  pageStyling: {
+    padding: "2%",
+    // paddingTop: "3%",
+    fontSize: fontSize,
+    fontFamily: "Helvetica",
+  },
+  globalPadding: { padding: "0.6%" },
+  footerRowPadding: { padding: "3px" },
+  // globalPadding: { padding: "0.6%" },
+  fontBold: {
+    //   fontWeight: "bold",
+    fontSize: fontSize,
+    fontFamily: "Helvetica-Bold",
+  },
+
   insideBox: { borderBottom: "1px", padding: "0.6%" },
-  page: {
-    fontSize: 11,
-    flexDirection: "column",
-  },
-  tableContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-  },
 
-  topspace: {
-    width: "100%",
-    marginTop: "70px",
-  },
-  betweenspace: {
-    width: "100%",
-    marginTop: "20px",
-  },
-  titleFull: {
-    padding: "5px",
-    paddingLeft: "15px",
-    width: "100%",
-    textAlign: "center",
-    fontWeight: "bold",
-    fontSize: "14px",
-  },
-  titleFull1: {
-    padding: "5px",
-    paddingLeft: "15px",
-    width: "100%",
-    textAlign: "center",
-    fontWeight: "bold",
-    fontSize: "12px",
-  },
-  titleFull2: {
-    padding: "5px",
-    paddingLeft: "25px",
-    width: "100%",
-    fontWeight: "bold",
-    fontSize: "12px",
-  },
-  titleFull3: {
-    padding: "5px",
-    paddingLeft: "35px",
-    width: "100%",
-    fontWeight: "bold",
-    fontSize: "12px",
-    textDecoration: "underline",
-  },
-
-  line1: {
-    width: "100%",
-    paddingLeft: "15px",
-  },
   material: {
     width: "30%",
     marginLeft: "50px",
     marginTop: "5px",
-    fontSize: 11,
-    fontWeight: "bold",
+    // fontSize: 11,
+    // fontWeight: "bold",
   },
   weightinkgs: {
     width: "30%",
     marginLeft: "5px",
     marginTop: "5px",
-    fontSize: 11,
-    fontWeight: "bold",
+    // fontSize: 11,
+    // fontWeight: "bold",
   },
   totqty: {
     width: "20%",
     marginLeft: "5px",
     marginTop: "5px",
-    fontSize: 11,
-    fontWeight: "bold",
+    // fontSize: 11,
+    // fontWeight: "bold",
   },
   para: {
     width: "10%",
     marginLeft: "5px",
     marginTop: "2px",
-    fontSize: 8,
-    fontWeight: "bold",
+    // fontSize: 8,
+    // fontWeight: "bold",
   },
   docu: {
     width: "50%",
     marginLeft: "5px",
     marginTop: "2px",
-    fontSize: 8,
-    fontWeight: "bold",
+    // fontSize: 8,
+    // fontWeight: "bold",
   },
 });
 
 //return <div>PrintMaterialDCTable</div>;
 //}
-const PrintMonthlyTable = ({
-  date,
-  thirdTab,
-  fourthTab,
-  totalobj,
-  purchaseDetails,
-  saleDetails,
-}) => (
+const PrintMonthlyTable = (props) => (
   <Document>
-    <Page size="A4" style={{ padding: "3%", fontSize: "11" }}>
+    <Page size="A4" style={{ ...styles.pageStyling }}>
       <View>
         {/* Top */}
         <View
@@ -134,21 +94,27 @@ const PrintMonthlyTable = ({
               alignItems: "center",
             }}
           >
-            <Text style={{ fontWeight: "700" }}>
-              Magod Laser Machining Pvt. Ltd.
+            <Text
+              style={{
+                borderBottom: "1px",
+                ...styles.fontBold,
+                fontSize: headerFontSize,
+              }}
+            >
+              Material Summary For the Month of : {props.date}
             </Text>
-            <Text style={{ fontWeight: "700" }}>
-              GSTIN: 29AABCM1970H1ZE, CIN: U28900KA1995PTC018437
+
+            <Text style={{ ...styles.fontBold, fontSize: subheaderFontsize }}>
+              {props.PDFData.RegisteredName}
             </Text>
+            <Text style={{ ...styles.fontBold }}>
+              GST: {props.PDFData.GST_No} CIN: {props.PDFData.CIN_No}
+            </Text>
+            <Text>{props.PDFData.RegistredOfficeAddress}</Text>
             <Text>
-              #71 & 72, Phase II, KIADB Indl Area, Jigani, Anekal Taluk,
-              Bengaluru - 560105
+              {props.PDFData.PhonePrimary}, {props.PDFData.PhoneSecondary},{" "}
+              {props.PDFData.Email}, {props.PDFData.URL}
             </Text>
-            <Text>
-              +91-80-42291005, +91-8110-414313, info@magodlaser.in,
-              https://www.magodlaser.in/
-            </Text>
-            <Text>Material Summary For the Month of : {date}</Text>
           </View>
           <Text style={{ padding: "3%" }}></Text>
         </View>
@@ -172,7 +138,7 @@ const PrintMonthlyTable = ({
                   justifyContent: "center",
                 }}
               >
-                <Text style={{ borderBottom: "1px" }}>
+                <Text style={{ borderBottom: "1px", ...styles.fontBold }}>
                   Material Purchase Summary
                 </Text>
               </View>
@@ -184,8 +150,12 @@ const PrintMonthlyTable = ({
                   justifyContent: "flex-start",
                 }}
               >
-                <Text style={styles.material}>Material</Text>
-                <Text style={styles.weightinkgs}>Weight in Kgs</Text>
+                <Text style={{ ...styles.material, ...styles.fontBold }}>
+                  Material
+                </Text>
+                <Text style={{ ...styles.weightinkgs, ...styles.fontBold }}>
+                  Weight in Kgs
+                </Text>
               </View>
               <View
                 style={{
@@ -195,7 +165,7 @@ const PrintMonthlyTable = ({
                   // justifyContent: "flex-start",
                 }}
               >
-                {fourthTab.map((item, index) => {
+                {props.fourthTab.map((item, index) => {
                   return (
                     <>
                       <View
@@ -225,7 +195,7 @@ const PrintMonthlyTable = ({
                   justifyContent: "center",
                 }}
               >
-                <Text style={{ borderBottom: "1px" }}>
+                <Text style={{ borderBottom: "1px", ...styles.fontBold }}>
                   Material Sales Summary
                 </Text>
               </View>
@@ -237,8 +207,12 @@ const PrintMonthlyTable = ({
                   justifyContent: "flex-start",
                 }}
               >
-                <Text style={styles.material}>Material</Text>
-                <Text style={styles.weightinkgs}>Weight in Kgs</Text>
+                <Text style={{ ...styles.material, ...styles.fontBold }}>
+                  Material
+                </Text>
+                <Text style={{ ...styles.weightinkgs, ...styles.fontBold }}>
+                  Weight in Kgs
+                </Text>
               </View>
               <View
                 style={{
@@ -248,7 +222,7 @@ const PrintMonthlyTable = ({
                   // justifyContent: "flex-start",
                 }}
               >
-                {thirdTab.map((item, index) => {
+                {props.thirdTab.map((item, index) => {
                   return (
                     <>
                       <View
@@ -279,7 +253,7 @@ const PrintMonthlyTable = ({
                   justifyContent: "center",
                 }}
               >
-                <Text style={{ borderBottom: "1px" }}>
+                <Text style={{ borderBottom: "1px", ...styles.fontBold }}>
                   Monthly Material Handling Summary
                 </Text>
               </View>
@@ -292,7 +266,7 @@ const PrintMonthlyTable = ({
                   // justifyContent: "flex-start",
                 }}
               >
-                {totalobj.map((item, index) => {
+                {props.totalobj.map((item, index) => {
                   return (
                     <>
                       <View
@@ -326,7 +300,7 @@ const PrintMonthlyTable = ({
                   justifyContent: "center",
                 }}
               >
-                <Text style={{ borderBottom: "1px" }}>
+                <Text style={{ borderBottom: "1px", ...styles.fontBold }}>
                   Material Purchase Details
                 </Text>
               </View>
@@ -340,7 +314,7 @@ const PrintMonthlyTable = ({
                   border: "none",
                 }}
               >
-                {purchaseDetails.map((item, index) => {
+                {props.purchaseDetails.map((item, index) => {
                   return (
                     <>
                       <View
@@ -350,7 +324,9 @@ const PrintMonthlyTable = ({
                           justifyContent: "center",
                         }}
                       >
-                        <Text style={{ borderBottom: "1px" }}>
+                        <Text
+                          style={{ borderBottom: "1px", ...styles.fontBold }}
+                        >
                           {item.material}
                         </Text>
                       </View>
@@ -401,7 +377,9 @@ const PrintMonthlyTable = ({
                           }}
                         >
                           <Text style={styles.para}></Text>
-                          <Text style={styles.para}>Total</Text>
+                          <Text style={{ ...styles.para, ...styles.fontBold }}>
+                            Total
+                          </Text>
                           <Text style={styles.para}>{item.totwt}</Text>
                           <Text style={styles.docu}></Text>
                         </View>
@@ -422,7 +400,7 @@ const PrintMonthlyTable = ({
                   justifyContent: "center",
                 }}
               >
-                <Text style={{ borderBottom: "1px" }}>
+                <Text style={{ borderBottom: "1px", ...styles.fontBold }}>
                   Material Sales Details
                 </Text>
               </View>
@@ -436,7 +414,7 @@ const PrintMonthlyTable = ({
                   border: "none",
                 }}
               >
-                {saleDetails.map((item, index) => {
+                {props.saleDetails.map((item, index) => {
                   return (
                     <>
                       <View
@@ -446,7 +424,9 @@ const PrintMonthlyTable = ({
                           justifyContent: "center",
                         }}
                       >
-                        <Text style={{ borderBottom: "1px" }}>
+                        <Text
+                          style={{ borderBottom: "1px", ...styles.fontBold }}
+                        >
                           {item.material}
                         </Text>
                       </View>
@@ -497,7 +477,9 @@ const PrintMonthlyTable = ({
                           }}
                         >
                           <Text style={styles.para}></Text>
-                          <Text style={styles.para}>Total</Text>
+                          <Text style={{ ...styles.para, ...styles.fontBold }}>
+                            Total
+                          </Text>
                           <Text style={styles.para}>{item.totwt}</Text>
                           <Text style={styles.docu}></Text>
                         </View>

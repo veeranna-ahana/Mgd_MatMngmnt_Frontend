@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import {
   PDFDownloadLink,
   Page,
@@ -13,10 +13,11 @@ import { useLocation } from "react-router-dom";
 import PrintPartsDCTable from "./PrintPartsDCTable";
 import Modal from "react-bootstrap/Modal";
 
-const { getRequest, postRequest } = require("../../../api/apiinstance");
-const { endpoints } = require("../../../api/constants");
+import { getRequest, postRequest } from "../../../api/apiinstance";
+import { endpoints } from "../../../api/constants";
 
 function PrintPartsDC(props) {
+  const [PDFData, setPDFData] = useState({});
   const location = useLocation();
   // console.log(
   //   "Second formheader = ",
@@ -63,6 +64,15 @@ function PrintPartsDC(props) {
 
   const handleClose = () => props.setPrintOpen(false);
 
+  function fetchPDFData() {
+    postRequest(endpoints.getPDFData, {}, (res) => {
+      setPDFData(res[0]);
+    });
+  }
+
+  useEffect(() => {
+    fetchPDFData();
+  }, []);
   return (
     <>
       <Modal show={props.printOpen} onHide={handleClose} fullscreen>
@@ -85,6 +95,7 @@ function PrintPartsDC(props) {
                 custdata={props?.custdata}
                 dcRegister={props?.dcRegister}
                 totalQTYVar={totalQTYVar}
+                PDFData={PDFData}
               />
             </PDFViewer>
           </Fragment>

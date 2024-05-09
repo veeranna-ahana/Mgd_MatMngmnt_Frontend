@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { PDFViewer } from "@react-pdf/renderer";
 import PrintMaterialDCTable from "./PrintDailyReportReceiptTable";
 import { useLocation } from "react-router-dom";
@@ -6,8 +6,11 @@ import PrintDailyReportReceiptTable from "./PrintDailyReportReceiptTable";
 import PrintMonthlyTable from "./PrintMonthlyTable";
 import { Modal } from "react-bootstrap";
 
-// Modal
+import { postRequest } from "../../../api/apiinstance";
+import { endpoints } from "../../../api/constants";
 function PrintMonthlyReport(props) {
+  const [PDFData, setPDFData] = useState({});
+
   const location = useLocation();
   // console.log(
   //   "date = ",
@@ -26,6 +29,16 @@ function PrintMonthlyReport(props) {
 
   const handleClose = () => props.setPrintReportOpen(false);
 
+  function fetchPDFData() {
+    postRequest(endpoints.getPDFData, {}, (res) => {
+      setPDFData(res[0]);
+    });
+  }
+
+  useEffect(() => {
+    fetchPDFData();
+  }, []);
+
   return (
     <>
       <Modal show={props.printReportOpen} onHide={handleClose} fullscreen>
@@ -42,6 +55,7 @@ function PrintMonthlyReport(props) {
                 totalobj={props.totalobj}
                 purchaseDetails={props.purchaseDetails}
                 saleDetails={props.saleDetails}
+                PDFData={PDFData}
               />
             </PDFViewer>
           </Fragment>
