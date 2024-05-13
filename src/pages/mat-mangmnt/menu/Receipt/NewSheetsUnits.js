@@ -488,8 +488,6 @@ function NewSheetsUnits(props) {
   //   setMaterialArray(newArray);
   // };
 
-  console.log("mtrlStock", mtrlStock);
-
   let changeMtrl = async (name, value) => {
     const newSelectedMtrl = value ? [{ Mtrl_Code: value }] : [];
     setSelectedMtrl(newSelectedMtrl);
@@ -499,13 +497,28 @@ function NewSheetsUnits(props) {
         let url1 = endpoints.getRowByMtrlCode + "?code=" + value;
         getRequest(url1, async (mtrlData) => {
           // console.log("mtrldata= ", mtrlData.Shape);
+          console.log("mtrlData", mtrlData);
           let Mtrlshape = mtrlData.Shape;
           setShape(Mtrlshape);
           inputPart.material = mtrlData.Mtrl_Type;
           inputPart.shapeMtrlId = mtrlData.ShapeMtrlID;
           let url2 = endpoints.getRowByShape + "?shape=" + mtrlData.Shape;
           getRequest(url2, async (shapeData) => {
-            //console.log("shapedata = ", shapeData);
+            console.log("shapedata = ", shapeData);
+
+            if (shapeData.length === 0) {
+              toast.error(
+                "ShapeID doesnot exist for selected Material Code , please select other Material Code"
+              );
+              // setPara1Label("");
+              // setPara2Label("");
+              // setPara3Label("");
+              // setUnitLabel1("");
+              // setUnitLabel2("");
+              // setUnitLabel3("");
+              return;
+            }
+
             inputPart.shapeID = shapeData.ShapeID;
             setInputPart(inputPart);
 
@@ -545,7 +558,10 @@ function NewSheetsUnits(props) {
           setPlateRowSelect(false);
         }
 
-        if (material.Shape.includes("Tube")) {
+        if (
+          material.Shape === "Tube Square" ||
+          material.Shape === "Tube Rectangle"
+        ) {
           // Tube
           setPara1Label("Length");
           setPara2Label("");
@@ -1939,9 +1955,10 @@ function NewSheetsUnits(props) {
   };
 
   console.log("Input Part", inputPart);
-  console.log("formHeader", formHeader);
+  // console.log("formHeader", formHeader);
   console.log("rvId", formHeader.rvId);
-  console.log("materialArray", materialArray);
+  // console.log("mtrlStock", mtrlStock);
+  // console.log("materialArray", materialArray);
 
   return (
     <div>
@@ -2135,13 +2152,13 @@ function NewSheetsUnits(props) {
         </div>
 
         <div className="row mt-2">
-          <div className="col-md-8 ">
+          <div className="col-md-8">
             {/* <label className="form-label"></label> */}
             <textarea
               className="input-disabled mt-1"
               id="exampleFormControlTextarea1"
               rows="2"
-              style={{ width: "700px", height: "60px" }}
+              style={{ width: "100%", height: "60px" }}
               // className="form-control"
               value={formHeader.address}
               readOnly
@@ -2389,6 +2406,59 @@ function NewSheetsUnits(props) {
                       </div>
                     </div>
                   )}
+
+                  {/* {rowSelect && materialArray.length !== 0 && (
+                    <div>
+                      <div className="row mt-1">
+                        <div className="col-md-4">
+                          <label className="form-label">Para 1</label>
+                        </div>
+                        <div className="col-md-6">
+                          <input
+                            className="input-disabled mt-2"
+                            name="dynamicPara1"
+                            disabled
+                            min="0"
+                          />
+                        </div>
+                        <div className="col-md-2">
+                          <label className="form-label">mm</label>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-md-4">
+                          <label className="form-label">Para 2</label>
+                        </div>
+                        <div className="col-md-6">
+                          <input
+                            className="input-disabled mt-1"
+                            name="dynamicPara2"
+                            min="0"
+                            disabled
+                          />
+                        </div>
+                        <div className="col-md-2">
+                          <label className="form-label">mm</label>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-md-4">
+                          <label className="form-label">Para 3</label>
+                        </div>
+                        <div className="col-md-6 ">
+                          <input
+                            className="input-disabled mt-1"
+                            name="dynamicPara3"
+                            min="0"
+                            disabled
+                          />
+                        </div>
+                        <div className="col-md-2">
+                          <label className="form-label">mm</label>
+                        </div>
+                      </div>
+                    </div>
+                  )} */}
 
                   {sheetRowSelect && materialArray.length !== 0 && (
                     <div>
@@ -2790,10 +2860,10 @@ function NewSheetsUnits(props) {
                     <div className="col-md-6 ">
                       <label className="form-label">Location</label>
                     </div>
-                    <div className="col-md-6 mt-1">
+                    <div className="col-md-6 mt-1" style={{ width: "140px" }}>
                       <select
                         // className="ip-select dropdown-field"
-                        style={{ width: "140px" }}
+                        // style={{ width: "140px" }}
                         className="input-disabled mt-1"
                         onChange={(e) => {
                           changeMaterialHandle(e, inputPart.id);
