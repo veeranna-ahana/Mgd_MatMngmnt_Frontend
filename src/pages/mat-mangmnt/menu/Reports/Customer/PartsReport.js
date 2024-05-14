@@ -37,13 +37,13 @@ function PartsReport() {
 
   return (
     <>
-      <h4 className="title">Customer Partss Stock</h4>
+      <h4 className="title">Customer Parts Stock</h4>
       <div className="row">
-        <div className="d-flex col-md-11" style={{gap:'10px'}}>
+        <div className="d-flex col-md-11" style={{ gap: "10px" }}>
           <div className="col-md-1.5 ">
-          <label className="form-label ">Select Customer</label>
+            <label className="form-label ">Select Customer</label>
           </div>
-          
+
           {/* <select className="ip-select" onChange={changeCustomer}>
             <option value="" disabled selected>
               Select Customer
@@ -55,15 +55,14 @@ function PartsReport() {
             ))}
           </select> */}
           <div className="col-md-4 mt-2">
-          <Typeahead
-            id="basic-example"
-            name="customer"
-            options={custdata}
-            placeholder="Select Customer"
-            onChange={(label) => changeCustomer(label)}
-          />
+            <Typeahead
+              id="basic-example"
+              name="customer"
+              options={custdata}
+              placeholder="Select Customer"
+              onChange={(label) => changeCustomer(label)}
+            />
           </div>
-          
         </div>
         <div className="col-md-1">
           <button

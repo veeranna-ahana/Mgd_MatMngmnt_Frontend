@@ -62,7 +62,7 @@ function MaterialStockList() {
       dataField: "Weight",
     },
     {
-      text: "Scarp Weight",
+      text: "Scrap Weight",
       dataField: "ScrapWeight",
     },
   ];
@@ -80,7 +80,7 @@ function MaterialStockList() {
       dataField: "Weight",
     },
     {
-      text: "Scarp Weight",
+      text: "Scrap Weight",
       dataField: "ScrapWeight",
     },
   ];
@@ -102,7 +102,7 @@ function MaterialStockList() {
       dataField: "Locked",
     },
     {
-      text: "Scarp ",
+      text: "Scrap ",
       dataField: "Scrap",
     },
     {
@@ -110,7 +110,7 @@ function MaterialStockList() {
       dataField: "Weight",
     },
     {
-      text: "Scarp Weight",
+      text: "Scrap Weight",
       dataField: "ScrapWeight",
     },
   ];

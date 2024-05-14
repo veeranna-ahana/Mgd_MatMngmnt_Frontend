@@ -138,7 +138,11 @@ export default function PurchaseUnitsDraftRVList() {
           </div>
 
           <div className="col-md-5 col-sm-12">
+<<<<<<< HEAD
             <div className="ip-box form-bg"  style={{height:'350px'}}>
+=======
+            <div className="ip-box form-bg" style={{ height: "350px" }}>
+>>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
               <div className="row">
                 <div className="col-md-4 mt-1">
                   <label className="form-label">Receipt Date</label>
@@ -156,7 +160,11 @@ export default function PurchaseUnitsDraftRVList() {
                   <label className="form-label">RV No</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="input-disabled mt-2" value={data.RV_No} readOnly />
+                  <input
+                    className="input-disabled mt-2"
+                    value={data.RV_No}
+                    readOnly
+                  />
                 </div>
               </div>
               <div className="row">
@@ -164,7 +172,11 @@ export default function PurchaseUnitsDraftRVList() {
                   <label className="form-label">RV Date</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="input-disabled mt-2" value={data.RV_Date} readOnly />
+                  <input
+                    className="input-disabled mt-2"
+                    value={data.RV_Date}
+                    readOnly
+                  />
                 </div>
               </div>
               <div className="row">
@@ -172,7 +184,11 @@ export default function PurchaseUnitsDraftRVList() {
                   <label className="form-label">Cust Code</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="input-disabled mt-2" value={data.Cust_Code} readOnly />
+                  <input
+                    className="input-disabled mt-2"
+                    value={data.Cust_Code}
+                    readOnly
+                  />
                 </div>
               </div>
               <div className="row">
@@ -180,7 +196,11 @@ export default function PurchaseUnitsDraftRVList() {
                   <label className="form-label">Customer</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="input-disabled mt-2" value={data.Customer} readOnly />
+                  <input
+                    className="input-disabled mt-2"
+                    value={data.Customer}
+                    readOnly
+                  />
                 </div>
               </div>
               <div className="row">
@@ -236,11 +256,13 @@ export default function PurchaseUnitsDraftRVList() {
                   <label className="form-label">RV Status</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input className="input-disabled mt-2" value={data.RVStatus} readOnly />
+                  <input
+                    className="input-disabled mt-2"
+                    value={data.RVStatus}
+                    readOnly
+                  />
                 </div>
               </div>
-
-
             </div>
           </div>
         </div>

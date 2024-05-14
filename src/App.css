@@ -714,16 +714,13 @@ tbody td {
   opacity: 0;
 }
 
-.input-disabled {
-  /* color: white !important; */
-  /* background-color: rgb(224, 224, 224) !important; */
-
+/* .input-disabled {
   cursor: no-drop;
-}
+} */
 
 .button-disabled {
   color: white !important;
   background-color: rgb(173, 173, 173) !important;
 
-  cursor: no-drop;
+  /* cursor: no-drop; */
 }

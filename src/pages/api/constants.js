@@ -6,6 +6,9 @@
 let API = process.env.REACT_APP_API_KEY;
 
 export const endpoints = {
+  // pdf
+  getPDFData: `${API}/pdf/getPDFData`,
+
   //customers
   getCustomers: `${API}/customers/allcustomers`,
   getCustomerByCustCode: `${API}/customers/getCustomerByCustCode`,
@@ -189,13 +192,13 @@ export const endpoints = {
 
   //shopfloorPartIssueRegister
   updateStatusShopfloorPartIssueRegister: `${API}/shopfloorPartIssueRegister/updateStatusShopfloorPartIssueRegister`,
-  getPDFData: `${API}/shopfloorPartIssueRegister/getPDFData`,
+  // getPDFData: `${API}/shopfloorPartIssueRegister/getPDFData`,
 
   insertShopfloorPartIssueRegister: `${API}/shopfloorPartIssueRegister/insertShopfloorPartIssueRegister`,
 
   //shopfloorUnitIssueRegister
   getMaterialAllotmentTable1: `${API}/shopfloorUnitIssueRegister/getMaterialAllotmentTable1`,
-  getPDFData: `${API}/shopfloorUnitIssueRegister/getPDFData`,
+  // getPDFData: `${API}/shopfloorUnitIssueRegister/getPDFData`,
 
   //shopfloorMaterialIssueRegister
   insertShopfloorMaterialIssueRegister: `${API}/shopfloorMaterialIssueRegister/insertShopfloorMaterialIssueRegister`,

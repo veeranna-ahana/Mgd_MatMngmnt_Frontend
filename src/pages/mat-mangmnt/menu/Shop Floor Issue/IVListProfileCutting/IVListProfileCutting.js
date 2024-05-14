@@ -185,7 +185,7 @@ function IVListProfileCutting(props) {
           </div>
 
           <div className="col-md-5 col-sm-12">
-            <div className="ip-box form-bg">
+            <div className="ip-box form-bg" style={{ height: "400px" }}>
               <div className="row justify-content-center mt-2">
                 <button
                   onClick={openButton} /*() =>
@@ -210,12 +210,12 @@ function IVListProfileCutting(props) {
               </div>
 
               <div className="row">
-                <div className="col-md-4 mt-3">
+                <div className="col-md-4 mt-1">
                   <label className="form-label">Customer</label>
                 </div>
                 <div className="col-md-8" style={{ marginTop: "8px" }}>
                   <input
-                     className="input-disabled mt-3"
+                    className="input-disabled mt-1"
                     disabled
                     value={rowData.Cust_Name}
                   />
@@ -223,20 +223,24 @@ function IVListProfileCutting(props) {
               </div>
 
               <div className="row">
-                <div className="col-md-4 mt-2 ">
+                <div className="col-md-4 mt-1">
                   <label className="form-label">Issue Vr No</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input  className="input-disabled mt-3" disabled value={rowData.IV_No} />
+                  <input
+                    className="input-disabled mt-1"
+                    disabled
+                    value={rowData.IV_No}
+                  />
                 </div>
               </div>
               <div className="row">
-                <div className="col-md-4 mt-2 ">
+                <div className="col-md-4 mt-1">
                   <label className="form-label">Vr Date</label>
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="input-disabled mt-3"
+                    className="input-disabled mt-1"
                     disabled
                     value={rowData.Issue_date}
                   />
@@ -244,82 +248,86 @@ function IVListProfileCutting(props) {
               </div>
 
               <div className="row">
-                <div className="col-md-4 mt-2 ">
+                <div className="col-md-4 mt-1">
                   <label className="form-label">Program No</label>
                 </div>
                 <div className="col-md-8 ">
                   <input
-                  className="input-disabled mt-3"
+                    className="input-disabled mt-1"
                     disabled
                     value={rowData.NC_ProgramNo}
                   />
                 </div>
               </div>
               <div className="row">
-                <div className="col-md-4 mt-2 ">
+                <div className="col-md-4 mt-1">
                   <label className="form-label">Task No</label>
                 </div>
                 <div className="col-md-8 ">
-                  <input  className="input-disabled mt-3" disabled value={rowData.TaskNo} />
+                  <input
+                    className="input-disabled mt-1"
+                    disabled
+                    value={rowData.TaskNo}
+                  />
                 </div>
               </div>
 
               <div className="row">
-                <div className="col-md-4 mt-2 ">
+                <div className="col-md-4 mt-1">
                   <label className="form-label">Operation</label>
                 </div>
 
                 <div className="col-md-8 ">
                   <input
-                    className="input-disabled mt-3"
+                    className="input-disabled mt-1"
                     disabled
                     value={rowData.Operation}
                   />
                 </div>
               </div>
               <div className="row">
-                <div className="col-md-4 mt-2 ">
+                <div className="col-md-4 mt-1">
                   <label className="form-label">Material</label>
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="input-disabled mt-3"
+                    className="input-disabled mt-1"
                     disabled
                     value={rowData.Mtrl_Code}
                   />
                 </div>
               </div>
               <div className="row">
-                <div className="col-md-4 mt-2 ">
+                <div className="col-md-4 mt-1">
                   <label className="form-label">Allotted</label>
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="input-disabled mt-3"
+                    className="input-disabled mt-1"
                     disabled
                     value={rowData.QtyIssued}
                   />
                 </div>
               </div>
               <div className="row">
-                <div className="col-md-4 mt-2 ">
+                <div className="col-md-4 mt-1">
                   <label className="form-label">Used</label>
                 </div>
                 <div className="col-md-8 ">
                   <input
-                    className="input-disabled mt-3"
+                    className="input-disabled mt-1"
                     value={rowData.QtyUsed}
                     disabled
                   />
                 </div>
               </div>
               <div className="row mb-4">
-                <div className="col-md-4 mt-2 ">
+                <div className="col-md-4 mt-1 ">
                   <label className="form-label">Returned</label>
                 </div>
                 <div className="col-md-8 ">
                   <input
-                   className="input-disabled mt-3"
+                    className="input-disabled mt-1"
                     disabled
                     value={rowData.QtyReturned}
                   />

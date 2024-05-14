@@ -11,7 +11,26 @@ import { formatDate } from "../../../../utils";
 // import MLLogo from "../../../../../../frontend/src/ML-LOGO.png";
 import MLLogo from "../../../../../src/ML-LOGO.png";
 //function PrintMaterialDCTable() {
+
+let headerFontSize = "13px";
+let subheaderFontsize = "11px";
+let fontSize = "9px";
 const styles = StyleSheet.create({
+  pageStyling: {
+    padding: "2%",
+    // paddingTop: "3%",
+    fontSize: fontSize,
+    fontFamily: "Helvetica",
+  },
+  globalPadding: { padding: "0.6%" },
+  footerRowPadding: { padding: "3px" },
+  // globalPadding: { padding: "0.6%" },
+  fontBold: {
+    //   fontWeight: "bold",
+    fontSize: fontSize,
+    fontFamily: "Helvetica-Bold",
+  },
+
   insideBox: { borderBottom: "1px", padding: "0.6%" },
   page: {
     fontSize: 11,
@@ -91,18 +110,9 @@ const styles = StyleSheet.create({
 
 //return <div>PrintMaterialDCTable</div>;
 //}
-const PrintReportStockListTable = ({
-  customerDetails,
-  tableData,
-  scrapFlag,
-  totQty1,
-  totWeight1,
-  totQty2,
-  totWeight2,
-  scrapData,
-}) => (
+const PrintReportStockListTable = (props) => (
   <Document>
-    <Page size="A4" style={{ padding: "3%", fontSize: "11" }}>
+    <Page size="A4" style={{ ...styles.pageStyling }}>
       {/* <View>
         <Text style={{ padding: "1%" }}></Text>
       </View> */}
@@ -122,21 +132,27 @@ const PrintReportStockListTable = ({
               alignItems: "center",
             }}
           >
-            <Text style={{ fontWeight: "700" }}>
-              Magod Laser Machining Pvt. Ltd.
+            <Text
+              style={{
+                borderBottom: "1px",
+                ...styles.fontBold,
+                fontSize: headerFontSize,
+              }}
+            >
+              Material Stock List as On : {formatDate(new Date(), 7)}
             </Text>
-            <Text style={{ fontWeight: "700" }}>
-              GSTIN: 29AABCM1970H1ZE, CIN: U28900KA1995PTC018437
+
+            <Text style={{ ...styles.fontBold, fontSize: subheaderFontsize }}>
+              {props.PDFData.RegisteredName}
             </Text>
+            <Text style={{ ...styles.fontBold }}>
+              GST: {props.PDFData.GST_No} CIN: {props.PDFData.CIN_No}
+            </Text>
+            <Text>{props.PDFData.RegistredOfficeAddress}</Text>
             <Text>
-              #71 & 72, Phase II, KIADB Indl Area, Jigani, Anekal Taluk,
-              Bengaluru - 560105
+              {props.PDFData.PhonePrimary}, {props.PDFData.PhoneSecondary},{" "}
+              {props.PDFData.Email}, {props.PDFData.URL}
             </Text>
-            <Text>
-              +91-80-42291005, +91-8110-414313, info@magodlaser.in,
-              https://www.magodlaser.in/
-            </Text>
-            <Text>Material Stock List as On : {formatDate(new Date(), 7)}</Text>
           </View>
           <Text style={{ padding: "3%" }}></Text>
         </View>
@@ -144,21 +160,27 @@ const PrintReportStockListTable = ({
         <View style={{ border: "1px" }}>
           {/* Cust */}
           <View style={styles.insideBox}>
-            <Text style={{ fontWeight: "bold" }}>Customer Name:</Text>
+            <Text style={{ ...styles.fontBold }}>Customer Name:</Text>
             <View style={{ paddingLeft: "1%" }}>
-              <Text style={styles.title1}>{customerDetails.customerName}</Text>
-              <Text style={styles.title1}>{customerDetails.address}</Text>
-              <Text style={styles.title1}>{customerDetails.city}</Text>
+              <Text style={{ ...styles.title1, ...styles.fontBold }}>
+                {props.customerDetails.customerName}
+              </Text>
+              <Text style={styles.title1}>{props.customerDetails.address}</Text>
+              <Text style={styles.title1}>{props.customerDetails.city}</Text>
             </View>
           </View>
 
           {/* material stock */}
           <View style={styles.insideBox}>
-            <Text style={styles.title1}>Material Stock Details</Text>
+            <Text style={{ ...styles.title1, ...styles.fontBold }}>
+              Material Stock Details
+            </Text>
             <View style={{ padding: "0.6%" }}>
               <View style={{ paddingLeft: "1%" }}>
-                <Text style={styles.title1}>
-                  {tableData.length > 0 ? tableData[0]?.Material : ""}
+                <Text style={{ ...styles.title1, ...styles.fontBold }}>
+                  {props.tableData.length > 0
+                    ? props.tableData[0]?.Material
+                    : ""}
                 </Text>
               </View>
               <View
@@ -168,12 +190,22 @@ const PrintReportStockListTable = ({
                   flexDirection: "row",
                 }}
               >
-                <Text style={styles.material}>Material</Text>
-                <Text style={styles.para}>Width</Text>
-                <Text style={styles.para}>Length</Text>
-                <Text style={styles.para}>Qty</Text>
-                <Text style={styles.para}>Weight</Text>
-                <Text style={styles.para}>Status</Text>
+                <Text style={{ ...styles.material, ...styles.fontBold }}>
+                  Material
+                </Text>
+                <Text style={{ ...styles.para, ...styles.fontBold }}>
+                  Width
+                </Text>
+                <Text style={{ ...styles.para, ...styles.fontBold }}>
+                  Length
+                </Text>
+                <Text style={{ ...styles.para, ...styles.fontBold }}>Qty</Text>
+                <Text style={{ ...styles.para, ...styles.fontBold }}>
+                  Weight
+                </Text>
+                <Text style={{ ...styles.para, ...styles.fontBold }}>
+                  Status
+                </Text>
               </View>
               <View
                 style={{
@@ -189,8 +221,8 @@ const PrintReportStockListTable = ({
               <Text style={styles.para}>Qty</Text>
               <Text style={styles.para}>Weight</Text>
               <Text style={styles.para}>Status</Text> */}
-                {tableData.length > 0 ? (
-                  tableData.map((item, index) => {
+                {props.tableData.length > 0 ? (
+                  props.tableData.map((item, index) => {
                     return (
                       <>
                         <View style={{ display: "flex", flexDirection: "row" }}>
@@ -219,11 +251,13 @@ const PrintReportStockListTable = ({
                 }}
               >
                 <Text style={styles.emptyblock1}></Text>
-                <Text style={styles.totalFinal}>
+                <Text style={{ ...styles.totalFinal, ...styles.fontBold }}>
                   Total Quantity and Weight :
                 </Text>
-                <Text style={styles.qtyFinal}>{totQty1}</Text>
-                <Text style={styles.weightFinal}>{totWeight1.toFixed(2)}</Text>
+                <Text style={styles.qtyFinal}>{props.totQty1}</Text>
+                <Text style={styles.weightFinal}>
+                  {props.totWeight1.toFixed(3)}
+                </Text>
                 <Text style={{ padding: "3.5%" }}></Text>
               </View>
             </View>
@@ -231,14 +265,18 @@ const PrintReportStockListTable = ({
 
           {/* Scrap Material Details */}
 
-          {scrapFlag !== 0 ? (
+          {props.scrapFlag !== 0 ? (
             <>
               <View style={{ ...styles.insideBox, border: "none" }}>
-                <Text style={styles.title1}>Scrap Material Details</Text>
+                <Text style={{ ...styles.title1, ...styles.fontBold }}>
+                  Scrap Material Details
+                </Text>
                 <View style={{ padding: "0.6%" }}>
                   <View style={{ paddingLeft: "1%" }}>
-                    <Text style={styles.title1}>
-                      {scrapData.length > 0 ? scrapData[0].Material : ""}
+                    <Text style={{ ...styles.title1, ...styles.fontBold }}>
+                      {props.scrapData.length > 0
+                        ? props.scrapData[0].Material
+                        : ""}
                     </Text>
                   </View>
                   <View
@@ -248,12 +286,24 @@ const PrintReportStockListTable = ({
                       flexDirection: "row",
                     }}
                   >
-                    <Text style={styles.material}>Material</Text>
-                    <Text style={styles.para}>Width</Text>
-                    <Text style={styles.para}>Length</Text>
-                    <Text style={styles.para}>Qty</Text>
-                    <Text style={styles.para}>Weight</Text>
-                    <Text style={styles.para}>Status</Text>
+                    <Text style={{ ...styles.material, ...styles.fontBold }}>
+                      Material
+                    </Text>
+                    <Text style={{ ...styles.para, ...styles.fontBold }}>
+                      Width
+                    </Text>
+                    <Text style={{ ...styles.para, ...styles.fontBold }}>
+                      Length
+                    </Text>
+                    <Text style={{ ...styles.para, ...styles.fontBold }}>
+                      Qty
+                    </Text>
+                    <Text style={{ ...styles.para, ...styles.fontBold }}>
+                      Weight
+                    </Text>
+                    <Text style={{ ...styles.para, ...styles.fontBold }}>
+                      Status
+                    </Text>
                   </View>
                   <View
                     style={{
@@ -262,7 +312,7 @@ const PrintReportStockListTable = ({
                       flexDirection: "column",
                     }}
                   >
-                    {scrapData.map((item, index) => {
+                    {props.scrapData.map((item, index) => {
                       return (
                         <>
                           <View
@@ -293,12 +343,12 @@ const PrintReportStockListTable = ({
                     }}
                   >
                     <Text style={styles.emptyblock1}></Text>
-                    <Text style={styles.totalFinal}>
+                    <Text style={{ ...styles.totalFinal, ...styles.fontBold }}>
                       Total Quantity and Weight :
                     </Text>
-                    <Text style={styles.qtyFinal}>{totQty2}</Text>
+                    <Text style={styles.qtyFinal}>{props.totQty2}</Text>
                     <Text style={styles.weightFinal}>
-                      {totWeight2.toFixed(2)}
+                      {props.totWeight2.toFixed(3)}
                     </Text>
                     <Text style={{ padding: "3.5%" }}></Text>
                   </View>

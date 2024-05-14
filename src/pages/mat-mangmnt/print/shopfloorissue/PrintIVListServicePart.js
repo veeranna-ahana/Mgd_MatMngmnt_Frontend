@@ -26,6 +26,7 @@ function PrintIVListServicePart({
   setIsPrintModalOpen,
 }) {
   const [PDFData, setPDFData] = useState({});
+  const [logoBase64, setLogoBase64] = useState(null);
   const location = useLocation();
   // console.log(
   //   "Second formheader = ",
@@ -40,7 +41,7 @@ function PrintIVListServicePart({
 
   function fetchPDFData() {
     let url1 = endpoints.getPDFData;
-    getRequest(url1, async (res) => {
+    postRequest(url1, {}, async (res) => {
       // console.log("res", res);
       setPDFData(res[0]);
     });

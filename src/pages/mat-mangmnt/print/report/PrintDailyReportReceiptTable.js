@@ -13,147 +13,102 @@ import MLLogo from "../../../../../src/ML-LOGO.png";
 import { formatDate } from "../../../../utils";
 
 //function PrintMaterialDCTable() {
+
+let headerFontSize = "13px";
+let subheaderFontsize = "11px";
+let fontSize = "9px";
+
 const styles = StyleSheet.create({
-  insideBox: { borderBottom: "1px", padding: "0.6%" },
-  page: {
-    fontSize: 11,
-    flexDirection: "column",
+  pageStyling: {
+    padding: "2%",
+    // paddingTop: "3%",
+    fontSize: fontSize,
+    fontFamily: "Helvetica",
   },
-  tableContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+  globalPadding: { padding: "0.6%" },
+  footerRowPadding: { padding: "3px" },
+  // globalPadding: { padding: "0.6%" },
+  fontBold: {
+    //   fontWeight: "bold",
+    fontSize: fontSize,
+    fontFamily: "Helvetica-Bold",
   },
 
-  topspace: {
-    width: "100%",
-    marginTop: "70px",
-  },
-  betweenspace: {
-    width: "100%",
-    marginTop: "20px",
-  },
-  titleFull: {
-    padding: "5px",
-    paddingLeft: "15px",
-    width: "100%",
-    fontWeight: "bold",
-    fontSize: "14px",
-  },
-  line1: {
-    width: "100%",
-    paddingLeft: "15px",
-  },
+  insideBox: { borderBottom: "1px", padding: "0.6%" },
+
   rvno: {
-    width: "9%",
+    width: "8%",
     // marginLeft: "18px",
-    marginTop: "6px",
-    fontSize: 10,
-    fontWeight: "bold",
+    // marginTop: "6px",
+    fontSize: fontSize,
+    // fontWeight: "bold",
   },
   customer: {
-    width: "34%",
+    width: "38%",
     // marginLeft: "5px",
-    marginTop: "6px",
-    fontSize: 10,
-    fontWeight: "bold",
+    // marginTop: "6px",
+    fontSize: fontSize,
+    // fontWeight: "bold",
   },
   material: {
-    width: "12%",
+    width: "13%",
     // marginLeft: "5px",
-    marginTop: "6px",
-    fontSize: 10,
-    fontWeight: "bold",
+    // marginTop: "6px",
+    fontSize: fontSize,
+    // fontWeight: "bold",
+  },
+  shape: {
+    width: "20%",
+    // marginLeft: "5px",
+    // marginTop: "6px",
+    fontSize: fontSize,
+    // fontWeight: "bold",
   },
   totalweight: {
     width: "12%",
     // marginLeft: "5px",
-    marginTop: "6px",
-    fontSize: 10,
-    fontWeight: "bold",
-  },
-  shape: {
-    width: "13%",
-    // marginLeft: "5px",
-    marginTop: "6px",
-    fontSize: 10,
-    fontWeight: "bold",
-  },
-  quantity: {
-    width: "12%",
-    // marginLeft: "5px",
-    marginTop: "6px",
-    fontSize: 10,
-    fontWeight: "bold",
-  },
-  rvnoVal: {
-    width: "10%",
-    // marginLeft: "18px",
-    marginTop: "3px",
-    fontSize: 8,
-  },
-  customerVal: {
-    width: "34%",
-    // marginLeft: "5px",
-    marginTop: "3px",
-    fontSize: 8,
-  },
-  materialVal: {
-    width: "12%",
-    // marginLeft: "5px",
-    marginTop: "3px",
-    fontSize: 8,
-  },
-  totalweightVal: {
-    width: "12%",
-    // marginLeft: "5px",
-    marginTop: "3px",
-    fontSize: 8,
-  },
-  shapeVal: {
-    width: "13%",
-    // marginLeft: "5px",
-    marginTop: "3px",
-    fontSize: 8,
-  },
-  quantityVal: {
-    width: "12%",
-    // marginLeft: "5px",
-    marginTop: "3px",
-    fontSize: 8,
+    // marginTop: "6px",
+    fontSize: fontSize,
+    // fontWeight: "bold",
   },
 
-  emptyblock1: {
-    width: "55%",
+  quantity: {
+    width: "9%",
+    // marginLeft: "5px",
+    // marginTop: "6px",
+    fontSize: fontSize,
+    // fontWeight: "bold",
   },
+
   summaryFinal: {
     width: "13%",
-    marginLeft: "5px",
-    marginTop: "13px",
-    marginBottom: "10px",
-    fontSize: 10,
+    // marginLeft: "5px",
+    // marginTop: "13px",
+    // marginBottom: "10px",
+    fontSize: fontSize,
   },
 
   totalWeightFinal: {
-    width: "13%",
-    marginLeft: "5px",
-    marginTop: "13px",
-    marginBottom: "10px",
-    fontSize: 10,
+    width: "12%",
+    // marginLeft: "5px",
+    // marginTop: "13px",
+    // marginBottom: "10px",
+    fontSize: fontSize,
   },
 
   quantityFinal: {
-    width: "13%",
-    marginLeft: "20px",
-    marginTop: "13px",
-    marginBottom: "10px",
-    fontSize: 10,
+    width: "9%",
+    // marginLeft: "20px",
+    // marginTop: "13px",
+    // marginBottom: "10px",
+    fontSize: fontSize,
   },
 
   MaterialReceiptIncharge: {
     width: "45%",
     marginLeft: "30px",
     marginTop: "10px",
-    fontSize: 11,
+    fontSize: subheaderFontsize,
   },
 
   MaterialDeptIncharge: {
@@ -161,20 +116,15 @@ const styles = StyleSheet.create({
     alignContent: "right",
     marginLeft: "25px",
     marginTop: "10px",
-    fontSize: 11,
+    fontSize: subheaderFontsize,
   },
 });
 
 //return <div>PrintMaterialDCTable</div>;
 //}
-const PrintDailyReportReceiptTable = ({
-  tableData,
-  date,
-  totqty,
-  totalweight,
-}) => (
+const PrintDailyReportReceiptTable = (props) => (
   <Document>
-    <Page size="A4" style={{ padding: "3%", fontSize: "11" }}>
+    <Page size="A4" style={{ ...styles.pageStyling }}>
       {/* <View>
         <Text style={{ padding: "1%" }}></Text>
       </View> */}
@@ -195,39 +145,33 @@ const PrintDailyReportReceiptTable = ({
               alignItems: "center",
             }}
           >
-            <Text style={{ fontWeight: "700" }}>
-              Magod Laser Machining Pvt. Ltd.
+            <Text
+              style={{
+                borderBottom: "1px",
+                ...styles.fontBold,
+                fontSize: headerFontSize,
+              }}
+            >
+              Daily Material Arrival Report :{" "}
+              {formatDate(new Date(props.date), 3)}{" "}
             </Text>
-            <Text style={{ fontWeight: "700" }}>
-              GSTIN: 29AABCM1970H1ZE, CIN: U28900KA1995PTC018437
+            <Text style={{ ...styles.fontBold, fontSize: subheaderFontsize }}>
+              {props.PDFData.RegisteredName}
             </Text>
+            <Text style={{ ...styles.fontBold }}>
+              GST: {props.PDFData.GST_No} CIN: {props.PDFData.CIN_No}
+            </Text>
+            <Text>{props.PDFData.RegistredOfficeAddress}</Text>
+
             <Text>
-              #71 & 72, Phase II, KIADB Indl Area, Jigani, Anekal Taluk,
-              Bengaluru - 560105
-            </Text>
-            <Text>
-              +91-80-42291005, +91-8110-414313, info@magodlaser.in,
-              https://www.magodlaser.in/
-            </Text>
-            <Text>
-              {" "}
-              Daily Material Arrival Report : {formatDate(new Date(date), 3)}
+              {props.PDFData.PhonePrimary}, {props.PDFData.PhoneSecondary},{" "}
+              {props.PDFData.Email}, {props.PDFData.URL}
             </Text>
           </View>
           <Text style={{ padding: "3%" }}></Text>
         </View>
         <Text style={{ padding: "1%" }}></Text>
         <View style={{ border: "1px" }}>
-          {/* Cust */}
-          {/* <View style={styles.insideBox}>
-            <Text style={{ fontWeight: "bold" }}>Customer Name:</Text>
-            <View style={{ paddingLeft: "1%" }}>
-              <Text style={styles.title1}>{customerDetails.customerName}</Text>
-              <Text style={styles.title1}>{customerDetails.address}</Text>
-              <Text style={styles.title1}>{customerDetails.city}</Text>
-            </View>
-          </View> */}
-
           {/* material stock */}
           <View style={styles.insideBox}>
             <View
@@ -237,17 +181,25 @@ const PrintDailyReportReceiptTable = ({
                 justifyContent: "space-between",
               }}
             >
-              <Text style={styles.rvno}>Rv No</Text>
-              <Text style={styles.customer}>Customer</Text>
-              <Text style={styles.material}>Material</Text>
-              <Text style={styles.shape}>Shape</Text>
-              <Text style={styles.totalweight}>Total Weight</Text>
-              <Text style={styles.quantity}>Quantity</Text>
+              <Text style={{ ...styles.rvno, ...styles.fontBold }}>Rv No</Text>
+              <Text style={{ ...styles.customer, ...styles.fontBold }}>
+                Customer
+              </Text>
+              <Text style={{ ...styles.material, ...styles.fontBold }}>
+                Material
+              </Text>
+              <Text style={{ ...styles.shape, ...styles.fontBold }}>Shape</Text>
+              <Text style={{ ...styles.totalweight, ...styles.fontBold }}>
+                Total Weight
+              </Text>
+              <Text style={{ ...styles.quantity, ...styles.fontBold }}>
+                Quantity
+              </Text>
             </View>
           </View>
           <View style={styles.insideBox}>
             <View style={{ display: "flex", flexDirection: "column" }}>
-              {tableData.map((item, index) => {
+              {props.tableData.map((item, index) => {
                 return (
                   <>
                     <View
@@ -257,14 +209,24 @@ const PrintDailyReportReceiptTable = ({
                         justifyContent: "space-between",
                       }}
                     >
-                      <Text style={styles.rvnoVal}>{item.RV_No}</Text>
-                      <Text style={styles.customerVal}>{item.Customer}</Text>
-                      <Text style={styles.materialVal}>{item.material}</Text>
-                      <Text style={styles.shapeVal}>{item.mtrl_code}</Text>
-                      <Text style={styles.totalweightVal}>
-                        {item.totalWeight}
+                      <Text style={{ padding: "2px", ...styles.rvno }}>
+                        {item.RV_No}
                       </Text>
-                      <Text style={styles.quantityVal}>{item.qty}</Text>
+                      <Text style={{ padding: "2px", ...styles.customer }}>
+                        {item.Customer}
+                      </Text>
+                      <Text style={{ padding: "2px", ...styles.material }}>
+                        {item.material}
+                      </Text>
+                      <Text style={{ padding: "2px", ...styles.shape }}>
+                        {item.mtrl_code}{" "}
+                      </Text>
+                      <Text style={{ padding: "2px", ...styles.totalweight }}>
+                        {parseFloat(item.totalWeight).toFixed(3)}
+                      </Text>
+                      <Text style={{ padding: "2px", ...styles.quantity }}>
+                        {parseInt(item.qty)}
+                      </Text>
                     </View>
                   </>
                 );
@@ -272,7 +234,14 @@ const PrintDailyReportReceiptTable = ({
             </View>
           </View>
 
-          <View style={{ ...styles.insideBox, border: "none" }}>
+          <View
+            style={{
+              ...styles.insideBox,
+              border: "none",
+              marginTop: "9px",
+              marginBottom: "9px",
+            }}
+          >
             <View
               style={{
                 display: "flex",
@@ -280,12 +249,14 @@ const PrintDailyReportReceiptTable = ({
                 justifyContent: "flex-end",
               }}
             >
-              <Text style={styles.summaryFinal}>Summary</Text>
-              <Text style={styles.totalWeightFinal}>
-                {totalweight.toFixed(2)}
+              <Text style={{ ...styles.summaryFinal, ...styles.fontBold }}>
+                Summary
               </Text>
-              <Text style={styles.quantityFinal}>{totqty}</Text>
-              <Text style={{ padding: "3.5%" }}></Text>
+              <Text style={styles.totalWeightFinal}>
+                {props.totalweight.toFixed(3)}
+              </Text>
+              <Text style={styles.quantityFinal}>{parseInt(props.totqty)}</Text>
+              {/* <Text style={{ padding: "3.5%" }}></Text> */}
             </View>
           </View>
         </View>
@@ -296,6 +267,7 @@ const PrintDailyReportReceiptTable = ({
             justifyContent: "space-between",
             padding: "3%",
             // marginTop: "1.5%",
+            ...styles.fontBold,
           }}
         >
           <Text

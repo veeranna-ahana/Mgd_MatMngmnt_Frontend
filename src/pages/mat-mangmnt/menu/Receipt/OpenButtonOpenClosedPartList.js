@@ -80,7 +80,7 @@ function OpenButtonOpenClosedPartList() {
       location.state.id;
     getRequest(url, (data) => {
       //console.log("data = ", data);
-      data.ReceiptDate = formatDate(new Date(data.ReceiptDate), 4);
+      data.ReceiptDate = formatDate(new Date(data.ReceiptDate), 10);
       data.RV_Date = formatDate(new Date(data.RV_Date), 3);
       //setFormHeader(data);
 
@@ -332,13 +332,13 @@ function OpenButtonOpenClosedPartList() {
           </div>
         </div>
 
-        <div className="row ">
+        <div className="row mt-2">
           <div className="col-md-8">
             <textarea
               className="input-disabled mt-1"
               id="exampleFormControlTextarea1"
               rows="4"
-              style={{ width: "700px", height: "40px" }}
+              style={{ width: "700px", height: "60px" }}
               value={formHeader.address}
               readOnly
             ></textarea>
@@ -371,7 +371,7 @@ function OpenButtonOpenClosedPartList() {
       </div>
       <div className="row">
         <div
-          style={{ height: "300px", overflowY: "scroll" }}
+          style={{ height: "250px", overflowY: "scroll" }}
           className="col-md-8 col-sm-12"
         >
           <BootstrapTable
@@ -387,7 +387,11 @@ function OpenButtonOpenClosedPartList() {
         </div>
 
         <div className="col-md-4 col-sm-12">
+<<<<<<< HEAD
           <div className="ip-box form-bg" style={{ height: "300px" }}>
+=======
+          <div className="ip-box form-bg" style={{ height: "250px" }}>
+>>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
             <div className="row mt-2 ">
               <div className="col-md-4"></div>
               <button
@@ -502,7 +506,8 @@ function OpenButtonOpenClosedPartList() {
                   type="text"
                   value={inputPart.qtyReceived - inputPart.qtyAccepted}
                   name="qtyRejected"
-                  readOnly
+                  // readOnly
+                  disabled
                 />
               </div>
             </div>

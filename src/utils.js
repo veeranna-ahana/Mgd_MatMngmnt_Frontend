@@ -90,21 +90,36 @@ export function formatDate(dateObj, format) {
   } else if (format === 9) {
     // Month yyyy
     return monthNames[parseInt(currmonth - 1)] + " " + curryear;
+  } else if (format === 10) {
+    // dd/mm/yyyy HH:mm:ss
+    return (
+      currdate +
+      "/" +
+      currmonth +
+      "/" +
+      curryear +
+      " " +
+      currhr +
+      ":" +
+      currmin +
+      ":" +
+      currsc
+    );
   }
 }
 
 export function getWeight(obj, para1, para2, para3) {
-  console.log(" getweight = ", obj);
-  console.log(" para1 = ", para1);
-  console.log(" para2 = ", para2);
-  console.log(" para3 = ", para3);
+  // console.log(" getweight = ", obj);
+  // console.log(" para1 = ", para1);
+  // console.log(" para2 = ", para2);
+  // console.log(" para3 = ", para3);
 
   let dblWeight = 0;
   let dblVol = getVolume(obj, obj.Shape, para1, para2, para3);
-  console.log(" dblVol = ", dblVol);
+  // console.log(" dblVol = ", dblVol);
   // dblWeight = dblVol * obj.SpecificWt;
   dblWeight = dblVol * getDensity(obj);
-  console.log(" dblweight = ", dblWeight);
+  // console.log(" dblweight = ", dblWeight);
   return dblWeight;
 }
 

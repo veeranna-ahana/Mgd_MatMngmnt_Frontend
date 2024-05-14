@@ -14,6 +14,25 @@ import { VscTypeHierarchySub } from "react-icons/vsc";
 import { BiFoodMenu } from "react-icons/bi";
 import { HiUsers } from "react-icons/hi";
 
+import { AiOutlineDeploymentUnit } from "react-icons/ai";
+import { FiSlack } from "react-icons/fi";
+import { TbReport } from "react-icons/tb";
+import { BiStore } from "react-icons/bi";
+import { TbReportSearch } from "react-icons/tb";
+import { MdPendingActions } from "react-icons/md";
+import { GiResize } from "react-icons/gi";
+import { TbTransferIn } from "react-icons/tb";
+import { SiMaterialdesignicons } from "react-icons/si";
+import { MdOutlinePlace } from "react-icons/md";
+import { MdAutoAwesomeMotion } from "react-icons/md";
+import { MdOutlineSettingsAccessibility } from "react-icons/md";
+import { MdOutlineWebhook } from "react-icons/md";
+import { FaBusinessTime } from "react-icons/fa";
+import { CgUserList } from "react-icons/cg";
+import { IoCartOutline } from "react-icons/io5";
+import { ImCancelCircle } from "react-icons/im";
+import { RiScissorsCutFill } from "react-icons/ri";
+
 export const customerSidebar = [
   /* {
     title: "Setup",
@@ -42,7 +61,7 @@ export const customerSidebar = [
       {
         title: "Customer Job Work",
         // path: "/materialmanagement/receipt/customerjobwork",
-        icon: <AiIcons.AiFillCustomerService />,
+        icon: <MdOutlineSettingsAccessibility />,
         subNav: [
           {
             title: "Parts",
@@ -51,7 +70,7 @@ export const customerSidebar = [
               {
                 title: "New",
                 path: "/MaterialManagement/Receipt/CustomerJobWork/Parts/New",
-                icon: <AiIcons.AiOutlineArrowRight />,
+                icon: <MdOutlineWebhook />,
               },
               {
                 title: "Draft RV List",
@@ -77,7 +96,7 @@ export const customerSidebar = [
               {
                 title: "New",
                 path: "/MaterialManagement/Receipt/CustomerJobWork/Units/New",
-                icon: <AiIcons.AiOutlineArrowRight />,
+                icon: <MdOutlineWebhook />,
               },
               {
                 title: "Draft RV List",
@@ -104,7 +123,7 @@ export const customerSidebar = [
               {
                 title: "New",
                 path: "/MaterialManagement/Receipt/CustomerJobWork/SheetsAndOthers/New",
-                icon: <AiIcons.AiOutlineArrowRight />,
+                icon: <MdOutlineWebhook />,
               },
               {
                 title: "Draft RV List",
@@ -139,7 +158,7 @@ export const customerSidebar = [
               {
                 title: "New",
                 path: "/MaterialManagement/Receipt/Purchase/Parts/New",
-                icon: <AiIcons.AiOutlineArrowRight />,
+                icon: <MdOutlineWebhook />,
               },
               {
                 title: "Draft RV List",
@@ -165,7 +184,7 @@ export const customerSidebar = [
               {
                 title: "New",
                 path: "/MaterialManagement/Receipt/Purchase/Units/New",
-                icon: <AiIcons.AiOutlineArrowRight />,
+                icon: <MdOutlineWebhook />,
               },
               {
                 title: "Draft RV List",
@@ -192,7 +211,7 @@ export const customerSidebar = [
               {
                 title: "New",
                 path: "/MaterialManagement/Receipt/Purchase/Others/New",
-                icon: <AiIcons.AiOutlineArrowRight />,
+                icon: <MdOutlineWebhook />,
               },
               {
                 title: "Draft RV List",
@@ -218,7 +237,7 @@ export const customerSidebar = [
               {
                 title: "New",
                 path: "/MaterialManagement/Receipt/Purchase/Gas/New",
-                icon: <AiIcons.AiOutlineArrowRight />,
+                icon: <MdOutlineWebhook />,
               },
             ],
           },
@@ -242,32 +261,32 @@ export const customerSidebar = [
       {
         title: "Customer Job Work",
         // path: "/materialmanagement/return/customerjobwork",
-        icon: <AiIcons.AiFillCustomerService />,
+        icon: <MdOutlineSettingsAccessibility />,
         subNav: [
           {
             title: "New",
             path: "/MaterialManagement/Return/CustomerJobWork/New",
-            icon: <AiIcons.AiOutlineArrowRight />,
+            icon: <MdOutlineWebhook />,
           },
           {
             title: "Pending Dispatch List",
             path: "/MaterialManagement/Return/CustomerJobWork/PendingDispatchList",
-            icon: <AiIcons.AiOutlineArrowRight />,
+            icon: <FaBusinessTime />,
           },
           {
             title: "Customer IV List",
             path: "/MaterialManagement/Return/CustomerJobWork/CustomerIVList",
-            icon: <AiIcons.AiOutlineArrowRight />,
+            icon: <CgUserList />,
           },
           {
             title: "Sales IV List",
             path: "/MaterialManagement/Return/CustomerJobWork/SalesIVList",
-            icon: <AiIcons.AiOutlineArrowRight />,
+            icon: <IoCartOutline />,
           },
           {
             title: "Cancelled",
             path: "/MaterialManagement/Return/CustomerJobWork/Cancelled",
-            icon: <AiIcons.AiOutlineArrowRight />,
+            icon: <ImCancelCircle />,
           },
         ],
       },
@@ -281,7 +300,7 @@ export const customerSidebar = [
   {
     title: "Shop Floor Issue",
     // path: "/customer",
-    icon: <BsIcon.BsListTask />,
+    icon: <AiOutlineDeploymentUnit />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
 
@@ -326,7 +345,7 @@ export const customerSidebar = [
       },
       {
         title: "IV List Profile Cutting",
-        icon: <BiIcons.BiCut />,
+        icon: <RiScissorsCutFill />,
         subNav: [
           {
             title: "Current",
@@ -345,7 +364,7 @@ export const customerSidebar = [
   {
     title: "Shop Floor Returns",
     // path: "/customer",
-    icon: <BsIcon.BsListTask />,
+    icon: <FiSlack />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
 
@@ -353,14 +372,14 @@ export const customerSidebar = [
       {
         title: "Pending IV List",
         path: "/MaterialManagement/ShopFloorReturns/PendingList",
-        icon: <AiIcons.AiOutlineArrowRight />,
+        icon: <MdPendingActions />,
       },
     ],
   },
   {
     title: "Reports",
     // path: "/customer",
-    icon: <BsIcon.BsListTask />,
+    icon: <TbReport />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
 
@@ -385,7 +404,7 @@ export const customerSidebar = [
       {
         title: "Daily Report",
         path: "/MaterialManagement/Reports/DailyReports",
-        icon: <MdIcon.MdOutlineSummarize />,
+        icon: <TbReportSearch />,
       },
       {
         title: " Monthly Report",
@@ -397,7 +416,7 @@ export const customerSidebar = [
   {
     title: "Store Management",
     // path: "/customer",
-    icon: <SiIcon.SiMaterialdesignicons />,
+    icon: <BiStore />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
 
@@ -405,12 +424,12 @@ export const customerSidebar = [
       {
         title: "Resize Sheets        ",
         path: "/MaterialManagement/StoreManagement/ResizeSheets",
-        icon: <MdIcon.MdOutlineOtherHouses />,
+        icon: <GiResize />,
       },
       {
         title: "Move Store",
         // path: "/materialmanagement/storemanagement/movestore",
-        icon: <MdIcon.MdOutlineOtherHouses />,
+        icon: <TbTransferIn />,
         subNav: [
           {
             title: "Customer",
@@ -433,11 +452,11 @@ export const customerSidebar = [
       {
         title: " Location List",
         path: "/MaterialManagement/StoreManagement/LocationList",
-        icon: <BiIcons.BiPurchaseTag />,
+        icon: <MdOutlinePlace />,
       },
       {
         title: " Stock",
-        icon: <BiIcons.BiPurchaseTag />,
+        icon: <SiMaterialdesignicons />,
         subNav: [
           {
             title: "Stock List",
@@ -471,9 +490,9 @@ export const customerSidebar = [
         ],
       },
       {
-        title: " Location Stock        ",
+        title: "Location Stock",
         path: "/MaterialManagement/StoreManagement/LocationStock",
-        icon: <BiIcons.BiPurchaseTag />,
+        icon: <MdAutoAwesomeMotion />,
       },
     ],
   },

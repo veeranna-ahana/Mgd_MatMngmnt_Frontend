@@ -215,11 +215,14 @@ const PrintIVListServicePartTable = ({ formHeader, tableData, PDFData }) => {
     acc[item.PartId].push(item);
     return acc;
   }, {});
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.tableContainer}>
           {/* <Image src={MLLogo} style={styles.logoImage} />
+        
+         
         <Text style={styles.title1}>Magod Laser Machining Pvt Ltd : Jigni</Text>
 
         <Text style={styles.title2}>
@@ -229,6 +232,8 @@ const PrintIVListServicePartTable = ({ formHeader, tableData, PDFData }) => {
 
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Image src={MLLogo} style={styles.logoImage} />
+            {/* {logoBase64 && <Image src={logoBase64} style={styles.logoImage} />} */}
+
             <View>
               <View style={{ justifyContent: "center" }}>
                 <Text style={[styles.title1, { textDecoration: "underline" }]}>

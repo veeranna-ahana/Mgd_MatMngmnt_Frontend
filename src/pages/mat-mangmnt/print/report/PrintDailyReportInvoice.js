@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { PDFViewer } from "@react-pdf/renderer";
 import PrintMaterialDCTable from "./PrintDailyReportReceiptTable";
 import { useLocation } from "react-router-dom";
@@ -6,7 +6,11 @@ import PrintDailyReportReceiptTable from "./PrintDailyReportReceiptTable";
 import PrintDailyReportInvoiceTable from "./PrintDailyReportInvoiceTable";
 import { Modal } from "react-bootstrap";
 
+import { postRequest } from "../../../api/apiinstance";
+import { endpoints } from "../../../api/constants";
 function PrintDailyReportInvoice(props) {
+  const [PDFData, setPDFData] = useState({});
+
   const location = useLocation();
   // console.log(
   //   "date = ",
@@ -16,6 +20,16 @@ function PrintDailyReportInvoice(props) {
   // );
 
   const handleClose = () => props.setInvoiceDispatchPrint(false);
+
+  function fetchPDFData() {
+    postRequest(endpoints.getPDFData, {}, (res) => {
+      setPDFData(res[0]);
+    });
+  }
+
+  useEffect(() => {
+    fetchPDFData();
+  }, []);
 
   return (
     <>
@@ -29,6 +43,7 @@ function PrintDailyReportInvoice(props) {
               <PrintDailyReportInvoiceTable
                 tableData={props.tableData}
                 date={props.date}
+                PDFData={PDFData}
               />
             </PDFViewer>
           </Fragment>

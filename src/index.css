@@ -59,14 +59,14 @@ code {
 
 .side-nav-main-title {
   display: none;
-  font-size: 15px !important;
+  font-size: 12px !important;
 }
 .side-nav-main-icon {
   font-size: 1.2rem;
 }
 
 .side-nav:hover .side-nav-main-icon {
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .side-nav-sub-menu {
@@ -128,6 +128,7 @@ code {
 
 .sub-menu-label {
   display: none;
+  font-size: 12px;
 }
 
 .side-nav:hover .sub-menu-label {
