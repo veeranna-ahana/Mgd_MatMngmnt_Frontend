@@ -164,18 +164,22 @@ function StockList(props) {
     {
       text: "Material",
       dataField: "Material",
+      sort: true,
     },
     {
       text: "Qty",
       dataField: "Qty",
+      sort: true,
     },
     {
       text: "Weight",
       dataField: "Weight",
+      sort: true,
     },
     {
       text: "Scrap Weight",
       dataField: "ScrapWeight",
+      sort: true,
     },
   ];
   const columns2 = [
@@ -187,18 +191,22 @@ function StockList(props) {
     {
       text: "Material Code",
       dataField: "Mtrl_Code",
+      sort: true,
     },
     {
       text: "Qty",
       dataField: "Qty",
+      sort: true,
     },
     {
       text: "Weight",
       dataField: "Weight",
+      sort: true,
     },
     {
       text: "Scrap Weight",
       dataField: "ScrapWeight",
+      sort: true,
     },
   ];
   const columns3 = [
@@ -210,14 +218,17 @@ function StockList(props) {
     {
       text: "Width",
       dataField: "DynamicPara1",
+      sort: true,
     },
     {
       text: "Length",
       dataField: "DynamicPara2",
+      sort: true,
     },
     {
       text: "Qty",
       dataField: "Qty",
+      sort: true,
     },
     {
       text: "Locked",
@@ -229,6 +240,7 @@ function StockList(props) {
           </lable>
         </div>
       ),
+      sort: true,
     },
     {
       text: "Scrap",
@@ -240,15 +252,18 @@ function StockList(props) {
           </lable>
         </div>
       ),
+      sort: true,
     },
     {
       text: "Weight",
       dataField: "Weight",
+      sort: true,
     },
     {
       text: "Scrap Weight",
       dataField: "ScrapWeight",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
   ];
   const selectRow1 = {
@@ -499,6 +514,33 @@ function StockList(props) {
     //   },
     // });
   };
+
+  const [sort1, setSort1] = React.useState({
+    dataField: "id",
+    order: "asc",
+  });
+
+  const [sort2, setSort2] = React.useState({
+    dataField: "id",
+    order: "asc",
+  });
+
+  const [sort3, setSort3] = React.useState({
+    dataField: "id",
+    order: "asc",
+  });
+
+  const onSortChange1 = (dataField, order) => {
+    setSort1({ dataField, order });
+  };
+
+  const onSortChange2 = (dataField, order) => {
+    setSort2({ dataField, order });
+  };
+
+  const onSortChange3 = (dataField, order) => {
+    setSort3({ dataField, order });
+  };
   return (
     <>
       <div>
@@ -507,7 +549,7 @@ function StockList(props) {
           <h4 className="title">Material Stock List</h4>
           {/* <h4 className="form-title">Customer Material Stock List</h4> */}
           <div className="row">
-            <div className="d-flex col-md-8 col-sm-12" style={{gap:'10px'}}>
+            <div className="d-flex col-md-8 col-sm-12" style={{ gap: "10px" }}>
               <div
                 className={
                   props.type === "customer" ? " col-md-1 mt-2" : "d-none"
@@ -548,13 +590,17 @@ function StockList(props) {
                 className="button-style"
                 onClick={selectedStock}
                 disabled={thirdTable.length <= 0}
-                style={{width:'90px'}}
+                style={{ width: "90px" }}
               >
                 Selected Stock
               </button>
             </div>
             <div className="col-md-1 col-sm-12 ms-3">
-              <button className="button-style"  style={{width:'70px'}} onClick={fullStock}>
+              <button
+                className="button-style"
+                style={{ width: "70px" }}
+                onClick={fullStock}
+              >
                 Full Stock
               </button>
             </div>
@@ -585,6 +631,8 @@ function StockList(props) {
                     condensed
                     selectRow={selectRow1}
                     headerClasses="header-class tableHeaderBGColor"
+                    sort={sort1}
+                    onSortChange={onSortChange1}
                   ></BootstrapTable>
                 </div>
               </div>
@@ -600,6 +648,8 @@ function StockList(props) {
                     condensed
                     selectRow={selectRow2}
                     headerClasses="header-class tableHeaderBGColor"
+                    sort={sort2}
+                    onSortChange={onSortChange2}
                   ></BootstrapTable>
                 </div>
               </div>
@@ -616,6 +666,8 @@ function StockList(props) {
                   condensed
                   //selectRow={selectRow1}
                   headerClasses="header-class tableHeaderBGColor"
+                  sort={sort3}
+                  onSortChange={onSortChange3}
                 ></BootstrapTable>
               </div>
             </div>

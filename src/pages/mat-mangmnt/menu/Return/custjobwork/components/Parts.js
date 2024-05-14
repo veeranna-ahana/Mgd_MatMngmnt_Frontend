@@ -522,6 +522,8 @@ function Parts(props) {
     // setThirdTableData(thirdTableData);
   };
 
+  console.log("thirdTableData", thirdTableData);
+
   const getDCNo = async () => {
     // console.log("todayDate", todayDate);
 
@@ -557,12 +559,37 @@ function Parts(props) {
     );
   };
 
+  const checkQtyForZero = () => {
+    let flag = true;
+    for (let i = 0; i < thirdTableData.length; i++) {
+      const element = thirdTableData[i];
+      if (element.QtyReturnedNew === 0) {
+        toast.warning("Qty returned can't be zero");
+        flag = false;
+        break;
+      }
+    }
+    return flag;
+  };
   const createReturnVoucherValidationFunc = () => {
     if (props.custCode) {
       if (firstTableSelectedRow.length > 0 || secondTableData.length > 0) {
         if (thirdTableData.length > 0) {
-          getDCNo();
-          setConfirmModalOpen(true);
+          let arr = [];
+          for (let i = 0; i < thirdTableData.length; i++) {
+            const element = thirdTableData[i];
+            if (element.QtyReturnedNew === "") {
+              element.QtyReturnedNew = 0;
+            }
+            arr.push(element);
+          }
+
+          setThirdTableData(arr);
+          // checkQtyForZero()
+          if (checkQtyForZero()) {
+            getDCNo();
+            setConfirmModalOpen(true);
+          }
         } else {
           toast.warning(
             "Select atleast one Part for creating the return voucher"

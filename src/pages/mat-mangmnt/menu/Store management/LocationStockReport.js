@@ -256,18 +256,22 @@ function LocationStockReport() {
     {
       text: "LocationNo",
       dataField: "LocationNo",
+      sort: true,
     },
     {
       text: "StorageType",
       dataField: "StorageType",
+      sort: true,
     },
     {
       text: "Capacity",
       dataField: "Capacity",
+      sort: true,
     },
     {
       text: "CapacityUtilised",
       dataField: "CapacityUtilised",
+      sort: true,
     },
   ];
   const columns2 = [
@@ -279,34 +283,42 @@ function LocationStockReport() {
     {
       text: "Customer",
       dataField: "Customer",
+      sort: true,
     },
     {
       text: "Material",
       dataField: "Mtrl_Code",
+      sort: true,
     },
     {
       text: "Dim1",
       dataField: "DynamicPara1",
+      sort: true,
     },
     {
       text: "Dim2",
       dataField: "DynamicPara2",
+      sort: true,
     },
     {
       text: "Quantity",
       dataField: "Quantity",
+      sort: true,
     },
     {
       text: "Scrap",
       dataField: "Scrap",
+      sort: true,
     },
     {
       text: "Weight",
       dataField: "Weight",
+      sort: true,
     },
     {
       text: "SWeight",
       dataField: "SWeight",
+      sort: true,
     },
   ];
   const columns3 = [
@@ -318,22 +330,27 @@ function LocationStockReport() {
     {
       text: "MtrlStockID",
       dataField: "MtrlStockID",
+      sort: true,
     },
     {
       text: "Dim1",
       dataField: "DynamicPara1",
+      sort: true,
     },
     {
       text: "Dim2",
       dataField: "DynamicPara2",
+      sort: true,
     },
     {
       text: "Weight",
       dataField: "Weight",
+      sort: true,
     },
     {
       text: "ScrapWeight",
       dataField: "ScrapWeight",
+      sort: true,
     },
   ];
   const selectRow1 = {
@@ -396,6 +413,33 @@ function LocationStockReport() {
     },
   };
 
+  const [sort1, setSort1] = React.useState({
+    dataField: "id",
+    order: "asc",
+  });
+
+  const [sort2, setSort2] = React.useState({
+    dataField: "id",
+    order: "asc",
+  });
+
+  const [sort3, setSort3] = React.useState({
+    dataField: "id",
+    order: "asc",
+  });
+
+  const onSortChange1 = (dataField, order) => {
+    setSort1({ dataField, order });
+  };
+
+  const onSortChange2 = (dataField, order) => {
+    setSort2({ dataField, order });
+  };
+
+  const onSortChange3 = (dataField, order) => {
+    setSort3({ dataField, order });
+  };
+
   return (
     <>
       <div>
@@ -403,7 +447,6 @@ function LocationStockReport() {
         <div className="row">
           <div className="col-md-4">
             <h4 className="form-title">
-              {" "}
               <u>Stock Viewer</u>
             </h4>
 
@@ -434,51 +477,45 @@ function LocationStockReport() {
                 />
               </div>
 
-
-              <div className="d-flex col-md-6 mt-1" style={{gap:'15px'}}>
+              <div className="d-flex col-md-6 mt-1" style={{ gap: "15px" }}>
                 <label className="form-label col-md-3"> Location</label>
                 <input
-                className="input-disabled "
+                  className="input-disabled "
                   name="LocationNo"
                   value={selectedfirstRow.LocationNo}
                 />
               </div>
 
-
-              <div className="d-flex col-md-6 mt-1" style={{gap:'15px'}}>
-                {" "}
+              <div className="d-flex col-md-6 mt-1" style={{ gap: "15px" }}>
                 <label className="form-label col-md-3">Capacity</label>
                 <input
-                   className="input-disabled "
+                  className="input-disabled "
                   name="Capacity"
                   value={selectedfirstRow.Capacity}
                 />
               </div>
 
-              <div className="d-flex col-md-6" style={{gap:'15px'}}>
-                
+              <div className="d-flex col-md-6" style={{ gap: "15px" }}>
                 <label className="form-label col-md-3">Type</label>
                 <input
-                   className="input-disabled "
+                  className="input-disabled "
                   name="StorageType"
                   value={selectedfirstRow.StorageType}
                 />
               </div>
 
-              <div className="d-flex col-md-6" style={{gap:'15px'}}>
-              
+              <div className="d-flex col-md-6" style={{ gap: "15px" }}>
                 <label className="form-label col-md-3">Used</label>
                 <input
-                   className="input-disabled "
+                  className="input-disabled "
                   name="CapacityUtilised"
                   value={selectedfirstRow.CapacityUtilised}
                 />
               </div>
             </div>
             <div className="row">
-              {" "}
               {/* <div className="col-md-6">
-                {" "}
+                
                 <label className="form-label">Type</label>
                 <input
                   className=""
@@ -487,7 +524,7 @@ function LocationStockReport() {
                 />
               </div> */}
               {/* <div className="col-md-6">
-                {" "}
+                
                 <label className="form-label">Used</label>
                 <input
                   className=""
@@ -501,10 +538,8 @@ function LocationStockReport() {
           <div className="col-md-8">
             <h8 className="form-label">Show Stock</h8>
             <div className="row">
-
               <div className="col-md-4">
                 <div className="row">
-                  {" "}
                   <div
                     className="col-md-6 mt-2"
                     style={{ display: "flex", gap: "5px" }}
@@ -524,7 +559,6 @@ function LocationStockReport() {
                   </div>
                 </div>
                 <div className="row">
-                  {" "}
                   <div
                     className="col-md-8 mt-2"
                     style={{ display: "flex", gap: "5px" }}
@@ -586,49 +620,58 @@ function LocationStockReport() {
             </div>
 
             <div className="row">
-              <div className="d-flex col-md-4" style={{gap:'5px'}}>
+              <div className="d-flex col-md-4" style={{ gap: "5px" }}>
                 <label className="form-label col-md-3">Material</label>
-                <input    className="input-disabled " value={selectedSecondRow.Mtrl_Code} />
+                <input
+                  className="input-disabled "
+                  value={selectedSecondRow.Mtrl_Code}
+                />
               </div>
 
-              <div className="d-flex col-md-4" style={{gap:'5px'}}>
+              <div className="d-flex col-md-4" style={{ gap: "5px" }}>
                 <label className="form-label col-md-3">Customer</label>
-                <input  className="input-disabled " value={selectedSecondRow.Customer} />
+                <input
+                  className="input-disabled "
+                  value={selectedSecondRow.Customer}
+                />
               </div>
 
               <div className="row col-md-4">
-                  <div className="col-md-2 col-sm-12">
-                    <input
-                      className="form-check-input mt-3"
-                      type="checkbox"
-                      id="flexCheckDefault"
-                      name="updated"
-                      checked={selectedSecondRow.Scrap !== 0 ? true : false}
-                      //   value={inputPart.upDated}
-                      //disabled={boolVal3 | boolVal4}
-                      //   disabled={true}
-                      //   onChange={changeMaterialHandle}
-                    />
-                  </div>
-                  <div className="col-md-8 col-sm-12">
-                    <label className="form-label mt-1">Scrap</label>
-                  </div>
+                <div className="col-md-2 col-sm-12">
+                  <input
+                    className="form-check-input mt-3"
+                    type="checkbox"
+                    id="flexCheckDefault"
+                    name="updated"
+                    checked={selectedSecondRow.Scrap !== 0 ? true : false}
+                    //   value={inputPart.upDated}
+                    //disabled={boolVal3 | boolVal4}
+                    //   disabled={true}
+                    //   onChange={changeMaterialHandle}
+                  />
                 </div>
+                <div className="col-md-8 col-sm-12">
+                  <label className="form-label mt-1">Scrap</label>
+                </div>
+              </div>
             </div>
 
             <div className="row">
-              {" "}
-              <div className=" d-flex col-md-4" style={{gap:'5px'}}>
+              <div className=" d-flex col-md-4" style={{ gap: "5px" }}>
                 <label className="form-label col-md-3">Dim 1</label>
-                <input className="input-disabled " value={selectedSecondRow.DynamicPara1} />
+                <input
+                  className="input-disabled "
+                  value={selectedSecondRow.DynamicPara1}
+                />
               </div>
 
-              <div className="d-flex col-md-4" style={{gap:'5px'}}>
+              <div className="d-flex col-md-4" style={{ gap: "5px" }}>
                 <label className="form-label col-md-3">Dim 2</label>
-                <input className="input-disabled " value={selectedSecondRow.DynamicPara2} />
+                <input
+                  className="input-disabled "
+                  value={selectedSecondRow.DynamicPara2}
+                />
               </div>
-
-              
 
               <div className="col-md-4 mt-2">
                 {/* <div className="row">
@@ -672,7 +715,9 @@ function LocationStockReport() {
                 condensed
                 selectRow={selectRow1}
                 headerClasses="header-class tableHeaderBGColor"
-              ></BootstrapTable>{" "}
+                sort={sort1}
+                onSortChange={onSortChange1}
+              ></BootstrapTable>
             </div>
           </div>
           <div className="col-md-7">
@@ -694,7 +739,9 @@ function LocationStockReport() {
                   condensed
                   selectRow={selectRow2}
                   headerClasses="header-class tableHeaderBGColor"
-                ></BootstrapTable>{" "}
+                  sort={sort2}
+                  onSortChange={onSortChange2}
+                ></BootstrapTable>
               </div>
             </div>
             <div className="row">
@@ -715,7 +762,9 @@ function LocationStockReport() {
                   condensed
                   //selectRow={selectRow1}
                   headerClasses="header-class tableHeaderBGColor"
-                ></BootstrapTable>{" "}
+                  sort={sort3}
+                  onSortChange={onSortChange3}
+                ></BootstrapTable>
               </div>
             </div>
           </div>
