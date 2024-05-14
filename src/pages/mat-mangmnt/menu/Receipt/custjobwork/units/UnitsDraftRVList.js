@@ -121,10 +121,8 @@ export default function UnitsDraftRVList(props) {
       <>
         <h4 className="title">Customer : Units Receipt List Created</h4>
         <div className="row">
-          <div className=" d-flex col-md-7 mb-3">
-            <div className="col-md-2">
-              <label className="form-label">Customer</label>
-            </div>
+          <div className=" d-flex col-md-7 mb-3" style={{ gap: "10px" }}>
+            <label className="form-label">Customer</label>
 
             {/* <select
               className="ip-select"
@@ -140,15 +138,15 @@ export default function UnitsDraftRVList(props) {
                 </option>
               ))}
             </select> */}
-            <div className="col-md-6 mt-2">
-              <Typeahead
-                id="basic-example"
-                name="customer"
-                options={custdata}
-                placeholder="Select Customer"
-                onChange={(label) => changeCustomer(label)}
-              />
-            </div>
+
+            <Typeahead
+              className="ip-select"
+              id="basic-example"
+              name="customer"
+              options={custdata}
+              placeholder="Select Customer"
+              onChange={(label) => changeCustomer(label)}
+            />
           </div>
           <div className="col-md-5 text-center">
             <button

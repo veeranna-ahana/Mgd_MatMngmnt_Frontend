@@ -826,8 +826,8 @@ function OutwordMaterialIssueVocher(props) {
                   }
                   className={
                     formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
-                      ? "input-disabled"
-                      : ""
+                      ? ""
+                      : "input-disabled"
                   }
                 />
               </div>

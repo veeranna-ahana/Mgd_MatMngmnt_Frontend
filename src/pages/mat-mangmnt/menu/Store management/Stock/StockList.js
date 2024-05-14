@@ -507,7 +507,7 @@ function StockList(props) {
           <h4 className="title">Material Stock List</h4>
           {/* <h4 className="form-title">Customer Material Stock List</h4> */}
           <div className="row">
-            <div className="d-flex col-md-8 col-sm-12" style={{gap:'10px'}}>
+            <div className="d-flex col-md-8 col-sm-12" style={{ gap: "10px" }}>
               <div
                 className={
                   props.type === "customer" ? " col-md-1 mt-2" : "d-none"
@@ -543,22 +543,20 @@ function StockList(props) {
               </div>
             </div>
 
-            <div className="col-md-1 col-sm-12">
+            <div className="col-md-4">
               <button
-                className="button-style"
+                className="button-style group-button"
                 onClick={selectedStock}
                 disabled={thirdTable.length <= 0}
-                style={{width:'90px'}}
+                // style={{ width: "90px" }}
               >
                 Selected Stock
               </button>
-            </div>
-            <div className="col-md-1 col-sm-12 ms-3">
-              <button className="button-style"  style={{width:'70px'}} onClick={fullStock}>
+
+              <button className="button-style" onClick={fullStock}>
                 Full Stock
               </button>
-            </div>
-            <div className="col-md-1 col-sm-12">
+
               <button
                 className="button-style "
                 id="btnclose"

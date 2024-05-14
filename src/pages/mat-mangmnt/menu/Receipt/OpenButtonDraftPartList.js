@@ -691,136 +691,124 @@ function OpenButtonDraftPartList() {
         <h4 className="title">Customer Parts Receipt Voucher </h4>
 
         <div className="row">
-          <div className="d-flex col-md-3">
-            <div className="col-md-4">
-              <label className="form-label">Receipt Date</label>
-            </div>
-            <div className="col-md-6">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="receiptDate"
-                value={formHeader.receiptDate}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-3" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Receipt Date
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="receiptDate"
+              value={formHeader.receiptDate}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-2">
-            <div className="col-md-4">
-              <label className="form-label">RV No</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="rvNo"
-                value={formHeader.rvNo}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-2" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              RV No
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="rvNo"
+              value={formHeader.rvNo}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-2">
-            <div className="col-md-4">
-              <label className="form-label">RV Date</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="rvDate"
-                value={formHeader.rvDate}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-2" style={{ gap: "19px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              RV Date
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="rvDate"
+              value={formHeader.rvDate}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-2">
-            <div className="col-md-3">
-              <label className="form-label">Status</label>
-            </div>
-            <div className="col-md-7">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="status"
-                value={formHeader.status}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-2" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Status
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="status"
+              value={formHeader.status}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-2">
-            <div className="col-md-9">
-              <label className="form-label">Weight</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="number"
-                onKeyDown={blockInvalidChar}
-                min="0"
-                name="weight"
-                value={formHeader.weight}
-                onChange={InputHeaderEvent}
-                disabled={boolVal4}
-              />
-            </div>
+          <div className="d-flex col-md-3" style={{ gap: "70px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Weight
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="number"
+              onKeyDown={blockInvalidChar}
+              min="0"
+              name="weight"
+              value={formHeader.weight}
+              onChange={InputHeaderEvent}
+              disabled={boolVal4}
+            />
           </div>
         </div>
 
         <div className="row">
-          <div className="d-flex col-md-5">
-            <div className="col-md-2">
-              <label className="form-label">Customer</label>
-            </div>
+          <div className="d-flex col-md-5" style={{ gap: "28px" }}>
+            <label className="form-label mt-1">Customer</label>
 
-            <div className="col-md-10">
-              <select
-                className="ip-select mt-1"
-                name="customer"
-                //onChange={changeCustomer}
-                disabled={boolVal1}
-              >
-                <option value={formHeader.customer} disabled selected>
-                  {formHeader.customerName}
-                </option>
-              </select>
-            </div>
+            <select
+              className="ip-select mt-1"
+              name="customer"
+              //onChange={changeCustomer}
+              disabled={boolVal1}
+            >
+              <option value={formHeader.customer} disabled selected>
+                {formHeader.customerName}
+              </option>
+            </select>
           </div>
 
-          <div className="d-flex col-md-4">
-            <div className="col-md-2">
-              <label className="form-label">Reference</label>
-            </div>
+          <div className="d-flex col-md-4" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Reference
+            </label>
 
-            <div className="col-md-9">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="reference"
-                value={formHeader.reference}
-                onChange={InputHeaderEvent}
-                disabled={boolVal2 && boolVal4}
-              />
-            </div>
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="reference"
+              value={formHeader.reference}
+              onChange={InputHeaderEvent}
+              disabled={boolVal2 && boolVal4}
+            />
           </div>
 
-          <div className="d-flex col-md-3">
-            <div className="col-md-6">
-              <label className="form-label">Calculated Weight</label>
-            </div>
-            <div className="col-md-5">
-              <input
-                className="input-disabled mt-1"
-                type="number"
-                name="calculatedWeight"
-                value={formHeader.calcWeight}
-                // value={calcWeightVal}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-3" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Calculated Weight
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="number"
+              name="calculatedWeight"
+              value={formHeader.calcWeight}
+              // value={calcWeightVal}
+              readOnly
+            />
           </div>
         </div>
 
@@ -830,7 +818,7 @@ function OpenButtonDraftPartList() {
               className="input-disabled mt-1"
               id="exampleFormControlTextarea1"
               rows="4"
-              style={{ width: "700px", height: "60px" }}
+              style={{ width: "100%", height: "60px" }}
               value={formHeader.address}
               readOnly
             ></textarea>
@@ -840,7 +828,6 @@ function OpenButtonDraftPartList() {
             <button
               className="button-style"
               onClick={saveButtonState}
-              style={{ marginLeft: "60px" }}
               disabled={boolVal4}
             >
               Save
@@ -874,7 +861,7 @@ function OpenButtonDraftPartList() {
       </div>
       <div className="row">
         <div
-          style={{ height: "250px", overflowY: "scroll" }}
+          style={{ height: "238px", overflowY: "scroll" }}
           className="col-md-8 col-sm-12"
         >
           <BootstrapTable
@@ -890,12 +877,10 @@ function OpenButtonDraftPartList() {
         </div>
 
         <div className="col-md-4 col-sm-12 ">
-          <div className="ip-box form-bg " style={{ height: "250px" }}>
-            <div className="row  mt-2">
-              <div className="col-md-4"></div>
+          <div className="form-bg">
+            <div className="d-flex  mt-2  justify-content-center">
               <button
                 className="button-style "
-                style={{ width: "75px" }}
                 onClick={addNewPart}
                 //disabled={boolVal1 | boolVal4}
                 disabled={boolVal4}
@@ -905,7 +890,6 @@ function OpenButtonDraftPartList() {
 
               <button
                 className="button-style "
-                style={{ width: "75px" }}
                 disabled={boolVal4}
                 onClick={deleteButtonState}
               >

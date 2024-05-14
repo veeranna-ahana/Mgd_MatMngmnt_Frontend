@@ -476,66 +476,82 @@ export default function ResizeModal(props) {
     <>
       <Modal show={props.open} fullscreen={true} onHide={() => handleClose()}>
         <Modal.Header closeButton>
-          <Modal.Title>Resize Sheets</Modal.Title>
+          <Modal.Title style={{ fontSize: "14px" }}>Resize Sheets</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
-            <h4 className="title">Material Resize and Splitting Form</h4>
+            <h4 className="title" style={{ fontSize: "12px" }}>
+              Material Resize and Splitting Form
+            </h4>
             <div>
               <div className="row">
-                <div className="col-md-10">
-                  <label className="form-label">Material Code</label>
-                  <input
+                <div className="d-flex col-md-3" style={{ gap: "10px" }}>
+                  <label
                     className="form-label"
+                    style={{ whiteSpace: "nowrap" }}
+                  >
+                    Material Code
+                  </label>
+                  <input
+                    className="form-label mt-1"
                     name="materialCode"
                     value={props?.selectedTableRows[0]?.Mtrl_Code}
                     disabled
                   />
                 </div>
 
-                <div className="col-md-2 d-flex align-items-center">
+                <div className="col-md-2 d-flex " style={{ gap: "10px" }}>
+                  <label
+                    className="form-label mt-1"
+                    style={{ whiteSpace: "nowrap" }}
+                  >
+                    Quantity
+                  </label>
+                  <input
+                    className="form-label"
+                    name="quantity"
+                    value={props?.selectedTableRows?.length}
+                    disabled
+                  />
+                </div>
+
+                <div className="col-md-2 d-flex " style={{ gap: "10px" }}>
+                  <label
+                    className="form-label mt-1"
+                    style={{ whiteSpace: "nowrap" }}
+                  >
+                    Length
+                  </label>
+                  <input
+                    className="form-label"
+                    name="para1"
+                    value={props?.selectedTableRows[0]?.DynamicPara1}
+                    disabled
+                  />
+                </div>
+
+                <div className="col-md-2 d-flex" style={{ gap: "10px" }}>
+                  <label
+                    className="form-label mt-1"
+                    style={{ whiteSpace: "nowrap" }}
+                  >
+                    Width
+                  </label>
+                  <input
+                    className="form-label"
+                    name="para2"
+                    value={props?.selectedTableRows[0]?.DynamicPara2}
+                    disabled
+                  />
+                </div>
+
+                <div className="d-flex col-md-3" style={{ gap: "20px" }}>
                   <button
                     className="button-style m-0"
                     onClick={splitMaterialButton}
                   >
                     Split Material
                   </button>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-10 p-0">
-                  <div className="row">
-                    <div className="col-md-4">
-                      <label className="form-label">Quantity</label>
-                      <input
-                        className="form-label"
-                        name="quantity"
-                        value={props?.selectedTableRows?.length}
-                        disabled
-                      />
-                    </div>
-                    <div className="col-md-4">
-                      <label className="form-label">Length</label>
-                      <input
-                        className="form-label"
-                        name="para1"
-                        value={props?.selectedTableRows[0]?.DynamicPara1}
-                        disabled
-                      />
-                    </div>
-                    <div className="col-md-4">
-                      <label className="form-label">Width</label>
-                      <input
-                        className="form-label"
-                        name="para2"
-                        value={props?.selectedTableRows[0]?.DynamicPara2}
-                        disabled
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-md-2 d-flex align-items-center">
                   <button
                     className="button-style m-0"
                     id="btnclose"
@@ -547,8 +563,6 @@ export default function ResizeModal(props) {
                 </div>
               </div>
             </div>
-
-            <div className="p-2"></div>
 
             <div className="row">
               {/* table */}
@@ -605,25 +619,19 @@ export default function ResizeModal(props) {
                 className="col-md-4 p-3"
                 style={{ backgroundColor: "#e6e6e6" }}
               >
-                <div className="row">
-                  <div className="d-flex justify-content-between">
-                    <button
-                      className="button-style m-0"
-                      style={{ width: "130px" }}
-                      onClick={addNew}
-                    >
-                      Add
-                    </button>
-                    <button
-                      className="button-style m-0"
-                      style={{ width: "130px" }}
-                      onClick={deleteItem}
-                      disabled={selectedTableRow.length === 0}
-                    >
-                      Delete
-                    </button>
-                  </div>
+                <div className="d-flex justify-content-center">
+                  <button className="button-style " onClick={addNew}>
+                    Add
+                  </button>
+                  <button
+                    className="button-style "
+                    onClick={deleteItem}
+                    disabled={selectedTableRow.length === 0}
+                  >
+                    Delete
+                  </button>
                 </div>
+
                 <div className="row">
                   <div>
                     <div className="row d-flex align-items-end">

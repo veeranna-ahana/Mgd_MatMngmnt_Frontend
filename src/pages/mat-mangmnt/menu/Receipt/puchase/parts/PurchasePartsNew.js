@@ -671,7 +671,7 @@ function PurchasePartsNew() {
               className="input-disabled mt-1"
               id="exampleFormControlTextarea1"
               rows="4"
-              style={{ width: "700px", height: "60px" }}
+              style={{ width: "100%", height: "60px" }}
               value={formHeader.address}
               readOnly
             ></textarea>
@@ -716,7 +716,7 @@ function PurchasePartsNew() {
       </div>
       <div className="row">
         <div
-          style={{ height: "250px", overflowY: "scroll" }}
+          style={{ height: "220px", overflowY: "scroll" }}
           className="col-md-8 col-sm-12"
         >
           <BootstrapTable
@@ -766,11 +766,10 @@ function PurchasePartsNew() {
           </table> 
         </div>*/}
         <div className="col-md-4 col-sm-12">
-          <div className="ip-box form-bg" style={{ height: "250px" }}>
-            <div className="row justify-content-center mt-2 mb-3">
+          <div className="ip-box form-bg">
+            <div className="d-flex justify-content-center mt-2 mb-3">
               <button
                 className="button-style "
-                style={{ width: "75px" }}
                 onClick={addNewPart}
                 disabled={boolVal1 | boolVal4}
               >
@@ -779,7 +778,6 @@ function PurchasePartsNew() {
 
               <button
                 className="button-style "
-                style={{ width: "55px" }}
                 disabled={boolVal3 | boolVal4}
                 onClick={deleteButtonState}
               >
@@ -798,7 +796,7 @@ function PurchasePartsNew() {
                   value={inputPart.partId}
                   onChange={changePartHandle}
                   disabled={boolVal3 | boolVal4}
-                  style={{ width: "200px" }}
+                  style={{ width: "100%" }}
                 >
                   <option value="" disabled selected>
                     Select Part

@@ -130,49 +130,21 @@ function PDraftRVList() {
       <>
         <h4 className="title">Customer : Parts Receipt List Created</h4>
         <div className="row">
-          <div className="d-flex col-md-7 mb-1">
-            <div className="col-md-2">
-              <label className="form-label">Customer</label>
-            </div>
+          <div className="d-flex col-md-7 mb-1" style={{ gap: "10px" }}>
+            <label className="form-label">Customer</label>
 
-            {/* <select
+            <Typeahead
               className="ip-select"
-              name="customer"
-              onChange={changeCustomer}
-            >
-              <option value="" disabled selected>
-                Select Customer
-              </option>
-              {custdata.map((customer, index) => (
-                <option key={index} value={customer.Cust_Code}>
-                  {customer.Cust_name}
-                </option>
-              ))}
-            </select> */}
-            <div className="col-md-5 mt-2">
-              <Typeahead
-                id="basic-example"
-                options={custdata}
-                placeholder="Select Customer"
-                onChange={(label) => changeCustomer(label)}
-              />
-            </div>
+              id="basic-example"
+              options={custdata}
+              placeholder="Select Customer"
+              onChange={(label) => changeCustomer(label)}
+            />
           </div>
 
-          {/* <div className="row justify-content-center ">
-                <button
-                  className="button-style "
-                  style={{ width: "55px" }}
-                  //data.RvID
-                  onClick={openButtonClick}
-                >
-                  Open
-                </button>
-              </div> */}
           <div className="col-md-5 text-center ">
             <button
               className="button-style "
-              style={{ width: "55px" }}
               //data.RvID
               onClick={openButtonClick}
             >

@@ -537,10 +537,10 @@ export default function ResizeAndSplittingStoreManagement() {
 
       <div>
         <div className="row">
-          <div className="col-md-10">
+          <div className="d-flex">
             <label className="form-label">Material Code</label>
             <input
-              className="form-label"
+              className="input-disabled mt-1"
               name="materialCode"
               value={formHeader.materialCode}
               disabled

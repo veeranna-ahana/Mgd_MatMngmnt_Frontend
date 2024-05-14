@@ -349,19 +349,16 @@ function MaterialMoverForm(props) {
       />
       <h4 className="title"> Material Mover</h4>
 
-      <div className="row">
-        <div className="d-flex ">
-          <div
-            className={
-              props.type === "location" ? "d-flex col-md-3 px-3" : "d-none"
-            }
-            style={{ gap: "5px" }}
-          >
-            <div className="col-md-5">
-              <label className="form-label">From Location</label>
-            </div>
+      <div className="row ">
+        <div
+          className={props.type === "location" ? "d-flex col-md-2" : "d-none"}
+          style={{ gap: "10px" }}
+        >
+          <label className="form-label mt-2" style={{ whiteSpace: "nowrap" }}>
+            From Location
+          </label>
 
-            {/* <select
+          {/* <select
                     className="ip-select"
                     name="customer"
                     onChange={fromLocationEvent}
@@ -376,29 +373,26 @@ function MaterialMoverForm(props) {
                       </option>
                     ))}
                   </select> */}
-            <div className="col-md-4 mt-2">
-              <Typeahead
-                id="basic-example"
-                name="location"
-                options={locationData}
-                placeholder="Select Location"
-                onChange={(label) => fromLocationEvent(label)}
-                // className="mb-10"
-              />
-            </div>
-          </div>
 
-          <div
-            className={
-              props.type === "location" ? " d-flex col-md-2 px-3" : "d-none"
-            }
-            style={{ gap: "5px" }}
-          >
-            <div className="col-md-4">
-              <label className="form-label">Customer</label>
-            </div>
+          <Typeahead
+            id="basic-example"
+            name="location"
+            options={locationData}
+            placeholder="Select Location"
+            onChange={(label) => fromLocationEvent(label)}
+            // className="mb-10"
+          />
+        </div>
 
-            {/* <select
+        <div
+          className={props.type === "location" ? " d-flex col-md-2 " : "d-none"}
+          style={{ gap: "10px" }}
+        >
+          <label className="form-label mt-2" style={{ whiteSpace: "nowrap" }}>
+            Customer
+          </label>
+
+          {/* <select
                     className="ip-select"
                     name="customer"
                     onChange={changeCustomer}
@@ -413,31 +407,28 @@ function MaterialMoverForm(props) {
                       </option>
                     ))}
                   </select> */}
-            <div className="col-md-7 mt-2">
-              <Typeahead
-                id="basic-example"
-                name="customer"
-                options={CustDataForLocation}
-                placeholder="Select Customer"
-                onChange={(label) => changeCustomerForLocation(label)}
-              />
-            </div>
 
-            {/* cust dropdown */}
-          </div>
+          <Typeahead
+            id="basic-example"
+            name="customer"
+            options={CustDataForLocation}
+            placeholder="Select Customer"
+            onChange={(label) => changeCustomerForLocation(label)}
+          />
 
-          <div
-            className={
-              props.type === "customer" ? "d-flex col-md-2 px-3" : "d-none"
-            }
-            // style={{ marginBottom: "15px" }}
-            style={{ gap: "5px" }}
-          >
-            <div className="col-md-4">
-              <label className="form-label">Customer</label>
-            </div>
+          {/* cust dropdown */}
+        </div>
 
-            {/* <select
+        <div
+          className={props.type === "customer" ? "d-flex col-md-2 " : "d-none"}
+          // style={{ marginBottom: "15px" }}
+          style={{ gap: "10px" }}
+        >
+          <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+            Customer
+          </label>
+
+          {/* <select
                     className="ip-select"
                     name="customer"
                     onChange={changeCustomer}
@@ -452,23 +443,22 @@ function MaterialMoverForm(props) {
                       </option>
                     ))}
                   </select> */}
-            <div className="col-md-7 mt-2">
-              <Typeahead
-                id="basic-example"
-                name="customer"
-                options={custdata}
-                placeholder="Select Customer"
-                onChange={(label) => changeCustomer(label)}
-              />
-            </div>
-          </div>
 
-          <div className="d-flex col-md-3 px-3" style={{ gap: "5px" }}>
-            <div className="col-md-4">
-              <label className="form-label">To Location</label>
-            </div>
+          <Typeahead
+            id="basic-example"
+            name="customer"
+            options={custdata}
+            placeholder="Select Customer"
+            onChange={(label) => changeCustomer(label)}
+          />
+        </div>
 
-            {/* <select
+        <div className="d-flex col-md-2 " style={{ gap: "10px" }}>
+          <label className="form-label mt-2" style={{ whiteSpace: "nowrap" }}>
+            To Location
+          </label>
+
+          {/* <select
                     className="ip-select"
                     name="customer"
                     onChange={changeLocation}
@@ -483,41 +473,34 @@ function MaterialMoverForm(props) {
                       </option>
                     ))}
                   </select> */}
-            <div className="col-md-5 mt-2">
-              <Typeahead
-                id="basic-example"
-                name="location"
-                options={locationData}
-                placeholder="Select Location"
-                onChange={(label) => changeLocation(label)}
-                className="mb-3"
-              />
-            </div>
-          </div>
 
-          <div className="row col-md-4 ">
-            <div>
-              <div className="d-flex justify-content-between">
-                <button className="button-style " onClick={loadData}>
-                  Load Data
-                </button>
-                <button className="button-style " onClick={selectButton}>
-                  Select
-                </button>
-                <button className="button-style" onClick={changeLocationButton}>
-                  Change Location
-                </button>
-                <button
-                  className="button-style "
-                  id="btnclose"
-                  type="submit"
-                  onClick={() => nav("/MaterialManagement")}
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
+          <Typeahead
+            id="basic-example"
+            name="location"
+            options={locationData}
+            placeholder="Select Location"
+            onChange={(label) => changeLocation(label)}
+          />
+        </div>
+
+        <div className="d-flex col-md-5">
+          <button className="button-style " onClick={loadData}>
+            Load Data
+          </button>
+          <button className="button-style " onClick={selectButton}>
+            Select
+          </button>
+          <button className="button-style" onClick={changeLocationButton}>
+            Change Location
+          </button>
+          <button
+            className="button-style "
+            id="btnclose"
+            type="submit"
+            onClick={() => nav("/MaterialManagement")}
+          >
+            Close
+          </button>
         </div>
       </div>
 

@@ -203,132 +203,120 @@ function OpenButtonOpenClosedPartList() {
         <h4 className="title">Customer Parts Receipt Voucher</h4>
 
         <div className="row">
-          <div className="d-flex col-md-3">
-            <div className="col-md-4">
-              <label className="form-label">Receipt Date</label>
-            </div>
-            <div className="col-md-6">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="receiptDate"
-                // value={formHeader.receiptDate}
-                value={formHeader.ReceiptDate}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-3" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Receipt Date
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="receiptDate"
+              // value={formHeader.receiptDate}
+              value={formHeader.ReceiptDate}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-2">
-            <div className="col-md-4">
-              <label className="form-label">RV No</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="rvNo"
-                value={formHeader.RV_No}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-2" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              RV No
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="rvNo"
+              value={formHeader.RV_No}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-2">
-            <div className="col-md-4">
-              <label className="form-label">RV Date</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="rvDate"
-                value={formHeader.RV_Date}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-2" style={{ gap: "19px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              RV Date
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="rvDate"
+              value={formHeader.RV_Date}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-2">
-            <div className="col-md-3">
-              <label className="form-label">Status</label>
-            </div>
-            <div className="col-md-7">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="status"
-                value={formHeader.RVStatus}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-2" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Status
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="status"
+              value={formHeader.RVStatus}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-2">
-            <div className="col-md-9">
-              <label className="form-label">Weight</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="weight"
-                value={formHeader.TotalWeight}
-                disabled={boolVal}
-              />
-            </div>
+          <div className="d-flex col-md-3" style={{ gap: "70px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Weight
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="weight"
+              value={formHeader.TotalWeight}
+              disabled={boolVal}
+            />
           </div>
         </div>
 
         <div className="row">
-          <div className="d-flex col-md-5">
-            <div className="col-md-2">
-              <label className="form-label">Customer</label>
-            </div>
+          <div className="d-flex col-md-5" style={{ gap: "28px" }}>
+            <label className="form-label">Customer</label>
 
-            <div className="col-md-10">
-              <select
-                className="ip-select mt-1"
-                name="customer"
-                //onChange={changeCustomer}
-                disabled={boolVal}
-              >
-                <option value={formHeader.Cust_Code} disabled selected>
-                  {formHeader.Customer}
-                </option>
-              </select>
-            </div>
+            <select
+              className="ip-select mt-1"
+              name="customer"
+              //onChange={changeCustomer}
+              disabled={boolVal}
+            >
+              <option value={formHeader.Cust_Code} disabled selected>
+                {formHeader.Customer}
+              </option>
+            </select>
           </div>
 
-          <div className="d-flex col-md-4">
-            <div className="col-md-2">
-              <label className="form-label">Reference</label>
-            </div>
+          <div className="d-flex col-md-4" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Reference
+            </label>
 
-            <div className="col-md-9">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="reference"
-                value={formHeader.CustDocuNo}
-                disabled={boolVal}
-              />
-            </div>
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="reference"
+              value={formHeader.CustDocuNo}
+              disabled={boolVal}
+            />
           </div>
 
-          <div className="d-flex col-md-3">
-            <div className="col-md-6">
-              <label className="form-label">Calculated Weight</label>
-            </div>
-            <div className="col-md-5">
-              <input
-                className="input-disabled mt-1"
-                type="number"
-                name="calculatedWeight"
-                value={formHeader.TotalCalculatedWeight}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-3" style={{ gap: "10px" }}>
+            <label className="form-label" style={{ whiteSpace: "nowrap" }}>
+              Calculated Weight
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="number"
+              name="calculatedWeight"
+              value={formHeader.TotalCalculatedWeight}
+              readOnly
+            />
           </div>
         </div>
 
@@ -338,16 +326,16 @@ function OpenButtonOpenClosedPartList() {
               className="input-disabled mt-1"
               id="exampleFormControlTextarea1"
               rows="4"
-              style={{ width: "700px", height: "60px" }}
+              style={{ width: "100%", height: "60px" }}
               value={formHeader.address}
               readOnly
             ></textarea>
           </div>
 
-          <div className="col-md-4 justify-content-center">
+          <div className="col-md-4">
             <button
               className="button-style"
-              style={{ marginLeft: "60px" }}
+              // style={{ marginLeft: "60px" }}
               disabled={boolVal}
             >
               Save
@@ -371,7 +359,7 @@ function OpenButtonOpenClosedPartList() {
       </div>
       <div className="row">
         <div
-          style={{ height: "250px", overflowY: "scroll" }}
+          style={{ height: "238px", overflowY: "scroll" }}
           className="col-md-8 col-sm-12"
         >
           <BootstrapTable
@@ -386,23 +374,14 @@ function OpenButtonOpenClosedPartList() {
           ></BootstrapTable>
         </div>
 
-        <div className="col-md-4 col-sm-12">
-          <div className="ip-box form-bg" style={{ height: "250px" }}>
-            <div className="row mt-2 ">
-              <div className="col-md-4"></div>
-              <button
-                className="button-style "
-                style={{ width: "75px" }}
-                disabled={boolVal}
-              >
+        <div className="col-md-4 ">
+          <div className=" form-bg">
+            <div className="d-flex justify-content-center  mt-2 ">
+              <button className="button-style " disabled={boolVal}>
                 Add New
               </button>
 
-              <button
-                className="button-style "
-                style={{ width: "75px" }}
-                disabled={boolVal}
-              >
+              <button className="button-style " disabled={boolVal}>
                 Delete
               </button>
             </div>

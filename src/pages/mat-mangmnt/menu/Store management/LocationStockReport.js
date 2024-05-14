@@ -402,10 +402,11 @@ function LocationStockReport() {
         <h4 className="title">Location Stock Report</h4>
         <div className="row">
           <div className="col-md-4">
-            <h4 className="form-title">
+            {/* <h4 className="form-title">
               {" "}
               <u>Stock Viewer</u>
-            </h4>
+            </h4> */}
+            <label className="form-label" style={{fontSize:'14px', }}> Stock Viewer</label>
 
             <div className="row">
               <div className="col-md-12">
@@ -434,77 +435,69 @@ function LocationStockReport() {
                 />
               </div>
 
-
-              <div className="d-flex col-md-6 mt-1" style={{gap:'15px'}}>
-                <label className="form-label col-md-3"> Location</label>
+              <div className="d-flex col-md-6 mt-1" style={{ gap: "10px" }}>
+                <label
+                  className="form-label mt-1"
+                  style={{ whiteSpace: "nowrap" }}
+                >
+                  Location
+                </label>
                 <input
-                className="input-disabled "
+                  className="input-disabled "
                   name="LocationNo"
                   value={selectedfirstRow.LocationNo}
                 />
               </div>
 
-
-              <div className="d-flex col-md-6 mt-1" style={{gap:'15px'}}>
-                {" "}
-                <label className="form-label col-md-3">Capacity</label>
+              <div className="d-flex col-md-6 mt-1" style={{ gap: "10px" }}>
+                <label
+                  className="form-label mt-1"
+                  style={{ whiteSpace: "nowrap" }}
+                >
+                  Capacity
+                </label>
                 <input
-                   className="input-disabled "
+                  className="input-disabled "
                   name="Capacity"
                   value={selectedfirstRow.Capacity}
                 />
               </div>
 
-              <div className="d-flex col-md-6" style={{gap:'15px'}}>
-                
-                <label className="form-label col-md-3">Type</label>
+              <div className="d-flex col-md-6" style={{ gap: "10px" }}>
+                <label
+                  className="form-label mt-1"
+                  style={{ whiteSpace: "nowrap" }}
+                >
+                  Type
+                </label>
                 <input
-                   className="input-disabled "
+                  className="input-disabled "
                   name="StorageType"
                   value={selectedfirstRow.StorageType}
                 />
               </div>
 
-              <div className="d-flex col-md-6" style={{gap:'15px'}}>
-              
-                <label className="form-label col-md-3">Used</label>
+              <div className="d-flex col-md-6" style={{ gap: "10px" }}>
+                <label
+                  className="form-label mt-1"
+                  style={{ whiteSpace: "nowrap" }}
+                >
+                  Used
+                </label>
                 <input
-                   className="input-disabled "
+                  className="input-disabled "
                   name="CapacityUtilised"
                   value={selectedfirstRow.CapacityUtilised}
                 />
               </div>
-            </div>
-            <div className="row">
-              {" "}
-              {/* <div className="col-md-6">
-                {" "}
-                <label className="form-label">Type</label>
-                <input
-                  className=""
-                  name="StorageType"
-                  value={selectedfirstRow.StorageType}
-                />
-              </div> */}
-              {/* <div className="col-md-6">
-                {" "}
-                <label className="form-label">Used</label>
-                <input
-                  className=""
-                  name="CapacityUtilised"
-                  value={selectedfirstRow.CapacityUtilised}
-                />
-              </div> */}
             </div>
           </div>
 
           <div className="col-md-8">
             <h8 className="form-label">Show Stock</h8>
             <div className="row">
-
               <div className="col-md-4">
                 <div className="row">
-                  {" "}
                   <div
                     className="col-md-6 mt-2"
                     style={{ display: "flex", gap: "5px" }}
@@ -545,38 +538,29 @@ function LocationStockReport() {
                   </div>
                 </div>
               </div>
-              <div className="col-md-8">
-                <div className="row  mt-3">
-                  <div className="col-md-4 col-sm-12">
-                    <button
-                      className="button-style "
-                      // style={{ width: "155px" }}
-                      onClick={summaryReport}
-                    >
-                      Summary Report
-                    </button>
-                  </div>
-                  <div className="col-md-4 col-sm-12">
-                    <button
-                      className="button-style "
-                      // style={{ width: "155px" }}
-                      onClick={detailsReport}
-                    >
-                      Details Report
-                    </button>
-                  </div>
-                  <div className="col-md-4 col-sm-12">
-                    <button
-                      className="button-style"
-                      // style={{ width: "155px" }}
-                      id="btnclose"
-                      type="submit"
-                      onClick={() => nav("/MaterialManagement")}
-                    >
-                      Close
-                    </button>
-                  </div>
-                </div>
+
+              <div className="d-flex col-md-8  mt-3">
+                <button className="button-style " onClick={summaryReport}>
+                  Summary Report
+                </button>
+
+                <button
+                  className="button-style "
+                  // style={{ width: "155px" }}
+                  onClick={detailsReport}
+                >
+                  Details Report
+                </button>
+
+                <button
+                  className="button-style"
+                  // style={{ width: "155px" }}
+                  id="btnclose"
+                  type="submit"
+                  onClick={() => nav("/MaterialManagement")}
+                >
+                  Close
+                </button>
               </div>
 
               {/* <div className="col-md-12">
@@ -586,50 +570,68 @@ function LocationStockReport() {
             </div>
 
             <div className="row">
-              <div className="d-flex col-md-4" style={{gap:'5px'}}>
-                <label className="form-label col-md-3">Material</label>
-                <input    className="input-disabled " value={selectedSecondRow.Mtrl_Code} />
+              <div className="d-flex col-md-4" style={{ gap: "10px" }}>
+                <label
+                  className="form-label mt-1"
+                  style={{ whiteSpace: "nowrap" }}
+                >
+                  Material
+                </label>
+                <input
+                  className="input-disabled "
+                  value={selectedSecondRow.Mtrl_Code}
+                />
               </div>
 
-              <div className="d-flex col-md-4" style={{gap:'5px'}}>
-                <label className="form-label col-md-3">Customer</label>
-                <input  className="input-disabled " value={selectedSecondRow.Customer} />
+              <div className="d-flex col-md-4" style={{ gap: "10px" }}>
+                <label
+                  className="form-label mt-1"
+                  style={{ whiteSpace: "nowrap" }}
+                >
+                  Customer
+                </label>
+                <input
+                  className="input-disabled "
+                  value={selectedSecondRow.Customer}
+                />
               </div>
 
               <div className="row col-md-4">
-                  <div className="col-md-2 col-sm-12">
-                    <input
-                      className="form-check-input mt-3"
-                      type="checkbox"
-                      id="flexCheckDefault"
-                      name="updated"
-                      checked={selectedSecondRow.Scrap !== 0 ? true : false}
-                      //   value={inputPart.upDated}
-                      //disabled={boolVal3 | boolVal4}
-                      //   disabled={true}
-                      //   onChange={changeMaterialHandle}
-                    />
-                  </div>
-                  <div className="col-md-8 col-sm-12">
-                    <label className="form-label mt-1">Scrap</label>
-                  </div>
+                <div className="col-md-2 col-sm-12">
+                  <input
+                    className="form-check-input mt-3"
+                    type="checkbox"
+                    id="flexCheckDefault"
+                    name="updated"
+                    checked={selectedSecondRow.Scrap !== 0 ? true : false}
+                    //   value={inputPart.upDated}
+                    //disabled={boolVal3 | boolVal4}
+                    //   disabled={true}
+                    //   onChange={changeMaterialHandle}
+                  />
                 </div>
+                <div className="col-md-8 col-sm-12">
+                  <label className="form-label mt-1">Scrap</label>
+                </div>
+              </div>
             </div>
 
             <div className="row">
               {" "}
-              <div className=" d-flex col-md-4" style={{gap:'5px'}}>
+              <div className=" d-flex col-md-4" style={{ gap: "5px" }}>
                 <label className="form-label col-md-3">Dim 1</label>
-                <input className="input-disabled " value={selectedSecondRow.DynamicPara1} />
+                <input
+                  className="input-disabled "
+                  value={selectedSecondRow.DynamicPara1}
+                />
               </div>
-
-              <div className="d-flex col-md-4" style={{gap:'5px'}}>
+              <div className="d-flex col-md-4" style={{ gap: "5px" }}>
                 <label className="form-label col-md-3">Dim 2</label>
-                <input className="input-disabled " value={selectedSecondRow.DynamicPara2} />
+                <input
+                  className="input-disabled "
+                  value={selectedSecondRow.DynamicPara2}
+                />
               </div>
-
-              
-
               <div className="col-md-4 mt-2">
                 {/* <div className="row">
                   <div className="col-md-1 col-sm-12">

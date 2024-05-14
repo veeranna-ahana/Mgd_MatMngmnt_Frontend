@@ -181,32 +181,21 @@ function StockArrival() {
       {" "}
       <h4 className="title">Stock Arrival Updater Form </h4>
       <div className="row">
-        
-        <div className="d-flex col-md-3">
-          <div className="col-md-3">
-          <label className="form-label">Stock Date</label>
-          </div>
-          <div className="col-md-6">
+        <div className="d-flex col-md-3" style={{ gap: "10px" }}>
+          <label className="form-label mt-2" style={{ whiteSpace: "nowrap" }}>
+            Stock Date
+          </label>
+
           <input type="date" name="date" onChange={InputEvent} />
-          </div>
         </div>
 
-
-        <div className="col-md-1">
-          <button className="button-style"  style={{width:'70px'}} onClick={loadData}>
+        <div className="col-md-6">
+          <button className="button-style" onClick={loadData}>
             Load Data
           </button>
-        </div>
-        <div className="col-md-2">
-          <button
-            className="button-style"
-            style={{ width: "140px" }}
-            onClick={updateLedger}
-          >
+          <button className="button-style" onClick={updateLedger}>
             Update Stock Ledger
           </button>
-        </div>
-        <div className="col-md-2">
           <button
             className="button-style "
             id="btnclose"
