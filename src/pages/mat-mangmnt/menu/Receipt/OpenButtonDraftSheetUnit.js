@@ -1773,7 +1773,7 @@ function OpenButtonDraftSheetUnit(props) {
         </div>
         <div className="row">
           <div className="col-md-8 col-sm-12">
-            <div style={{ height: "420px", overflowY: "scroll" }}>
+            <div style={{ height: "400px", overflowY: "scroll" }}>
               <BootstrapTable
                 keyField="id"
                 columns={columns}
@@ -1788,14 +1788,14 @@ function OpenButtonDraftSheetUnit(props) {
           </div>
           <div
             className="col-md-4 col-sm-12"
-            style={{ overflowY: "scroll", height: "420px" }}
+            style={{ overflowY: "scroll", height: "400px" }}
           >
-            <div className="ip-box form-bg">
+            <div className="ip-box form-bg" style={{ height: "400px" }}>
               <div className="row justify-content-center mt-2">
                 <div className="col-md-6 col-sm-12">
                   <button
                     className="button-style "
-                    style={{ width: "80px" }}
+                    style={{ width: "100px" }}
                     disabled={boolVal4}
                     onClick={addNewMaterial}
                   >
@@ -1818,7 +1818,7 @@ function OpenButtonDraftSheetUnit(props) {
                 <div className="col-md-6 col-sm-12">
                   <button
                     className="button-style "
-                    style={{ width: "80px" }}
+                    style={{ width: "100px" }}
                     disabled={rmvBtn || boolVal6}
                     onClick={addToStock}
                   >
@@ -2235,9 +2235,15 @@ function OpenButtonDraftSheetUnit(props) {
                     </div>
                   )}
 
-                  <p className="form-title-deco">
+                  {/* <p className="form-title-deco">
                     <h5>Quantity Details</h5>
-                  </p>
+                  </p> */}
+                  <label
+                    className="form-label mt-1"
+                    style={{ textDecoration: "underline", fontSize: "14px" }}
+                  >
+                    Quantity Details
+                  </label>
                   <div className="row">
                     <div className="col-md-3 col-sm-12">
                       <label className="form-label mt-1">Received</label>
@@ -2365,6 +2371,7 @@ function OpenButtonDraftSheetUnit(props) {
                     <div className="col-md-6 mt-1">
                       <select
                         // className="ip-select dropdown-field"
+                        style={{ width: "140px" }}
                         className="input-disabled mt-1"
                         min="0"
                         onChange={(e) => {

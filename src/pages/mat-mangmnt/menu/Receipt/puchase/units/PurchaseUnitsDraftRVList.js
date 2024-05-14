@@ -119,7 +119,7 @@ export default function PurchaseUnitsDraftRVList() {
           </div>
 
           <div
-            style={{ height: "420px", overflowY: "scroll" }}
+            style={{ height: "350px", overflowY: "scroll" }}
             className="col-md-7 col-sm-12"
           >
             {/* <BootstrapTable keyField="id" data={products} columns={columns} /> */}
@@ -138,7 +138,7 @@ export default function PurchaseUnitsDraftRVList() {
           </div>
 
           <div className="col-md-5 col-sm-12">
-            <div className="ip-box form-bg">
+            <div className="ip-box form-bg"  style={{height:'350px'}}>
               <div className="row">
                 <div className="col-md-4 mt-1">
                   <label className="form-label">Receipt Date</label>

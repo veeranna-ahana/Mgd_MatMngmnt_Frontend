@@ -630,9 +630,9 @@ function NewSheetsUnits(props) {
       //p.id === "d28d67b2-6c32-4aae-a7b6-74dc985a3cff"
       p.id === partUniqueId
         ? {
-          ...p,
-          [name]: value,
-        }
+            ...p,
+            [name]: value,
+          }
         : p
     );
     setMaterialArray(newArray);
@@ -1240,7 +1240,7 @@ function NewSheetsUnits(props) {
             postRequest(
               endpoints.updateHeaderMaterialReceiptRegister,
               formHeader,
-              (data) => { }
+              (data) => {}
             );
 
             //update material array:
@@ -1248,13 +1248,13 @@ function NewSheetsUnits(props) {
               //p.id === "d28d67b2-6c32-4aae-a7b6-74dc985a3cff"
               p.id === id
                 ? {
-                  ...p,
-                  [name]: formattedValue,
-                  qty: inputPart.qty,
-                  // inspected: inputPart.inspected,
-                  inspected: inputPart.inspected == true ? 1 : 0,
-                  totalWeightCalculated: inputPart.totalWeightCalculated,
-                }
+                    ...p,
+                    [name]: formattedValue,
+                    qty: inputPart.qty,
+                    // inspected: inputPart.inspected,
+                    inspected: inputPart.inspected == true ? 1 : 0,
+                    totalWeightCalculated: inputPart.totalWeightCalculated,
+                  }
                 : p
             );
             setMaterialArray(newArray);
@@ -1295,13 +1295,13 @@ function NewSheetsUnits(props) {
     const newArray = materialArray.map((p) =>
       p.id === id
         ? {
-          ...p,
-          [name]: formattedValue,
-          qty: inputPart.qty,
-          // inspected: inputPart.inspected == "on" ? 1 : 0,
-          inspected: inputPart.inspected == true ? 1 : 0,
-          // inspected: inputPart.inspected,
-        }
+            ...p,
+            [name]: formattedValue,
+            qty: inputPart.qty,
+            // inspected: inputPart.inspected == "on" ? 1 : 0,
+            inspected: inputPart.inspected == true ? 1 : 0,
+            // inspected: inputPart.inspected,
+          }
         : p
     );
     setMaterialArray(newArray);
@@ -1966,7 +1966,6 @@ function NewSheetsUnits(props) {
         <h4 className="title">Material Receipt Voucher</h4>
 
         <div className="row">
-
           <div className=" d-flex col-md-2">
             <div className="col-md-6">
               <label className="form-label">Receipt Date</label>
@@ -1980,26 +1979,24 @@ function NewSheetsUnits(props) {
                 readOnly
               />
             </div>
-
-
           </div>
-
-
 
           <div className="d-flex col-md-2">
             <div className="col-md-4">
               <label className="form-label">RV No</label>
             </div>
             <div className="col-md-8">
-              <input className="input-disabled mt-1"
-                type="text" name="rvNo" value={formHeader.rvNo} readOnly />
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="rvNo"
+                value={formHeader.rvNo}
+                readOnly
+              />
             </div>
-
-
           </div>
 
           <div className="d-flex col-md-2">
-
             <div className="col-md-4">
               <label className="form-label">RV Date</label>
             </div>
@@ -2012,25 +2009,22 @@ function NewSheetsUnits(props) {
                 readOnly
               />
             </div>
-
           </div>
 
           <div className="d-flex col-md-4">
-            <div className="col-md-4" >
+            <div className="col-md-4">
               <label className="form-label">Status</label>
             </div>
             <div className="col-md-8">
-
-              <input className="input-disabled mt-1"
+              <input
+                className="input-disabled mt-1"
                 type="text"
                 name="status"
                 value={formHeader.status}
                 readOnly
               />
-
             </div>
           </div>
-
 
           <div className="d-flex col-md-2">
             <div className="col-md-4">
@@ -2085,32 +2079,31 @@ function NewSheetsUnits(props) {
 
                   {props.type2 === "purchase"
                     ? custdata.map((customer, index) =>
-                      customer.Cust_Code == 0 ? (
+                        customer.Cust_Code == 0 ? (
+                          <option key={index} value={customer.Cust_Code}>
+                            {customer.Cust_name}
+                          </option>
+                        ) : (
+                          ""
+                        )
+                      )
+                    : custdata.map((customer, index) => (
                         <option key={index} value={customer.Cust_Code}>
                           {customer.Cust_name}
                         </option>
-                      ) : (
-                        ""
-                      )
-                    )
-                    : custdata.map((customer, index) => (
-                      <option key={index} value={customer.Cust_Code}>
-                        {customer.Cust_name}
-                      </option>
-                    ))}
+                      ))}
                 </select>
               )}
             </div>
-
           </div>
-          
-           <div className="d-flex col-md-2" style={{gap:'5px'}}>
+
+          <div className="d-flex col-md-2" style={{ gap: "5px" }}>
             <div className="col-md-4">
               <label className="form-label">Reference</label>
             </div>
             <div className="col-md-8">
               <input
-              className="input-disabled mt-1" 
+                className="input-disabled mt-1"
                 type="text"
                 name="reference"
                 value={formHeader.reference}
@@ -2119,15 +2112,15 @@ function NewSheetsUnits(props) {
               />
             </div>
           </div>
-         
-           <div className="d-flex col-md-4">
+
+          <div className="d-flex col-md-4">
             <div className="col-md-4">
               <label className="form-label">Calculated Weight</label>
             </div>
 
             <div className="col-md-8">
               <input
-              className="input-disabled mt-1" 
+                className="input-disabled mt-1"
                 type="number"
                 name="calculatedWeight"
                 value={calcWeightVal}
@@ -2138,11 +2131,10 @@ function NewSheetsUnits(props) {
         </div>
 
         <div className="row mt-2">
-
-        <div className="col-md-8 ">
+          <div className="col-md-8 ">
             {/* <label className="form-label"></label> */}
             <textarea
-            className="input-disabled mt-1" 
+              className="input-disabled mt-1"
               id="exampleFormControlTextarea1"
               rows="2"
               style={{ width: "700px", height: "60px" }}
@@ -2154,7 +2146,6 @@ function NewSheetsUnits(props) {
           <div className="col-md-4 justify-content-center">
             <button
               className="button-style"
-             
               // style={{ width: "120px" }}
               onClick={saveButtonState}
               disabled={boolVal4}
@@ -2187,7 +2178,6 @@ function NewSheetsUnits(props) {
               Close
             </button>
           </div>
-          
         </div>
         <div className="row">
           <div className="col-md-8 col-sm-12">
@@ -2213,7 +2203,7 @@ function NewSheetsUnits(props) {
                 <div className="col-md-6 col-sm-12">
                   <button
                     className="button-style "
-                    style={{width:'80px'}}
+                    style={{ width: "80px" }}
                     //onClick={addNewPart}
                     disabled={boolVal1 || boolVal4}
                     onClick={addNewMaterial}
@@ -2224,7 +2214,6 @@ function NewSheetsUnits(props) {
                 <div className="col-md-6 col-sm-12">
                   <button
                     className="button-style "
-                   
                     disabled={boolVal3 || boolVal4}
                     // onClick={handleDelete}
                     onClick={deleteButtonState}
@@ -2238,7 +2227,6 @@ function NewSheetsUnits(props) {
                 <div className="col-md-6 col-sm-12">
                   <button
                     className="button-style "
-                    
                     disabled={rmvBtn || boolVal6}
                     onClick={addToStock}
                   >
@@ -2248,7 +2236,6 @@ function NewSheetsUnits(props) {
                 <div className="col-md-6 col-sm-12">
                   <button
                     className="button-style "
-                  
                     disabled={addBtn || boolVal6}
                     onClick={removeStock}
                   >
@@ -2262,7 +2249,12 @@ function NewSheetsUnits(props) {
                   {/* <p className="form-title-deco mt-1">
                     <h5>Serial Details</h5>
                   </p> */}
-                  <label className="form-label" style={{textDecoration: 'underline', fontSize:'14px'}}>Serial Details</label>
+                  <label
+                    className="form-label"
+                    style={{ textDecoration: "underline", fontSize: "14px" }}
+                  >
+                    Serial Details
+                  </label>
                   <div className="row">
                     <div className="col-md-4 mt-2">
                       <label className="form-label">Mtrl Code</label>
@@ -2346,7 +2338,7 @@ function NewSheetsUnits(props) {
                         </div>
                         <div className="col-md-6">
                           <input
-                           className="input-disabled mt-1" 
+                            className="input-disabled mt-1"
                             name="dynamicPara1"
                             disabled
                             min="0"
@@ -2362,7 +2354,7 @@ function NewSheetsUnits(props) {
                         </div>
                         <div className="col-md-6">
                           <input
-                           className="input-disabled mt-1" 
+                            className="input-disabled mt-1"
                             name="dynamicPara2"
                             min="0"
                             disabled
@@ -2378,7 +2370,7 @@ function NewSheetsUnits(props) {
                         </div>
                         <div className="col-md-6 ">
                           <input
-                           className="input-disabled mt-1" 
+                            className="input-disabled mt-1"
                             name="dynamicPara3"
                             min="0"
                             disabled
@@ -2649,16 +2641,20 @@ function NewSheetsUnits(props) {
                   {/* <p className="form-title-deco mt-2">
                     <h5>Quantity Details</h5>
                   </p> */}
-                  <label className="form-label" style={{textDecoration: 'underline',fontSize:'14px'}}>Quantity Details</label>
+                  <label
+                    className="form-label"
+                    style={{ textDecoration: "underline", fontSize: "14px" }}
+                  >
+                    Quantity Details
+                  </label>
                   <div className="row">
                     <div className="col-md-3 col-sm-12">
                       <label className="form-label mt-1">Received</label>
                     </div>
                     <div className="col-md-4 col-sm-12">
                       <input
-                      className="input-disabled mt-1" 
+                        className="input-disabled mt-1"
                         type="number"
-                        
                         name="qty"
                         // defaultValue={0}
                         value={inputPart.qty}
@@ -2702,9 +2698,8 @@ function NewSheetsUnits(props) {
                     </div>
                     <div className="col-md-4 col-sm-12">
                       <input
-                      className="input-disabled mt-1" 
+                        className="input-disabled mt-1"
                         type="number"
-                       
                         name="accepted"
                         // defaultValue={0}
                         value={inputPart.accepted}
@@ -2753,7 +2748,7 @@ function NewSheetsUnits(props) {
                     </div>
                     <div className="col-md-6">
                       <input
-                       className="input-disabled mt-1" 
+                        className="input-disabled mt-1"
                         name="totalWeightCalculated"
                         value={inputPart.totalWeightCalculated}
                         onChange={(e) => {
@@ -2770,7 +2765,7 @@ function NewSheetsUnits(props) {
                     <div className="col-md-6">
                       <input
                         type="number"
-                        className="input-disabled mt-1" 
+                        className="input-disabled mt-1"
                         name="totalWeight"
                         value={inputPart.totalWeight}
                         onKeyDown={blockInvalidChar}
@@ -2790,8 +2785,9 @@ function NewSheetsUnits(props) {
                     </div>
                     <div className="col-md-6 mt-1">
                       <select
-                       // className="ip-select dropdown-field"
-                       className="input-disabled mt-1" 
+                        // className="ip-select dropdown-field"
+                        style={{ width: "140px" }}
+                        className="input-disabled mt-1"
                         onChange={(e) => {
                           changeMaterialHandle(e, inputPart.id);
                         }}

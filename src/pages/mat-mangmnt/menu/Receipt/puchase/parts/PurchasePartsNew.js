@@ -199,9 +199,9 @@ function PurchasePartsNew() {
       //p.id === "d28d67b2-6c32-4aae-a7b6-74dc985a3cff"
       p.id === partUniqueId
         ? {
-          ...p,
-          [name]: value,
-        }
+            ...p,
+            [name]: value,
+          }
         : p
     );
     setPartArray(newArray);
@@ -529,7 +529,6 @@ function PurchasePartsNew() {
         <h4 className="title">Customer Parts Receipt Voucher</h4>
 
         <div className="row">
-
           <div className="d-flex col-md-2">
             <div className="col-md-6">
               <label className="form-label ">Receipt Date</label>
@@ -544,7 +543,6 @@ function PurchasePartsNew() {
                 readOnly
               />
             </div>
-
           </div>
 
           <div className="d-flex col-md-2">
@@ -552,16 +550,17 @@ function PurchasePartsNew() {
               <label className="form-label">RV No</label>
             </div>
             <div className="col-md-8">
-              <input className="input-disabled mt-1"
-                type="text" name="rvNo" value={formHeader.rvNo} readOnly />
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="rvNo"
+                value={formHeader.rvNo}
+                readOnly
+              />
             </div>
-
-
           </div>
 
-
           <div className="d-flex col-md-2">
-
             <div className="col-md-4">
               <label className="form-label">RV Date</label>
             </div>
@@ -574,27 +573,22 @@ function PurchasePartsNew() {
                 readOnly
               />
             </div>
-
           </div>
 
-
-
           <div className="d-flex col-md-4">
-            <div className="col-md-4" >
+            <div className="col-md-4">
               <label className="form-label">Status</label>
             </div>
             <div className="col-md-8">
-
-              <input className="input-disabled mt-1"
+              <input
+                className="input-disabled mt-1"
                 type="text"
                 name="status"
                 value={formHeader.status}
                 readOnly
               />
-
             </div>
           </div>
-          
 
           <div className="d-flex col-md-2">
             <div className="col-md-4">
@@ -614,48 +608,46 @@ function PurchasePartsNew() {
         </div>
         <div className="row">
           <div className="d-flex col-md-4">
-          <div className="col-md-2">
+            <div className="col-md-2">
               <label className="form-label">Customer</label>
             </div>
 
             <div className="col-md-10 ">
-            <select
-              className="ip-select mt-1"
-              name="customer"
-              //onChange={changeCustomer}
-              disabled={boolVal1}
-            >
-              {custdata.map((customer, index) =>
-                customer.Cust_Code == 0 ? (
-                  <option key={index} value={customer.Cust_Code}>
-                    {customer.Cust_name}
-                  </option>
-                ) : (
-                  ""
-                )
-              )}
-            </select>
+              <select
+                className="ip-select mt-1"
+                name="customer"
+                //onChange={changeCustomer}
+                disabled={boolVal1}
+              >
+                {custdata.map((customer, index) =>
+                  customer.Cust_Code == 0 ? (
+                    <option key={index} value={customer.Cust_Code}>
+                      {customer.Cust_name}
+                    </option>
+                  ) : (
+                    ""
+                  )
+                )}
+              </select>
             </div>
-           
           </div>
-          
-          
-          <div className="d-flex col-md-2" style={{gap:'5px'}}>
+
+          <div className="d-flex col-md-2" style={{ gap: "5px" }}>
             <div className="col-md-4">
-              <label className="form-label">Reference  </label>
+              <label className="form-label">Reference </label>
             </div>
             <div className="col-md-8">
               <input
-              className="input-disabled mt-1" 
-              type="text"
-              name="reference"
-              value={formHeader.reference}
-              onChange={InputHeaderEvent}
-              disabled={boolVal2 & boolVal4}
+                className="input-disabled mt-1"
+                type="text"
+                name="reference"
+                value={formHeader.reference}
+                onChange={InputHeaderEvent}
+                disabled={boolVal2 & boolVal4}
               />
             </div>
           </div>
-          
+
           <div className="d-flex col-md-4">
             <div className="col-md-4">
               <label className="form-label">Calculated Weight</label>
@@ -663,7 +655,7 @@ function PurchasePartsNew() {
 
             <div className="col-md-8">
               <input
-              className="input-disabled mt-1" 
+                className="input-disabled mt-1"
                 type="number"
                 name="calculatedWeight"
                 value={calcWeightVal}
@@ -674,9 +666,9 @@ function PurchasePartsNew() {
         </div>
 
         <div className="row">
-        <div className="col-md-8 ">
+          <div className="col-md-8 ">
             <textarea
-             className="input-disabled mt-1" 
+              className="input-disabled mt-1"
               id="exampleFormControlTextarea1"
               rows="4"
               style={{ width: "700px", height: "60px" }}
@@ -720,12 +712,11 @@ function PurchasePartsNew() {
               Close
             </button>
           </div>
-          
         </div>
       </div>
       <div className="row">
         <div
-          style={{ height: "330px", overflowY: "scroll" }}
+          style={{ height: "250px", overflowY: "scroll" }}
           className="col-md-8 col-sm-12"
         >
           <BootstrapTable
@@ -775,7 +766,7 @@ function PurchasePartsNew() {
           </table> 
         </div>*/}
         <div className="col-md-4 col-sm-12">
-          <div className="ip-box form-bg">
+          <div className="ip-box form-bg" style={{ height: "250px" }}>
             <div className="row justify-content-center mt-2 mb-3">
               <button
                 className="button-style "
@@ -802,7 +793,8 @@ function PurchasePartsNew() {
               <div className="col-md-8">
                 <select
                   // className="ip-select dropdown-field"
-                  className="input-disabled mt-1" 
+                  style={{ width: "200px" }}
+                  className="input-disabled mt-1"
                   name="partId"
                   value={inputPart.partId}
                   onChange={changePartHandle}
@@ -823,7 +815,7 @@ function PurchasePartsNew() {
               </div>
               <div className="col-md-8 ">
                 <input
-                  className="input-disabled mt-1" 
+                  className="input-disabled mt-1"
                   type="text"
                   name="unitWeight"
                   value={inputPart.unitWeight}
@@ -839,7 +831,7 @@ function PurchasePartsNew() {
               </div>
               <div className="col-md-8 ">
                 <input
-                   className="input-disabled mt-1" 
+                  className="input-disabled mt-1"
                   type="text"
                   name="qtyReceived"
                   //value={tempVal}
@@ -853,7 +845,7 @@ function PurchasePartsNew() {
               </div>
               <div className="col-md-8 ">
                 <input
-                  className="input-disabled mt-1" 
+                  className="input-disabled mt-1"
                   type="text"
                   name="qtyAccepted"
                   value={inputPart.qtyAccepted}
@@ -868,7 +860,7 @@ function PurchasePartsNew() {
               </div>
               <div className="col-md-8 ">
                 <input
-                  className="input-disabled mt-1" 
+                  className="input-disabled mt-1"
                   type="text"
                   value={inputPart.qtyReceived - inputPart.qtyAccepted}
                   name="qtyRejected"

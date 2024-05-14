@@ -387,7 +387,7 @@ function OpenButtonOpenClosedPartList() {
         </div>
 
         <div className="col-md-4 col-sm-12">
-          <div className="ip-box form-bg">
+          <div className="ip-box form-bg" style={{ height: "300px" }}>
             <div className="row mt-2 ">
               <div className="col-md-4"></div>
               <button

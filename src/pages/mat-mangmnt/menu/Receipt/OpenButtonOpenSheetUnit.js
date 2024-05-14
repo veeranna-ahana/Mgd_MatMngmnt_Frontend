@@ -1098,7 +1098,7 @@ function OpenButtonOpenSheetUnit() {
         </div>
         <div className="row">
           <div
-            style={{ height: "420px", overflowY: "scroll" }}
+            style={{ height: "450px", overflowY: "scroll" }}
             className="col-md-8 col-sm-12"
           >
             <BootstrapTable
@@ -1122,9 +1122,9 @@ function OpenButtonOpenSheetUnit() {
           </div> */}
           <div
             className="col-md-4 col-sm-12"
-            style={{ overflowY: "scroll", height: "420px" }}
+            style={{ overflowY: "scroll", height: "450px" }}
           >
-            <div className="ip-box form-bg">
+            <div className="ip-box form-bg" style={{ height: "450px" }}>
               {/* <div className="row justify-content-center mt-2">
                 <button
                   className="button-style "

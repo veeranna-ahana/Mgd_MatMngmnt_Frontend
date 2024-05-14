@@ -433,7 +433,6 @@ function OpenButtonClosedSheetUnit() {
         <h4 className="title">Material Receipt Voucher</h4>
 
         <div className="row">
-
           <div className="d-flex col-md-3">
             <div className="col-md-4">
               <label className="form-label">Receipt Date</label>
@@ -447,25 +446,24 @@ function OpenButtonClosedSheetUnit() {
                 readOnly
               />
             </div>
-
-
           </div>
-
 
           <div className="d-flex col-md-2">
             <div className="col-md-4">
               <label className="form-label">RV No</label>
             </div>
             <div className="col-md-8">
-              <input className="input-disabled mt-1"
-                type="text" name="rvNo" value={formHeader.RV_No} readOnly />
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="rvNo"
+                value={formHeader.RV_No}
+                readOnly
+              />
             </div>
           </div>
 
-
-
           <div className="d-flex col-md-2">
-
             <div className="col-md-4">
               <label className="form-label">RV Date</label>
             </div>
@@ -478,18 +476,13 @@ function OpenButtonClosedSheetUnit() {
                 readOnly
               />
             </div>
-
-
           </div>
 
-
-
           <div className="d-flex col-md-2">
-            <div className="col-md-3" >
+            <div className="col-md-3">
               <label className="form-label">Status</label>
             </div>
             <div className="col-md-7">
-
               <input
                 className="input-disabled mt-1"
                 type="text"
@@ -497,10 +490,8 @@ function OpenButtonClosedSheetUnit() {
                 value={formHeader.RVStatus}
                 readOnly
               />
-
             </div>
           </div>
-
 
           <div className="d-flex col-md-2">
             <div className="col-md-9">
@@ -513,15 +504,12 @@ function OpenButtonClosedSheetUnit() {
                 name="weight"
                 value={formHeader.TotalWeight}
                 disabled={boolVal}
-              // onChange={InputHeaderEvent}
+                // onChange={InputHeaderEvent}
               />
             </div>
-
           </div>
         </div>
         <div className="row">
-
-
           <div className="d-flex col-md-5">
             <div className="col-md-2">
               <label className="form-label">Customer</label>
@@ -539,10 +527,7 @@ function OpenButtonClosedSheetUnit() {
                 </option>
               </select>
             </div>
-
           </div>
-
-
 
           <div className="d-flex col-md-4">
             <div className="col-md-2">
@@ -556,13 +541,10 @@ function OpenButtonClosedSheetUnit() {
                 name="reference"
                 value={formHeader.CustDocuNo}
                 disabled={boolVal}
-              // onChange={InputHeaderEvent}
+                // onChange={InputHeaderEvent}
               />
             </div>
-
           </div>
-
-          
 
           <div className="d-flex col-md-3">
             <div className="col-md-6">
@@ -574,19 +556,14 @@ function OpenButtonClosedSheetUnit() {
                 type="text"
                 name="calculatedWeight"
                 value={formHeader.TotalCalculatedWeight}
-
                 readOnly
               />
             </div>
-
-
           </div>
         </div>
-        
 
         <div className="row ">
-
-        <div className="col-md-8">
+          <div className="col-md-8">
             <textarea
               className="input-disabled mt-1"
               id="exampleFormControlTextarea1"
@@ -597,11 +574,7 @@ function OpenButtonClosedSheetUnit() {
             ></textarea>
           </div>
           <div className="col-md-4 justify-content-center">
-            <button
-              className="button-style"
-
-              disabled={boolVal}
-            >
+            <button className="button-style" disabled={boolVal}>
               Save
             </button>
 
@@ -622,11 +595,10 @@ function OpenButtonClosedSheetUnit() {
               Close
             </button>
           </div>
-         
         </div>
         <div className="row">
           <div
-            style={{ height: "330px", overflowY: "scroll" }}
+            style={{ height: "480px", overflowY: "scroll" }}
             className="col-md-8 col-sm-12"
           >
             <BootstrapTable
@@ -650,9 +622,9 @@ function OpenButtonClosedSheetUnit() {
           </div> */}
           <div
             className="col-md-4 col-sm-12"
-            style={{ overflowY: "scroll", height: "420px" }}
+            style={{ overflowY: "scroll", height: "480px" }}
           >
-            <div className="ip-box form-bg">
+            <div className="ip-box form-bg" style={{ height: "480px" }}>
               <div className="row justify-content-center mt-2">
                 {/* <button
                   className="button-style "
@@ -689,7 +661,15 @@ function OpenButtonClosedSheetUnit() {
                       {/* <p className="form-title-deco mt-2">
                         <h5>Serial Details</h5>
                       </p> */}
-                          <label className="form-label" style={{ textDecoration: 'underline', fontSize:'14px' }}>Serial Details</label>
+                      <label
+                        className="form-label"
+                        style={{
+                          textDecoration: "underline",
+                          fontSize: "14px",
+                        }}
+                      >
+                        Serial Details
+                      </label>
 
                       <div className="col-md-4">
                         <label className="form-label">Mtrl Code</label>
@@ -697,8 +677,8 @@ function OpenButtonClosedSheetUnit() {
                       <div className="col-md-8" style={{ marginTop: "8px" }}>
                         <select
                           // className="ip-select dropdown-field"
-                          style={{width:'133px'}}
-                        className="input-disabled mt-1"
+                          style={{ width: "133px" }}
+                          className="input-disabled mt-1"
                           disabled={boolVal}
                           value={inputPart.mtrlCode}
                           name="mtrlCode"
@@ -754,7 +734,6 @@ function OpenButtonClosedSheetUnit() {
                           <div className="col-md-6">
                             <input
                               type="number"
-                            
                               className="input-disabled mt-1"
                               name="dynamicPara1"
                               value={inputPart.dynamicPara1}
@@ -962,14 +941,22 @@ function OpenButtonClosedSheetUnit() {
                       {/* <p className="form-title-deco">
                         <h5>Quantity Details</h5>
                       </p> */}
-                          <label className="form-label" style={{ textDecoration: 'underline', fontSize:'14px' }}>Quantity Details</label>
+                      <label
+                        className="form-label"
+                        style={{
+                          textDecoration: "underline",
+                          fontSize: "14px",
+                        }}
+                      >
+                        Quantity Details
+                      </label>
                       <div className="row">
                         <div className="col-md-3">
                           <label className="form-label mt-2">Received</label>
                         </div>
                         <div className="col-md-4">
                           <input
-                          className="input-disabled mt-1"
+                            className="input-disabled mt-1"
                             disabled={boolVal}
                             value={(inputPart.qty = Math.floor(inputPart.qty))}
                           />
@@ -1000,7 +987,7 @@ function OpenButtonClosedSheetUnit() {
                         </div>
                         <div className="col-md-4">
                           <input
-                           className="input-disabled mt-1"
+                            className="input-disabled mt-1"
                             disabled={boolVal}
                             value={
                               (inputPart.accepted = Math.floor(
@@ -1039,7 +1026,7 @@ function OpenButtonClosedSheetUnit() {
                         </div>
                         <div className="col-md-6 mt-1">
                           <input
-                          className="input-disabled mt-1"
+                            className="input-disabled mt-1"
                             disabled={boolVal}
                             value={inputPart.totalWeightCalculated}
                           />
@@ -1051,7 +1038,7 @@ function OpenButtonClosedSheetUnit() {
                         </div>
                         <div className="col-md-6 ">
                           <input
-                           className="input-disabled mt-1"
+                            className="input-disabled mt-1"
                             disabled={boolVal}
                             value={inputPart.totalWeight}
                           />
@@ -1065,8 +1052,7 @@ function OpenButtonClosedSheetUnit() {
                           <select
                             // className="ip-select dropdown-field"
                             className="input-disabled mt-1"
-                         
-                          style={{width:'140px'}}
+                            style={{ width: "130px" }}
                             disabled={boolVal}
                           >
                             <option value={inputPart.locationNo}>
