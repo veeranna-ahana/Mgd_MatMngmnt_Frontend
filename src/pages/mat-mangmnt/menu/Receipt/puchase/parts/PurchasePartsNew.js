@@ -793,6 +793,10 @@ function PurchasePartsNew() {
               <div className="col-md-8">
                 <select
                   // className="ip-select dropdown-field"
+<<<<<<< HEAD
+                  style={{ width: "200px" }}
+=======
+>>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
                   className="input-disabled mt-1"
                   name="partId"
                   value={inputPart.partId}

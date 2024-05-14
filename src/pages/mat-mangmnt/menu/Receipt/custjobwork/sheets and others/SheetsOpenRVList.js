@@ -180,7 +180,11 @@ function SheetsOpenRVList() {
             </button>
           </div>
           <div className="col-md-7 col-sm-12">
+<<<<<<< HEAD
+            <div style={{ height: "400px", overflowY: "scroll" }}>
+=======
             <div style={{ height: "350px", overflowY: "scroll" }}>
+>>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
               {/* <BootstrapTable keyField="id" data={products} columns={columns} /> */}
               <BootstrapTable
                 keyField="RvID"
@@ -224,7 +228,11 @@ function SheetsOpenRVList() {
           </div>
 
           <div className="col-md-5 col-sm-12">
+<<<<<<< HEAD
+            <div className="ip-box form-bg" style={{ height: "400px" }}>
+=======
             <div className="ip-box form-bg" style={{ height: "350px" }}>
+>>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
               <div className="row">
                 <div className="col-md-4 mt-1 ">
                   <label className="form-label">Receipt Date</label>

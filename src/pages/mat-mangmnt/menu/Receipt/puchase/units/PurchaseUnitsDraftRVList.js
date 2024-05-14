@@ -138,7 +138,11 @@ export default function PurchaseUnitsDraftRVList() {
           </div>
 
           <div className="col-md-5 col-sm-12">
+<<<<<<< HEAD
+            <div className="ip-box form-bg"  style={{height:'350px'}}>
+=======
             <div className="ip-box form-bg" style={{ height: "350px" }}>
+>>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
               <div className="row">
                 <div className="col-md-4 mt-1">
                   <label className="form-label">Receipt Date</label>
