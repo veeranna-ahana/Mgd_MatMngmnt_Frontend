@@ -2320,7 +2320,6 @@ function OpenButtonDraftSheetUnit(props) {
                         // className="ip-select dropdown-field"
                         style={{ width: "140px" }}
                         className="input-disabled mt-1"
-                        style={{ width: "140px" }}
                         min="0"
                         onChange={(e) => {
                           changeMaterialHandle(e, inputPart.id);
