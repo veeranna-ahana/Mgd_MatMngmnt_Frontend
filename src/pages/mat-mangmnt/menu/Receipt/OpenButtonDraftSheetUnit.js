@@ -1740,13 +1740,8 @@ function OpenButtonDraftSheetUnit(props) {
             className="col-md-4 col-sm-12"
             style={{ overflowY: "scroll", height: "400px" }}
           >
-<<<<<<< HEAD
-            <div className="ip-box form-bg" style={{ height: "400px" }}>
-              <div className="row justify-content-center mt-2">
-=======
             <div className="ip-box form-bg">
               <div className="row justify-content-center ">
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
                 <div className="col-md-6 col-sm-12">
                   <button
                     className="button-style "
@@ -2190,18 +2185,9 @@ function OpenButtonDraftSheetUnit(props) {
                     </div>
                   )}
 
-<<<<<<< HEAD
-                  {/* <p className="form-title-deco">
-                    <h5>Quantity Details</h5>
-                  </p> */}
-                  <label
-                    className="form-label mt-1"
-                    style={{ textDecoration: "underline", fontSize: "14px" }}
-=======
                   <label
                     className="form-label"
                     style={{ textDecoration: "underline" }}
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
                   >
                     Quantity Details
                   </label>

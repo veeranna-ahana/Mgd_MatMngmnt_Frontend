@@ -2152,11 +2152,7 @@ function NewSheetsUnits(props) {
         </div>
 
         <div className="row mt-2">
-<<<<<<< HEAD
-          <div className="col-md-8 ">
-=======
           <div className="col-md-8">
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
             {/* <label className="form-label"></label> */}
             <textarea
               className="input-disabled mt-1"
@@ -2228,11 +2224,7 @@ function NewSheetsUnits(props) {
                 <div className="col-md-6 col-sm-12">
                   <button
                     className="button-style "
-<<<<<<< HEAD
-                    style={{ width: "80px" }}
-=======
                     style={{ width: "90px" }}
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
                     //onClick={addNewPart}
                     disabled={boolVal1 || boolVal4}
                     onClick={addNewMaterial}
@@ -2243,10 +2235,7 @@ function NewSheetsUnits(props) {
                 <div className="col-md-6 col-sm-12">
                   <button
                     className="button-style "
-<<<<<<< HEAD
-=======
                     style={{ width: "90px" }}
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
                     disabled={boolVal3 || boolVal4}
                     // onClick={handleDelete}
                     onClick={deleteButtonState}
@@ -2260,10 +2249,7 @@ function NewSheetsUnits(props) {
                 <div className="col-md-6 col-sm-12">
                   <button
                     className="button-style "
-<<<<<<< HEAD
-=======
                     style={{ width: "90px" }}
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
                     disabled={rmvBtn || boolVal6}
                     onClick={addToStock}
                   >
@@ -2273,10 +2259,7 @@ function NewSheetsUnits(props) {
                 <div className="col-md-6 col-sm-12">
                   <button
                     className="button-style "
-<<<<<<< HEAD
-=======
                     style={{ width: "90px" }}
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
                     disabled={addBtn || boolVal6}
                     onClick={removeStock}
                   >
@@ -2292,11 +2275,7 @@ function NewSheetsUnits(props) {
                   </p> */}
                   <label
                     className="form-label"
-<<<<<<< HEAD
-                    style={{ textDecoration: "underline", fontSize: "14px" }}
-=======
                     style={{ textDecoration: "underline" }}
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
                   >
                     Serial Details
                   </label>
@@ -2383,11 +2362,7 @@ function NewSheetsUnits(props) {
                         </div>
                         <div className="col-md-6">
                           <input
-<<<<<<< HEAD
-                            className="input-disabled mt-1"
-=======
                             className="input-disabled mt-2"
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
                             name="dynamicPara1"
                             disabled
                             min="0"
@@ -2745,11 +2720,7 @@ function NewSheetsUnits(props) {
                   </p> */}
                   <label
                     className="form-label"
-<<<<<<< HEAD
-                    style={{ textDecoration: "underline", fontSize: "14px" }}
-=======
                     style={{ textDecoration: "underline" }}
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
                   >
                     Quantity Details
                   </label>
@@ -2759,11 +2730,7 @@ function NewSheetsUnits(props) {
                     </div>
                     <div className="col-md-4 col-sm-12">
                       <input
-<<<<<<< HEAD
-                        className="input-disabled mt-1"
-=======
                         className="input-disabled mt-2"
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
                         type="number"
                         name="qty"
                         // defaultValue={0}
@@ -2808,11 +2775,7 @@ function NewSheetsUnits(props) {
                     </div>
                     <div className="col-md-4 col-sm-12">
                       <input
-<<<<<<< HEAD
-                        className="input-disabled mt-1"
-=======
                         className="input-disabled mt-2"
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
                         type="number"
                         name="accepted"
                         // defaultValue={0}
@@ -2900,11 +2863,7 @@ function NewSheetsUnits(props) {
                     <div className="col-md-6 mt-1" style={{ width: "140px" }}>
                       <select
                         // className="ip-select dropdown-field"
-<<<<<<< HEAD
-                        style={{ width: "140px" }}
-=======
                         // style={{ width: "140px" }}
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
                         className="input-disabled mt-1"
                         onChange={(e) => {
                           changeMaterialHandle(e, inputPart.id);
