@@ -601,11 +601,7 @@ function OpenButtonClosedSheetUnit() {
         </div>
         <div className="row">
           <div
-<<<<<<< HEAD
-            style={{ height: "480px", overflowY: "scroll" }}
-=======
             style={{ height: "380px", overflowY: "scroll" }}
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
             className="col-md-8 col-sm-12"
           >
             <BootstrapTable
@@ -627,16 +623,8 @@ function OpenButtonClosedSheetUnit() {
               <Tables theadData={getHeadings()} tbodyData={data3} />
             </div> 
           </div> */}
-<<<<<<< HEAD
-          <div
-            className="col-md-4 col-sm-12"
-            style={{ overflowY: "scroll", height: "480px" }}
-          >
-            <div className="ip-box form-bg" style={{ height: "480px" }}>
-=======
           <div className="col-md-4 col-sm-12" style={{ overflowY: "scroll" }}>
             <div className="ip-box form-bg" style={{ height: "380px" }}>
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
               <div className="row justify-content-center mt-2">
                 {/* <button
                   className="button-style "
@@ -681,18 +669,6 @@ function OpenButtonClosedSheetUnit() {
                       {/* <p className="form-title-deco mt-2">
                         <h5>Serial Details</h5>
                       </p> */}
-<<<<<<< HEAD
-                      <label
-                        className="form-label"
-                        style={{
-                          textDecoration: "underline",
-                          fontSize: "14px",
-                        }}
-                      >
-                        Serial Details
-                      </label>
-=======
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
 
                       <div className="col-md-4">
                         <label className="form-label">Mtrl Code</label>
@@ -700,11 +676,7 @@ function OpenButtonClosedSheetUnit() {
                       <div className="col-md-8" style={{ marginTop: "8px" }}>
                         <select
                           // className="ip-select dropdown-field"
-<<<<<<< HEAD
-                          style={{ width: "133px" }}
-=======
                           style={{ width: "140px" }}
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
                           className="input-disabled mt-1"
                           disabled={boolVal}
                           value={inputPart.mtrlCode}
@@ -761,11 +733,7 @@ function OpenButtonClosedSheetUnit() {
                           <div className="col-md-6">
                             <input
                               type="number"
-<<<<<<< HEAD
-                              className="input-disabled mt-1"
-=======
                               className="input-disabled mt-2"
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
                               name="dynamicPara1"
                               value={inputPart.dynamicPara1}
                               disabled
@@ -976,10 +944,6 @@ function OpenButtonClosedSheetUnit() {
                         className="form-label"
                         style={{
                           textDecoration: "underline",
-<<<<<<< HEAD
-                          fontSize: "14px",
-=======
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
                         }}
                       >
                         Quantity Details
@@ -990,11 +954,7 @@ function OpenButtonClosedSheetUnit() {
                         </div>
                         <div className="col-md-4">
                           <input
-<<<<<<< HEAD
-                            className="input-disabled mt-1"
-=======
                             className="input-disabled mt-2"
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
                             disabled={boolVal}
                             value={(inputPart.qty = Math.floor(inputPart.qty))}
                           />
@@ -1025,11 +985,7 @@ function OpenButtonClosedSheetUnit() {
                         </div>
                         <div className="col-md-4">
                           <input
-<<<<<<< HEAD
-                            className="input-disabled mt-1"
-=======
                             className="input-disabled mt-2"
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
                             disabled={boolVal}
                             value={
                               (inputPart.accepted = Math.floor(
@@ -1094,11 +1050,7 @@ function OpenButtonClosedSheetUnit() {
                           <select
                             // className="ip-select dropdown-field"
                             className="input-disabled mt-1"
-<<<<<<< HEAD
-                            style={{ width: "130px" }}
-=======
                             style={{ width: "140px" }}
->>>>>>> b66bf2496ef7186f879acbe07f40f37b0f047a41
                             disabled={boolVal}
                           >
                             <option value={inputPart.locationNo}>
