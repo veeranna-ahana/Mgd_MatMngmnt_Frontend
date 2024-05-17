@@ -41,27 +41,22 @@ function StockArrival() {
     {
       text: "RV_No",
       dataField: "RV_No",
-      sort: true,
     },
     {
       text: "CustDocuNo",
       dataField: "CustDocuNo",
-      sort: true,
     },
     {
       text: "Material",
       dataField: "Material",
-      sort: true,
     },
     {
       text: "Calculated Weight",
       dataField: "TotalWeightCalculated",
-      sort: true,
     },
     {
       text: "Total Weight",
       dataField: "TotalWeight",
-      sort: true,
     },
   ];
 
@@ -74,22 +69,18 @@ function StockArrival() {
     {
       text: "RV_No",
       dataField: "RV_No",
-      sort: true,
     },
     {
       text: "Srl",
       dataField: "Srl",
-      sort: true,
     },
     {
       text: "Calculated Weight",
       dataField: "TotalWeightCalculated",
-      sort: true,
     },
     {
       text: "Total Weight",
       dataField: "TotalWeight",
-      sort: true,
     },
   ];
   const columns3 = [
@@ -101,22 +92,18 @@ function StockArrival() {
     {
       text: "RV_No",
       dataField: "RV_No",
-      sort: true,
     },
     {
       text: "CustDocuNo",
       dataField: "CustDocuNo",
-      sort: true,
     },
     {
       text: "Material",
       dataField: "Material",
-      sort: true,
     },
     {
       text: "Total Weight",
       dataField: "WeightIN",
-      sort: true,
     },
   ];
 
@@ -189,53 +176,24 @@ function StockArrival() {
       }
     }
   };
-
-  const [sort1, setSort1] = React.useState({
-    dataField: "id",
-    order: "asc",
-  });
-
-  const [sort2, setSort2] = React.useState({
-    dataField: "id",
-    order: "asc",
-  });
-
-  const [sort3, setSort3] = React.useState({
-    dataField: "id",
-    order: "asc",
-  });
-
-  const onSortChange1 = (dataField, order) => {
-    setSort1({ dataField, order });
-  };
-
-  const onSortChange2 = (dataField, order) => {
-    setSort2({ dataField, order });
-  };
-
-  const onSortChange3 = (dataField, order) => {
-    setSort3({ dataField, order });
-  };
-
   return (
     <div>
+      {" "}
       <h4 className="title">Stock Arrival Updater Form </h4>
       <div className="row">
+        
         <div className="d-flex col-md-3">
           <div className="col-md-3">
-            <label className="form-label">Stock Date</label>
+          <label className="form-label">Stock Date</label>
           </div>
           <div className="col-md-6">
-            <input type="date" name="date" onChange={InputEvent} />
+          <input type="date" name="date" onChange={InputEvent} />
           </div>
         </div>
 
+
         <div className="col-md-1">
-          <button
-            className="button-style"
-            style={{ width: "70px" }}
-            onClick={loadData}
-          >
+          <button className="button-style"  style={{width:'70px'}} onClick={loadData}>
             Load Data
           </button>
         </div>
@@ -261,6 +219,7 @@ function StockArrival() {
       </div>
       <div className="row mt-4">
         <div className="col-md-7">
+          {" "}
           <div className="row">
             <div style={{ height: "200px", overflowY: "scroll" }}>
               <BootstrapTable
@@ -272,8 +231,6 @@ function StockArrival() {
                 condensed
                 //selectRow={selectRow1}
                 headerClasses="header-class tableHeaderBGColor"
-                sort={sort1}
-                onSortChange={onSortChange1}
               ></BootstrapTable>
             </div>
           </div>
@@ -288,9 +245,7 @@ function StockArrival() {
                 condensed
                 //selectRow={selectRow1}
                 headerClasses="header-class tableHeaderBGColor"
-                sort={sort2}
-                onSortChange={onSortChange2}
-              ></BootstrapTable>
+              ></BootstrapTable>{" "}
             </div>
           </div>
         </div>
@@ -305,8 +260,6 @@ function StockArrival() {
               condensed
               //selectRow={selectRow1}
               headerClasses="header-class tableHeaderBGColor"
-              sort={sort3}
-              onSortChange={onSortChange3}
             ></BootstrapTable>
           </div>
         </div>

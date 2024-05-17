@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
 
 //return <div>PrintMaterialDCTable</div>;
 //}
-const PrintDailyReportInvoiceTable = (props) => (
+const PrintDailyReportInvoiceTable = ({ tableData, date }) => (
   <Document>
     <Page size="A4" style={{ ...styles.pageStyling }}>
       <View>
@@ -100,19 +100,21 @@ const PrintDailyReportInvoiceTable = (props) => (
               }}
             >
               Daily Invoice Material Dispatch List :
-              {formatDate(new Date(props.date), 3)}
+              {formatDate(new Date(date), 3)}
             </Text>
             <Text style={{ ...styles.fontBold, fontSize: subheaderFontsize }}>
-              {props.PDFData.RegisteredName}
+              Magod Laser Machining Pvt. Ltd.
             </Text>
             <Text style={{ ...styles.fontBold }}>
-              GST: {props.PDFData.GST_No} CIN: {props.PDFData.CIN_No}
+              GSTIN: 29AABCM1970H1ZE, CIN: U28900KA1995PTC018437
             </Text>
-            <Text>{props.PDFData.RegistredOfficeAddress}</Text>
-
             <Text>
-              {props.PDFData.PhonePrimary}, {props.PDFData.PhoneSecondary},{" "}
-              {props.PDFData.Email}, {props.PDFData.URL}
+              #71 & 72, Phase II, KIADB Indl Area, Jigani, Anekal Taluk,
+              Bengaluru - 560105
+            </Text>
+            <Text>
+              +91-80-42291005, +91-8110-414313, info@magodlaser.in,
+              https://www.magodlaser.in/
             </Text>
           </View>
           <Text style={{ padding: "3%" }}></Text>
@@ -143,7 +145,7 @@ const PrintDailyReportInvoiceTable = (props) => (
             </View>
           </View>
 
-          {props.tableData.map((item, index) => {
+          {tableData.map((item, index) => {
             return (
               <>
                 <View

@@ -1,16 +1,14 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import { PDFViewer } from "@react-pdf/renderer";
 import { useLocation } from "react-router-dom";
 import PrintLocationStockDetailTableReport from "./PrintLocationStockDetailTableReport";
 import PrintLocationStockSummaryTableReport from "./PrintLocationStockSummaryTableReport";
 import { Modal } from "react-bootstrap";
 
-import { postRequest } from "../../../api/apiinstance";
-import { endpoints } from "../../../api/constants";
+// Modal
 
 function PrintLocationStockSummaryReport(props) {
-  const [PDFData, setPDFData] = useState({});
-
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
   const location = useLocation();
   // console.log(
   //   "formHeader = ",
@@ -22,16 +20,6 @@ function PrintLocationStockSummaryReport(props) {
   // );
 
   const handleClose = () => props.setSummaryReportPrintOpen(false);
-
-  function fetchPDFData() {
-    postRequest(endpoints.getPDFData, {}, (res) => {
-      setPDFData(res[0]);
-    });
-  }
-
-  useEffect(() => {
-    fetchPDFData();
-  }, []);
 
   return (
     <>
@@ -49,7 +37,6 @@ function PrintLocationStockSummaryReport(props) {
               <PrintLocationStockSummaryTableReport
                 formHeader={props.formHeader}
                 tableData={props.tableData}
-                PDFData={PDFData}
               />
             </PDFViewer>
           </Fragment>

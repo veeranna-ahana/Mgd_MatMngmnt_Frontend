@@ -176,23 +176,19 @@ function MaterialMoverForm(props) {
       text: "Mtrl Stock ID",
       dataField: "MtrlStockID",
       headerStyle: { whiteSpace: "nowrap" },
-      sort: true,
     },
     {
       text: "Mtrl Code",
       dataField: "Mtrl_Code",
       headerStyle: { whiteSpace: "nowrap" },
-      sort: true,
     },
     {
       text: "Length",
       dataField: "DynamicPara1",
-      sort: true,
     },
     {
       text: "Width",
       dataField: "DynamicPara2",
-      sort: true,
     },
     {
       text: "Locked",
@@ -204,7 +200,6 @@ function MaterialMoverForm(props) {
           </lable>
         </div>
       ),
-      sort: true,
     },
     {
       text: "Scrap",
@@ -216,19 +211,16 @@ function MaterialMoverForm(props) {
           </lable>
         </div>
       ),
-      sort: true,
     },
     {
       text: "Scrap Weight",
       dataField: "ScrapWeight",
       headerStyle: { whiteSpace: "nowrap" },
-      sort: true,
     },
     {
       text: "Location No",
       dataField: "LocationNo",
       headerStyle: { whiteSpace: "nowrap" },
-      sort: true,
     },
   ];
   const columns2 = [
@@ -345,15 +337,6 @@ function MaterialMoverForm(props) {
       setFirstTable(allData);
     }
     // console.log("new....", newArray);
-  };
-
-  const [sort, setSort] = React.useState({
-    dataField: "MtrlStockID",
-    order: "asc",
-  });
-
-  const onSortChange = (dataField, order) => {
-    setSort({ dataField, order });
   };
   return (
     <div>
@@ -667,8 +650,6 @@ function MaterialMoverForm(props) {
               condensed
               selectRow={selectRow1}
               headerClasses="header-class tableHeaderBGColor"
-              sort={sort}
-              onSortChange={onSortChange}
             ></BootstrapTable>
           </div>
         </div>

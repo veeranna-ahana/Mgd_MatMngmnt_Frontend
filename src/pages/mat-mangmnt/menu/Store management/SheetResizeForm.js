@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Typeahead } from "react-bootstrap-typeahead";
 import ResizeModal from "./ResizeModal";
-import { FaArrowUp } from "react-icons/fa";
 
 const { getRequest, postRequest } = require("../../../api/apiinstance");
 const { endpoints } = require("../../../api/constants");
@@ -202,47 +201,6 @@ function SheetResizeForm() {
       // }
     }
   };
-
-  const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
-
-  const sortedData = () => {
-    let dataCopy = [...tabledata];
-
-    if (sortConfig.key) {
-      dataCopy.sort((a, b) => {
-        if (!parseFloat(a[sortConfig.key]) || !parseFloat(b[sortConfig.key])) {
-          // console.log("string");
-          if (a[sortConfig.key] < b[sortConfig.key]) {
-            return sortConfig.direction === "asc" ? -1 : 1;
-          }
-          if (a[sortConfig.key] > b[sortConfig.key]) {
-            return sortConfig.direction === "asc" ? 1 : -1;
-          }
-          return 0;
-        } else {
-          // console.log("number");
-          if (parseFloat(a[sortConfig.key]) < parseFloat(b[sortConfig.key])) {
-            return sortConfig.direction === "asc" ? -1 : 1;
-          }
-          if (parseFloat(a[sortConfig.key]) > parseFloat(b[sortConfig.key])) {
-            return sortConfig.direction === "asc" ? 1 : -1;
-          }
-          return 0;
-        }
-      });
-    }
-
-    return dataCopy;
-  };
-
-  const requestSort = (key) => {
-    let direction = "asc";
-    if (sortConfig.key === key && sortConfig.direction === "asc") {
-      direction = "desc";
-    }
-    setSortConfig({ key, direction });
-  };
-
   return (
     <>
       <div>
@@ -328,94 +286,16 @@ function SheetResizeForm() {
             >
               <thead className="tableHeaderBGColor">
                 <tr>
-                  <th
-                    onClick={() => requestSort("MtrlStockID")}
-                    className="cursor"
-                  >
-                    Mtrl Stock
-                    <FaArrowUp
-                      className={
-                        sortConfig.key === "MtrlStockID"
-                          ? sortConfig.direction === "desc"
-                            ? "rotateClass"
-                            : ""
-                          : "displayNoneClass"
-                      }
-                    />
-                  </th>
-                  <th
-                    onClick={() => requestSort("Mtrl_Code")}
-                    className="cursor"
-                  >
-                    Mtrl Code
-                    <FaArrowUp
-                      className={
-                        sortConfig.key === "Mtrl_Code"
-                          ? sortConfig.direction === "desc"
-                            ? "rotateClass"
-                            : ""
-                          : "displayNoneClass"
-                      }
-                    />
-                  </th>
-                  <th onClick={() => requestSort("Shape")} className="cursor">
-                    Shape
-                    <FaArrowUp
-                      className={
-                        sortConfig.key === "Shape"
-                          ? sortConfig.direction === "desc"
-                            ? "rotateClass"
-                            : ""
-                          : "displayNoneClass"
-                      }
-                    />
-                  </th>
-                  <th
-                    onClick={() => requestSort("DynamicPara1")}
-                    className="cursor"
-                  >
-                    Length
-                    <FaArrowUp
-                      className={
-                        sortConfig.key === "DynamicPara1"
-                          ? sortConfig.direction === "desc"
-                            ? "rotateClass"
-                            : ""
-                          : "displayNoneClass"
-                      }
-                    />
-                  </th>
-                  <th
-                    onClick={() => requestSort("DynamicPara2")}
-                    className="cursor"
-                  >
-                    Width
-                    <FaArrowUp
-                      className={
-                        sortConfig.key === "DynamicPara2"
-                          ? sortConfig.direction === "desc"
-                            ? "rotateClass"
-                            : ""
-                          : "displayNoneClass"
-                      }
-                    />
-                  </th>
-                  <th onClick={() => requestSort("Weight")} className="cursor">
-                    Weight
-                    <FaArrowUp
-                      className={
-                        sortConfig.key === "Weight"
-                          ? sortConfig.direction === "desc"
-                            ? "rotateClass"
-                            : ""
-                          : "displayNoneClass"
-                      }
-                    />
-                  </th>
+                  <th>Mtrl Stock</th>
+                  <th>Mtrl Code</th>
+                  <th>Shape</th>
+                  <th>Length</th>
+                  <th>Width</th>
+                  <th>Weight</th>
                 </tr>
               </thead>
               <tbody>
-                {sortedData().map((val, key) => (
+                {tabledata.map((val, key) => (
                   <tr
                     onClick={() => {
                       selectTableRow(val);
