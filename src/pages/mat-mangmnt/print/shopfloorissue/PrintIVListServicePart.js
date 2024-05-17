@@ -41,7 +41,7 @@ function PrintIVListServicePart({
 
   function fetchPDFData() {
     let url1 = endpoints.getPDFData;
-    postRequest(url1, {}, async (res) => {
+    getRequest(url1, async (res) => {
       // console.log("res", res);
       setPDFData(res[0]);
     });

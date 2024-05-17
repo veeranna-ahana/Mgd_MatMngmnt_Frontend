@@ -122,7 +122,12 @@ const styles = StyleSheet.create({
 
 //return <div>PrintMaterialDCTable</div>;
 //}
-const PrintDailyReportReceiptTable = (props) => (
+const PrintDailyReportReceiptTable = ({
+  tableData,
+  date,
+  totqty,
+  totalweight,
+}) => (
   <Document>
     <Page size="A4" style={{ ...styles.pageStyling }}>
       {/* <View>
@@ -152,20 +157,21 @@ const PrintDailyReportReceiptTable = (props) => (
                 fontSize: headerFontSize,
               }}
             >
-              Daily Material Arrival Report :{" "}
-              {formatDate(new Date(props.date), 3)}{" "}
+              Daily Material Arrival Report : {formatDate(new Date(date), 3)}{" "}
             </Text>
             <Text style={{ ...styles.fontBold, fontSize: subheaderFontsize }}>
-              {props.PDFData.RegisteredName}
+              Magod Laser Machining Pvt. Ltd.
             </Text>
             <Text style={{ ...styles.fontBold }}>
-              GST: {props.PDFData.GST_No} CIN: {props.PDFData.CIN_No}
+              GSTIN: 29AABCM1970H1ZE, CIN: U28900KA1995PTC018437
             </Text>
-            <Text>{props.PDFData.RegistredOfficeAddress}</Text>
-
             <Text>
-              {props.PDFData.PhonePrimary}, {props.PDFData.PhoneSecondary},{" "}
-              {props.PDFData.Email}, {props.PDFData.URL}
+              #71 & 72, Phase II, KIADB Indl Area, Jigani, Anekal Taluk,
+              Bengaluru - 560105
+            </Text>
+            <Text>
+              +91-80-42291005, +91-8110-414313, info@magodlaser.in,
+              https://www.magodlaser.in/
             </Text>
           </View>
           <Text style={{ padding: "3%" }}></Text>
@@ -199,7 +205,7 @@ const PrintDailyReportReceiptTable = (props) => (
           </View>
           <View style={styles.insideBox}>
             <View style={{ display: "flex", flexDirection: "column" }}>
-              {props.tableData.map((item, index) => {
+              {tableData.map((item, index) => {
                 return (
                   <>
                     <View
@@ -253,9 +259,9 @@ const PrintDailyReportReceiptTable = (props) => (
                 Summary
               </Text>
               <Text style={styles.totalWeightFinal}>
-                {props.totalweight.toFixed(3)}
+                {totalweight.toFixed(3)}
               </Text>
-              <Text style={styles.quantityFinal}>{parseInt(props.totqty)}</Text>
+              <Text style={styles.quantityFinal}>{parseInt(totqty)}</Text>
               {/* <Text style={{ padding: "3.5%" }}></Text> */}
             </View>
           </View>

@@ -194,7 +194,6 @@ function OutwordPartIssueVocher(props) {
         // console.log("data = ", data);
         if (data.affectedRows !== 0) {
           toast.success("Record Updated Successfully");
-          fetchData();
         } else {
           toast.error("Record Not Updated");
         }
@@ -366,27 +365,25 @@ function OutwordPartIssueVocher(props) {
     }
   };
   let printDC = () => {
-    setPrintOpen(true);
+    //console.log("First formheader = ", formHeader, " outdata = ", outData);
+    if (dcID !== "" && dcID !== 0) {
+      // nav("/MaterialManagement/Return/CustomerJobWork/PrintPartsDC", {
+      //   //formHeader: formHeader,
+      //   //outData: outData,
+      //   state: {
+      //     //id: data.RvID,
+      //     formHeader: formHeader,
+      //     outData: outData,
+      //     custdata: custdata,
+      //     dcRegister: dcRegister,
+      //   },
+      // });
+      setPrintOpen(true);
 
-    // //console.log("First formheader = ", formHeader, " outdata = ", outData);
-    // if (dcID !== "" && dcID !== 0) {
-    //   // nav("/MaterialManagement/Return/CustomerJobWork/PrintPartsDC", {
-    //   //   //formHeader: formHeader,
-    //   //   //outData: outData,
-    //   //   state: {
-    //   //     //id: data.RvID,
-    //   //     formHeader: formHeader,
-    //   //     outData: outData,
-    //   //     custdata: custdata,
-    //   //     dcRegister: dcRegister,
-    //   //   },
-    //   // });
-    //   setPrintOpen(true);
-
-    //   //window.location.reload();
-    // } else {
-    //   toast.error("DC Not Created");
-    // }
+      //window.location.reload();
+    } else {
+      toast.error("DC Not Created");
+    }
   };
 
   // const handleSave = () => {
@@ -595,15 +592,6 @@ function OutwordPartIssueVocher(props) {
 
       if (i === key) {
         element[field] = value;
-
-        if (field === "UnitWt") {
-          let totalWeight = 0;
-
-          totalWeight = (
-            parseFloat(element.QtyReturned || 0) * parseFloat(value || 0)
-          ).toFixed(3);
-          element.TotalWeight = totalWeight;
-        }
       }
       // console.log("element", element);
 
@@ -635,7 +623,6 @@ function OutwordPartIssueVocher(props) {
     setFormHeader({
       ...formHeader,
       TotalWeight: newTotalWeight,
-      TotalCalculatedWeight: newTotalWeight,
     });
   };
 
@@ -1020,47 +1007,19 @@ function OutwordPartIssueVocher(props) {
                       <td>{key + 1}</td>
                       <td>{val.PartId}</td>
                       <td>{parseInt(val.QtyReturned)} </td>
+                      <td>{parseFloat(val.UnitWt).toFixed(3)}</td>
                       <td>
-                        {/* {parseFloat(val.UnitWt).toFixed(3)} */}
+                        {/* {val.TotalWeight} */}
 
                         <input
                           type="number"
                           min={0}
-                          defaultValue={parseFloat(val.UnitWt).toFixed(3)}
-                          onKeyDown={(e) => {
-                            if (e.which === 38 || e.which === 40) {
-                              e.preventDefault();
-                            }
-                          }}
-                          onChange={(e) => {
-                            updateChange(key, e.target.value || 0, "UnitWt");
-                            handleChangeWeightTotalCal();
-                          }}
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            backgroundColor: "transparent",
-                            border: "none",
-                          }}
-                          disabled={
-                            formHeader.IVStatus === "Cancelled" ||
-                            formHeader.PkngDcNo
-                          }
-                          className={
-                            formHeader.IVStatus === "Cancelled" ||
-                            formHeader.PkngDcNo
-                              ? "input-disabled"
-                              : ""
-                          }
-                        />
-                      </td>
-                      <td>
-                        {parseFloat(val.TotalWeight).toFixed(3)}
-
-                        {/* <input
-                          type="number"
-                          min={0}
-                          
+                          // disabled={
+                          //   (formHeader.IVStatus === "Cancelled") ||
+                          //   (formHeader.IVStatus === "Returned")
+                          //     ? true
+                          //     : false
+                          // }
                           defaultValue={parseFloat(val.TotalWeight).toFixed(3)}
                           onKeyDown={(e) => {
                             if (e.which === 38 || e.which === 40) {
@@ -1091,37 +1050,9 @@ function OutwordPartIssueVocher(props) {
                               ? "input-disabled"
                               : ""
                           }
-                        /> */}
-                      </td>
-                      <td>
-                        {/* {val.Remarks} */}
-
-                        <input
-                          // type="number"
-                          // min={0}
-                          maxLength={150}
-                          defaultValue={val.Remarks}
-                          onChange={(e) => {
-                            updateChange(key, e.target.value || "", "Remarks");
-                          }}
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            backgroundColor: "transparent",
-                            border: "none",
-                          }}
-                          disabled={
-                            formHeader.IVStatus === "Cancelled" ||
-                            formHeader.PkngDcNo
-                          }
-                          className={
-                            formHeader.IVStatus === "Cancelled" ||
-                            formHeader.PkngDcNo
-                              ? "input-disabled"
-                              : ""
-                          }
                         />
                       </td>
+                      <td>{val.Remarks}</td>
                       <td>
                         {val.UpDated === 0 ? (
                           <input

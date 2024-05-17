@@ -1,16 +1,12 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import { PDFViewer } from "@react-pdf/renderer";
 import PrintMaterialDCTable from "./PrintDailyReportReceiptTable";
 import { useLocation } from "react-router-dom";
 import PrintReportStockListTable from "./PrintReportStockListTable";
 
 import Modal from "react-bootstrap/Modal";
-import { postRequest } from "../../../api/apiinstance";
-import { endpoints } from "../../../api/constants";
 
 function PrintReportStockList(props) {
-  const [PDFData, setPDFData] = useState({});
-
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
   const location = useLocation();
   // console.log(
@@ -45,16 +41,6 @@ function PrintReportStockList(props) {
 
   const handleClose = () => props.setprintSelectedStockOpen(false);
 
-  function fetchPDFData() {
-    postRequest(endpoints.getPDFData, {}, (res) => {
-      setPDFData(res[0]);
-    });
-  }
-
-  useEffect(() => {
-    fetchPDFData();
-  }, []);
-
   return (
     <>
       <Modal
@@ -87,7 +73,6 @@ function PrintReportStockList(props) {
                 scrapData={props.scrapData}
                 scrapFlag={props.scrapFlag}
                 customerDetails={props.customerDetails}
-                PDFData={PDFData}
               />
             </PDFViewer>
           </Fragment>
