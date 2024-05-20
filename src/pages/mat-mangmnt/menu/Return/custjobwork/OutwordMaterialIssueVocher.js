@@ -396,24 +396,26 @@ function OutwordMaterialIssueVocher(props) {
   };
 
   let printDC = () => {
-    //console.log("First formheader = ", formHeader, " outdata = ", outData);
-    if (dcID !== "" && dcID !== 0) {
-      // nav("/MaterialManagement/Return/CustomerJobWork/PrintMaterialDC", {
-      //   //formHeader: formHeader,
-      //   //outData: outData,
-      //   state: {
-      //     //id: data.RvID,
-      //     formHeader: formHeader,
-      //     outData: outData,
-      //     custdata: custdata,
-      //     dcRegister: dcRegister,
-      //   },
-      // });
+    setPrintOpen(true);
 
-      setPrintOpen(true);
-    } else {
-      toast.error("DC Not Created");
-    }
+    // //console.log("First formheader = ", formHeader, " outdata = ", outData);
+    // if (dcID !== "" && dcID !== 0) {
+    //   // nav("/MaterialManagement/Return/CustomerJobWork/PrintMaterialDC", {
+    //   //   //formHeader: formHeader,
+    //   //   //outData: outData,
+    //   //   state: {
+    //   //     //id: data.RvID,
+    //   //     formHeader: formHeader,
+    //   //     outData: outData,
+    //   //     custdata: custdata,
+    //   //     dcRegister: dcRegister,
+    //   //   },
+    //   // });
+
+    //   setPrintOpen(true);
+    // } else {
+    //   toast.error("DC Not Created");
+    // }
   };
 
   const updateChange = (key, value, field) => {
