@@ -179,18 +179,16 @@ export default function PrintPartsDCTable(props) {
                       </Text>
                     </View>
                     <Text style={{ ...styles.fontBold }}>
-                      Magod Laser Machining Private Limited
+                      {props.PDFData.RegisteredName}
                     </Text>
                     <Text style={{ ...styles.fontBold }}>
-                      GST: 29AABCM1970H1ZE CIN: U28900KA1995PTC018437
+                      GST: {props.PDFData.GST_No} CIN: {props.PDFData.CIN_No}
                     </Text>
+                    <Text>{props.PDFData.RegistredOfficeAddress}</Text>
                     <Text>
-                      Plot No 72, 2nd Phase, KIADB Indl Area Jigani, Anekal
-                      Taluk Bengaluru - 560105
-                    </Text>
-                    <Text>
-                      Ph : 08110 414313, 9513393352, sales@magodlaser.in,
-                      www.magodlaser.in
+                      {props.PDFData.PhonePrimary},{" "}
+                      {props.PDFData.PhoneSecondary}, {props.PDFData.Email},{" "}
+                      {props.PDFData.URL}
                     </Text>
                   </View>
                   <Text style={{ width: "10%" }}>{copyVal.copyName}</Text>
@@ -430,19 +428,7 @@ export default function PrintPartsDCTable(props) {
                   </View>
                   <View style={{ ...styles.insideBox }}>
                     <View>
-                      <Text>
-                        Please receive the above goods return to us the
-                        duplicate copy of the "Delivery Challan" duly stamped
-                        and receipted in acknowledgement of having received the
-                        material in good condition. Any issues on this
-                        transactions, kindly initmate to us in writing within 3
-                        days from the date of receipt.
-                      </Text>
-                    </View>
-                    <View>
-                      <Text style={{ ...styles.fontBold }}>
-                        SUBJECT TO BANGALORE JURISDICTION
-                      </Text>
+                      <Text>{props.PDFData.DCterms}</Text>
                     </View>
                   </View>
                   <View
@@ -493,7 +479,7 @@ export default function PrintPartsDCTable(props) {
                           // justifyContent: "center",
                         }}
                       >
-                        <Text>For MAGOD LASER MACHINING PVT. LTD.</Text>
+                        <Text>For, {props.PDFData.RegisteredName}</Text>
                         <Text style={{ padding: "5%" }}></Text>
                         <View
                           style={{

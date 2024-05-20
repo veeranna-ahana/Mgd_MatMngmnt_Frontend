@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
 export default function PrintLocationStockDetailTableReport(props) {
   return (
     <>
-      {" "}
       <Document>
         <Page size="A4" style={{ ...styles.pageStyling }}>
           <View>
