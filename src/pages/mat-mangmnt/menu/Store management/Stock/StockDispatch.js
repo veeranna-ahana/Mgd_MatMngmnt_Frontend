@@ -38,29 +38,35 @@ function StockDispatch() {
       text: "Invoice No",
       dataField: "Inv_No",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "PN No",
       dataField: "DC_No",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Customer",
       dataField: "Cust_Name",
+      sort: true,
     },
     {
       text: "Inv Type",
       dataField: "DC_InvType",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Material",
       dataField: "Material",
+      sort: true,
     },
     {
       text: "Total Weight",
       dataField: "DC_Srl_Wt",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
   ];
 
@@ -73,24 +79,29 @@ function StockDispatch() {
     {
       text: "Srl",
       dataField: "DC_Inv_Srl",
+      sort: true,
     },
     {
       text: "Material",
       dataField: "Material",
+      sort: true,
     },
     {
       text: "Qty",
       dataField: "Qty",
+      sort: true,
     },
     {
       text: "Unit Weight",
       dataField: "Unit_Wt",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Srl Weight",
       dataField: "DC_Srl_Wt",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
   ];
 
@@ -104,20 +115,24 @@ function StockDispatch() {
       text: "Inv Type",
       dataField: "DC_InvType",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Invoice No",
       dataField: "Inv_No",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Customer",
       dataField: "Cust_Name",
+      sort: true,
     },
     {
       text: "Total Weight",
       dataField: "WeightOut",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
   ];
   const loadData = () => {
@@ -206,24 +221,53 @@ function StockDispatch() {
       //}
     }
   };
+
+  const [sort1, setSort1] = React.useState({
+    dataField: "id",
+    order: "asc",
+  });
+
+  const [sort2, setSort2] = React.useState({
+    dataField: "id",
+    order: "asc",
+  });
+
+  const [sort3, setSort3] = React.useState({
+    dataField: "id",
+    order: "asc",
+  });
+
+  const onSortChange1 = (dataField, order) => {
+    setSort1({ dataField, order });
+  };
+
+  const onSortChange2 = (dataField, order) => {
+    setSort2({ dataField, order });
+  };
+
+  const onSortChange3 = (dataField, order) => {
+    setSort3({ dataField, order });
+  };
+
   return (
     <div>
-      {" "}
       <UpdateStockModal open={open} setOpen={setOpen} />
       <h4 className="title">Stock Dispatch Updated Form </h4>
       <div className="row">
-        
-        
-          <div className="d-flex col-md-3">
+        <div className="d-flex col-md-3">
           <div className="col-md-3">
-          <label className="form-label">Stock Date</label>
+            <label className="form-label">Stock Date</label>
           </div>
           <div className="col-md-6">
-          <input type="date" name="date" onChange={InputEvent} />
+            <input type="date" name="date" onChange={InputEvent} />
           </div>
         </div>
         <div className="col-md-1">
-          <button className="button-style" style={{width:'70px'}} onClick={loadData}>
+          <button
+            className="button-style"
+            style={{ width: "70px" }}
+            onClick={loadData}
+          >
             Load Data
           </button>
         </div>
@@ -249,7 +293,6 @@ function StockDispatch() {
       </div>
       <div className="row mt-4">
         <div className="col-md-7">
-          {" "}
           <div className="row">
             <div style={{ height: "200px", overflowY: "scroll" }}>
               <BootstrapTable
@@ -261,7 +304,9 @@ function StockDispatch() {
                 condensed
                 selectRow={selectRow1}
                 headerClasses="header-class tableHeaderBGColor"
-              ></BootstrapTable>{" "}
+                sort={sort1}
+                onSortChange={onSortChange1}
+              ></BootstrapTable>
             </div>
           </div>
           <div className="row mt-3">
@@ -275,7 +320,9 @@ function StockDispatch() {
                 condensed
                 //selectRow={selectRow1}
                 headerClasses="header-class tableHeaderBGColor"
-              ></BootstrapTable>{" "}
+                sort={sort2}
+                onSortChange={onSortChange2}
+              ></BootstrapTable>
             </div>
           </div>
         </div>
@@ -290,6 +337,8 @@ function StockDispatch() {
               condensed
               //selectRow={selectRow1}
               headerClasses="header-class tableHeaderBGColor"
+              sort={sort3}
+              onSortChange={onSortChange3}
             ></BootstrapTable>
           </div>
         </div>
