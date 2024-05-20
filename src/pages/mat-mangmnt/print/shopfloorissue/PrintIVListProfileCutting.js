@@ -58,7 +58,7 @@ function PrintIVListProfileCutting({
 
   function fetchPDFData() {
     let url1 = endpoints.getPDFData;
-    getRequest(url1, async (res) => {
+    postRequest(url1, {}, async (res) => {
       // console.log("res", res);
       setPDFData(res[0]);
     });

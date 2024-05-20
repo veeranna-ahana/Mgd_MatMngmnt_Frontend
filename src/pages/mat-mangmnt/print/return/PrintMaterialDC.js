@@ -1,11 +1,15 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { PDFViewer } from "@react-pdf/renderer";
 import PrintMaterialDCTable from "./PrintMaterialDCTable";
 import { useLocation } from "react-router-dom";
 
 import Modal from "react-bootstrap/Modal";
 
+import { postRequest } from "../../../api/apiinstance";
+import { endpoints } from "../../../api/constants";
 function PrintMaterialDC(props) {
+  const [PDFData, setPDFData] = useState({});
+
   const location = useLocation();
   // console.log(
   //   "Second formheader = ",
@@ -25,6 +29,16 @@ function PrintMaterialDC(props) {
 
   const handleClose = () => props.setPrintOpen(false);
 
+  function fetchPDFData() {
+    postRequest(endpoints.getPDFData, {}, (res) => {
+      setPDFData(res[0]);
+    });
+  }
+
+  useEffect(() => {
+    fetchPDFData();
+  }, []);
+
   return (
     <>
       <Modal show={props.printOpen} onHide={handleClose} fullscreen>
@@ -43,6 +57,7 @@ function PrintMaterialDC(props) {
                 custdata={props.custdata}
                 dcRegister={props.dcRegister}
                 totalQTYVar={totalQTYVar}
+                PDFData={PDFData}
               />
             </PDFViewer>
           </Fragment>

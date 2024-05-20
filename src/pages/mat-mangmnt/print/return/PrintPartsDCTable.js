@@ -12,110 +12,41 @@ import { formatDate } from "../../../../utils";
 import MLLogo from "../../../../../src/ML-LOGO.png";
 
 //function PrintMaterialDCTable() {
+
+let headerFontSize = "13px";
+let subheaderFontsize = "11px";
+let fontSize = "9px";
 const styles = StyleSheet.create({
+  pageStyling: {
+    padding: "2%",
+    // paddingTop: "3%",
+    fontSize: fontSize,
+    fontFamily: "Helvetica",
+  },
+  globalPadding: { padding: "0.6%" },
+  footerRowPadding: { padding: "3px" },
+  // globalPadding: { padding: "0.6%" },
+  fontBold: {
+    //   fontWeight: "bold",
+    fontSize: fontSize,
+    fontFamily: "Helvetica-Bold",
+  },
   insideBox: { borderBottom: "1px", padding: "0.6%" },
   fontBold: {
     //   fontWeight: "bold",
     fontSize: "10px",
     fontFamily: "Helvetica-Bold",
   },
-  pageStyling: { padding: "2%", fontSize: "10px", fontFamily: "Helvetica" },
-  tableContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-  },
-  // row: {
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  // },
-  // description: {
-  //   width: "60%",
-  // },
-  // xyz: {
-  //   width: "40%",
-  // },
-  // tableTitle: {
-  //   textDecoration: "underline",
-  //   marginLeft: "200px",
-  //   marginTop: "20px",
-  // },
-  // title2: {
-  //   textDecoration: "underline",
-  //   marginLeft: "220px",
-  // },
-  // shiftperiod: {
-  //   marginLeft: "140px",
-  //   marginTop: "20px",
-  // },
-  // boxdata: {
-  //   border: "1px",
-  //   padding: "10px",
-  //   marginTop: "40px",
-  //   width: "550px",
-  //   marginLeft: "50px",
-  //   marginRight: "100px",
-  // },
-  // tableview: {
-  //   marginLeft: "60px",
-  //   width: "430px",
-  // },
-  // Headingrow: {
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   borderBottom: "1px",
-  //   marginTop: "20px",
-  //   marginLeft: "60px",
-  //   width: "430px",
-  // },
-  // machineHeading: {
-  //   width: "30%",
-  // },
-  // operatorHeading: {
-  //   width: "30%",
-  // },
-  // remarksHeading: {
-  //   width: "40%",
-  // },
 
   topspace: {
     width: "100%",
     marginTop: "100px",
   },
-  titleFull: {
-    //border: "1px",
-    padding: "5px",
-    width: "100%",
-    fontWeight: "bold",
-    //fontSize: "11px",
-  },
-  titleFull1: {
-    //border: "1px",
-    padding: "5px",
-    width: "100%",
-    //fontSize: "10px",
-  },
-  titleLeft1: {
-    //border: "1px",
-    padding: "5px",
-    width: "40%",
-    //fontSize: "10px",
-  },
 
-  titleMiddle1: {
-    //border: "1px",
-    padding: "5px",
-    width: "30%",
-    //fontSize: "10px",
-  },
   titleMiddle2: {
     padding: "5px",
     // width: "30%",
     //fontSize: "12px",
-  },
-  titleRight1: {
-    //border: "1px",
-    padding: "5px",
-    width: "30%",
   },
 
   tableCol1: {
@@ -125,7 +56,7 @@ const styles = StyleSheet.create({
   tableCol2: {
     padding: "5px",
     width: "60%",
-    fontWeight: "bold",
+    // fontWeight: "bold",
   },
   tableCol3: {
     padding: "5px",
@@ -173,24 +104,33 @@ export default function PrintPartsDCTable(props) {
                       alignItems: "center",
                     }}
                   >
-                    <View style={{ borderBottom: "1px" }}>
-                      <Text style={{ ...styles.fontBold }}>
+                    <View>
+                      <Text
+                        style={{
+                          borderBottom: "1px",
+                          ...styles.fontBold,
+                          fontSize: headerFontSize,
+                        }}
+                      >
                         Material / Scrap Sheets Return Challan
                       </Text>
                     </View>
-                    <Text style={{ ...styles.fontBold }}>
-                      Magod Laser Machining Private Limited
+                    <Text
+                      style={{
+                        ...styles.fontBold,
+                        fontSize: subheaderFontsize,
+                      }}
+                    >
+                      {props.PDFData.RegisteredName}
                     </Text>
                     <Text style={{ ...styles.fontBold }}>
-                      GST: 29AABCM1970H1ZE CIN: U28900KA1995PTC018437
+                      GST: {props.PDFData.GST_No} CIN: {props.PDFData.CIN_No}
                     </Text>
+                    <Text>{props.PDFData.RegistredOfficeAddress}</Text>
                     <Text>
-                      Plot No 72, 2nd Phase, KIADB Indl Area Jigani, Anekal
-                      Taluk Bengaluru - 560105
-                    </Text>
-                    <Text>
-                      Ph : 08110 414313, 9513393352, sales@magodlaser.in,
-                      www.magodlaser.in
+                      {props.PDFData.PhonePrimary},{" "}
+                      {props.PDFData.PhoneSecondary}, {props.PDFData.Email},{" "}
+                      {props.PDFData.URL}
                     </Text>
                   </View>
                   <Text style={{ width: "10%" }}>{copyVal.copyName}</Text>
@@ -430,20 +370,13 @@ export default function PrintPartsDCTable(props) {
                   </View>
                   <View style={{ ...styles.insideBox }}>
                     <View>
-                      <Text>
-                        Please receive the above goods return to us the
-                        duplicate copy of the "Delivery Challan" duly stamped
-                        and receipted in acknowledgement of having received the
-                        material in good condition. Any issues on this
-                        transactions, kindly initmate to us in writing within 3
-                        days from the date of receipt.
-                      </Text>
+                      <Text>{props.PDFData.DCterms}</Text>
                     </View>
-                    <View>
+                    {/* <View>
                       <Text style={{ ...styles.fontBold }}>
                         SUBJECT TO BANGALORE JURISDICTION
                       </Text>
-                    </View>
+                    </View> */}
                   </View>
                   <View
                     style={{
@@ -493,7 +426,7 @@ export default function PrintPartsDCTable(props) {
                           // justifyContent: "center",
                         }}
                       >
-                        <Text>For MAGOD LASER MACHINING PVT. LTD.</Text>
+                        <Text>For, {props.PDFData.RegisteredName}</Text>
                         <Text style={{ padding: "5%" }}></Text>
                         <View
                           style={{

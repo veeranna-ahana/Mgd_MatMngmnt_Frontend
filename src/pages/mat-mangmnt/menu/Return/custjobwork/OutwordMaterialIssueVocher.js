@@ -396,24 +396,26 @@ function OutwordMaterialIssueVocher(props) {
   };
 
   let printDC = () => {
-    //console.log("First formheader = ", formHeader, " outdata = ", outData);
-    if (dcID !== "" && dcID !== 0) {
-      // nav("/MaterialManagement/Return/CustomerJobWork/PrintMaterialDC", {
-      //   //formHeader: formHeader,
-      //   //outData: outData,
-      //   state: {
-      //     //id: data.RvID,
-      //     formHeader: formHeader,
-      //     outData: outData,
-      //     custdata: custdata,
-      //     dcRegister: dcRegister,
-      //   },
-      // });
+    setPrintOpen(true);
 
-      setPrintOpen(true);
-    } else {
-      toast.error("DC Not Created");
-    }
+    // //console.log("First formheader = ", formHeader, " outdata = ", outData);
+    // if (dcID !== "" && dcID !== 0) {
+    //   // nav("/MaterialManagement/Return/CustomerJobWork/PrintMaterialDC", {
+    //   //   //formHeader: formHeader,
+    //   //   //outData: outData,
+    //   //   state: {
+    //   //     //id: data.RvID,
+    //   //     formHeader: formHeader,
+    //   //     outData: outData,
+    //   //     custdata: custdata,
+    //   //     dcRegister: dcRegister,
+    //   //   },
+    //   // });
+
+    //   setPrintOpen(true);
+    // } else {
+    //   toast.error("DC Not Created");
+    // }
   };
 
   const updateChange = (key, value, field) => {
@@ -1050,13 +1052,11 @@ function OutwordMaterialIssueVocher(props) {
                           }
                         }}
                         onChange={(e) => {
-                          // console.log("eeeeeeeeee", e.target.value);
-
-                          updateChange(
-                            key,
-                            e.target.value.length === 0 ? 0 : e.target.value,
-                            "TotalWeight"
-                          );
+                          if (parseInt(e.target.value) < 0) {
+                            e.target.value = parseInt(e.target.value) * -1;
+                            toast.warning("Total weight can't be negative");
+                          }
+                          updateChange(key, e.target.value || 0, "TotalWeight");
                           handleChangeWeightTotalCal();
                         }}
                         style={{
