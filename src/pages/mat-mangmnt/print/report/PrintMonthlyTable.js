@@ -74,14 +74,7 @@ const styles = StyleSheet.create({
 
 //return <div>PrintMaterialDCTable</div>;
 //}
-const PrintMonthlyTable = ({
-  date,
-  thirdTab,
-  fourthTab,
-  totalobj,
-  purchaseDetails,
-  saleDetails,
-}) => (
+const PrintMonthlyTable = (props) => (
   <Document>
     <Page size="A4" style={{ ...styles.pageStyling }}>
       <View>
@@ -108,22 +101,19 @@ const PrintMonthlyTable = ({
                 fontSize: headerFontSize,
               }}
             >
-              Material Summary For the Month of : {date}
+              Material Summary For the Month of : {props.date}
             </Text>
 
             <Text style={{ ...styles.fontBold, fontSize: subheaderFontsize }}>
-              Magod Laser Machining Pvt. Ltd.
+              {props.PDFData.RegisteredName}
             </Text>
             <Text style={{ ...styles.fontBold }}>
-              GSTIN: 29AABCM1970H1ZE, CIN: U28900KA1995PTC018437
+              GST: {props.PDFData.GST_No} CIN: {props.PDFData.CIN_No}
             </Text>
+            <Text>{props.PDFData.RegistredOfficeAddress}</Text>
             <Text>
-              #71 & 72, Phase II, KIADB Indl Area, Jigani, Anekal Taluk,
-              Bengaluru - 560105
-            </Text>
-            <Text>
-              +91-80-42291005, +91-8110-414313, info@magodlaser.in,
-              https://www.magodlaser.in/
+              {props.PDFData.PhonePrimary}, {props.PDFData.PhoneSecondary},{" "}
+              {props.PDFData.Email}, {props.PDFData.URL}
             </Text>
           </View>
           <Text style={{ padding: "3%" }}></Text>
@@ -175,7 +165,7 @@ const PrintMonthlyTable = ({
                   // justifyContent: "flex-start",
                 }}
               >
-                {fourthTab.map((item, index) => {
+                {props.fourthTab.map((item, index) => {
                   return (
                     <>
                       <View
@@ -232,7 +222,7 @@ const PrintMonthlyTable = ({
                   // justifyContent: "flex-start",
                 }}
               >
-                {thirdTab.map((item, index) => {
+                {props.thirdTab.map((item, index) => {
                   return (
                     <>
                       <View
@@ -276,7 +266,7 @@ const PrintMonthlyTable = ({
                   // justifyContent: "flex-start",
                 }}
               >
-                {totalobj.map((item, index) => {
+                {props.totalobj.map((item, index) => {
                   return (
                     <>
                       <View
@@ -324,7 +314,7 @@ const PrintMonthlyTable = ({
                   border: "none",
                 }}
               >
-                {purchaseDetails.map((item, index) => {
+                {props.purchaseDetails.map((item, index) => {
                   return (
                     <>
                       <View
@@ -424,7 +414,7 @@ const PrintMonthlyTable = ({
                   border: "none",
                 }}
               >
-                {saleDetails.map((item, index) => {
+                {props.saleDetails.map((item, index) => {
                   return (
                     <>
                       <View
