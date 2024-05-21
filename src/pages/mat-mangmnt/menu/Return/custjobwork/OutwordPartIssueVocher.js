@@ -807,7 +807,7 @@ function OutwordPartIssueVocher(props) {
                   className={
                     formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
                       ? "input-disabled"
-                      : ""
+                      : "input-disabled"
                   }
                 />
               </div>
@@ -842,7 +842,7 @@ function OutwordPartIssueVocher(props) {
                   className={
                     formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
                       ? "input-disabled"
-                      : ""
+                      : "input-disabled"
                   }
                   style={{ height: "90px" }}
                 ></textarea>
@@ -1050,7 +1050,7 @@ function OutwordPartIssueVocher(props) {
                             formHeader.IVStatus === "Cancelled" ||
                             formHeader.PkngDcNo
                               ? "input-disabled"
-                              : ""
+                              : "x"
                           }
                         />
                       </td>

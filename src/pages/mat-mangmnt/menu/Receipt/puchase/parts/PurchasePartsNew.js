@@ -536,65 +536,69 @@ function PurchasePartsNew() {
         <h4 className="title">Customer Parts Receipt Voucher</h4>
 
         <div className="row">
-          <div className="d-flex col-md-2">
-            <div className="col-md-6">
-              <label className="form-label ">Receipt Date</label>
-            </div>
+          <div className="d-flex col-md-2" style={{ gap: "20px" }}>
+            <label
+              className="form-label mt-1 "
+              style={{ whiteSpace: "nowrap" }}
+            >
+              Receipt Date
+            </label>
 
-            <div className="col-md-6">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="receiptDate"
-                value={formHeader.receiptDate}
-                readOnly
-              />
-            </div>
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="receiptDate"
+              value={formHeader.receiptDate}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-2">
-            <div className="col-md-4">
-              <label className="form-label">RV No</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="rvNo"
-                value={formHeader.rvNo}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-2" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              RV No
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="rvNo"
+              value={formHeader.rvNo}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-2">
-            <div className="col-md-4">
-              <label className="form-label">RV Date</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="rvDate"
-                value={formHeader.rvDate}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-2" style={{ gap: "20px" }}>
+            <label
+              className="form-label mt-1 "
+              style={{ whiteSpace: "nowrap" }}
+            >
+              RV Date
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="rvDate"
+              value={formHeader.rvDate}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-4">
-            <div className="col-md-4">
-              <label className="form-label">Status</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="status"
-                value={formHeader.status}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-4" style={{ gap: "80px" }}>
+            <label
+              className="form-label mt-1 "
+              style={{ whiteSpace: "nowrap" }}
+            >
+              Status
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="status"
+              value={formHeader.status}
+              readOnly
+            />
           </div>
 
           <div className="d-flex col-md-2">
@@ -615,61 +619,65 @@ function PurchasePartsNew() {
           </div>
         </div>
         <div className="row">
-          <div className="d-flex col-md-4">
-            <div className="col-md-2">
-              <label className="form-label">Customer</label>
-            </div>
+          <div className="d-flex col-md-4" style={{ gap: "35px" }}>
+            <label
+              className="form-label mt-1 "
+              style={{ whiteSpace: "nowrap" }}
+            >
+              Customer
+            </label>
 
-            <div className="col-md-10 ">
-              <select
-                className="ip-select mt-1"
-                name="customer"
-                //onChange={changeCustomer}
-                disabled={boolVal1}
-              >
-                {custdata.map((customer, index) =>
-                  customer.Cust_Code == 0 ? (
-                    <option key={index} value={customer.Cust_Code}>
-                      {customer.Cust_name}
-                    </option>
-                  ) : (
-                    ""
-                  )
-                )}
-              </select>
-            </div>
+            <select
+              className="ip-select mt-1"
+              name="customer"
+              //onChange={changeCustomer}
+              disabled={boolVal1}
+            >
+              {custdata.map((customer, index) =>
+                customer.Cust_Code == 0 ? (
+                  <option key={index} value={customer.Cust_Code}>
+                    {customer.Cust_name}
+                  </option>
+                ) : (
+                  ""
+                )
+              )}
+            </select>
           </div>
 
-          <div className="d-flex col-md-2" style={{ gap: "5px" }}>
-            <div className="col-md-4">
-              <label className="form-label">Reference </label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="reference"
-                value={formHeader.reference}
-                onChange={InputHeaderEvent}
-                disabled={boolVal2 & boolVal4}
-              />
-            </div>
+          <div className="d-flex col-md-2" style={{ gap: "10px" }}>
+            <label
+              className="form-label mt-1 "
+              style={{ whiteSpace: "nowrap" }}
+            >
+              Reference{" "}
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="reference"
+              value={formHeader.reference}
+              onChange={InputHeaderEvent}
+              disabled={boolVal2 & boolVal4}
+            />
           </div>
 
-          <div className="d-flex col-md-4">
-            <div className="col-md-4">
-              <label className="form-label">Calculated Weight</label>
-            </div>
+          <div className="d-flex col-md-4" style={{ gap: "10px" }}>
+            <label
+              className="form-label mt-1 "
+              style={{ whiteSpace: "nowrap" }}
+            >
+              Calculated Weight
+            </label>
 
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="number"
-                name="calculatedWeight"
-                value={calcWeightVal}
-                readOnly
-              />
-            </div>
+            <input
+              className="input-disabled mt-1"
+              type="number"
+              name="calculatedWeight"
+              value={calcWeightVal}
+              readOnly
+            />
           </div>
         </div>
 
@@ -679,7 +687,7 @@ function PurchasePartsNew() {
               className="input-disabled mt-1"
               id="exampleFormControlTextarea1"
               rows="4"
-              style={{ width: "700px", height: "60px" }}
+              style={{ width: "100%", height: "60px" }}
               value={formHeader.address}
               readOnly
             ></textarea>
@@ -688,8 +696,6 @@ function PurchasePartsNew() {
           <div className="col-md-4 justify-content-center">
             <button
               className="button-style"
-              // style={{ width: "196px" }}
-              // style={{ marginLeft: "60px" }}
               onClick={saveButtonState}
               disabled={boolVal4}
             >
@@ -724,7 +730,7 @@ function PurchasePartsNew() {
       </div>
       <div className="row">
         <div
-          style={{ height: "250px", overflowY: "scroll" }}
+          style={{ height: "223px", overflowY: "scroll" }}
           className="col-md-8 col-sm-12"
         >
           <BootstrapTable
@@ -774,11 +780,10 @@ function PurchasePartsNew() {
           </table> 
         </div>*/}
         <div className="col-md-4 col-sm-12">
-          <div className="ip-box form-bg" style={{ height: "250px" }}>
-            <div className="row justify-content-center mt-2 mb-3">
+          <div className=" form-bg">
+            <div className="d-flex justify-content-center mt-2 mb-3">
               <button
                 className="button-style "
-                style={{ width: "75px" }}
                 onClick={addNewPart}
                 disabled={boolVal1 | boolVal4}
               >
@@ -787,7 +792,6 @@ function PurchasePartsNew() {
 
               <button
                 className="button-style "
-                style={{ width: "55px" }}
                 disabled={boolVal3 | boolVal4}
                 onClick={deleteButtonState}
               >
@@ -806,7 +810,7 @@ function PurchasePartsNew() {
                   value={inputPart.partId}
                   onChange={changePartHandle}
                   disabled={boolVal3 | boolVal4}
-                  style={{ width: "200px" }}
+                  style={{ width: "100%" }}
                 >
                   <option value="" disabled selected>
                     Select Part

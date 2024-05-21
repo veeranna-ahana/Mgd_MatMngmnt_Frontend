@@ -367,6 +367,7 @@ function DailyReport() {
             </div>
          <div className="col-md-5">
          <input
+         className='input-field'
               type="date"
               name="date"
               onChange={InputEvent}

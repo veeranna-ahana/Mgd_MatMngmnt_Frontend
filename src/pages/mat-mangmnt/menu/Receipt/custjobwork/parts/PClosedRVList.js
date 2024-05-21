@@ -126,10 +126,10 @@ function PClosedRVList() {
       <>
         <h4 className="title">Customer : Parts Receipt List Closed</h4>
         <div className="row">
-          <div className="d-flex col-md-7 mb-1">
-            <div className="col-md-2">
-              <label className="form-label">Customer</label>
-            </div>
+          <div className="d-flex col-md-7 mb-2" style={{ gap: "10px" }}>
+            <label className="form-label" style={{ whiteSpace: "nowrap" }}>
+              Customer
+            </label>
 
             {/* <select
               className="ip-select"
@@ -145,20 +145,19 @@ function PClosedRVList() {
                 </option>
               ))}
             </select> */}
-            <div className="col-md-5 mt-2">
-              <Typeahead
-                id="basic-example"
-                name="customer"
-                options={custdata}
-                placeholder="Select Customer"
-                onChange={(label) => changeCustomer(label)}
-              />
-            </div>
+
+            <Typeahead
+              className="ip-select"
+              id="basic-example"
+              name="customer"
+              options={custdata}
+              placeholder="Select Customer"
+              onChange={(label) => changeCustomer(label)}
+            />
           </div>
-          <div className="col-md-5 text-center">
+          <div className="col-md-5 text-center mb-2">
             <button
               className="button-style "
-              style={{ width: "55px" }}
               //data.RvID
               onClick={openButtonClick}
             >

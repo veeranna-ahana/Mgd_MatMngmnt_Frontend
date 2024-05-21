@@ -12,16 +12,26 @@ function ChangeLocationModal({ open, setOpen }) {
     <>
       <Modal show={open} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title style={{fontSize:'14px'}}>Magod Material Accounting</Modal.Title>
+          <Modal.Title style={{ fontSize: "14px" }}>
+            Magod Material Accounting
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{fontSize:'12px'}}>
-          <Form>TAre you sure you want to shift a material "material" ?</Form>
+        <Modal.Body style={{ fontSize: "12px" }}>
+          <Form>Are you sure you want to shift a material "material" ?</Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose} style={{fontSize:'12px'}}>
+          <Button
+            variant="secondary"
+            onClick={handleClose}
+            style={{ fontSize: "12px" }}
+          >
             yes
           </Button>
-          <Button variant="primary" onClick={handleClose} style={{fontSize:'12px'}}>
+          <Button
+            variant="primary"
+            onClick={handleClose}
+            style={{ fontSize: "12px" }}
+          >
             No
           </Button>
         </Modal.Footer>

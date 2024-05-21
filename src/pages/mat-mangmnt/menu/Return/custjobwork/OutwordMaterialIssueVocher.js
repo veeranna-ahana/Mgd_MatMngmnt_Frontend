@@ -774,7 +774,7 @@ function OutwordMaterialIssueVocher(props) {
               </div>
             </div>
 
-            <div className="d-flex col-md-6 mt-2">
+            <div className="d-flex col-md-6 mt-2" style={{ gap: "15px" }}>
               <div className="col-md-2">
                 <label className="form-label">Customer</label>
               </div>
@@ -829,7 +829,7 @@ function OutwordMaterialIssueVocher(props) {
                   className={
                     formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
                       ? "input-disabled"
-                      : ""
+                      : "input-disabled "
                   }
                 />
               </div>
@@ -864,7 +864,7 @@ function OutwordMaterialIssueVocher(props) {
                   className={
                     formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
                       ? "input-disabled"
-                      : ""
+                      : "input-disabled"
                   }
                   style={{ height: "90px" }}
                 ></textarea>
