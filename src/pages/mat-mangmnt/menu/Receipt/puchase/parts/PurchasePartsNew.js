@@ -505,6 +505,13 @@ function PurchasePartsNew() {
     deleteRVButtonState();
     setDeleteRvModalOpen(false);
   };
+
+  const blockInvalidQtyChar = (e) =>
+    ["e", "E", "+", "-", "."].includes(e.key) && e.preventDefault();
+
+  const blockInvalidChar = (e) =>
+    ["e", "E", "+", "-"].includes(e.key) && e.preventDefault();
+
   return (
     <div>
       <CreateYesNoModal
@@ -601,6 +608,7 @@ function PurchasePartsNew() {
                 name="weight"
                 value={formHeader.weight}
                 onChange={InputHeaderEvent}
+                onKeyDown={blockInvalidChar}
                 disabled={boolVal4}
               />
             </div>
@@ -816,11 +824,13 @@ function PurchasePartsNew() {
               <div className="col-md-8 ">
                 <input
                   className="input-disabled mt-1"
-                  type="text"
+                  type="number"
                   name="unitWeight"
                   value={inputPart.unitWeight}
                   onChange={changePartHandle}
                   //onKeyUp={changePartHandle1}
+                  onKeyDown={blockInvalidChar}
+                  min="0"
                   disabled={boolVal3 | boolVal4}
                 />
               </div>
@@ -832,10 +842,11 @@ function PurchasePartsNew() {
               <div className="col-md-8 ">
                 <input
                   className="input-disabled mt-1"
-                  type="text"
+                  type="number"
                   name="qtyReceived"
                   //value={tempVal}
                   value={inputPart.qtyReceived}
+                  onKeyDown={blockInvalidQtyChar}
                   onChange={changePartHandle}
                   disabled={boolVal3 | boolVal4}
                 />
@@ -846,10 +857,12 @@ function PurchasePartsNew() {
               <div className="col-md-8 ">
                 <input
                   className="input-disabled mt-1"
-                  type="text"
+                  type="number"
                   name="qtyAccepted"
                   value={inputPart.qtyAccepted}
+                  onKeyDown={blockInvalidQtyChar}
                   onChange={changePartHandle}
+                  min="0"
                   disabled={boolVal3 | boolVal4}
                 />
               </div>
@@ -861,7 +874,7 @@ function PurchasePartsNew() {
               <div className="col-md-8 ">
                 <input
                   className="input-disabled mt-1"
-                  type="text"
+                  type="number"
                   value={inputPart.qtyReceived - inputPart.qtyAccepted}
                   name="qtyRejected"
                   readOnly
