@@ -939,131 +939,119 @@ function OpenButtonOpenSheetUnit() {
         <h4 className="title">Material Receipt Voucher</h4>
 
         <div className="row">
-          <div className="d-flex col-md-3">
-            <div className="col-md-4">
-              <label className="form-label">Receipt Date</label>
-            </div>
-            <div className="col-md-6">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="receiptDate"
-                value={formHeader.receiptDate}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-3" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Receipt Date
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="receiptDate"
+              value={formHeader.receiptDate}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-2">
-            <div className="col-md-4">
-              <label className="form-label">RV No</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="rvNo"
-                value={formHeader.rvNo}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-2" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              RV No
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="rvNo"
+              value={formHeader.rvNo}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-2">
-            <div className="col-md-4">
-              <label className="form-label">RV Date</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="rvDate"
-                value={formHeader.rvDate}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-2" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              RV Date
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="rvDate"
+              value={formHeader.rvDate}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-2">
-            <div className="col-md-3">
-              <label className="form-label">Status</label>
-            </div>
-            <div className="col-md-7">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="status"
-                value={formHeader.status}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-2" style={{ gap: "10px" }}>
+            <label className="form-label mt-1">Status</label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="status"
+              value={formHeader.status}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-2">
-            <div className="col-md-9">
-              <label className="form-label">Weight</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="weight"
-                value={formHeader.weight}
-                disabled={boolVal}
-              />
-            </div>
+          <div className="d-flex col-md-3" style={{ gap: "70px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Weight
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="weight"
+              value={formHeader.weight}
+              disabled={boolVal}
+            />
           </div>
         </div>
 
         <div className="row">
-          <div className="d-flex col-md-5">
-            <div className="col-md-2">
-              <label className="form-label">Customer</label>
-            </div>
+          <div className="d-flex col-md-5" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Customer
+            </label>
 
-            <div className="col-md-10">
-              <select
-                className="ip-select mt-1"
-                name="customer"
-                //onChange={changeCustomer}
-                disabled={boolVal}
-              >
-                <option value={formHeader.customer} disabled selected>
-                  {formHeader.customerName}
-                </option>
-              </select>
-            </div>
+            <select
+              className="ip-select mt-1"
+              name="customer"
+              //onChange={changeCustomer}
+              disabled={boolVal}
+            >
+              <option value={formHeader.customer} disabled selected>
+                {formHeader.customerName}
+              </option>
+            </select>
           </div>
 
-          <div className="d-flex col-md-4">
-            <div className="col-md-2">
-              <label className="form-label">Reference</label>
-            </div>
+          <div className="d-flex col-md-4" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Reference
+            </label>
 
-            <div className="col-md-9">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="reference"
-                value={formHeader.reference}
-                disabled={boolVal}
-              />
-            </div>
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="reference"
+              value={formHeader.reference}
+              disabled={boolVal}
+            />
           </div>
 
-          <div className="d-flex col-md-3">
-            <div className="col-md-6">
-              <label className="form-label">Calculated Weight</label>
-            </div>
-            <div className="col-md-5">
-              <input
-                className="input-disabled mt-1"
-                type="number"
-                name="calculatedWeight"
-                value={formHeader.calcWeight}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-3" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Calculated Weight
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="number"
+              name="calculatedWeight"
+              value={formHeader.calcWeight}
+              readOnly
+            />
           </div>
         </div>
 
@@ -1073,18 +1061,14 @@ function OpenButtonOpenSheetUnit() {
               className="input-disabled mt-1"
               id="exampleFormControlTextarea1"
               rows="4"
-              style={{ width: "700px", height: "60px" }}
+              style={{ width: "100%", height: "60px" }}
               value={formHeader.address}
               readOnly
             ></textarea>
           </div>
 
           <div className="col-md-4 justify-content-center">
-            <button
-              className="button-style"
-              style={{ marginLeft: "70px" }}
-              disabled={boolVal}
-            >
+            <button className="button-style" disabled={boolVal}>
               Save
             </button>
 
@@ -1108,7 +1092,7 @@ function OpenButtonOpenSheetUnit() {
         </div>
         <div className="row">
           <div
-            style={{ height: "380px", overflowY: "scroll" }}
+            style={{ height: "326px", overflowY: "scroll" }}
             className="col-md-8 col-sm-12"
           >
             <BootstrapTable
@@ -1131,7 +1115,7 @@ function OpenButtonOpenSheetUnit() {
             </div> 
           </div> */}
           <div className="col-md-4 col-sm-12" style={{ overflowY: "scroll" }}>
-            <div className="ip-box form-bg" style={{ height: "380px" }}>
+            <div className=" form-bg">
               {/* <div className="row justify-content-center mt-2">
                 <button
                   className="button-style "
@@ -1141,27 +1125,22 @@ function OpenButtonOpenSheetUnit() {
                   Add Serial
                 </button>
               </div> */}
-              <div className="row justify-content-center">
-                <div className="col-md-6 col-sm-12">
-                  <button
-                    className="button-style "
-                    style={{ width: "85px" }}
-                    disabled={rmvBtn}
-                    onClick={addToStock}
-                  >
-                    Add to stock
-                  </button>
-                </div>
-                <div className="col-md-6 col-sm-12">
-                  <button
-                    className="button-style "
-                    style={{ width: "95px" }}
-                    disabled={addBtn}
-                    onClick={removeStock}
-                  >
-                    Remove stock
-                  </button>
-                </div>
+              <div className="d-flex justify-content-center">
+                <button
+                  className="button-style "
+                  disabled={rmvBtn}
+                  onClick={addToStock}
+                >
+                  Add to stock
+                </button>
+
+                <button
+                  className="button-style "
+                  disabled={addBtn}
+                  onClick={removeStock}
+                >
+                  Remove stock
+                </button>
               </div>
               <div className="row">
                 <div className="ip-box form-bg">
@@ -1251,12 +1230,17 @@ function OpenButtonOpenSheetUnit() {
                     </p> */}
 
                     <div className="col-md-4">
-                      <label className="form-label">Mtrl Code</label>
+                      <label
+                        className="form-label"
+                        style={{ whiteSpace: "nowrap" }}
+                      >
+                        Mtrl Code
+                      </label>
                     </div>
                     <div className="col-md-8">
                       <select
                         // className="ip-select dropdown-field"
-                        style={{ width: "133px" }}
+                        style={{ width: "100%" }}
                         className="input-disabled mt-1"
                         disabled={boolVal}
                         // defaultValue={" "}
@@ -1493,11 +1477,9 @@ function OpenButtonOpenSheetUnit() {
                     >
                       Quantity Details
                     </label>
-                    <div className="row">
-                      <div className="col-md-3 col-sm-12">
-                        <label className="form-label">Received</label>
-                      </div>
-                      <div className="col-md-4 col-sm-12">
+                    <div className="d-flex col-md-12" style={{ gap: "10px" }}>
+                      <div className=" d-flex col-md-6" style={{ gap: "10px" }}>
+                        <label className="form-label mt-2">Received</label>
                         <input
                           className="input-disabled mt-2"
                           disabled={boolVal}
@@ -1505,31 +1487,25 @@ function OpenButtonOpenSheetUnit() {
                         />
                       </div>
 
-                      <div className="col-md-5">
-                        <div
-                          className="col-md-12"
-                          style={{ display: "flex", gap: "5px" }}
-                        >
-                          <input
-                            className="form-check-input mt-2"
-                            type="checkbox"
-                            id="flexCheckDefault"
-                            name="inspected"
-                            checked={inputPart.inspected == 1 ? true : false}
-                            value={inputPart.inspected}
-                            // checked={insCheck}
+                      <div className=" d-flex col-md-6" style={{ gap: "10px" }}>
+                        <input
+                          className="form-check-input mt-3"
+                          type="checkbox"
+                          id="flexCheckDefault"
+                          name="inspected"
+                          checked={inputPart.inspected == 1 ? true : false}
+                          value={inputPart.inspected}
+                          // checked={insCheck}
 
-                            disabled={boolVal}
-                          />
-                          <label className="form-label ">Inspected</label>
-                        </div>
+                          disabled={boolVal}
+                        />
+                        <label className="form-label mt-2 ">Inspected</label>
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-md-3">
-                        <label className="form-label">Accepted</label>
-                      </div>
-                      <div className="col-md-4">
+                    <div className="d-flex col-md-12" style={{ gap: "10px" }}>
+                      <div className="d-flex col-md-6" style={{ gap: "10px" }}>
+                        <label className="form-label mt-2">Accepted</label>
+
                         <input
                           className="input-disabled mt-2"
                           disabled={boolVal}
@@ -1541,20 +1517,15 @@ function OpenButtonOpenSheetUnit() {
                         />
                       </div>
 
-                      <div className="col-md-5">
-                        <div
-                          className="col-md-12 "
-                          style={{ display: "flex", gap: "3px" }}
-                        >
-                          <input
-                            className="form-check-input mt-2"
-                            type="checkbox"
-                            checked={inputPart.updated === 1 ? true : false}
-                            id="flexCheckDefault"
-                            disabled={boolVal}
-                          />
-                          <label className="form-label ">Updated</label>
-                        </div>
+                      <div className="d-flex col-md-6" style={{ gap: "10px" }}>
+                        <input
+                          className="form-check-input mt-3"
+                          type="checkbox"
+                          checked={inputPart.updated === 1 ? true : false}
+                          id="flexCheckDefault"
+                          disabled={boolVal}
+                        />
+                        <label className="form-label mt-2">Updated</label>
                       </div>
                     </div>
 
@@ -1596,7 +1567,7 @@ function OpenButtonOpenSheetUnit() {
                           //className="ip-select dropdown-field"
                           className="input-disabled mt-1"
                           disabled={boolVal}
-                          style={{ width: "140px" }}
+                          style={{ width: "100%" }}
                         >
                           <option value={inputPart.locationNo}>
                             {inputPart.locationNo}

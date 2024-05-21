@@ -202,119 +202,51 @@ function ReturnListing(props) {
     <>
       <h4 className="title">Material Return Issue Voucher</h4>
       <div className="row">
-        <div className="d-flex col-md-6">
-          <div className="col-md-3">
-          <label className="form-label" style={{whiteSpace:'nowrap'}}>Select Customer</label>
-          </div>
-          
-          {/* <select
-            className="ip-select"
-            name="pending"
-            onChange={changeCustomer}
-          >
-            <option value="" disabled selected>
+        <div className="d-flex col-md-12" style={{ gap: "10px" }}>
+          <div className="d-flex col-md-6" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
               Select Customer
-            </option>
+            </label>
 
-            {custdata.map((customer, index) => (
-              <option key={index} value={customer.Cust_Code}>
-                {customer.Cust_name}
-              </option>
-            ))}
-          </select> */}
-          <div className="col-md-5 mt-2">
-          <Typeahead
-            id="basic-example"
-            name="customer"
-            options={custdata}
-            placeholder="Select Customer"
-            onChange={(label) => changeCustomer(label)}
-          />
+            <Typeahead
+              className="ip-select "
+              id="basic-example"
+              name="customer"
+              options={custdata}
+              placeholder="Select Customer"
+              onChange={(label) => changeCustomer(label)}
+            />
           </div>
 
-          <div className="col-md-3 col-sm-12 ">
-          <div className="row">
-            <div className="col-md-1 col-sm-12 mt-1">
-              <input
-                className="form-check-input mt-2"
-                type="checkbox"
-                // checked={checkboxVal === "on" ? true : false}
-                id="filterCustCheckbox"
-                onChange={changeCheckbox}
-                disabled={!selectedCust}
-              />
-            </div>
-            <div className="col-md-2 col-sm-12">
-              <label className="form-label" style={{ whiteSpace: "nowrap" }}>
-                Filter Customer
-              </label>
-            </div>
-          </div>
-        </div>
+          <div className="d-flex col-md-2  mt-1" style={{ gap: "10px" }}>
+            <input
+              className="form-check-input "
+              type="checkbox"
+              // checked={checkboxVal === "on" ? true : false}
+              id="filterCustCheckbox"
+              onChange={changeCheckbox}
+              disabled={!selectedCust}
+            />
 
-        <div className="col-md-2">
-          <div className="col-md-4 ">
-            <button className="button-style"
-            style={{width:'65px'}}
-             onClick={openClick}>
+            <label className="form-label" style={{ whiteSpace: "nowrap" }}>
+              Filter Customer
+            </label>
+          </div>
+
+          <div className="d-flex  ">
+            <button className="button-style" onClick={openClick}>
               Open IV
+            </button>
+            <button
+              className="button-style "
+              id="btnclose"
+              type="submit"
+              onClick={() => nav("/MaterialManagement")}
+            >
+              Close
             </button>
           </div>
         </div>
-        <div className="col-md-2 ">
-          <button
-            className="button-style "
-            id="btnclose"
-            type="submit"
-            onClick={() => nav("/MaterialManagement")}
-          >
-            Close
-          </button>
-        </div>
-          
-        </div>
-
-        <div className="row">
-        {/* <div className="col-md-2 col-sm-12 ">
-          <div className="row">
-            <div className="col-md-1 col-sm-12 mt-1">
-              <input
-                className="form-check-input mt-2"
-                type="checkbox"
-                // checked={checkboxVal === "on" ? true : false}
-                id="filterCustCheckbox"
-                onChange={changeCheckbox}
-                disabled={!selectedCust}
-              />
-            </div>
-            <div className="col-md-1 col-sm-12">
-              <label className="form-label" style={{ whiteSpace: "nowrap" }}>
-                Filter Customer
-              </label>
-            </div>
-          </div>
-        </div> */}
-
-        {/* <div className="col-md-2">
-          <div className="col-md-4 mt-2">
-            <button className="button-style"
-            style={{width:'65px'}}
-             onClick={openClick}>
-              Open IV
-            </button>
-          </div>
-        </div>
-        <div className="col-md-2 mt-2">
-          <button
-            className="button-style "
-            id="btnclose"
-            type="submit"
-            onClick={() => nav("/MaterialManagement")}
-          >
-            Close
-          </button>
-        </div> */}
-      </div>
       </div>
       {/* <div className="row">
         <div className="col-md-2 col-sm-12 ">

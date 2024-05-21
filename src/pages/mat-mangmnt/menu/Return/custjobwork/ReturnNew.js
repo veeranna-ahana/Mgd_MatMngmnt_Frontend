@@ -53,11 +53,11 @@ function ReturnNew() {
     <>
       <h4 className="title m-0">Customer Material Information</h4>
       <div className="row mb-2">
-        <div className=" d-flex col-md-8">
-          <div className="col-md-2">
-          <label className="form-label m-0">Select Customer</label>
-          </div>
-          
+        <div className=" d-flex col-md-8" style={{ gap: "10px" }}>
+          <label className="form-label m-1" style={{ whiteSpace: "nowrap" }}>
+            Select Customer
+          </label>
+
           {/* <select className="ip-select" onChange={changeCustomer}>
             <option value="" disabled selected>
               Select Customer
@@ -68,16 +68,15 @@ function ReturnNew() {
               </option>
             ))}
           </select> */}
-          <div className="col-md-5 mt-2">
+
           <Typeahead
+            className="ip-select"
             id="basic-example"
             name="customer"
             options={custdata}
             placeholder="Select Customer"
             onChange={(label) => changeCustomer(label)}
           />
-          </div>
-          
         </div>
         <div className="col-md-4 d-flex align-items-center justify-content-end mt-1">
           <button

@@ -716,100 +716,94 @@ function PNew() {
         <h4 className="title">Customer Parts Receipt Voucher</h4>
 
         <div className="row">
-          <div className="d-flex col-md-3">
-            <div className="col-md-4">
-              <label className="form-label ">Receipt Date</label>
-            </div>
+          <div className="d-flex col-md-3" style={{ gap: "10px" }}>
+            <label
+              className="form-label mt-1 "
+              style={{ whiteSpace: "nowrap" }}
+            >
+              Receipt Date
+            </label>
 
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="receiptDate"
-                value={formHeader.receiptDate}
-                readOnly
-              />
-            </div>
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="receiptDate"
+              value={formHeader.receiptDate}
+              readOnly
+            />
           </div>
-          <div className="d-flex col-md-2">
-            <div className="col-md-4">
-              <label className="form-label">RV No</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="rvNo"
-                value={formHeader.rvNo}
-                readOnly
-              />
-            </div>
-          </div>
+          <div className="d-flex col-md-2" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              RV No
+            </label>
 
-          <div className="d-flex col-md-2">
-            <div className="col-md-4">
-              <label className="form-label">RV Date</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="rvDate"
-                value={formHeader.rvDate}
-                readOnly
-              />
-            </div>
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="rvNo"
+              value={formHeader.rvNo}
+              readOnly
+            />
+          </div>
+          <div className="d-flex col-md-2" style={{ gap: "18px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              RV Date
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="rvDate"
+              value={formHeader.rvDate}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-2">
-            <div className="col-md-4">
-              <label className="form-label">Status</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="status"
-                value={formHeader.status}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-2" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Status
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="status"
+              value={formHeader.status}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-2">
-            <div className="col-md-9">
-              <label className="form-label">Weight</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                required="required"
-                type="number"
-                name="weight"
-                value={formHeader.weight}
-                onChange={InputHeaderEvent}
-                onKeyDown={blockInvalidChar}
-                min="0"
-                disabled={boolVal4}
-              />
-            </div>
+          <div className="d-flex col-md-3" style={{ gap: "70px" }}>
+            <label className="form-label mt-1">Weight</label>
+
+            <input
+              className="input-disabled mt-1"
+              required="required"
+              type="number"
+              name="weight"
+              value={formHeader.weight}
+              onChange={InputHeaderEvent}
+              onKeyDown={blockInvalidChar}
+              min="0"
+              disabled={boolVal4}
+            />
           </div>
         </div>
         <div className="row">
-          <div className="d-flex col-md-5">
-            <div className="col-md-2">
-              <label className="form-label">Customer</label>
-            </div>
+          <div className="d-flex col-md-5" style={{ gap: "27px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Customer
+            </label>
 
-            <div className="col-md-10 mt-2">
-              <Typeahead
-                id="basic-example"
-                options={custdata}
-                placeholder="Select Customer"
-                onChange={(label) => changeCustomer(label)}
-                disabled={boolVal2}
-              />
-            </div>
+            <Typeahead
+              className="ip-select"
+              // className="input-disabled mt-1"
+              id="basic-example"
+              options={custdata}
+              placeholder="Select Customer"
+              onChange={(label) => changeCustomer(label)}
+              disabled={boolVal2}
+            />
           </div>
           {/* <div className="col-md-5 ">
             <label className="form-label">Customer</label>
@@ -824,36 +818,31 @@ function PNew() {
             />
           </div> */}
 
-          <div className="d-flex col-md-4">
-            <div className="col-md-2">
-              <label className="form-label">Reference</label>
-            </div>
-            <div className="col-md-9">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="reference"
-                value={formHeader.reference}
-                onChange={InputHeaderEvent}
-                disabled={boolVal2 && boolVal4}
-              />
-            </div>
+          <div className="d-flex col-md-4" style={{ gap: "10px" }}>
+            <label className="form-label mt-1">Reference</label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="reference"
+              value={formHeader.reference}
+              onChange={InputHeaderEvent}
+              disabled={boolVal2 && boolVal4}
+            />
           </div>
 
-          <div className="d-flex col-md-3">
-            <div className="col-md-6">
-              <label className="form-label">Calculated Weight</label>
-            </div>
+          <div className="d-flex col-md-3" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Calculated Weight
+            </label>
 
-            <div className="col-md-5">
-              <input
-                className="input-disabled mt-1"
-                type="number"
-                name="calculatedWeight"
-                value={calcWeightVal}
-                readOnly
-              />
-            </div>
+            <input
+              className="input-disabled mt-1"
+              type="number"
+              name="calculatedWeight"
+              value={calcWeightVal}
+              readOnly
+            />
           </div>
         </div>
 
@@ -864,7 +853,7 @@ function PNew() {
               className="input-disabled mt-1"
               id="exampleFormControlTextarea1"
               rows="4"
-              style={{ width: "700px", height: "60px" }}
+              style={{ width: "100%", height: "60px" }}
               //className="form-control"
               value={formHeader.address}
               readOnly
@@ -907,7 +896,7 @@ function PNew() {
       </div>
       <div className="row">
         <div
-          style={{ height: "250px", overflowY: "scroll" }}
+          style={{ height: "230px", overflowY: "scroll" }}
           className="col-md-8 col-sm-12"
         >
           <BootstrapTable
@@ -923,30 +912,23 @@ function PNew() {
         </div>
 
         <div className="col-md-4 ">
-          <div className="ip-box form-bg" style={{ height: "250px" }}>
-            <div className="row col-md-12 ">
-              <div className="col-md-4"></div>
-              <div className="col-md-4 mt-1 ">
-                <button
-                  className="button-style  "
-                  style={{ width: "75px" }}
-                  onClick={addNewPart}
-                  disabled={boolVal1 || boolVal4}
-                >
-                  Add New
-                </button>
-              </div>
+          <div className="form-bg">
+            <div className="d-flex col-md-12 justify-content-center">
+              <button
+                className="button-style  "
+                onClick={addNewPart}
+                disabled={boolVal1 || boolVal4}
+              >
+                Add New
+              </button>
 
-              <div className="col-md-4 mt-1  ">
-                <button
-                  className="button-style "
-                  style={{ width: "55px" }}
-                  disabled={boolVal3 || boolVal4}
-                  onClick={deleteButtonState}
-                >
-                  Delete
-                </button>
-              </div>
+              <button
+                className="button-style "
+                disabled={boolVal3 || boolVal4}
+                onClick={deleteButtonState}
+              >
+                Delete
+              </button>
             </div>
 
             <div className="row">

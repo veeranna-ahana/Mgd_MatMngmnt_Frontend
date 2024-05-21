@@ -1987,167 +1987,149 @@ function NewSheetsUnits(props) {
         <h4 className="title">Material Receipt Voucher</h4>
 
         <div className="row">
-          <div className=" d-flex col-md-2">
-            <div className="col-md-6">
-              <label className="form-label">Receipt Date</label>
-            </div>
-            <div className="col-md-6">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="receiptDate"
-                value={formHeader.receiptDate}
-                readOnly
-              />
-            </div>
+          <div className=" d-flex col-md-2" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Receipt Date
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="receiptDate"
+              value={formHeader.receiptDate}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-2">
-            <div className="col-md-4">
-              <label className="form-label">RV No</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="rvNo"
-                value={formHeader.rvNo}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-2" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              RV No
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="rvNo"
+              value={formHeader.rvNo}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-2">
-            <div className="col-md-4">
-              <label className="form-label">RV Date</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="rvDate"
-                value={formHeader.rvDate}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-2" style={{ gap: "18px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              RV Date
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="rvDate"
+              value={formHeader.rvDate}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-4">
-            <div className="col-md-4">
-              <label className="form-label">Status</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="status"
-                value={formHeader.status}
-                readOnly
-              />
-            </div>
+          <div className="d-flex col-md-4" style={{ gap: "90px" }}>
+            <label className="form-label mt-1">Status</label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="status"
+              value={formHeader.status}
+              readOnly
+            />
           </div>
 
-          <div className="d-flex col-md-2">
-            <div className="col-md-4">
-              <label className="form-label">Weight</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="number"
-                name="weight"
-                onKeyDown={blockInvalidChar}
-                min="0"
-                required
-                value={formHeader.weight}
-                onChange={InputHeaderEvent}
-                disabled={boolVal4}
-              />
-            </div>
+          <div className="d-flex col-md-2" style={{ gap: "10px" }}>
+            <label className="form-label mt-1">Weight</label>
+
+            <input
+              className="input-disabled mt-1"
+              type="number"
+              name="weight"
+              onKeyDown={blockInvalidChar}
+              min="0"
+              required
+              value={formHeader.weight}
+              onChange={InputHeaderEvent}
+              disabled={boolVal4}
+            />
           </div>
         </div>
         <div className="row">
-          <div className="d-flex col-md-4">
-            <div className="col-md-2">
-              <label className="form-label">Customer</label>
-            </div>
+          <div className="d-flex col-md-4" style={{ gap: "26px" }}>
+            <label className="form-label">Customer</label>
+            {props.type2 !== "purchase" ? (
+              <Typeahead
+                className="ip-select"
+                id="basic-example"
+                name="customer"
+                options={custdata}
+                //disabled={props.type2 === "purchase" ? true : boolVal2}
+                placeholder="Select Customer"
+                onChange={(label) => changeCustomer(label)}
+                disabled={boolVal2}
+              />
+            ) : (
+              <select
+                className="ip-select"
+                name="customer"
+                disabled={props.type2 === "purchase" ? true : boolVal2}
+                onChange={changeCustomer1}
+              >
+                {props.type2 === "purchase" ? (
+                  ""
+                ) : (
+                  <option value="" disabled selected>
+                    Select Customer
+                  </option>
+                )}
 
-            <div className="col-md-10 mt-2">
-              {props.type2 !== "purchase" ? (
-                <Typeahead
-                  id="basic-example"
-                  name="customer"
-                  options={custdata}
-                  //disabled={props.type2 === "purchase" ? true : boolVal2}
-                  placeholder="Select Customer"
-                  onChange={(label) => changeCustomer(label)}
-                  disabled={boolVal2}
-                />
-              ) : (
-                <select
-                  className="ip-select"
-                  name="customer"
-                  disabled={props.type2 === "purchase" ? true : boolVal2}
-                  onChange={changeCustomer1}
-                >
-                  {props.type2 === "purchase" ? (
-                    ""
-                  ) : (
-                    <option value="" disabled selected>
-                      Select Customer
-                    </option>
-                  )}
-
-                  {props.type2 === "purchase"
-                    ? custdata.map((customer, index) =>
-                        customer.Cust_Code == 0 ? (
-                          <option key={index} value={customer.Cust_Code}>
-                            {customer.Cust_name}
-                          </option>
-                        ) : (
-                          ""
-                        )
-                      )
-                    : custdata.map((customer, index) => (
+                {props.type2 === "purchase"
+                  ? custdata.map((customer, index) =>
+                      customer.Cust_Code == 0 ? (
                         <option key={index} value={customer.Cust_Code}>
                           {customer.Cust_name}
                         </option>
-                      ))}
-                </select>
-              )}
-            </div>
+                      ) : (
+                        ""
+                      )
+                    )
+                  : custdata.map((customer, index) => (
+                      <option key={index} value={customer.Cust_Code}>
+                        {customer.Cust_name}
+                      </option>
+                    ))}
+              </select>
+            )}
           </div>
 
-          <div className="d-flex col-md-2" style={{ gap: "5px" }}>
-            <div className="col-md-4">
-              <label className="form-label">Reference</label>
-            </div>
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="text"
-                name="reference"
-                value={formHeader.reference}
-                onChange={InputHeaderEvent}
-                disabled={boolVal2 && boolVal4}
-              />
-            </div>
+          <div className="d-flex col-md-2" style={{ gap: "10px" }}>
+            <label className="form-label mt-1">Reference</label>
+
+            <input
+              className="input-disabled mt-1"
+              type="text"
+              name="reference"
+              value={formHeader.reference}
+              onChange={InputHeaderEvent}
+              disabled={boolVal2 && boolVal4}
+            />
           </div>
 
-          <div className="d-flex col-md-4">
-            <div className="col-md-4">
-              <label className="form-label">Calculated Weight</label>
-            </div>
+          <div className="d-flex col-md-4" style={{ gap: "20px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Calculated Weight
+            </label>
 
-            <div className="col-md-8">
-              <input
-                className="input-disabled mt-1"
-                type="number"
-                name="calculatedWeight"
-                value={calcWeightVal}
-                readOnly
-              />
-            </div>
+            <input
+              className="input-disabled mt-1"
+              type="number"
+              name="calculatedWeight"
+              value={calcWeightVal}
+              readOnly
+            />
           </div>
         </div>
 
@@ -2219,53 +2201,49 @@ function NewSheetsUnits(props) {
             className="col-md-4 col-sm-12"
             style={{ overflowY: "scroll", height: "400px" }}
           >
-            <div className="ip-box form-bg">
-              <div className="row justify-content-center">
-                <div className="col-md-6 col-sm-12">
-                  <button
-                    className="button-style "
-                    style={{ width: "90px" }}
-                    //onClick={addNewPart}
-                    disabled={boolVal1 || boolVal4}
-                    onClick={addNewMaterial}
-                  >
-                    Add Serial
-                  </button>
-                </div>
-                <div className="col-md-6 col-sm-12">
-                  <button
-                    className="button-style "
-                    style={{ width: "90px" }}
-                    disabled={boolVal3 || boolVal4}
-                    // onClick={handleDelete}
-                    onClick={deleteButtonState}
-                  >
-                    Delete Serial
-                  </button>
-                </div>
+            <div className=" form-bg">
+              <div
+                className="d-flex  justify-content-center mb-2"
+                style={{ gap: "20px" }}
+              >
+                <button
+                  className="button-style "
+                  //onClick={addNewPart}
+                  disabled={boolVal1 || boolVal4}
+                  onClick={addNewMaterial}
+                >
+                  Add Serial
+                </button>
+
+                <button
+                  className="button-style "
+                  disabled={boolVal3 || boolVal4}
+                  // onClick={handleDelete}
+                  onClick={deleteButtonState}
+                >
+                  Delete Serial
+                </button>
               </div>
 
-              <div className="row  justify-content-center">
-                <div className="col-md-6 col-sm-12">
-                  <button
-                    className="button-style "
-                    style={{ width: "90px" }}
-                    disabled={rmvBtn || boolVal6}
-                    onClick={addToStock}
-                  >
-                    Add to stock
-                  </button>
-                </div>
-                <div className="col-md-6 col-sm-12">
-                  <button
-                    className="button-style "
-                    style={{ width: "90px" }}
-                    disabled={addBtn || boolVal6}
-                    onClick={removeStock}
-                  >
-                    Remove stock
-                  </button>
-                </div>
+              <div
+                className="d-flex  justify-content-center"
+                style={{ gap: "20px" }}
+              >
+                <button
+                  className="button-style "
+                  disabled={rmvBtn || boolVal6}
+                  onClick={addToStock}
+                >
+                  Add to stock
+                </button>
+
+                <button
+                  className="button-style "
+                  disabled={addBtn || boolVal6}
+                  onClick={removeStock}
+                >
+                  Remove stock
+                </button>
               </div>
 
               <div className="row">
@@ -2279,12 +2257,15 @@ function NewSheetsUnits(props) {
                   >
                     Serial Details
                   </label>
-                  <div className="row">
-                    <div className="col-md-4">
-                      <label className="form-label">Mtrl Code</label>
-                    </div>
-                    <div className="col-md-8">
-                      {/* <select
+                  <div className="d-flex " style={{ gap: "20px" }}>
+                    <label
+                      className="form-label mt-1"
+                      style={{ whiteSpace: "nowrap" }}
+                    >
+                      Mtrl Code
+                    </label>
+
+                    {/* <select
                         className="ip-select dropdown-field"
                         onChange={changeMtrl}
                         defaultValue={" "}
@@ -2334,75 +2315,78 @@ function NewSheetsUnits(props) {
                             )}
                       </select> */}
 
-                      <Typeahead
-                        id="mtrlCode"
-                        className="input-disabled mt-2"
-                        labelKey="Mtrl_Code"
-                        options={filterMaterials()}
-                        selected={selectedMtrl}
-                        onChange={(selected) =>
-                          changeMtrl("mtrlCode", selected[0]?.Mtrl_Code)
-                        }
-                        disabled={
-                          boolVal3 ||
-                          boolVal4 ||
-                          boolVal5 ||
-                          materialArray.length === 0
-                        }
-                        placeholder="Select Material"
-                      />
-                    </div>
+                    <Typeahead
+                      id="mtrlCode"
+                      className="input-disabled mt-2"
+                      labelKey="Mtrl_Code"
+                      options={filterMaterials()}
+                      selected={selectedMtrl}
+                      onChange={(selected) =>
+                        changeMtrl("mtrlCode", selected[0]?.Mtrl_Code)
+                      }
+                      disabled={
+                        boolVal3 ||
+                        boolVal4 ||
+                        boolVal5 ||
+                        materialArray.length === 0
+                      }
+                      placeholder="Select Material"
+                    />
                   </div>
 
                   {materialArray.length === 0 && (
                     <div>
-                      <div className="row mt-1">
-                        <div className="col-md-4">
-                          <label className="form-label">Para 1</label>
-                        </div>
-                        <div className="col-md-6">
-                          <input
-                            className="input-disabled mt-2"
-                            name="dynamicPara1"
-                            disabled
-                            min="0"
-                          />
-                        </div>
-                        <div className="col-md-2">
-                          <label className="form-label">mm</label>
-                        </div>
+                      <div className="d-flex " style={{ gap: "10px" }}>
+                        <label
+                          className="form-label mt-2"
+                          style={{ whiteSpace: "nowrap" }}
+                        >
+                          Para 1
+                        </label>
+
+                        <input
+                          className="input-disabled mt-2"
+                          name="dynamicPara1"
+                          disabled
+                          min="0"
+                        />
+
+                        <label className="form-label mt-1">mm</label>
                       </div>
-                      <div className="row">
-                        <div className="col-md-4">
-                          <label className="form-label">Para 2</label>
-                        </div>
-                        <div className="col-md-6">
-                          <input
-                            className="input-disabled mt-1"
-                            name="dynamicPara2"
-                            min="0"
-                            disabled
-                          />
-                        </div>
-                        <div className="col-md-2">
-                          <label className="form-label">mm</label>
-                        </div>
+
+                      <div className="d-flex " style={{ gap: "10px" }}>
+                        <label
+                          className="form-label mt-2"
+                          style={{ whiteSpace: "nowrap" }}
+                        >
+                          Para 2
+                        </label>
+
+                        <input
+                          className="input-disabled mt-1"
+                          name="dynamicPara2"
+                          min="0"
+                          disabled
+                        />
+
+                        <label className="form-label mt-1">mm</label>
                       </div>
-                      <div className="row">
-                        <div className="col-md-4">
-                          <label className="form-label">Para 3</label>
-                        </div>
-                        <div className="col-md-6 ">
-                          <input
-                            className="input-disabled mt-1"
-                            name="dynamicPara3"
-                            min="0"
-                            disabled
-                          />
-                        </div>
-                        <div className="col-md-2">
-                          <label className="form-label">mm</label>
-                        </div>
+                      <div className="d-flex" style={{ gap: "10px" }}>
+                        <label
+                          className="form-label mt-2"
+                          style={{ whiteSpace: "nowrap" }}
+                        >
+                          Para 3
+                        </label>
+
+                        <input
+                          className="input-disabled mt-1"
+                          name="dynamicPara3"
+                          min="0"
+                          disabled
+                        />
+
+                        <label className="form-label mt-1">mm</label>
                       </div>
                     </div>
                   )}
@@ -2724,11 +2708,10 @@ function NewSheetsUnits(props) {
                   >
                     Quantity Details
                   </label>
-                  <div className="row">
-                    <div className="col-md-3 col-sm-12">
-                      <label className="form-label mt-1">Received</label>
-                    </div>
-                    <div className="col-md-4 col-sm-12">
+                  <div className="d-flex col-md-12" style={{ gap: "10px" }}>
+                    <div className="d-flex col-md-6" style={{ gap: "10px" }}>
+                      <label className="form-label mt-2">Received</label>
+
                       <input
                         className="input-disabled mt-2"
                         type="number"
@@ -2746,34 +2729,28 @@ function NewSheetsUnits(props) {
                         }}
                       />
                     </div>
-                    <div className="col-md-5">
-                      <div
-                        className="col-md-12 "
-                        style={{ display: "flex", gap: "5px" }}
-                      >
-                        <input
-                          className="form-check-input mt-2"
-                          type="checkbox"
-                          id="flexCheckDefault"
-                          name="inspected"
-                          checked={inputPart.inspected}
-                          disabled={
-                            boolVal3 || boolVal4 || materialArray.length === 0
-                          }
-                          onChange={(e) => {
-                            changeMaterialHandle(e, inputPart.id);
-                          }}
-                        />
-                        <label className="form-label">Inspected</label>
-                      </div>
+
+                    <div className="d-flex col-md-6" style={{ gap: "10px" }}>
+                      <input
+                        className="form-check-input mt-3"
+                        type="checkbox"
+                        id="flexCheckDefault"
+                        name="inspected"
+                        checked={inputPart.inspected}
+                        disabled={
+                          boolVal3 || boolVal4 || materialArray.length === 0
+                        }
+                        onChange={(e) => {
+                          changeMaterialHandle(e, inputPart.id);
+                        }}
+                      />
+                      <label className="form-label mt-2">Inspected</label>
                     </div>
                   </div>
 
-                  <div className="row">
-                    <div className="col-md-3 col-sm-12 mt-1">
-                      <label className="form-label">Accepted</label>
-                    </div>
-                    <div className="col-md-4 col-sm-12">
+                  <div className="d-flex col-md-12" style={{ gap: "10px" }}>
+                    <div className="d-flex col-md-6" style={{ gap: "10px" }}>
+                      <label className="form-label mt-2">Accepted</label>
                       <input
                         className="input-disabled mt-2"
                         type="number"
@@ -2788,29 +2765,25 @@ function NewSheetsUnits(props) {
                         }}
                       />
                     </div>
-                    <div className="col-md-5 ">
-                      <div
-                        className="col-md-12"
-                        style={{ display: "flex", gap: "5px" }}
-                      >
-                        <input
-                          // className="checkBoxStyle mt-2"
-                          // type="checkbox"
-                          className="form-check-input mt-2"
-                          type="checkbox"
-                          id="flexCheckDefault"
-                          name="updated"
-                          checked={inputPart.updated === 1 ? true : false}
-                          disabled={
-                            boolVal3 || boolVal4 || materialArray.length === 0
-                          }
-                          // disabled={true}
-                          onChange={(e) => {
-                            changeMaterialHandle(e, inputPart.id);
-                          }}
-                        />
-                        <label className="form-label">Updated</label>
-                      </div>
+
+                    <div className="d-flex col-md-6" style={{ gap: "10px" }}>
+                      <input
+                        // className="checkBoxStyle mt-2"
+                        // type="checkbox"
+                        className="form-check-input mt-3"
+                        type="checkbox"
+                        id="flexCheckDefault"
+                        name="updated"
+                        checked={inputPart.updated === 1 ? true : false}
+                        disabled={
+                          boolVal3 || boolVal4 || materialArray.length === 0
+                        }
+                        // disabled={true}
+                        onChange={(e) => {
+                          changeMaterialHandle(e, inputPart.id);
+                        }}
+                      />
+                      <label className="form-label mt-2">Updated</label>
                     </div>
                   </div>
 
@@ -2856,14 +2829,14 @@ function NewSheetsUnits(props) {
                       />
                     </div>
                   </div>
-                  <div className="row">
+                  <div className="d-flex ">
                     <div className="col-md-6 ">
                       <label className="form-label">Location</label>
                     </div>
-                    <div className="col-md-6 mt-1" style={{ width: "140px" }}>
+                    <div className="col-md-6 mt-1">
                       <select
                         // className="ip-select dropdown-field"
-                        // style={{ width: "140px" }}
+                        style={{ width: "100%" }}
                         className="input-disabled mt-1"
                         onChange={(e) => {
                           changeMaterialHandle(e, inputPart.id);

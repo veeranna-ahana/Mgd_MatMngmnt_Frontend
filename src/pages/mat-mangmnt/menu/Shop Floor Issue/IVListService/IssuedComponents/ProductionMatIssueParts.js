@@ -256,127 +256,115 @@ function ProductionMatIssueParts() {
 
       <div className="table_top_style">
         <div className="row">
-          <div className="d-flex col-md-3">
-            <div className="col-md-4">
-              <label className="form-label">Issue Vr No</label>
-            </div>
-            <div className="col-md-6">
-              <input
-                className="input-disabled mt-1"
-                style={{ width: "140px" }}
-                value={formHeader.IV_No}
-                disabled
-              />
-            </div>
+          <div className="d-flex col-md-3" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Issue Vr No
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              value={formHeader.IV_No}
+              disabled
+            />
           </div>
 
-          <div className="d-flex col-md-3">
-            <div className="col-md-5">
-              <label className="form-label">Assembly Name</label>
-            </div>
+          <div className="d-flex col-md-3" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Assembly Name
+            </label>
 
-            <div className="col-md-6">
-              <input
-                className="input-disabled mt-1"
-                value={formHeader.AssyName}
-                disabled
-              />
-            </div>
+            <input
+              className="input-disabled mt-1"
+              value={formHeader.AssyName}
+              disabled
+            />
           </div>
 
-          <div className="d-flex col-md-3">
-            <div className="col-md-5">
-              <label className="form-label">Allotted</label>
-            </div>
-            <div className="col-md-6">
-              <input
-                className="input-disabled mt-1"
-                value={formHeader.QtyIssued}
-                disabled
-              />
-            </div>
+          <div className="d-flex col-md-3" style={{ gap: "33px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Allotted
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              value={formHeader.QtyIssued}
+              disabled
+            />
           </div>
 
-          <div className="d-flex col-md-3">
-            <div className="col-md-3">
-              <label className="form-label">Vr Date</label>
-            </div>
-            <div className="col-md-6">
-              <input
-                className="input-disabled mt-1"
-                value={formHeader.Issue_date}
-                disabled
-              />
-            </div>
+          <div className="d-flex col-md-3" style={{ gap: "13px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Vr Date
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              value={formHeader.Issue_date}
+              disabled
+            />
           </div>
 
-          <div className="d-flex col-md-3">
-            <div className="col-md-4">
-              <label className="form-label">Operation</label>
-            </div>
-            <div className="col-md-6">
-              <input
-                className="input-disabled mt-1"
-                value={formHeader.Operation}
-                disabled
-              />
-            </div>
+          <div className="d-flex col-md-3" style={{ gap: "15px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Operation
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              value={formHeader.Operation}
+              disabled
+            />
           </div>
 
-          <div className="d-flex col-md-3">
-            <div className="col-md-5">
-              <label className="form-label">Returned</label>
-            </div>
+          <div className="d-flex col-md-3" style={{ gap: "48px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Returned
+            </label>
 
-            <div className="col-md-6">
-              <input
-                className="input-disabled mt-1"
-                value={formHeader.QtyReturned}
-                disabled
-              />
-            </div>
+            <input
+              className="input-disabled mt-1"
+              value={formHeader.QtyReturned}
+              disabled
+            />
           </div>
 
-          <div className="d-flex col-md-3">
-            <div className="col-md-5">
-              <label className="form-label">Program No</label>
-            </div>
-            <div className="col-md-6">
-              <input
-                className="input-disabled mt-1"
-                value={formHeader.NCProgramNo}
-                disabled
-              />
-            </div>
+          <div className="d-flex col-md-3" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Program No
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              value={formHeader.NCProgramNo}
+              disabled
+            />
           </div>
 
-          <div className="d-flex col-md-3">
-            <div className="col-md-3">
-              <label className="form-label">Material</label>
-            </div>
-            <div className="col-md-6">
-              <input
-                className="input-disabled mt-1"
-                value={formHeader.Mtrl_Code}
-                disabled
-              />
-            </div>
+          <div className="d-flex col-md-3" style={{ gap: "10px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Material
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              value={formHeader.Mtrl_Code}
+              disabled
+            />
           </div>
 
-          <div className="d-flex col-md-6">
-            <div className="col-md-2">
-              <label className="form-label">Customer</label>
-            </div>
-            <div className="col-md-9">
-              <input
-                className="input-disabled mt-1"
-                value={formHeader.Cust_name}
-                disabled
-              />
-            </div>
+          <div className="d-flex col-md-6" style={{ gap: "15px" }}>
+            <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
+              Customer
+            </label>
+
+            <input
+              className="input-disabled mt-1"
+              value={formHeader.Cust_name}
+              disabled
+            />
           </div>
 
-          <div className="d-flex col-md-4">
+          <div className="d-flex col-md-5">
             <button className="button-style" onClick={printButton}>
               Print
             </button>

@@ -129,11 +129,9 @@ function PDraftRVList() {
     <div>
       <>
         <h4 className="title">Customer : Parts Receipt List Created</h4>
-        <div className="row">
-          <div className="d-flex col-md-7 mb-1">
-            <div className="col-md-2">
-              <label className="form-label">Customer</label>
-            </div>
+        <div className="row ">
+          <div className="d-flex col-md-7 mb-2" style={{ gap: "10px" }}>
+            <label className="form-label">Customer</label>
 
             {/* <select
               className="ip-select"
@@ -149,14 +147,14 @@ function PDraftRVList() {
                 </option>
               ))}
             </select> */}
-            <div className="col-md-5 mt-2">
-              <Typeahead
-                id="basic-example"
-                options={custdata}
-                placeholder="Select Customer"
-                onChange={(label) => changeCustomer(label)}
-              />
-            </div>
+
+            <Typeahead
+              className="ip-select"
+              id="basic-example"
+              options={custdata}
+              placeholder="Select Customer"
+              onChange={(label) => changeCustomer(label)}
+            />
           </div>
 
           {/* <div className="row justify-content-center ">
@@ -169,10 +167,9 @@ function PDraftRVList() {
                   Open
                 </button>
               </div> */}
-          <div className="col-md-5 text-center ">
+          <div className="col-md-5 text-center mb-2 ">
             <button
               className="button-style "
-              style={{ width: "55px" }}
               //data.RvID
               onClick={openButtonClick}
             >
@@ -207,7 +204,7 @@ function PDraftRVList() {
           </div>
 
           <div className="col-md-5 col-sm-12">
-            <div className="ip-box form-bg" style={{ height: "350px" }}>
+            <div className=" form-bg">
               <div className="row">
                 <div className="col-md-4 mt-1 ">
                   <label className="form-label">Receipt Date</label>
@@ -234,7 +231,12 @@ function PDraftRVList() {
               </div>
               <div className="row">
                 <div className="col-md-4 mt-1">
-                  <label className="form-label">RV Date</label>
+                  <label
+                    className="form-label"
+                    style={{ whiteSpace: "nowrap" }}
+                  >
+                    RV Date
+                  </label>
                 </div>
                 <div className="col-md-8 ">
                   <input
@@ -304,7 +306,7 @@ function PDraftRVList() {
                 </div>
               </div>
 
-              <div className="row">
+              <div className="row ">
                 <div className="col-md-4 mt-1">
                   <label
                     className="form-label"
