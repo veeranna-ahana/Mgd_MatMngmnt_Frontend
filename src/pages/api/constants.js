@@ -6,9 +6,6 @@
 let API = process.env.REACT_APP_API_KEY;
 
 export const endpoints = {
-  // pdf
-  getPDFData: `${API}/pdf/getPDFData`,
-
   //customers
   getCustomers: `${API}/customers/allcustomers`,
   getCustomerByCustCode: `${API}/customers/getCustomerByCustCode`,
@@ -413,4 +410,6 @@ export const endpoints = {
   getPaymentReceipts: `${API}/accounts/paymentreceipts`,
   getPaymentRectsDetails: `${API}/accounts/paymentrectdetails`,
   getPrdSummary: `${API}/accounts/prdsummary`,*/
+
+  getPDFData: `${API}/pdf/getPDFData`,
 };

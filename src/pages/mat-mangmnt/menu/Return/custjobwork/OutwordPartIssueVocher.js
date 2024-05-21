@@ -1056,11 +1056,15 @@ function OutwordPartIssueVocher(props) {
                       </td>
                       <td>
                         {parseFloat(val.TotalWeight).toFixed(3)}
-
                         {/* <input
                           type="number"
                           min={0}
-                          
+                          // disabled={
+                          //   (formHeader.IVStatus === "Cancelled") ||
+                          //   (formHeader.IVStatus === "Returned")
+                          //     ? true
+                          //     : false
+                          // }
                           defaultValue={parseFloat(val.TotalWeight).toFixed(3)}
                           onKeyDown={(e) => {
                             if (e.which === 38 || e.which === 40) {
@@ -1090,7 +1094,7 @@ function OutwordPartIssueVocher(props) {
                             formHeader.PkngDcNo
                               ? "input-disabled"
                               : ""
-                          }
+                          } 
                         /> */}
                       </td>
                       <td>

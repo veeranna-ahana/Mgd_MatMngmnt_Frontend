@@ -281,10 +281,7 @@ function OpenButtonDraftSheetUnit(props) {
             setPlateRowSelect(false);
           }
 
-          if (
-            data3.Shape === "Tube Square" ||
-            data3.Shape === "Tube Rectangle"
-          ) {
+          if (data3.Shape.includes("Tube")) {
             // Tube
             setPara1Label("Length");
             setUnitLabel1("mm");
@@ -373,11 +370,10 @@ function OpenButtonDraftSheetUnit(props) {
           getRequest(url2, async (shapeData) => {
             // console.log("shapedata = ", shapeData);
 
-            if (shapeData.length === 0) {
+            if (!shapeData.ShapeID) {
               toast.error(
-                "ShapeID doesnot exist for selected Material Code , please select other Material Code"
+                "ShapeID for MtrlCode doesnot exist please select other material"
               );
-
               return;
             }
             inputPart.shapeID = shapeData.ShapeID;

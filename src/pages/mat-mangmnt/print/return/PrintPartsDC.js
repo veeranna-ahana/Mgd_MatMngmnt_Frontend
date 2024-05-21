@@ -13,11 +13,11 @@ import { useLocation } from "react-router-dom";
 import PrintPartsDCTable from "./PrintPartsDCTable";
 import Modal from "react-bootstrap/Modal";
 
-import { getRequest, postRequest } from "../../../api/apiinstance";
+import { postRequest } from "../../../api/apiinstance";
 import { endpoints } from "../../../api/constants";
-
 function PrintPartsDC(props) {
   const [PDFData, setPDFData] = useState({});
+
   const location = useLocation();
   // console.log(
   //   "Second formheader = ",

@@ -522,8 +522,6 @@ function Parts(props) {
     // setThirdTableData(thirdTableData);
   };
 
-  console.log("thirdTableData", thirdTableData);
-
   const getDCNo = async () => {
     // console.log("todayDate", todayDate);
 
@@ -571,6 +569,7 @@ function Parts(props) {
     }
     return flag;
   };
+
   const createReturnVoucherValidationFunc = () => {
     if (props.custCode) {
       if (firstTableSelectedRow.length > 0 || secondTableData.length > 0) {

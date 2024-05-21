@@ -9,6 +9,7 @@ import { postRequest } from "../../../api/apiinstance";
 import { endpoints } from "../../../api/constants";
 function PrintMaterialDC(props) {
   const [PDFData, setPDFData] = useState({});
+
   const location = useLocation();
   // console.log(
   //   "Second formheader = ",
@@ -37,6 +38,7 @@ function PrintMaterialDC(props) {
   useEffect(() => {
     fetchPDFData();
   }, []);
+
   return (
     <>
       <Modal show={props.printOpen} onHide={handleClose} fullscreen>

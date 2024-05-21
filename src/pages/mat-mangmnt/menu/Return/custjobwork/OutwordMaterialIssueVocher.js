@@ -1055,9 +1055,7 @@ function OutwordMaterialIssueVocher(props) {
                           if (parseInt(e.target.value) < 0) {
                             e.target.value = parseInt(e.target.value) * -1;
                             toast.warning("Total weight can't be negative");
-                            // props.handleChangeDiscountDelivery(e);
                           }
-
                           updateChange(key, e.target.value || 0, "TotalWeight");
                           handleChangeWeightTotalCal();
                         }}

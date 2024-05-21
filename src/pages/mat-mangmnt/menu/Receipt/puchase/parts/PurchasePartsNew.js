@@ -505,6 +505,13 @@ function PurchasePartsNew() {
     deleteRVButtonState();
     setDeleteRvModalOpen(false);
   };
+
+  const blockInvalidQtyChar = (e) =>
+    ["e", "E", "+", "-", "."].includes(e.key) && e.preventDefault();
+
+  const blockInvalidChar = (e) =>
+    ["e", "E", "+", "-"].includes(e.key) && e.preventDefault();
+
   return (
     <div>
       <CreateYesNoModal
@@ -594,22 +601,21 @@ function PurchasePartsNew() {
             />
           </div>
 
-          <div className="d-flex col-md-2" style={{ gap: "10px" }}>
-            <label
-              className="form-label mt-1 "
-              style={{ whiteSpace: "nowrap" }}
-            >
-              Weight
-            </label>
-
-            <input
-              className="input-disabled mt-1"
-              type="text"
-              name="weight"
-              value={formHeader.weight}
-              onChange={InputHeaderEvent}
-              disabled={boolVal4}
-            />
+          <div className="d-flex col-md-2">
+            <div className="col-md-4">
+              <label className="form-label">Weight</label>
+            </div>
+            <div className="col-md-8">
+              <input
+                className="input-disabled mt-1"
+                type="text"
+                name="weight"
+                value={formHeader.weight}
+                onChange={InputHeaderEvent}
+                onKeyDown={blockInvalidChar}
+                disabled={boolVal4}
+              />
+            </div>
           </div>
         </div>
         <div className="row">
@@ -822,11 +828,13 @@ function PurchasePartsNew() {
               <div className="col-md-8 ">
                 <input
                   className="input-disabled mt-1"
-                  type="text"
+                  type="number"
                   name="unitWeight"
                   value={inputPart.unitWeight}
                   onChange={changePartHandle}
                   //onKeyUp={changePartHandle1}
+                  onKeyDown={blockInvalidChar}
+                  min="0"
                   disabled={boolVal3 | boolVal4}
                 />
               </div>
@@ -838,10 +846,11 @@ function PurchasePartsNew() {
               <div className="col-md-8 ">
                 <input
                   className="input-disabled mt-1"
-                  type="text"
+                  type="number"
                   name="qtyReceived"
                   //value={tempVal}
                   value={inputPart.qtyReceived}
+                  onKeyDown={blockInvalidQtyChar}
                   onChange={changePartHandle}
                   disabled={boolVal3 | boolVal4}
                 />
@@ -852,10 +861,12 @@ function PurchasePartsNew() {
               <div className="col-md-8 ">
                 <input
                   className="input-disabled mt-1"
-                  type="text"
+                  type="number"
                   name="qtyAccepted"
                   value={inputPart.qtyAccepted}
+                  onKeyDown={blockInvalidQtyChar}
                   onChange={changePartHandle}
+                  min="0"
                   disabled={boolVal3 | boolVal4}
                 />
               </div>
@@ -867,7 +878,7 @@ function PurchasePartsNew() {
               <div className="col-md-8 ">
                 <input
                   className="input-disabled mt-1"
-                  type="text"
+                  type="number"
                   value={inputPart.qtyReceived - inputPart.qtyAccepted}
                   name="qtyRejected"
                   readOnly
