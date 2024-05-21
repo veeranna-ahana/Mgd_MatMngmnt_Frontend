@@ -498,14 +498,24 @@ function NewSheetsUnits(props) {
         //update the mtrl_data related columns
         let url1 = endpoints.getRowByMtrlCode + "?code=" + value;
         getRequest(url1, async (mtrlData) => {
-          // console.log("mtrldata= ", mtrlData.Shape);
+          console.log("mtrldata= ", mtrlData.Shape);
           let Mtrlshape = mtrlData.Shape;
           setShape(Mtrlshape);
           inputPart.material = mtrlData.Mtrl_Type;
           inputPart.shapeMtrlId = mtrlData.ShapeMtrlID;
+          // console.log("mtrlData.Shape", mtrlData.Shape);
           let url2 = endpoints.getRowByShape + "?shape=" + mtrlData.Shape;
           getRequest(url2, async (shapeData) => {
-            //console.log("shapedata = ", shapeData);
+            console.log("shapedata = ", shapeData);
+            console.log("ShapeID = ", shapeData.ShapeID);
+
+            if (!shapeData.ShapeID) {
+              toast.error(
+                "ShapeID for MtrlCode doesnot exist please select other material"
+              );
+              return;
+            }
+
             inputPart.shapeID = shapeData.ShapeID;
             setInputPart(inputPart);
 
@@ -515,7 +525,6 @@ function NewSheetsUnits(props) {
             // }
           });
         });
-        // console.log("material.Shape", material.Shape);
 
         if (shape !== null && shape !== undefined && shape !== material.Shape) {
           toast.error("Please select a same type of part");
@@ -545,7 +554,10 @@ function NewSheetsUnits(props) {
           setPlateRowSelect(false);
         }
 
-        if (material.Shape.includes("Tube")) {
+        if (
+          material.Shape === "Tube Square" ||
+          material.Shape === "Tube Rectangle"
+        ) {
           // Tube
           setPara1Label("Length");
           setPara2Label("");
