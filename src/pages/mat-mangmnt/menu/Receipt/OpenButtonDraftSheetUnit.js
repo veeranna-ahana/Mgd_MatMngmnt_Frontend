@@ -369,6 +369,13 @@ function OpenButtonDraftSheetUnit(props) {
           let url2 = endpoints.getRowByShape + "?shape=" + mtrlData.Shape;
           getRequest(url2, async (shapeData) => {
             // console.log("shapedata = ", shapeData);
+
+            if (!shapeData.ShapeID) {
+              toast.error(
+                "ShapeID for MtrlCode doesnot exist please select other material"
+              );
+              return;
+            }
             inputPart.shapeID = shapeData.ShapeID;
             setInputPart(inputPart);
           });
@@ -402,7 +409,10 @@ function OpenButtonDraftSheetUnit(props) {
           setPlateRowSelect(false);
         }
 
-        if (material.Shape.includes("Tube")) {
+        if (
+          material.Shape === "Tube Square" ||
+          material.Shape === "Tube Rectangle"
+        ) {
           // Tube
           setPara1Label("Length");
           setPara2Label("");
