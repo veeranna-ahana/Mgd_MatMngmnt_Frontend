@@ -24,10 +24,12 @@ function ReturnPartQtyCheckOk(props) {
       />
       <Modal show={showOK} onHide={handleClose}>
         <Modal.Header closeButton className="p-3 ">
-          <Modal.Title>Confirmation Message</Modal.Title>
+          <Modal.Title style={{ fontSize: "14px" }}>
+            Confirmation Message
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body className="p-3">
-          <span>Quantity Check Ok</span>
+          <span style={{ fontSize: "12px" }}>Quantity Check Ok</span>
         </Modal.Body>
         <Modal.Footer className="p-2 px-3">
           <button

@@ -90,7 +90,7 @@ function PartsInStockAndProcess(props) {
           {/* <NavComp /> */}
           {treeData.map((node, i) => {
             const part = node.PartId;
-            const label = <span className="node">{part}</span>;
+            const label = <span className="node" style={{fontSize:'12px'}}>{part}</span>;
             return (
               <TreeView
                 key={part + "|" + i}

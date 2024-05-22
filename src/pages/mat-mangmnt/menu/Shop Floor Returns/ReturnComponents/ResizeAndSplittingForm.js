@@ -444,7 +444,7 @@ export default function ResizeAndSplittingForm() {
           <div className="col-md-10">
             <label className="form-label">Material Code</label>
             <input
-              className="form-label"
+              className="form-label mt-1"
               name="materialCode"
               value={formHeader.materialCode}
               disabled
@@ -463,7 +463,7 @@ export default function ResizeAndSplittingForm() {
               <div className="col-md-4">
                 <label className="form-label">Quantity</label>
                 <input
-                  className="form-label"
+                  className="form-label mt-1"
                   name="quantity"
                   value={formHeader.quantity}
                   disabled

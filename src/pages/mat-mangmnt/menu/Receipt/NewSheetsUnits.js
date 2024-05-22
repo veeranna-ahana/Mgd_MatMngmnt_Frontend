@@ -2135,7 +2135,7 @@ function NewSheetsUnits(props) {
               className="input-disabled mt-1"
               id="exampleFormControlTextarea1"
               rows="2"
-              style={{ width: "700px", height: "60px" }}
+              style={{ width: "100%", height: "60px" }}
               // className="form-control"
               value={formHeader.address}
               readOnly
@@ -2252,13 +2252,15 @@ function NewSheetsUnits(props) {
                   >
                     Serial Details
                   </label>
-                  <div className="d-flex " style={{ gap: "20px" }}>
-                    <label
-                      className="form-label mt-1"
-                      style={{ whiteSpace: "nowrap" }}
-                    >
-                      Mtrl Code
-                    </label>
+                  <div className="row  ">
+                    <div className="col-md-4">
+                      <label
+                        className="form-label mt-1"
+                        style={{ whiteSpace: "nowrap" }}
+                      >
+                        Mtrl Code
+                      </label>
+                    </div>
 
                     {/* <select
                         className="ip-select dropdown-field"
@@ -2309,79 +2311,95 @@ function NewSheetsUnits(props) {
                               )
                             )}
                       </select> */}
-
-                    <Typeahead
-                      id="mtrlCode"
-                      className="input-disabled mt-2"
-                      labelKey="Mtrl_Code"
-                      options={filterMaterials()}
-                      selected={selectedMtrl}
-                      onChange={(selected) =>
-                        changeMtrl("mtrlCode", selected[0]?.Mtrl_Code)
-                      }
-                      disabled={
-                        boolVal3 ||
-                        boolVal4 ||
-                        boolVal5 ||
-                        materialArray.length === 0
-                      }
-                      placeholder="Select Material"
-                    />
+                    <div className="col-md-6">
+                      <Typeahead
+                        id="mtrlCode"
+                        className="input-disabled mt-2"
+                        labelKey="Mtrl_Code"
+                        options={filterMaterials()}
+                        selected={selectedMtrl}
+                        onChange={(selected) =>
+                          changeMtrl("mtrlCode", selected[0]?.Mtrl_Code)
+                        }
+                        disabled={
+                          boolVal3 ||
+                          boolVal4 ||
+                          boolVal5 ||
+                          materialArray.length === 0
+                        }
+                        placeholder="Select Material"
+                      />
+                    </div>
                   </div>
 
                   {materialArray.length === 0 && (
                     <div>
-                      <div className="d-flex " style={{ gap: "10px" }}>
-                        <label
-                          className="form-label mt-2"
-                          style={{ whiteSpace: "nowrap" }}
-                        >
-                          Para 1
-                        </label>
-
-                        <input
-                          className="input-disabled mt-2"
-                          name="dynamicPara1"
-                          disabled
-                          min="0"
-                        />
-
-                        <label className="form-label mt-1">mm</label>
+                      <div className="row ">
+                        <div className="col-md-4">
+                          <label
+                            className="form-label mt-2"
+                            style={{ whiteSpace: "nowrap" }}
+                          >
+                            Para 1
+                          </label>
+                        </div>
+                        <div className="col-md-6">
+                          <input
+                            className="input-disabled mt-2"
+                            name="dynamicPara1"
+                            disabled
+                            min="0"
+                          />
+                        </div>
+                        <div className="col-md-1">
+                          <label className="form-label mt-2">mm</label>
+                        </div>
                       </div>
 
-                      <div className="d-flex " style={{ gap: "10px" }}>
-                        <label
-                          className="form-label mt-2"
-                          style={{ whiteSpace: "nowrap" }}
-                        >
-                          Para 2
-                        </label>
+                      <div className="row">
+                        <div className="col-md-4">
+                          <label
+                            className="form-label mt-2"
+                            style={{ whiteSpace: "nowrap" }}
+                          >
+                            Para 2
+                          </label>{" "}
+                        </div>
 
-                        <input
-                          className="input-disabled mt-1"
-                          name="dynamicPara2"
-                          min="0"
-                          disabled
-                        />
-
-                        <label className="form-label mt-1">mm</label>
+                        <div className="col-md-6">
+                          <input
+                            className="input-disabled mt-1"
+                            name="dynamicPara2"
+                            min="0"
+                            disabled
+                          />
+                        </div>
+                        <div className="col-md-1">
+                          <label className="form-label mt-1">mm</label>
+                        </div>
                       </div>
-                      <div className="d-flex" style={{ gap: "10px" }}>
-                        <label
-                          className="form-label mt-2"
-                          style={{ whiteSpace: "nowrap" }}
-                        >
-                          Para 3
-                        </label>
+                      <div className="row">
+                        <div className="col-md-4">
+                          <label
+                            className="form-label mt-2"
+                            style={{ whiteSpace: "nowrap" }}
+                          >
+                            Para 3
+                          </label>
+                        </div>
 
-                        <input
-                          className="input-disabled mt-1"
-                          name="dynamicPara3"
-                          min="0"
-                          disabled
-                        />
+                        <div className="col-md-6">
+                          <input
+                            className="input-disabled mt-1"
+                            name="dynamicPara3"
+                            min="0"
+                            disabled
+                          />
+                        </div>
 
-                        <label className="form-label mt-1">mm</label>
+                        <div className="col-md-2">
+                          <label className="form-label mt-1">mm</label>
+                        </div>
                       </div>
                     </div>
                   )}
@@ -2771,7 +2789,7 @@ function NewSheetsUnits(props) {
                       />
                     </div>
                   </div>
-                  <div className="d-flex ">
+                  <div className="row ">
                     <div className="col-md-6 ">
                       <label className="form-label">Location</label>
                     </div>

@@ -1092,7 +1092,7 @@ function OpenButtonOpenSheetUnit() {
         </div>
         <div className="row">
           <div
-            style={{ height: "326px", overflowY: "scroll" }}
+            style={{ height: "355px", overflowY: "scroll" }}
             className="col-md-8 col-sm-12"
           >
             <BootstrapTable

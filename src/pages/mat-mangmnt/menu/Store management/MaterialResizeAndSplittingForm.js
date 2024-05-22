@@ -11,9 +11,9 @@ function MaterialResizeAndSplittingForm(props) {
   };
   return (
     <div>
-      <SplitMatModal open={open} setOpen={setOpen} />
+      <SplitMatModal open={open} setOpen={setOpen}   />
       <h4 className="form-title">
-        <b>Material Resize and Splitting Form</b>
+        <b>Material Resize and Splitting Form </b>
       </h4>
       <hr className="horizontal-line" />
       <div className="table_top_style">
