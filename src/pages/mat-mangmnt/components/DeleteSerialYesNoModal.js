@@ -15,7 +15,7 @@ function DeleteSerialYesNoModal(props) {
         <Modal.Header closeButton>
           <Modal.Title style={{fontSize:'14px'}}>  Please Confirm Before Proceed</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{message}</Modal.Body>
+        <Modal.Body style={{fontSize: '12px'}}>{message}</Modal.Body>
         <Modal.Footer>
           <Button
             variant="secondary"

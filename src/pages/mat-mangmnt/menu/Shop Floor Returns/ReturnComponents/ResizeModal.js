@@ -57,7 +57,7 @@ function ResizeModal({ open1, setOpen1, row, resizeModal }) {
       {/* <ModalComp open={open} setOpen={setOpen} resizeModal={resizeModal} /> */}
       <Modal show={open1} onHide={handleCancel}>
         <Modal.Header closeButton>
-          <Modal.Title>Magod Material</Modal.Title>
+          <Modal.Title style={{ fontSize: "14px" }}>Magod Material</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>

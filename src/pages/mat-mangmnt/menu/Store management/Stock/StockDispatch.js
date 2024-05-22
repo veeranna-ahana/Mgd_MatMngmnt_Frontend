@@ -259,7 +259,12 @@ function StockDispatch() {
             <label className="form-label">Stock Date</label>
           </div>
           <div className="col-md-6">
-            <input type="date" name="date" onChange={InputEvent} />
+            <input
+              className="input-field"
+              type="date"
+              name="date"
+              onChange={InputEvent}
+            />
           </div>
         </div>
         <div className="col-md-1">

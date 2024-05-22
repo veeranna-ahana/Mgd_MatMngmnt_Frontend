@@ -55,7 +55,7 @@ function LocationModel({ show, setShow, scrapModal }) {
       />
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Magod Material</Modal.Title>
+          <Modal.Title style={{ fontSize: "14px" }}>Magod Material</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>

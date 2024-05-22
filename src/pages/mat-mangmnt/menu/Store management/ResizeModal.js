@@ -476,7 +476,7 @@ export default function ResizeModal(props) {
     <>
       <Modal show={props.open} fullscreen={true} onHide={() => handleClose()}>
         <Modal.Header closeButton>
-          <Modal.Title>Resize Sheets</Modal.Title>
+          <Modal.Title>Resize Sheets </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
@@ -485,13 +485,13 @@ export default function ResizeModal(props) {
               <div className="row">
                 <div className="d-flex col-md-2 " style={{ gap: "10px" }}>
                   <label
-                    className="form-label mt-1"
+                    className="form-label "
                     style={{ whiteSpace: "nowrap" }}
                   >
                     Material Code
                   </label>
                   <input
-                    className="form-label"
+                    className="form-label mt-1"
                     name="materialCode"
                     value={props?.selectedTableRows[0]?.Mtrl_Code}
                     disabled
@@ -500,13 +500,13 @@ export default function ResizeModal(props) {
 
                 <div className="d-flex col-md-2" style={{ gap: "10px" }}>
                   <label
-                    className="form-label mt-1"
+                    className="form-label "
                     style={{ whiteSpace: "nowrap" }}
                   >
                     Quantity
                   </label>
                   <input
-                    className="form-label"
+                    className="form-label mt-1"
                     name="quantity"
                     value={props?.selectedTableRows?.length}
                     disabled
@@ -515,13 +515,13 @@ export default function ResizeModal(props) {
 
                 <div className="d-flex col-md-2" style={{ gap: "10px" }}>
                   <label
-                    className="form-label mt-1"
+                    className="form-label "
                     style={{ whiteSpace: "nowrap" }}
                   >
                     Length
                   </label>
                   <input
-                    className="form-label"
+                    className="form-label mt-1"
                     name="para1"
                     value={props?.selectedTableRows[0]?.DynamicPara1}
                     disabled
@@ -529,13 +529,13 @@ export default function ResizeModal(props) {
                 </div>
                 <div className=" d-flex col-md-2" style={{ gap: "10px" }}>
                   <label
-                    className="form-label mt=1"
+                    className="form-label "
                     style={{ whiteSpace: "nowrap" }}
                   >
                     Width
                   </label>
                   <input
-                    className="form-label"
+                    className="form-label mt-1"
                     name="para2"
                     value={props?.selectedTableRows[0]?.DynamicPara2}
                     disabled

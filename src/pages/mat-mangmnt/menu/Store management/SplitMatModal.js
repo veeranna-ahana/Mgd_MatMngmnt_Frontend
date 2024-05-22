@@ -12,10 +12,15 @@ function SplitMatModal({ open, setOpen }) {
     <>
       <Modal show={open} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Magod Material Accounting</Modal.Title>
+          <Modal.Title style={{ fontSize: "14px" }}>
+            Magod Material Accounting
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>Are you sure you want to shift a material "material" ?</Form>
+          <Form style={{ fontSize: "12px" }}>
+            {" "}
+            Are you sure you want to shift a material "material" ?
+          </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

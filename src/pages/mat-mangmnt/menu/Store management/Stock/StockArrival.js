@@ -223,10 +223,15 @@ function StockArrival() {
       <div className="row">
         <div className="d-flex col-md-3">
           <div className="col-md-3">
-            <label className="form-label">Stock Date</label>
+            <label className="form-label ">Stock Date</label>
           </div>
           <div className="col-md-6">
-            <input type="date" name="date" onChange={InputEvent} />
+            <input
+              className="input-field"
+              type="date"
+              name="date"
+              onChange={InputEvent}
+            />
           </div>
         </div>
 

@@ -12,13 +12,19 @@ function UpdateStockModal({ open, setOpen }) {
     <>
       <Modal show={open} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title style={{fontSize:'14px'}}>Magod Material Accounting</Modal.Title>
+          <Modal.Title style={{ fontSize: "14px" }}>
+            Magod Material Accounting
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{fontSize:'12px'}}>
+        <Modal.Body style={{ fontSize: "12px" }}>
           <Form>Stock Ledger Updated</Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose} style={{fontSize:'12px'}}>
+          <Button
+            variant="secondary"
+            onClick={handleClose}
+            style={{ fontSize: "12px" }}
+          >
             Okay
           </Button>
         </Modal.Footer>

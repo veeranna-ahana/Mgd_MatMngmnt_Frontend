@@ -17,10 +17,14 @@ function ModalComp({ open, setOpen, setShow, row, scrapModal }) {
     <>
       <Modal show={open} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Magod Material Accounting</Modal.Title>
+          <Modal.Title style={{ fontSize: "14px" }}>
+            Magod Material Accounting
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>The Material will be altered as SCRAP, Continue?</Form>
+          <Form style={{ fontSize: "12px" }}>
+            The Material will be altered as SCRAP, Continue?
+          </Form>
         </Modal.Body>
         <Modal.Footer>
           {/* <Button variant="secondary" onClick={handleYes}>
