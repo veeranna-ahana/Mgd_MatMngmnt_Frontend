@@ -68,6 +68,17 @@ export default function ThirdTable(props) {
     }
     props.setSortConfigThird({ key, direction });
   };
+
+  const numbValidations = (e) => {
+    if (
+      e.which === 38 ||
+      e.which === 40 ||
+      ["e", "E", "+", "-", "."].includes(e.key)
+    ) {
+      e.preventDefault();
+    }
+  };
+
   return (
     <>
       <Table
@@ -128,12 +139,8 @@ export default function ThirdTable(props) {
                 <input
                   type="number"
                   value={val.QtyReturnedNew}
-                  min={"0"}
-                  onKeyDown={(e) => {
-                    if (e.which === 38 || e.which === 40) {
-                      e.preventDefault();
-                    }
-                  }}
+                  // min={"0"}
+                  onKeyDown={numbValidations}
                   onChange={(e) => {
                     if (parseInt(e.target.value) < 0) {
                       e.target.value = parseInt(e.target.value) * -1;
@@ -147,7 +154,7 @@ export default function ThirdTable(props) {
                           val.QtyReturned +
                           parseInt(e.target.value || 0)
                       ) {
-                        changeQTY(key, e.target.value);
+                        changeQTY(key, e.target.value || 0);
                       } else {
                         toast.warning(
                           "Greater then Quantity Received plus Returned/Used"

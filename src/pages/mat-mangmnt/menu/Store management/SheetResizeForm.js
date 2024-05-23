@@ -75,6 +75,10 @@ function SheetResizeForm() {
 
     getRequest(url1, (data) => {
       setSelectedTableRows([]);
+
+      if (data.length <= 0) {
+        toast.warning("No data found for selected customer.");
+      }
       setTabledata(data);
 
       setSelectedCust(custCode);

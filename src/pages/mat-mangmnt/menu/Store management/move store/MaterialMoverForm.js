@@ -85,6 +85,9 @@ function MaterialMoverForm(props) {
           "?code=" +
           selectedCustomer;
         getRequest(url1, async (data) => {
+          if (data.length <= 0) {
+            toast.warning("No data found for selected customer");
+          }
           setFirstTable(data);
           console.log("first table = ", data);
         });
@@ -128,6 +131,9 @@ function MaterialMoverForm(props) {
   };
 
   const selectButton = () => {
+    if (selectedRows.length <= 0) {
+      toast.warning("No row is selected in first table");
+    }
     setSecondTable(selectedRows);
   };
 
@@ -467,15 +473,14 @@ function MaterialMoverForm(props) {
                       </option>
                     ))}
                   </select> */}
-          
-              <Typeahead
-                id="basic-example"
-                name="customer"
-                options={custdata}
-                placeholder="Select Customer"
-                onChange={(label) => changeCustomer(label)}
-              />
-           
+
+            <Typeahead
+              id="basic-example"
+              name="customer"
+              options={custdata}
+              placeholder="Select Customer"
+              onChange={(label) => changeCustomer(label)}
+            />
           </div>
 
           <div className="d-flex col-md-3 px-3" style={{ gap: "10px" }}>

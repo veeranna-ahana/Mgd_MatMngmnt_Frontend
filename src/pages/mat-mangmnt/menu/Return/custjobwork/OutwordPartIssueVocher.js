@@ -677,6 +677,16 @@ function OutwordPartIssueVocher(props) {
     setSortConfig({ key, direction });
   };
 
+  const numbValidations = (e) => {
+    if (
+      e.which === 38 ||
+      e.which === 40 ||
+      ["e", "E", "+", "-"].includes(e.key)
+    ) {
+      e.preventDefault();
+    }
+  };
+
   return (
     <>
       {/* new */}
@@ -790,16 +800,33 @@ function OutwordPartIssueVocher(props) {
               <div className="col-md-6">
                 <input
                   type="number"
-                  min="0"
+                  // min="0"
                   name="TotalWeight"
-                  defaultValue={formHeader.TotalWeight}
-                  onKeyDown={(e) => {
-                    if (e.which === 38 || e.which === 40) {
+                  value={formHeader.TotalWeight}
+                  onKeyDown={numbValidations}
+                  onChange={(e) => {
+                    if (
+                      e.target.value === "" ||
+                      parseInt(e.target.value) <= 100000000
+                    ) {
+                      e.target.value = e.target.value.replace(
+                        /(\.\d{3})\d+/,
+                        "$1"
+                      );
+
+                      if (parseInt(e.target.value) < 0) {
+                        e.target.value = parseInt(e.target.value) * -1;
+                        toast.warning("Actual weight can't be negative");
+                      }
+
+                      InputHeaderEvent(
+                        e.target.name,
+                        parseFloat(e.target.value || 0)
+                      );
+                    } else {
+                      toast.warning("Actual Weight can't be greater then 10Cr");
                       e.preventDefault();
                     }
-                  }}
-                  onChange={(e) => {
-                    InputHeaderEvent(e.target.name, parseFloat(e.target.value));
                   }}
                   disabled={
                     formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
@@ -807,7 +834,7 @@ function OutwordPartIssueVocher(props) {
                   className={
                     formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
                       ? "input-disabled"
-                      : "input-disabled"
+                      : ""
                   }
                 />
               </div>
@@ -834,7 +861,12 @@ function OutwordPartIssueVocher(props) {
                   name="RV_Remarks"
                   value={formHeader.RV_Remarks}
                   onChange={(e) => {
-                    InputHeaderEvent(e.target.name, e.target.value);
+                    if (e.target.value?.length <= 150) {
+                      InputHeaderEvent(e.target.name, e.target.value || "");
+                    } else {
+                      toast.warning("Remarks can be only 150 characters");
+                      e.preventDefault();
+                    }
                   }}
                   disabled={
                     formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
@@ -842,7 +874,7 @@ function OutwordPartIssueVocher(props) {
                   className={
                     formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
                       ? "input-disabled"
-                      : "input-disabled"
+                      : ""
                   }
                   style={{ height: "90px" }}
                 ></textarea>
@@ -1025,16 +1057,32 @@ function OutwordPartIssueVocher(props) {
 
                         <input
                           type="number"
-                          min={0}
-                          defaultValue={parseFloat(val.UnitWt).toFixed(3)}
-                          onKeyDown={(e) => {
-                            if (e.which === 38 || e.which === 40) {
+                          // min={0}
+                          value={val.UnitWt}
+                          onKeyDown={numbValidations}
+                          onChange={(e) => {
+                            if (
+                              e.target.value === "" ||
+                              parseInt(e.target.value) <= 100000000
+                            ) {
+                              e.target.value = e.target.value.replace(
+                                /(\.\d{3})\d+/,
+                                "$1"
+                              );
+
+                              if (parseInt(e.target.value) < 0) {
+                                e.target.value = parseInt(e.target.value) * -1;
+                                toast.warning("Unit weight can't be negative");
+                              }
+
+                              updateChange(key, e.target.value || 0, "UnitWt");
+                              handleChangeWeightTotalCal();
+                            } else {
+                              toast.warning(
+                                "Unit Weight can't be greater then 10Cr"
+                              );
                               e.preventDefault();
                             }
-                          }}
-                          onChange={(e) => {
-                            updateChange(key, e.target.value || 0, "UnitWt");
-                            handleChangeWeightTotalCal();
                           }}
                           style={{
                             width: "100%",
@@ -1050,7 +1098,7 @@ function OutwordPartIssueVocher(props) {
                             formHeader.IVStatus === "Cancelled" ||
                             formHeader.PkngDcNo
                               ? "input-disabled"
-                              : "x"
+                              : ""
                           }
                         />
                       </td>
@@ -1103,10 +1151,21 @@ function OutwordPartIssueVocher(props) {
                         <input
                           // type="number"
                           // min={0}
-                          maxLength={150}
-                          defaultValue={val.Remarks}
+                          // maxLength={150}
+                          value={val.Remarks}
                           onChange={(e) => {
-                            updateChange(key, e.target.value || "", "Remarks");
+                            if (e.target.value?.length <= 150) {
+                              updateChange(
+                                key,
+                                e.target.value || "",
+                                "Remarks"
+                              );
+                            } else {
+                              toast.warning(
+                                "Remarks can be only 150 characters"
+                              );
+                              e.preventDefault();
+                            }
                           }}
                           style={{
                             width: "100%",

@@ -17,7 +17,7 @@ function StockList(props) {
   const [firstTable, setFirstTable] = useState([]);
   const [secondTable, setSecondTable] = useState([]);
   const [thirdTable, setThirdTable] = useState([]);
-  const [firstAllData, setFirstAllData] = useState([]);
+  // const [firstAllData, setFirstAllData] = useState([]);
   const [secondAllData, setSecondAllData] = useState([]);
   const [thirdAllData, setThirdAllData] = useState([]);
   let [custdata, setCustdata] = useState([]);
@@ -110,9 +110,13 @@ function StockList(props) {
         endpoints.getStockListByCustCodeThird + "?code=" + e[0].Cust_Code;
       //first table
       getRequest(url1, (data) => {
+        if (data.length === 0) {
+          toast.warning("No data found for selected customer");
+        }
         for (let i = 0; i < data.length; i++) {
           data[i].id = i + 1;
         }
+
         setFirstTable(data);
         //console.log("first table = ", data);
       });
@@ -587,14 +591,26 @@ function StockList(props) {
 
             <div className="d-flex col-md-4 ">
               <button
-                className="button-style"
                 onClick={selectedStock}
+                className={
+                  thirdTable.length <= 0
+                    ? "button-style button-disabled"
+                    : "button-style"
+                }
                 disabled={thirdTable.length <= 0}
               >
                 Selected Stock
               </button>
 
-              <button className="button-style" onClick={fullStock}>
+              <button
+                onClick={fullStock}
+                className={
+                  firstTable.length <= 0
+                    ? "button-style button-disabled"
+                    : "button-style"
+                }
+                disabled={firstTable.length <= 0}
+              >
                 Full Stock
               </button>
 

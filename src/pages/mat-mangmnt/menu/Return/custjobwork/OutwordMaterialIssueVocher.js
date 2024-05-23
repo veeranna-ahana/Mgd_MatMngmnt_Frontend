@@ -699,6 +699,16 @@ function OutwordMaterialIssueVocher(props) {
     setSortConfig({ key, direction });
   };
 
+  const numbValidations = (e) => {
+    if (
+      e.which === 38 ||
+      e.which === 40 ||
+      ["e", "E", "+", "-"].includes(e.key)
+    ) {
+      e.preventDefault();
+    }
+  };
+
   return (
     <>
       {/* new */}
@@ -812,16 +822,33 @@ function OutwordMaterialIssueVocher(props) {
               <div className="col-md-6">
                 <input
                   type="number"
-                  min="0"
+                  // min="0"
                   name="TotalWeight"
-                  defaultValue={formHeader.TotalWeight}
-                  onKeyDown={(e) => {
-                    if (e.which === 38 || e.which === 40) {
+                  value={formHeader.TotalWeight}
+                  onKeyDown={numbValidations}
+                  onChange={(e) => {
+                    if (
+                      e.target.value === "" ||
+                      parseInt(e.target.value) <= 100000000
+                    ) {
+                      e.target.value = e.target.value.replace(
+                        /(\.\d{3})\d+/,
+                        "$1"
+                      );
+
+                      if (parseInt(e.target.value) < 0) {
+                        e.target.value = parseInt(e.target.value) * -1;
+                        toast.warning("Actual weight can't be negative");
+                      }
+
+                      InputHeaderEvent(
+                        e.target.name,
+                        parseFloat(e.target.value)
+                      );
+                    } else {
+                      toast.warning("Actual Weight can't be greater then 10Cr");
                       e.preventDefault();
                     }
-                  }}
-                  onChange={(e) => {
-                    InputHeaderEvent(e.target.name, parseFloat(e.target.value));
                   }}
                   disabled={
                     formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
@@ -829,7 +856,7 @@ function OutwordMaterialIssueVocher(props) {
                   className={
                     formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
                       ? "input-disabled"
-                      : "input-disabled "
+                      : ""
                   }
                 />
               </div>
@@ -856,7 +883,12 @@ function OutwordMaterialIssueVocher(props) {
                   name="RV_Remarks"
                   value={formHeader.RV_Remarks}
                   onChange={(e) => {
-                    InputHeaderEvent(e.target.name, e.target.value);
+                    if (e.target.value?.length <= 150) {
+                      InputHeaderEvent(e.target.name, e.target.value || "");
+                    } else {
+                      toast.warning("Remarks can be only 150 characters");
+                      e.preventDefault();
+                    }
                   }}
                   disabled={
                     formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
@@ -864,7 +896,7 @@ function OutwordMaterialIssueVocher(props) {
                   className={
                     formHeader.IVStatus === "Cancelled" || formHeader.PkngDcNo
                       ? "input-disabled"
-                      : "input-disabled"
+                      : ""
                   }
                   style={{ height: "90px" }}
                 ></textarea>
@@ -1035,29 +1067,40 @@ function OutwordMaterialIssueVocher(props) {
                     <td>{val.Material} </td>
                     <td>{parseInt(val?.Qty)}</td>
                     <td>{parseFloat(val?.TotalWeightCalculated).toFixed(3)}</td>
-                    <td
-                    // contenteditable="true"
-                    // onChange={(e) => {
-                    //   console.log("eeeeeeeeee", e);
-                    // }}
-                    >
+                    <td>
                       {/* {val.TotalWeight} */}
                       <input
                         type="number"
-                        min="0"
-                        defaultValue={parseFloat(val?.TotalWeight).toFixed(3)}
-                        onKeyDown={(e) => {
-                          if (e.which === 38 || e.which === 40) {
+                        // min="0"
+                        value={val?.TotalWeight}
+                        onKeyDown={numbValidations}
+                        onChange={(e) => {
+                          if (
+                            e.target.value === "" ||
+                            parseInt(e.target.value) <= 100000000
+                          ) {
+                            e.target.value = e.target.value.replace(
+                              /(\.\d{3})\d+/,
+                              "$1"
+                            );
+
+                            if (parseInt(e.target.value) < 0) {
+                              e.target.value = parseInt(e.target.value) * -1;
+                              toast.warning("Total weight can't be negative");
+                            }
+
+                            updateChange(
+                              key,
+                              e.target.value || 0,
+                              "TotalWeight"
+                            );
+                            handleChangeWeightTotalCal();
+                          } else {
+                            toast.warning(
+                              "Total Weight can't be greater then 10Cr"
+                            );
                             e.preventDefault();
                           }
-                        }}
-                        onChange={(e) => {
-                          if (parseInt(e.target.value) < 0) {
-                            e.target.value = parseInt(e.target.value) * -1;
-                            toast.warning("Total weight can't be negative");
-                          }
-                          updateChange(key, e.target.value || 0, "TotalWeight");
-                          handleChangeWeightTotalCal();
                         }}
                         style={{
                           width: "100%",
