@@ -136,26 +136,31 @@ function OpenButtonOpenClosedPartList() {
       text: "Part Id",
       dataField: "PartId",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Unit Wt",
       dataField: "UnitWt",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Qty Received",
       dataField: "qtyReceived",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Qty Accepted",
       dataField: "qtyAccepted",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Qty Rejected",
       dataField: "qtyRejected",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
   ];
 

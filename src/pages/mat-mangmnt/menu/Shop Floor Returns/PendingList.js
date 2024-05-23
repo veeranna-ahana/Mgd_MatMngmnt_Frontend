@@ -107,47 +107,56 @@ function PendingList(props) {
     {
       text: "Customer",
       dataField: "cust_name",
+      sort: true,
     },
     {
       text: "IV No",
       dataField: "IV_No",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "IV Date",
       dataField: "Issue_date",
       formatter: statusFormatter,
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Program No",
       dataField: "NC_ProgramNo",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Mtrl Code",
       dataField: "mtrl_code",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Issued",
       dataField: "QtyIssued",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Returned",
       dataField: "QtyReturned",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Used",
       dataField: "QtyUsed",
       formatter: (cell, row) =>
         cell !== null && cell !== undefined ? cell : 0,
+      sort: true,
     },
     {
       text: "Remarks",
       dataField: "Remarks",
+      sort: true,
     },
   ];
 
@@ -166,10 +175,12 @@ function PendingList(props) {
       text: "ShapeMtrlID",
       dataField: "ShapeMtrlID",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Used",
       dataField: "Used",
+      sort: true,
       formatter: (celContent, row) => (
         <div className="checkbox">
           <lable>
@@ -181,6 +192,7 @@ function PendingList(props) {
     {
       text: "Rejected",
       dataField: "Rejected",
+      sort: true,
       formatter: (celContent, row) => (
         <div className="checkbox">
           <lable>
@@ -193,11 +205,13 @@ function PendingList(props) {
       text: "Balance Length",
       dataField: "Para1",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Balance Width",
       dataField: "Para2",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
   ];
 
@@ -586,7 +600,7 @@ function PendingList(props) {
           <button
             className="button-style mt-0"
             onClick={returnScrap}
-           // style={{ width: "170px" }}
+            // style={{ width: "170px" }}
           >
             Return As Scrap
           </button>
@@ -648,7 +662,7 @@ function PendingList(props) {
             id="btnclose"
             type="submit"
             onClick={() => nav("/MaterialManagement")}
-           // style={{ width: "170px" }}
+            // style={{ width: "170px" }}
           >
             Close
           </button>
@@ -659,7 +673,11 @@ function PendingList(props) {
           {/* <SideComponent /> */}
           {treeData.map((node, i) => {
             const machine = node.Machine;
-            const label = <span className="node" style={{fontSize:'12px'}}>{machine}</span>;
+            const label = (
+              <span className="node" style={{ fontSize: "12px" }}>
+                {machine}
+              </span>
+            );
             return (
               <TreeView
                 key={machine + "|" + i}

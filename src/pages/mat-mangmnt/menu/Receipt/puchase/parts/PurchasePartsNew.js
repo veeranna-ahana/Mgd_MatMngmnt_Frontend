@@ -140,27 +140,32 @@ function PurchasePartsNew() {
       text: "Part Id",
       dataField: "partId",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Unit Wt",
       dataField: "unitWeight",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Qty Received",
       dataField: "qtyReceived",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Qty Accepted",
       dataField: "qtyAccepted",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Qty Rejected",
       dataField: "qtyRejected",
       formatter: (celContent, row) => <div className="">{qtyRejected}</div>,
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
   ];
 
@@ -169,15 +174,20 @@ function PurchasePartsNew() {
 
     if (name === "unitWeight" && parseFloat(value) < 0) {
       toast.error("unitWeight should be a positive value");
+      return;
     }
+
+    const formattedValue =
+      name === "unitWeight" ? value.replace(/(\.\d{3})\d+/, "$1") : value;
+
     setInputPart((preValue) => {
       //console.log(preValue)
       return {
         ...preValue,
-        [name]: value,
+        [name]: formattedValue,
       };
     });
-    inputPart[name] = value;
+    inputPart[name] = formattedValue;
     inputPart.custBomId = formHeader.customer;
     inputPart.rvId = formHeader.rvId;
     // inputPart.qtyRejected = 0;
@@ -195,25 +205,47 @@ function PurchasePartsNew() {
       }
     });
 
-    const newArray = partArray.map((p) =>
-      //p.id === "d28d67b2-6c32-4aae-a7b6-74dc985a3cff"
-      p.id === partUniqueId
-        ? {
-            ...p,
-            [name]: value,
-          }
-        : p
-    );
+    // const newArray = partArray.map((p) =>
+    //   //p.id === "d28d67b2-6c32-4aae-a7b6-74dc985a3cff"
+    //   p.id === partUniqueId
+    //     ? {
+    //         ...p,
+    //         [name]: value,
+    //       }
+    //     : p
+    // );
+
+    const newArray = partArray.map((p) => {
+      if (p.id === partUniqueId) {
+        // Calculate the updated qtyRejected based on the new qtyReceived and qtyAccepted values
+        const qtyReceived =
+          name === "qtyReceived" ? formattedValue : p.qtyReceived;
+        const qtyAccepted =
+          name === "qtyAccepted" ? formattedValue : p.qtyAccepted;
+        const qtyRejected = parseFloat(qtyReceived) - parseFloat(qtyAccepted);
+
+        return {
+          ...p,
+          [name]: formattedValue,
+          qtyRejected: isNaN(qtyRejected) ? 0 : qtyRejected,
+        };
+      } else {
+        return p;
+      }
+    });
+
     setPartArray(newArray);
 
     let totwt = 0;
     partArray.map((obj) => {
       totwt =
         parseFloat(totwt) +
-        parseFloat(obj.unitWeight) * parseFloat(obj.qtyReceived);
+        parseFloat(obj.unitWeight) * parseFloat(obj.qtyAccepted);
       //console.log(newWeight);
     });
-    setCalcWeightVal(parseFloat(totwt).toFixed(2));
+    // setCalcWeightVal(parseFloat(totwt).toFixed(2));
+    setCalcWeightVal(parseFloat(totwt).toFixed(3));
+    setFormHeader({ ...formHeader, calcWeight: parseFloat(totwt).toFixed(3) });
   };
 
   //add new part
@@ -321,11 +353,15 @@ function PurchasePartsNew() {
   //input header change event
   const InputHeaderEvent = (e) => {
     const { value, name } = e.target;
+
+    const formattedValue =
+      name === "weight" ? value.replace(/(\.\d{3})\d+/, "$1") : value;
     setFormHeader((preValue) => {
       //console.log(preValue)
       return {
         ...preValue,
-        [name]: value,
+        [name]: formattedValue,
+        [formHeader.calcWeight]: calcWeightVal,
       };
     });
   };
@@ -380,9 +416,17 @@ function PurchasePartsNew() {
       toast.error("Please Select Customer");
     } else if (formHeader.reference.length === 0) {
       toast.error("Please Enter Customer Document Material Reference");
+    } else if (formHeader.weight === "") {
+      toast.error(
+        "Enter the Customer Material Weight as per Customer Document"
+      );
+    } else if (
+      parseFloat(inputPart.qtyAccepted) > parseFloat(inputPart.qtyReceived)
+    ) {
+      toast.error("QtyAccepted should be less than or equal to QtyReceived");
     } else {
       if (saveUpdateCount == 0) {
-        formHeader.receiptDate = formatDate(new Date(), 4);
+        formHeader.receiptDate = formatDate(new Date(), 10);
         formHeader.rvDate = currDate;
         setFormHeader(formHeader);
         await delay(500);

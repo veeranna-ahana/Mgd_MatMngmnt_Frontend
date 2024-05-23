@@ -115,22 +115,27 @@ function ProductionMatIssueParts() {
     {
       text: "RV No",
       dataField: "RV_No",
+      sort: true,
     },
     {
       text: "Part ID",
       dataField: "PartId",
+      sort: true,
     },
     {
       text: "Issued",
       dataField: "QtyIssued",
+      sort: true,
     },
     {
       text: "Used",
       dataField: "QtyUsed",
+      sort: true,
     },
     {
       text: "Returned",
       dataField: "QtyReturned",
+      sort: true,
     },
   ];
 

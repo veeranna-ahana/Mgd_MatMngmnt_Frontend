@@ -148,23 +148,28 @@ function NewSheetsUnits(props) {
     {
       text: "Mtrl Code",
       dataField: "mtrlCode",
+      sort: true,
     },
     {
       text: unitLabel1 !== "" ? para1Label : "",
       dataField: "dynamicPara1",
+      sort: true,
     },
     // + "(" + unitLabel1 + ")"
     {
       text: unitLabel2 !== "" ? para2Label : "",
       dataField: "dynamicPara2",
+      sort: true,
     },
     {
       text: unitLabel3 !== "" ? para3Label : "",
       dataField: "dynamicPara3",
+      sort: true,
     },
     {
       text: "Qty",
       dataField: "qty",
+      sort: true,
     },
     {
       text: "Inspected",
@@ -180,6 +185,7 @@ function NewSheetsUnits(props) {
     {
       text: "Location No",
       dataField: "locationNo",
+      sort: true,
     },
     {
       text: "UpDated",
@@ -556,7 +562,8 @@ function NewSheetsUnits(props) {
 
         if (
           material.Shape === "Tube Square" ||
-          material.Shape === "Tube Rectangle"
+          material.Shape === "Tube Rectangle" ||
+          material.Shape === "Tube Round"
         ) {
           // Tube
           setPara1Label("Length");

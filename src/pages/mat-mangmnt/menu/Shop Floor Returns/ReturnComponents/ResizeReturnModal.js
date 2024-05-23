@@ -587,71 +587,67 @@ function ResizeReturnModal({
     <>
       <Modal show={isOpen} onHide={handleClose} fullscreen>
         <Modal.Header closeButton>
-          <Modal.Title style={{fontSize:'14px'}}>Magod Material</Modal.Title>
+          <Modal.Title style={{ fontSize: "14px" }}>Magod Material</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <h4 className="title">Material Resize and Splitting Form</h4>
           <div>
             <div className="row">
-
               <div className="d-flex col-md-3">
-                <div className="col-md-4"> 
+                <div className="col-md-4">
                   <label className="form-label ">Material Code</label>
                 </div>
                 <div className="col-md-8">
                   <input
-                  className="input-disabled mt-1"
-                  name="materialCode"
-                  value={materialCode}
-                  disabled
-                /></div>   
+                    className="input-disabled mt-1"
+                    name="materialCode"
+                    value={materialCode}
+                    disabled
+                  />
+                </div>
               </div>
-
 
               <div className="d-flex col-md-2">
                 <div className="col-md-4">
-                <label className="form-label">Quantity</label>
+                  <label className="form-label">Quantity</label>
                 </div>
                 <div className="col-md-8">
-                <input
-                      className="input-disabled mt-1"
-                      name="quantity"
-                      value={quantity}
-                      disabled
-                    />
+                  <input
+                    className="input-disabled mt-1"
+                    name="quantity"
+                    value={quantity}
+                    disabled
+                  />
                 </div>
-                  </div>
+              </div>
 
-                  <div className="d-flex col-md-2">
-                    <div className="col-md-3">
-                    <label className="form-label">Length</label>
-                    </div>
-                    <div className="col-md-8">
-                    <input
-                      className="input-disabled mt-1"
-                      name="para1"
-                      value={para1}
-                      disabled
-                    />
-                    </div>
-                  </div>
+              <div className="d-flex col-md-2">
+                <div className="col-md-3">
+                  <label className="form-label">Para 1</label>
+                </div>
+                <div className="col-md-8">
+                  <input
+                    className="input-disabled mt-1"
+                    name="para1"
+                    value={para1}
+                    disabled
+                  />
+                </div>
+              </div>
 
-                  <div className="d-flex col-md-2">
-                    <div className="col-md-3">
-                    <label className="form-label">Width</label>
-                    </div>
-                    <div className="col-md-8">
-                    <input
-                       className="input-disabled mt-1"
-                      name="para2"
-                      value={para2}
-                      disabled
-                    />
-                    </div>
-                   
-                  
-                  </div>
-
+              <div className="d-flex col-md-2">
+                <div className="col-md-3">
+                  <label className="form-label">Para 2</label>
+                </div>
+                <div className="col-md-8">
+                  <input
+                    className="input-disabled mt-1"
+                    name="para2"
+                    value={para2}
+                    disabled
+                  />
+                </div>
+              </div>
 
               <div className="col-md-2 d-flex align-items-center">
                 <button
@@ -676,9 +672,7 @@ function ResizeReturnModal({
                 </button>
               </div>
             </div>
-           
           </div>
-          
 
           <div className="row mt-2">
             {/* table */}
@@ -700,8 +694,8 @@ function ResizeReturnModal({
                     <th>MtrlStock ID</th>
                     {/* <th>DynamicPara1</th> */}
                     {/* <th>DynamicPara2</th> */}
-                    <th>Length</th>
-                    <th>Width</th>
+                    <th>DynamicPara1</th>
+                    <th>DynamicPara2</th>
                     <th>InStock</th>
                     <th>Weight</th>
                   </tr>
@@ -776,7 +770,7 @@ function ResizeReturnModal({
                 <div>
                   <div className="row d-flex align-items-end">
                     <div className="col-md-3 p-0">
-                      <label className="form-label">Length</label>
+                      <label className="form-label">Para 1</label>
                     </div>
 
                     <div className="col-md-9 p-0">
@@ -794,7 +788,7 @@ function ResizeReturnModal({
                 <div>
                   <div className="row d-flex align-items-end">
                     <div className="col-md-3 p-0">
-                      <label className="form-label">Width</label>
+                      <label className="form-label">Para 2</label>
                     </div>
 
                     <div className="col-md-9 p-0">
@@ -842,7 +836,7 @@ function ResizeReturnModal({
                         name="Location"
                         onChange={changeHandler}
                         value={inputData.Location}
-                        style={{width:'278px'}}
+                        style={{ width: "278px" }}
                       >
                         <option value="" disabled selected hidden>
                           Select Location

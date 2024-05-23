@@ -333,7 +333,7 @@ const PrintIVListProfileCuttingTable2 = ({
         <Text style={styles.blockWhole}>Source : Custom</Text> */}
         <View style={styles.blockRightAlign2}>
           <Text>Material</Text>
-          <Text style={styles.linegap}>Height</Text>
+          <Text style={styles.linegap}>Para 3</Text>
           <Text style={styles.linegap}>Qty Issued</Text>
           {/* <Text style={styles.linegap}>Qty</Text> */}
           {/* <Text style={styles.linegap}>Source</Text> */}
@@ -348,22 +348,22 @@ const PrintIVListProfileCuttingTable2 = ({
           {/* <Text style={styles.linegap}>{formHeader.CustMtrl}</Text> */}
         </View>
         <View style={styles.blockRightAlign2}>
-          <Text>Width</Text>
+          <Text>Para 1</Text>
           <Text style={styles.linegap}>Machine</Text> 1
           <Text style={styles.linegap}>Qty Received</Text>
         </View>
         <View style={styles.blockLeftAlign2}>
-          <Text>{formHeader.Para2}</Text>
+          <Text>{formHeader.Para1}</Text>
           <Text style={styles.linegap}>{formHeader.Machine}</Text>
           <Text style={styles.linegap}>{formHeader.Qty}</Text>
         </View>
         <View style={styles.blockRightAlign2}>
-          <Text>Length</Text>
+          <Text>Para 2</Text>
           <Text style={styles.linegap}>Process</Text>
           <Text style={styles.linegap}>Source</Text>
         </View>
         <View style={styles.blockLeftAlign2}>
-          <Text>{formHeader.Para1}</Text>
+          <Text>{formHeader.Para2}</Text>
           <Text style={styles.linegap}>{formHeader.MProcess}</Text>
           <Text style={styles.linegap}>{formHeader.CustMtrl}</Text>
         </View>
@@ -371,8 +371,8 @@ const PrintIVListProfileCuttingTable2 = ({
           ___________________________________________________________________________________________________________________
         </Text>
         <Text style={styles.mtrlID}>Mtrl ID </Text>
-        <Text style={styles.para1}>Width </Text>
-        <Text style={styles.para2}>Length </Text>
+        <Text style={styles.para1}>Para 1</Text>
+        <Text style={styles.para2}>Para 2</Text>
         <Text style={styles.used}>Used </Text>
         <Text style={styles.reject}>Reject </Text>
         <Text style={styles.line1}>

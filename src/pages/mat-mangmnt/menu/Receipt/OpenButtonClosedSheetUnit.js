@@ -257,22 +257,27 @@ function OpenButtonClosedSheetUnit() {
     {
       text: "Mtrl Code",
       dataField: "Mtrl_Code",
+      sort: true,
     },
     {
       text: para1Label,
       dataField: "DynamicPara1",
+      sort: true,
     },
     {
       text: para2Label,
       dataField: "DynamicPara2",
+      sort: true,
     },
     {
       text: para3Label,
       dataField: "DynamicPara3",
+      sort: true,
     },
     {
       text: "Qty",
       dataField: "Qty",
+      sort: true,
     },
     {
       text: "Inspected",
@@ -291,6 +296,7 @@ function OpenButtonClosedSheetUnit() {
     {
       text: "Location No",
       dataField: "LocationNo",
+      sort: true,
     },
     {
       text: "UpDated",
