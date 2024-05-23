@@ -18,7 +18,7 @@ export default function LocationList() {
   const [inputData, setInputData] = useState({
     location: "",
     storage: "",
-    capacity: "",
+    capacity: "0",
   });
   const [selectedRow, setSelectedRow] = useState({});
   const [selectedIndex, setSelectedIndex] = useState([]);
@@ -287,6 +287,17 @@ export default function LocationList() {
   const onSortChange = (dataField, order) => {
     setSort({ dataField, order });
   };
+
+  const numbValidations = (e) => {
+    if (
+      e.which === 38 ||
+      e.which === 40 ||
+      ["e", "E", "+", "-", "0"].includes(e.key)
+    ) {
+      e.preventDefault();
+    }
+  };
+
   return (
     <>
       <h4 className="title">Material Storage Location Manager</h4>
@@ -318,18 +329,27 @@ export default function LocationList() {
                   className="input-disabled mt-2"
                   type="text"
                   name="location"
-                  onChange={changeHandler}
+                  onChange={(e) => {
+                    if (e.target.value?.length === 40) {
+                      toast.warning(
+                        "Location No/Name can be only 40 characters"
+                      );
+                      e.preventDefault();
+                    } else {
+                      changeHandler(e);
+                    }
+                  }}
                   value={inputData.location}
                   disabled={selectedRow?.id ? true : false}
                   // onBlur={focusOutEvent}
                   // value={formHeader.location}
                   // onChange={InputEvent}
-                />{" "}
+                />
               </div>
             </div>
             <div className="row mb-3">
               <div className="col-md-5">
-                <label className="form-label mt-2">Storage Type</label>{" "}
+                <label className="form-label mt-2">Storage Type</label>
               </div>
               <div className="   col-md-7">
                 {/* {shape.length > 0 ? (
@@ -385,14 +405,32 @@ export default function LocationList() {
               <div className="col-md-7">
                 <input
                   className="input-disabled mt-2"
-                  type="text"
                   name="capacity"
-                  onChange={changeHandler}
+                  type="number"
                   value={inputData.capacity}
+                  onKeyDown={numbValidations}
+                  // onChange={changeHandler}
+
+                  onChange={(e) => {
+                    if (
+                      e.target.value === "" ||
+                      parseInt(e.target.value) === "NaN" ||
+                      parseInt(e.target.value) === NaN
+                    ) {
+                      e.target.value = 0;
+                    }
+                    if (parseInt(e.target.value) < 0) {
+                      e.target.value = parseInt(e.target.value) * -1;
+                      toast.warning("Capacity can't be negative");
+                    }
+
+                    changeHandler(e);
+                  }}
+
                   // value={formHeader.capacity}
                   // onChange={InputEvent}
                   // onBlur={insertData}
-                />{" "}
+                />
               </div>
             </div>
             {/* buttons */}

@@ -472,6 +472,16 @@ export default function ResizeModal(props) {
     });
   };
 
+  const numbValidations = (e) => {
+    if (
+      e.which === 38 ||
+      e.which === 40 ||
+      ["e", "E", "+", "-"].includes(e.key)
+    ) {
+      e.preventDefault();
+    }
+  };
+
   return (
     <>
       <Modal show={props.open} fullscreen={true} onHide={() => handleClose()}>
@@ -663,8 +673,29 @@ export default function ResizeModal(props) {
                           type="number"
                           className="in-field rounded-0"
                           name="DynamicPara1"
-                          onChange={changeHandler}
                           value={inputData.DynamicPara1}
+                          onKeyDown={numbValidations}
+                          onChange={(e) => {
+                            if (
+                              e.target.value === "" ||
+                              parseInt(e.target.value) === "NaN" ||
+                              parseInt(e.target.value) === NaN
+                            ) {
+                              e.target.value = 0;
+                            }
+
+                            e.target.value = e.target.value.replace(
+                              /(\.\d{2})\d+/,
+                              "$1"
+                            );
+
+                            if (parseInt(e.target.value) < 0) {
+                              e.target.value = parseInt(e.target.value) * -1;
+                              toast.warning("Length can't be negative");
+                            }
+
+                            changeHandler(e);
+                          }}
                           onBlur={focusOutEvent}
                           disabled={selectedTableRow.length === 0}
                         />
@@ -682,8 +713,29 @@ export default function ResizeModal(props) {
                           type="number"
                           className="in-field rounded-0"
                           name="DynamicPara2"
-                          onChange={changeHandler}
                           value={inputData.DynamicPara2}
+                          onKeyDown={numbValidations}
+                          onChange={(e) => {
+                            if (
+                              e.target.value === "" ||
+                              parseInt(e.target.value) === "NaN" ||
+                              parseInt(e.target.value) === NaN
+                            ) {
+                              e.target.value = 0;
+                            }
+
+                            e.target.value = e.target.value.replace(
+                              /(\.\d{2})\d+/,
+                              "$1"
+                            );
+
+                            if (parseInt(e.target.value) < 0) {
+                              e.target.value = parseInt(e.target.value) * -1;
+                              toast.warning("Width can't be negative");
+                            }
+
+                            changeHandler(e);
+                          }}
                           onBlur={focusOutEvent}
                           disabled={selectedTableRow.length === 0}
                         />
@@ -701,8 +753,29 @@ export default function ResizeModal(props) {
                           type="number"
                           className="in-field rounded-0"
                           name="InStock"
-                          onChange={changeHandler}
                           value={inputData.InStock}
+                          onKeyDown={numbValidations}
+                          onChange={(e) => {
+                            if (
+                              e.target.value === "" ||
+                              parseInt(e.target.value) === "NaN" ||
+                              parseInt(e.target.value) === NaN
+                            ) {
+                              e.target.value = 0;
+                            }
+
+                            e.target.value = e.target.value.replace(
+                              /(\.\d{2})\d+/,
+                              "$1"
+                            );
+
+                            if (parseInt(e.target.value) < 0) {
+                              e.target.value = parseInt(e.target.value) * -1;
+                              toast.warning("Quantity can't be negative");
+                            }
+
+                            changeHandler(e);
+                          }}
                           disabled={selectedTableRow.length === 0}
                         />
                       </div>

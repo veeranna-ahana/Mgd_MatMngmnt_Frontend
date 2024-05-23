@@ -561,7 +561,7 @@ function Parts(props) {
     let flag = true;
     for (let i = 0; i < thirdTableData.length; i++) {
       const element = thirdTableData[i];
-      if (element.QtyReturnedNew === 0) {
+      if (parseInt(element.QtyReturnedNew) === 0) {
         toast.warning("Qty returned can't be zero");
         flag = false;
         break;
