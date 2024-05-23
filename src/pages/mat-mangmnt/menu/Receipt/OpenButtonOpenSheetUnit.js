@@ -754,25 +754,30 @@ function OpenButtonOpenSheetUnit() {
       text: "Mtrl Code",
       dataField: "mtrlCode",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: unitLabel1 !== "" ? para1Label : "",
       // text: "Width(Mm)",
       dataField: "dynamicPara1",
+      sort: true,
     },
     {
       text: unitLabel2 !== "" ? para2Label : "",
       // text: "Length(Mm)",
       dataField: "dynamicPara2",
+      sort: true,
     },
     {
       text: unitLabel3 !== "" ? para3Label : "",
       // text: "Height(Mm)",
       dataField: "dynamicPara3",
+      sort: true,
     },
     {
       text: "Qty",
       dataField: "qty",
+      sort: true,
     },
     {
       text: "Inspected",
@@ -793,6 +798,7 @@ function OpenButtonOpenSheetUnit() {
       text: "Location No",
       dataField: "locationNo",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "UpDated",

@@ -107,14 +107,17 @@ function UnitsMatAllotmentForm() {
     {
       text: "Stock Id",
       dataField: "MtrlStockID",
+      sort: true,
     },
     {
-      text: "Width",
+      text: "Para1",
       dataField: "DynamicPara1",
+      sort: true,
     },
     {
-      text: "Length",
+      text: "Para2",
       dataField: "DynamicPara2",
+      sort: true,
     },
     {
       text: "Location",
@@ -131,14 +134,17 @@ function UnitsMatAllotmentForm() {
     {
       text: "Stock Id",
       dataField: "MtrlStockID",
+      sort: true,
     },
     {
-      text: "Width",
+      text: "Para1",
       dataField: "DynamicPara1",
+      sort: true,
     },
     {
-      text: "Length",
+      text: "Para2",
       dataField: "DynamicPara2",
+      sort: true,
     },
     {
       text: "Selected",
@@ -663,7 +669,7 @@ function UnitsMatAllotmentForm() {
       />
 
       <div>
-        <h4 className="title">Material Allotment Form </h4>
+        <h4 className="title">Material Allotment Form</h4>
 
         <div className="row">
           <div className="d-flex col-md-3" style={{ gap: "10px" }}>
@@ -730,7 +736,7 @@ function UnitsMatAllotmentForm() {
 
           <div className="d-flex col-md-3" style={{ gap: "25px" }}>
             <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
-              Length
+              Para1
             </label>
 
             <input
@@ -778,7 +784,7 @@ function UnitsMatAllotmentForm() {
 
           <div className="d-flex col-md-3" style={{ gap: "30px" }}>
             <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
-              Width
+              Para2
             </label>
 
             <input

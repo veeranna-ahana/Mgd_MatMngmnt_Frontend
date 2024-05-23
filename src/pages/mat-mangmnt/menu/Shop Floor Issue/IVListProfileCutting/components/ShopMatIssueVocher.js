@@ -106,18 +106,22 @@ function ShopMatIssueVocher() {
     {
       text: "Shape Mtrl ID",
       dataField: "ShapeMtrlID",
+      sort: true,
     },
     {
-      text: "Width",
+      text: "Para1",
       dataField: "Para1",
+      sort: true,
     },
     {
-      text: "Length",
+      text: "Para2",
       dataField: "Para2",
+      sort: true,
     },
     {
-      text: "Height",
+      text: "Para3",
       dataField: "Para3",
+      sort: true,
     },
     {
       text: "Used",
@@ -238,7 +242,7 @@ function ShopMatIssueVocher() {
         setIsPrintModalOpen={setIsPrintModalOpen}
         combineSheets={combineSheets}
       />
-      <h4 className="title">Shop Material Issue Voucher </h4>
+      <h4 className="title">Shop Material Issue Voucher</h4>
       <div className="row">
         {/* <div className="col-md-4">
           <div className="row">
@@ -521,7 +525,7 @@ function ShopMatIssueVocher() {
 
         <div className="d-flex col-md-3" style={{ gap: "42px" }}>
           <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
-            Length
+            Para1
           </label>
 
           <input
@@ -533,7 +537,7 @@ function ShopMatIssueVocher() {
 
         <div className="d-flex col-md-3" style={{ gap: "30px" }}>
           <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
-            Width
+            Para2
           </label>
 
           <input
@@ -545,7 +549,7 @@ function ShopMatIssueVocher() {
 
         <div className="d-flex col-md-3" style={{ gap: "25px" }}>
           <label className="form-label mt-1" style={{ whiteSpace: "nowrap" }}>
-            Height
+            Para3
           </label>
 
           <input

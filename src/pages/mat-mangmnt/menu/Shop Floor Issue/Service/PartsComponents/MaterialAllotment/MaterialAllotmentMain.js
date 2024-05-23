@@ -578,6 +578,9 @@ function MaterialAllotmentMain() {
     return firstTable.some((row) => row.QtyAvailable === 0);
   };
 
+  const blockInvalidQtyChar = (e) =>
+    ["e", "E", "+", "-", "."].includes(e.key) && e.preventDefault();
+
   console.log("secondTable", secondTable);
 
   return (
@@ -726,6 +729,7 @@ function MaterialAllotmentMain() {
               onChange={issuenowchange}
               value={issuenowval}
               onBlur={issuenowonblur}
+              onKeyDown={blockInvalidQtyChar}
               disabled={isAnyQtyAvailableZero() || firstTable.length === 0}
             />
           </div>

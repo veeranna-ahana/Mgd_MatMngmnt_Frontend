@@ -116,6 +116,9 @@ export default function UnitsDraftRVList(props) {
       sort: true,
     },
   ];
+
+  console.log("tableData", tabledata);
+  console.log("allData", allData);
   return (
     <div>
       <>

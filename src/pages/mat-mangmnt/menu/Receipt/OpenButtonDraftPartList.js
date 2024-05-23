@@ -147,27 +147,32 @@ function OpenButtonDraftPartList() {
     {
       text: "Part Id",
       dataField: "partId",
+      sort: true,
     },
     {
       text: "Unit Wt",
       dataField: "unitWeight",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Qty Received",
       dataField: "qtyReceived",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Qty Accepted",
       dataField: "qtyAccepted",
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
     {
       text: "Qty Rejected",
       dataField: "qtyRejected",
       // formatter: (celContent, row) => <div className="">{qtyRejected}</div>,
       headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
     },
   ];
 
