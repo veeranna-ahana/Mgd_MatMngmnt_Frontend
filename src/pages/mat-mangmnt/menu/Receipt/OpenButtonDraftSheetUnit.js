@@ -368,9 +368,16 @@ function OpenButtonDraftSheetUnit(props) {
           // console.log("mtrldata = ", mtrlData);
           let Mtrlshape = mtrlData.Shape;
           setShape(Mtrlshape);
-          inputPart.material = mtrlData.Mtrl_Type;
+          // inputPart.material = mtrlData.Mtrl_Type;
           inputPart.shapeMtrlId = mtrlData.ShapeMtrlID;
           console.log("Mtrl Grade ID", mtrlData.MtrlGradeID);
+
+          let gradeID =
+            endpoints.getGradeID + "?gradeid=" + mtrlData.MtrlGradeID;
+          getRequest(gradeID, async (gradeData) => {
+            console.log("gradeData = ", gradeData);
+            inputPart.material = gradeData.Material;
+          });
 
           let url2 = endpoints.getRowByShape + "?shape=" + mtrlData.Shape;
           getRequest(url2, async (shapeData) => {
