@@ -59,8 +59,8 @@ function DailyReport() {
       let tweight = 0;
       let tqty = 0;
       for (let i = 0; i < data.length; i++) {
-        tweight = tweight + data[i].totalWeight;
-        tqty = tqty + parseInt(data[i].qty);
+        tweight = tweight + data[i].totalWeight || 0;
+        tqty = tqty + parseInt(data[i].qty || 0);
       }
       await delay(2000);
       settotalweight(tweight);
@@ -363,18 +363,17 @@ function DailyReport() {
         <div className="row">
           <div className="d-flex col-md-3">
             <div className="col-md-4">
-            <label className="form-label">Select Date</label>
+              <label className="form-label">Select Date</label>
             </div>
-         <div className="col-md-5">
-         <input
-         className='input-field'
-              type="date"
-              name="date"
-              onChange={InputEvent}
-              defaultValue={`${yearrr}-${monthhh + 1}-${dateee}`}
-            />
-         </div>
-           
+            <div className="col-md-5">
+              <input
+                className="input-field"
+                type="date"
+                name="date"
+                onChange={InputEvent}
+                defaultValue={`${yearrr}-${monthhh + 1}-${dateee}`}
+              />
+            </div>
           </div>
           <div className="col-md-9">
             <button className="button-style" onClick={loadData}>
@@ -392,7 +391,7 @@ function DailyReport() {
             </button>
             <button
               className="button-style"
-             // style={{ width: "200px" }}
+              // style={{ width: "200px" }}
               onClick={printInvoice}
             >
               Print Invoice Dispatch
@@ -406,7 +405,6 @@ function DailyReport() {
           </div>
         </div>
         <div className="row mt-1">
-          
           <div className="col-md-12">
             <Tabs id="controlled-tab-example" className="mb-3 mt-3 tab_font">
               <Tab eventKey="mat_rece" title="Material Receipt">

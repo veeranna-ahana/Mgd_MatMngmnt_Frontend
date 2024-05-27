@@ -222,10 +222,10 @@ const PrintDailyReportReceiptTable = (props) => (
                         {item.mtrl_code}{" "}
                       </Text>
                       <Text style={{ padding: "2px", ...styles.totalweight }}>
-                        {parseFloat(item.totalWeight).toFixed(3)}
+                        {parseFloat(item.totalWeight || 0).toFixed(3)}
                       </Text>
                       <Text style={{ padding: "2px", ...styles.quantity }}>
-                        {parseInt(item.qty)}
+                        {parseInt(item.qty || 0)}
                       </Text>
                     </View>
                   </>

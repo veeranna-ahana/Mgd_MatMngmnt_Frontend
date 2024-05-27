@@ -507,9 +507,17 @@ function NewSheetsUnits(props) {
           console.log("mtrldata= ", mtrlData.Shape);
           let Mtrlshape = mtrlData.Shape;
           setShape(Mtrlshape);
-          inputPart.material = mtrlData.Mtrl_Type;
           inputPart.shapeMtrlId = mtrlData.ShapeMtrlID;
-          // console.log("mtrlData.Shape", mtrlData.Shape);
+
+          // inputPart.material = mtrlData.Mtrl_Type;
+          // console.log("mtrlData.MtrlGradeID", mtrlData.MtrlGradeID);
+
+          let gradeID =
+            endpoints.getGradeID + "?gradeid=" + mtrlData.MtrlGradeID;
+          getRequest(gradeID, async (gradeData) => {
+            console.log("gradeData = ", gradeData);
+            inputPart.material = gradeData.Material;
+          });
           let url2 = endpoints.getRowByShape + "?shape=" + mtrlData.Shape;
           getRequest(url2, async (shapeData) => {
             console.log("shapedata = ", shapeData);
