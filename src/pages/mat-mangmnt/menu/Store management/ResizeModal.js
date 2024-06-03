@@ -528,7 +528,7 @@ export default function ResizeModal(props) {
                     className="form-label "
                     style={{ whiteSpace: "nowrap" }}
                   >
-                    Length
+                    Para1
                   </label>
                   <input
                     className="form-label mt-1"
@@ -542,7 +542,7 @@ export default function ResizeModal(props) {
                     className="form-label "
                     style={{ whiteSpace: "nowrap" }}
                   >
-                    Width
+                    Para2
                   </label>
                   <input
                     className="form-label mt-1"
@@ -591,8 +591,8 @@ export default function ResizeModal(props) {
                   <thead className="tableHeaderBGColor">
                     <tr>
                       <th>SL No</th>
-                      <th>Length</th>
-                      <th>Width</th>
+                      <th>DynamicPara1</th>
+                      <th>DynamicPara2</th>
                       <th>Quantity</th>
                       <th>Weight</th>
                       <th>Location</th>
@@ -665,7 +665,7 @@ export default function ResizeModal(props) {
                   <div>
                     <div className="row d-flex align-items-end">
                       <div className="col-md-3 p-0">
-                        <label className="form-label">Length</label>
+                        <label className="form-label">Para1</label>
                       </div>
 
                       <div className="col-md-9 p-0">
@@ -691,7 +691,7 @@ export default function ResizeModal(props) {
 
                             if (parseInt(e.target.value) < 0) {
                               e.target.value = parseInt(e.target.value) * -1;
-                              toast.warning("Length can't be negative");
+                              toast.warning("Para1 can't be negative");
                             }
 
                             changeHandler(e);
@@ -705,7 +705,7 @@ export default function ResizeModal(props) {
                   <div>
                     <div className="row d-flex align-items-end">
                       <div className="col-md-3 p-0">
-                        <label className="form-label">Width</label>
+                        <label className="form-label">Para2</label>
                       </div>
 
                       <div className="col-md-9 p-0">
@@ -731,7 +731,7 @@ export default function ResizeModal(props) {
 
                             if (parseInt(e.target.value) < 0) {
                               e.target.value = parseInt(e.target.value) * -1;
-                              toast.warning("Width can't be negative");
+                              toast.warning("Para2 can't be negative");
                             }
 
                             changeHandler(e);
