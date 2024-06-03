@@ -199,10 +199,10 @@ const PrintReportFullStockListTable = (props) => (
                         Material
                       </Text>
                       <Text style={{ ...styles.para, ...styles.fontBold }}>
-                        Width
+                        Para1
                       </Text>
                       <Text style={{ ...styles.para, ...styles.fontBold }}>
-                        Length
+                        Para2
                       </Text>
                       <Text style={{ ...styles.para, ...styles.fontBold }}>
                         Qty

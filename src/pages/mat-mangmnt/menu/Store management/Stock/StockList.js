@@ -220,12 +220,12 @@ function StockList(props) {
       hidden: true,
     },
     {
-      text: "Width",
+      text: "Para1",
       dataField: "DynamicPara1",
       sort: true,
     },
     {
-      text: "Length",
+      text: "Para2",
       dataField: "DynamicPara2",
       sort: true,
     },

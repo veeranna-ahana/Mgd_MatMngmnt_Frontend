@@ -182,10 +182,10 @@ export default function PrintLocationStockSummaryTableReport(props) {
                   Material
                 </Text>
                 <Text style={{ ...styles.col2, ...styles.fontBold }}>
-                  Length
+                  Para1
                 </Text>
                 <Text style={{ ...styles.col2, ...styles.fontBold }}>
-                  Width
+                  Para2
                 </Text>
                 <Text style={{ ...styles.col2, ...styles.fontBold }}>
                   Quantity

@@ -85,7 +85,7 @@ export default function ThirdTable(props) {
               />
             </th>
             <th onClick={() => requestSort("DynamicPara1")} className="cursor">
-              Width
+              DynamicPara1
               <FaArrowUp
                 className={
                   props.sortConfigThird.key === "DynamicPara1"
@@ -97,7 +97,7 @@ export default function ThirdTable(props) {
               />
             </th>
             <th onClick={() => requestSort("DynamicPara2")} className="cursor">
-              Length
+              DynamicPara2
               <FaArrowUp
                 className={
                   props.sortConfigThird.key === "DynamicPara2"
