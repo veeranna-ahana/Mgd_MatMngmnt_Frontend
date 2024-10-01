@@ -16,6 +16,9 @@ const styles = StyleSheet.create({
     fontSize: "9px",
     flexDirection: "column",
     // margin: "50px",
+    marginTop: 30,
+    marginBottom: 50,
+    paddingBottom: 50,
   },
   tableContainer: {
     // flexDirection: "row",

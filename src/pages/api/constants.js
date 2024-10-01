@@ -11,6 +11,7 @@ export const endpoints = {
   getCustomerByCustCode: `${API}/customers/getCustomerByCustCode`,
   //bom list
   getCustBomList: `${API}/custbomlist/allCustBomList`,
+  getCustBomId: `${API}/custbomlist/getCustBomId`,
 
   //locations
   getMaterialLocationList: `${API}/materiallocationlist/allMaterialLocationList`,

@@ -82,6 +82,8 @@ function PNew() {
     address: "",
   });
 
+  console.log("Cust_Code", formHeader.customer);
+
   async function fetchCustData() {
     getRequest(endpoints.getCustomers, async (data) => {
       for (let i = 0; i < data.length; i++) {
@@ -159,30 +161,86 @@ function PNew() {
     },
   ];
 
+  // const changePartID = (selected) => {
+  //   setSelectedPart(selected);
+
+  //   setInputPart((prevInputPart) => ({
+  //     ...prevInputPart,
+  //     partId: selected.length > 0 ? selected[0].PartId : "",
+  //   }));
+
+  //   // Use the updated inputPart inside the postRequest callback
+  //   postRequest(
+  //     endpoints.updatePartReceiptDetails,
+  //     {
+  //       ...inputPart,
+  //       partId: selected.length > 0 ? selected[0].PartId : "",
+  //     },
+  //     (data) => {
+  //       if (data.affectedRows !== 0) {
+  //         // Handle success, if needed
+  //       } else {
+  //         toast.error("Record Not Updated");
+  //       }
+  //     }
+  //   );
+
+  //   const newArray = partArray.map((p) =>
+  //     p.id === partUniqueId
+  //       ? {
+  //           ...p,
+  //           partId: selected.length > 0 ? selected[0].PartId : "",
+  //         }
+  //       : p
+  //   );
+
+  //   setPartArray(newArray);
+  // };
+
   const changePartID = (selected) => {
     setSelectedPart(selected);
 
+    // Update partId in inputPart state
     setInputPart((prevInputPart) => ({
       ...prevInputPart,
       partId: selected.length > 0 ? selected[0].PartId : "",
     }));
 
-    // Use the updated inputPart inside the postRequest callback
-    postRequest(
-      endpoints.updatePartReceiptDetails,
-      {
-        ...inputPart,
-        partId: selected.length > 0 ? selected[0].PartId : "",
-      },
-      (data) => {
-        if (data.affectedRows !== 0) {
-          // Handle success, if needed
-        } else {
-          toast.error("Record Not Updated");
-        }
-      }
-    );
+    // First, call the getCustBomId endpoint to get the custBomId based on the selected partId
+    if (selected.length > 0) {
+      const partId = selected[0].PartId;
+      const cust_Code = formHeader.customer;
 
+      postRequest(endpoints.getCustBomId, { partId, cust_Code }, (data) => {
+        if (data) {
+          console.log("response.data", data);
+          // Update the inputPart with custBomId from the response
+          setInputPart((prevInputPart) => ({
+            ...prevInputPart,
+            custBomId: data[0].Id,
+          }));
+
+          // Now, call the updatePartReceiptDetails endpoint with the updated inputPart
+          postRequest(
+            endpoints.updatePartReceiptDetails,
+            {
+              ...inputPart,
+              partId,
+              custBomId: data[0].Id,
+            },
+            (data) => {
+              if (data.affectedRows !== 0) {
+                // Handle success, if needed
+              } else {
+                toast.error("Record Not Updated");
+              }
+            }
+          );
+        }
+      });
+    }
+
+    // Update partArray with the selected partId
     const newArray = partArray.map((p) =>
       p.id === partUniqueId
         ? {
@@ -194,63 +252,6 @@ function PNew() {
 
     setPartArray(newArray);
   };
-
-  // const changePartHandle = (e) => {
-  //   const { value, name } = e.target;
-
-  //   if (name === "unitWeight" && parseFloat(value) < 0) {
-  //     toast.error("unitWeight should be a positive value");
-  //     return;
-  //   }
-
-  //   const formattedValue =
-  //     name === "unitWeight" ? value.replace(/(\.\d{3})\d+/, "$1") : value;
-  //   setInputPart((preValue) => {
-  //     return {
-  //       ...preValue,
-  //       [name]: formattedValue,
-  //     };
-  //   });
-  //   inputPart[name] = formattedValue;
-  //   inputPart.custBomId = formHeader.customer;
-  //   inputPart.rvId = formHeader.rvId;
-  //   inputPart.qtyRejected =
-  //     parseFloat(inputPart.qtyReceived) - parseFloat(inputPart.qtyAccepted);
-  //   inputPart.qtyUsed = 0;
-  //   inputPart.qtyReturned = 0;
-  //   inputPart.qtyIssued = 0;
-
-  //   setInputPart(inputPart);
-
-  //   postRequest(endpoints.updatePartReceiptDetails, inputPart, (data) => {
-  //     if (data.affectedRows !== 0) {
-  //     } else {
-  //       toast.error("Record Not Updated");
-  //     }
-  //   });
-
-  //   const newArray = partArray.map((p) =>
-  //     p.id === partUniqueId
-  //       ? {
-  //           ...p,
-  //           [name]: formattedValue,
-  //         }
-  //       : p
-  //   );
-
-  //   setPartArray(newArray);
-
-  //   let totwt = 0;
-  //   newArray.map((obj) => {
-  //     totwt =
-  //       parseFloat(totwt) +
-  //       // parseFloat(obj.unitWeight) * parseFloat(obj.qtyReceived);
-  //       parseFloat(obj.unitWeight) * parseFloat(obj.qtyAccepted);
-  //   });
-
-  //   setCalcWeightVal(parseFloat(totwt).toFixed(3));
-  //   setFormHeader({ ...formHeader, calcWeight: parseFloat(totwt).toFixed(3) });
-  // };
 
   const changePartHandle = (e) => {
     const { value, name } = e.target;
@@ -268,7 +269,7 @@ function PNew() {
       };
     });
     inputPart[name] = formattedValue;
-    inputPart.custBomId = formHeader.customer;
+    // inputPart.custBomId = formHeader.customer;
     inputPart.rvId = formHeader.rvId;
     // inputPart.qtyRejected = 0;
     inputPart.qtyRejected =
