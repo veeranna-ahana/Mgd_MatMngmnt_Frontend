@@ -19,9 +19,12 @@ let fontSize = "9px";
 const styles = StyleSheet.create({
   pageStyling: {
     padding: "2%",
-    // paddingTop: "3%",
+    paddingTop: "0%",
     fontSize: fontSize,
     fontFamily: "Helvetica",
+    marginTop: 30,
+    marginBottom: 50,
+    paddingBottom: 50,
   },
 
   globalPadding: { padding: "0.6%" },

@@ -435,7 +435,36 @@ function PurchasePartsNew() {
         setBoolVal2(true);
       } else {
         //to update data
-        updateHeaderFunction();
+        // updateHeaderFunction();
+        let flag1 = 0;
+
+        for (let i = 0; i < partArray.length; i++) {
+          if (
+            partArray[i].partId === "" ||
+            partArray[i].unitWeight === "" ||
+            partArray[i].qtyReceived === "" ||
+            partArray[i].qtyAccepted === ""
+          ) {
+            flag1 = 1;
+          }
+
+          if (
+            parseFloat(partArray[i].qtyAccepted) >
+            parseFloat(partArray[i].qtyReceived)
+          ) {
+            flag1 = 2;
+          }
+        }
+        if (flag1 === 1) {
+          toast.error("Please fill correct Part details");
+        } else if (flag1 === 2) {
+          toast.error(
+            "QtyAccepted should be less than or equal to QtyReceived"
+          );
+        } else {
+          //to update data
+          updateHeaderFunction();
+        }
       }
     }
   };
