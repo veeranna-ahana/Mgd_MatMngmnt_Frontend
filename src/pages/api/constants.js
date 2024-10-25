@@ -112,6 +112,9 @@ export const endpoints = {
 	insertByMtrlStockID: `${API}/mtrlStockList/insertByMtrlStockID`,
 	insertByMtrlStockIDResize: `${API}/mtrlStockList/insertByMtrlStockIDResize`,
 	getDataByMtrlStockIdResize: `${API}/mtrlStockList/getDataByMtrlStockIdResize`,
+	// New Running No for ShopFloor
+	getNewRunningNo: `${API}/runningNo/getNewRunningNo`,
+	updateRunNo: `${API}/runningNo/updateRunNo`,
 
 	//material Return Details
 	insertmaterialReturnDetails: `${API}/materialReturnDetails/insert`,

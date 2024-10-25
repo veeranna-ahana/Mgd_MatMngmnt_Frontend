@@ -20,9 +20,6 @@ function ShopFloorMaterialAllotment(props) {
 	const [ncid, setncid] = useState("");
 	const [custCode, setCustCode] = useState("");
 
-	console.log("Props Type", props.type);
-	console.log("Props HasBom", props.hasbom);
-
 	const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 	const fetchData = async () => {
 		//get table data
@@ -34,14 +31,12 @@ function ShopFloorMaterialAllotment(props) {
 			props.hasbom;
 		await getRequest(url1, async (data) => {
 			//delay(5000);
-			// veeranna tsting pstatus completed
 			// data = data.filter((obj) => {
 			// 	return obj["PStatus"] !== "Completed";
 			// });
 			//await delay(3000);
-			console.log("new table data = ", data);
+
 			setTableData(data);
-			//setAllData(data);
 		});
 		let url2 =
 			endpoints.getShopFloorServiceTreeViewMachine +
@@ -86,14 +81,11 @@ function ShopFloorMaterialAllotment(props) {
 				await delay(800);
 			}
 			setTreeData(data);
-			console.log("data = ", data);
 		});
 	};
 	useEffect(() => {
 		fetchData();
 	}, []);
-
-	console.log("tableData", tableData);
 
 	const columns = [
 		{
@@ -158,8 +150,6 @@ function ShopFloorMaterialAllotment(props) {
 	];
 
 	const treeViewclickMachine = (machine) => {
-		//console.log("tree view click machine : ", e);
-		//get table data
 		let url =
 			endpoints.getShopFloorServiceTreeViewProcess +
 			"?type=" +
@@ -170,15 +160,13 @@ function ShopFloorMaterialAllotment(props) {
 			machine +
 			"&tree=0";
 		getRequest(url, async (data) => {
-			//veeranna testing PStatus
 			// data = data.filter((obj) => obj["PStatus"] !== "Completed");
-			console.log("table data 2", data);
+
 			setTableData(data);
 		});
 	};
 
 	const treeViewclickProcess = (machine, process) => {
-		//console.log("machine = ", machine, " process = ", process);
 		let url =
 			endpoints.getShopFloorServiceTreeViewMtrlCode +
 			"?type=" +
@@ -191,15 +179,13 @@ function ShopFloorMaterialAllotment(props) {
 			process +
 			"&tree=0";
 		getRequest(url, async (data) => {
-			// veeranna tsting pstatus completed
 			// data = data.filter((obj) => obj["PStatus"] !== "Completed");
-			console.log("table data 3", data);
+
 			setTableData(data);
 		});
 	};
 
 	const treeViewclickMaterial = (machine, process, material) => {
-		//console.log("machine = ", machine, " process = ", process);
 		let url =
 			endpoints.getShopFloorServiceTreeViewMtrlCodeClick +
 			"?type=" +
@@ -213,9 +199,8 @@ function ShopFloorMaterialAllotment(props) {
 			"&material=" +
 			material;
 		getRequest(url, async (data) => {
-			// veeranna tsting pstatus completed
 			// data = data.filter((obj) => obj["PStatus"] !== "Completed");
-			console.log("table data 4", data);
+
 			setTableData(data);
 		});
 	};
@@ -226,12 +211,10 @@ function ShopFloorMaterialAllotment(props) {
 		bgColor: "#98A8F8",
 		onSelect: (row, isSelect, rowIndex, e) => {
 			setncid(row.Ncid);
-			// console.log("row", row);
+
 			setCustCode(row.Cust_Code);
 		},
 	};
-
-	// console.log("custCode", custCode);
 
 	const allotMaterial = () => {
 		if (ncid === "") {
