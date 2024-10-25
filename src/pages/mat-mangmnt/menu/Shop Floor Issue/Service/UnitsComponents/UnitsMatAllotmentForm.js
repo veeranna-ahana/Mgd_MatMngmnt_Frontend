@@ -45,6 +45,8 @@ function UnitsMatAllotmentForm() {
 
 			setFormHeader(data);
 			//setAllData(data);
+			// VEERANNA PURCHASE CHANGES 17/10/24
+			console.log("data123", data.CustMtrl);
 			console.log("data", data.Mtrl_Code);
 			console.log("Shape", data.Shape);
 			console.log("Para1", data.Para1);
@@ -66,6 +68,9 @@ function UnitsMatAllotmentForm() {
 				data.Mtrl_Code +
 				"&CustCode=" +
 				data.Cust_Code +
+				// VEERANNA PURCHASE CHANGES 17/10/24
+				"&CustMtrl=" +
+				data.CustMtrl +
 				"&shape=" +
 				data.Shape +
 				"&para1=" +
@@ -657,7 +662,7 @@ function UnitsMatAllotmentForm() {
 		// )
 	};
 
-	console.log("formHeader", formHeader);
+	console.log("formHeader", formHeader.CustMtrl);
 	return (
 		<>
 			<OkModal

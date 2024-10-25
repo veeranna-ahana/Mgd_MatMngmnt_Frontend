@@ -76,6 +76,7 @@ const SidebarComp = () => {
 					}
 				} else {
 					if (element.title === "Previous Menu") {
+						console.log(element.path);
 						previousMenu = element;
 					} else if (accessPaths?.includes(element.path)) {
 						// if(element.path)

@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
 		fontSize: "9px",
 		flexDirection: "column",
 		//  margin: "30px"
-		// margin:""
 		marginTop: 30,
 		marginBottom: 50,
 		paddingBottom: 50,
