@@ -17,8 +17,6 @@ const { endpoints } = require("../../../../../../api/constants");
 function MaterialAllotmentMain() {
   const location = useLocation();
   const nav = useNavigate();
-  console.log("ncid = ", location?.state?.ncid);
-  console.log("custCode = ", location?.state?.custCode);
 
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
   const [formHeader, setFormHeader] = useState({});
@@ -39,15 +37,17 @@ function MaterialAllotmentMain() {
   const [selectedSecondTableRows, setSelectedSecondTableRows] = useState([]);
   const [sumOfIssueNow, setSumOfIssueNow] = useState(0);
 
+  const storedData = JSON.parse(localStorage.getItem("LazerUser"));
+  let unitName = storedData.data[0]["UnitName"];
+
   const fetchData = async () => {
     let url1 = endpoints.getRowByNCID + "?id=" + location.state?.ncid;
     getRequest(url1, async (data) => {
       setFormHeader(data);
 
       let url2 = endpoints.getCustomerByCustCode + "?code=" + data.Cust_Code;
-      //console.log(url2);
+
       getRequest(url2, async (data1) => {
-        // console.log("url2 data", data1);
         setFormHeader({ ...data, customer: data1.Cust_name });
       });
     });
@@ -62,7 +62,6 @@ function MaterialAllotmentMain() {
       //setFirstTable(data);
       let tempArray = [];
       for (let i = 0; i < data.length; i++) {
-        //console.log("bom id = ", data[i].CustBOM_Id);
         tempArray.push(data[i].CustBOM_Id);
 
         //find QtyAvailable
@@ -89,15 +88,10 @@ function MaterialAllotmentMain() {
 
       await delay(2000);
       setFirstTable(data);
-      console.log("first table data = ", data);
-      //setCustBOMIdArray(tempArray);
-      //console.log("custbom ids = ", tempArray);
 
       if (data.length === 0) {
         toast.warning("There is no material data available.");
       }
-
-      console.log("first table data = ", data);
 
       for (let i = 0; i < data.length; i++) {
         if (data[i].QtyAvailable === 0) {
@@ -120,7 +114,7 @@ function MaterialAllotmentMain() {
             data[i].issueNow = 0;
           }
           //setFirstTable(data);
-          // console.log("Second table data = ", data);
+
           setSecondTable(data);
 
           if (data.length > 0) {
@@ -139,22 +133,73 @@ function MaterialAllotmentMain() {
   }, []);
 
   useEffect(() => {
-    //if (firstTable.issueNow != 0) {
-    //setFirstTable(firstTable);
-    //setSecondTable(secondTable);
-    // }
-
     console.log("use state call");
   }, [firstTable, secondTable]);
 
   let issuenowchange = (e) => {
     setissuenowval(e.target.value);
-    //console.log("change = ", e.target.value);
   };
 
-  let issuenowonblur = async () => {
-    //console.log("on blur : ", issuenowval, " calc = ", formHeader);
+  // let issuenowonblur = async () => {
+  //   if (issuenowval > formHeader.Qty - formHeader.QtyAllotted) {
+  //     toast.error("Cannot Allot more material than Programmed Quantity");
+  //     setBtnVisibility(true);
+  //   } else {
+  //     setBtnVisibility(false);
 
+  //     let setQtyAvailable = issuenowval;
+
+  //     for (const key in firstTable) {
+  //       if (
+  //         Math.floor(
+  //           parseInt(firstTable[key].QtyAvailable) /
+  //             parseInt(firstTable[key].QtyPerAssy)
+  //         ) < parseInt(setQtyAvailable)
+  //       ) {
+  //         setQtyAvailable = Math.floor(
+  //           parseInt(firstTable[key].QtyAvailable) /
+  //             parseInt(firstTable[key].QtyPerAssy)
+  //         );
+  //       }
+  //     }
+
+  //     if (issuenowval > setQtyAvailable) {
+  //       toast.error(
+  //         "Sets Required : " +
+  //           issuenowval +
+  //           " Sets Available : " +
+  //           setQtyAvailable
+  //       );
+  //     } else {
+  //       const updatedFirstTable = firstTable.map((obj1) => {
+  //         const newIssueNow = obj1.QtyPerAssy * setQtyAvailable;
+
+  //         let flag = 0;
+
+  //         const updatedSecondTable = secondTable.map((obj2) => {
+  //           if (obj1.CustBOM_Id === obj2.CustBOM_Id && flag === 0) {
+  //             obj2.issueNow = newIssueNow;
+  //             flag = 1;
+  //           }
+  //           return obj2;
+  //         });
+  //         return { ...obj1, issueNow: newIssueNow };
+  //       });
+
+  //       const sumByCustBOM = {};
+  //       secondTable.forEach((obj2) => {
+  //         const { CustBOM_Id, issueNow } = obj2;
+  //         sumByCustBOM[CustBOM_Id] = (sumByCustBOM[CustBOM_Id] || 0) + issueNow;
+  //       });
+  //       console.log("Sum of issueNow values by CustBOM_Id:", sumByCustBOM);
+  //       await delay(1000);
+  //       setFirstTable(updatedFirstTable);
+  //       setSecondTable(secondTable);
+  //     }
+  //   }
+  // };
+
+  let issuenowonblur = async () => {
     if (issuenowval > formHeader.Qty - formHeader.QtyAllotted) {
       toast.error("Cannot Allot more material than Programmed Quantity");
       setBtnVisibility(true);
@@ -163,7 +208,7 @@ function MaterialAllotmentMain() {
 
       let setQtyAvailable = issuenowval;
 
-      //***** First Examaine the Max Set Quantity THAT can be issued
+      // Ensure that we are finding the minimum available set quantity from the firstTable
       for (const key in firstTable) {
         if (
           Math.floor(
@@ -186,30 +231,52 @@ function MaterialAllotmentMain() {
             setQtyAvailable
         );
       } else {
+        // Mapping and distributing the available quantity across the firstTable
         const updatedFirstTable = firstTable.map((obj1) => {
           const newIssueNow = obj1.QtyPerAssy * setQtyAvailable;
 
-          let flag = 0;
+          let remainingIssueNow = newIssueNow;
 
+          // Distribute the IssueNow across associated rows in secondTable
           const updatedSecondTable = secondTable.map((obj2) => {
-            if (obj1.CustBOM_Id === obj2.CustBOM_Id && flag === 0) {
-              obj2.issueNow = newIssueNow;
-              flag = 1;
+            if (obj1.CustBOM_Id === obj2.CustBOM_Id) {
+              // Calculate how many items can still be issued for this row
+              let availableForIssue = obj2.QtyReceived - obj2.QtyIssued;
+
+              // Ensure availableForIssue is positive to prevent negative values
+              availableForIssue = Math.max(0, availableForIssue);
+
+              // Distribute based on availableForIssue and remainingIssueNow
+              let issueNowForThisRow = Math.min(
+                remainingIssueNow,
+                availableForIssue
+              );
+
+              // Update the secondTable row with the calculated issueNow
+              obj2.issueNow = issueNowForThisRow;
+
+              // Subtract from remainingIssueNow
+              remainingIssueNow -= issueNowForThisRow;
             }
             return obj2;
           });
+
+          // Update secondTable with newly calculated values
+          setSecondTable(updatedSecondTable);
+
+          // Return the updated firstTable row
           return { ...obj1, issueNow: newIssueNow };
         });
 
+        // Sum the issueNow for each CustBOM_Id
         const sumByCustBOM = {};
         secondTable.forEach((obj2) => {
           const { CustBOM_Id, issueNow } = obj2;
           sumByCustBOM[CustBOM_Id] = (sumByCustBOM[CustBOM_Id] || 0) + issueNow;
         });
-        console.log("Sum of issueNow values by CustBOM_Id:", sumByCustBOM);
-        await delay(1000);
-        setFirstTable(updatedFirstTable);
-        setSecondTable(secondTable);
+
+        await delay(1000); // Small delay for async operation
+        setFirstTable(updatedFirstTable); // Update the first table with new issueNow values
       }
     }
   };
@@ -246,7 +313,6 @@ function MaterialAllotmentMain() {
     );
 
     if (hasZeroQtyAvailable) {
-      // toast.error("QtyAvailable is 0 for some parts.");
       toast.error(`Set Required: ${issuenowval} Set Available: ${0}  `);
       return;
     }
@@ -272,82 +338,9 @@ function MaterialAllotmentMain() {
     CreatePartsIssueVoucher();
   };
 
-  // const releaseProduction = async () => {
-  //   if (issuenowval.length === 0) {
-  //     toast.warning("Please enter Issue Now Value");
-  //     return;
-  //   }
-
-  //   const sumByCustBOM = {};
-
-  //   secondTable.forEach((obj2) => {
-  //     const { CustBOM_Id, issueNow } = obj2;
-  //     sumByCustBOM[CustBOM_Id] = (sumByCustBOM[CustBOM_Id] || 0) + issueNow;
-  //   });
-
-  //   for (const key in sumByCustBOM) {
-  //     const sumIssueNow = sumByCustBOM[key];
-  //     const firstTableEntry = firstTable.find(
-  //       (item) => item.CustBOM_Id === parseInt(key)
-  //     );
-
-  //     if (firstTableEntry && sumIssueNow !== firstTableEntry.issueNow) {
-  //       toast.error(
-  //         `Issue Quantity Mismatch ${firstTableEntry.PartId} Required: ${firstTableEntry.issueNow} Issuing: ${sumIssueNow}`
-  //       );
-  //       return;
-  //     }
-  //   }
-
-  //   CreatePartsIssueVoucher();
-  // };
-
   function statusFormatter(cell, row, rowIndex, formatExtraData) {
     return formatDate(new Date(cell), 3);
   }
-
-  // const columns2 = [
-  //   {
-  //     text: "Id",
-  //     dataField: "Id",
-  //     hidden: true,
-  //   },
-  //   {
-  //     text: "RV No",
-  //     dataField: "RV_No",
-  //   },
-  //   {
-  //     text: "RV Date",
-  //     dataField: "RV_Date",
-  //     formatter: statusFormatter,
-  //   },
-  //   {
-  //     text: "Received",
-  //     dataField: "QtyReceived",
-  //   },
-  //   {
-  //     text: "Accepted",
-  //     dataField: "QtyAccepted",
-  //   },
-  //   {
-  //     text: "Issued",
-  //     dataField: "QtyIssued",
-  //   },
-  //   {
-  //     text: "Issue Now",
-  //     dataField: "issueNow",
-  //     editorRenderer: (editorProps, value, row, column, rowIndex, columnIndex) => {
-  //       return (
-  //         <input
-  //           type="number"
-  //           {...editorProps}
-  //           value={value}
-  //           onChange={(e) => handleIssueNowChange(e, row)}
-  //         />
-  //       );
-  //     }
-  //   },
-  // ];
 
   const selectRow1 = {
     mode: "radio",
@@ -370,14 +363,9 @@ function MaterialAllotmentMain() {
     clickToSelect: true,
     // bgColor: "#98A8F8",
     onSelect: (row, isSelect, rowIndex, e) => {
-      console.log("Selected Row in Second Table:", row);
       setRow2(row);
     },
   };
-
-  // console.log("selectedFirstTableRow", selectedFirstTableRow);
-  // console.log("selectedSecondTableRows", selectedSecondTableRows)
-  // console.log("Sum of issueNow:", sumOfIssueNow);
 
   function isSelectedCell(rowId, colId) {
     return (
@@ -404,147 +392,238 @@ function MaterialAllotmentMain() {
     return style;
   };
 
+  // const CreatePartsIssueVoucher = async () => {
+  //   //get running no and assign to RvNo
+  //   let yyyy = formatDate(new Date(), 6).toString();
+  //   const url =
+  //     endpoints.getRunningNo +
+  //     "?SrlType=ShopFloor_PartIssueVoucher&Period=" +
+  //     yyyy;
+  //   //console.log(url);
+
+  //   getRequest(url, async (data) => {
+  //     data.map((obj) => {
+  //       let newNo = parseInt(obj.Running_No) + 1;
+  //       console.log("newno = ", newNo);
+  //       //insert into shopfloorpartissueregister
+
+  //       let header1 = {
+  //         IV_No: newNo,
+  //         Issue_date: formatDate(new Date(), 2),
+  //         NC_ProgramNo: formHeader.NCProgramNo,
+  //         QtyIssued: issuenowval,
+  //         QtyReturned: 0,
+  //         QtyUsed: 0,
+  //         Ncid: formHeader.Ncid,
+  //       };
+
+  //       postRequest(
+  //         endpoints.insertShopfloorPartIssueRegister,
+  //         header1,
+
+  //         async (data) => {
+  //           if (data.affectedRows !== 0) {
+  //             //toast.success("Record Inserted Successfully");
+  //             await delay(100);
+  //             setissueidval(data.insertId);
+  //             console.log("data insert id = ", data.insertId);
+  //             //insert into shopfloorBOMIssueDetails
+
+  //             for (let i = 0; i < secondTable.length; i++) {
+  //               if (secondTable[i].issueNow > 0) {
+  //                 //console.log("NR = ", secondTable[i]);
+  //                 let header3 = {
+  //                   IV_ID: data.insertId,
+  //                   RV_Id: secondTable[i].RVId,
+  //                   PartReceipt_DetailsID: secondTable[i].Id,
+  //                   QtyIssued: secondTable[i].issueNow,
+  //                   QtyReturned: 0,
+  //                   QtyUsed: 0,
+  //                 };
+
+  //                 postRequest(
+  //                   endpoints.insertShopfloorBOMIssueDetails,
+  //                   header3,
+  //                   async (data) => {
+  //                     if (data.affectedRows !== 0) {
+  //                       //toast.success("Record Inserted Successfully");
+  //                     } else {
+  //                       //toast.error("Record Not Updated");
+  //                     }
+  //                   }
+  //                 );
+  //               }
+
+  //               let header5 = {
+  //                 Id: secondTable[i].Id,
+  //                 Qty: secondTable[i].issueNow,
+  //               };
+
+  //               postRequest(
+  //                 endpoints.updateQtyIssuedPartReceiptDetails2,
+  //                 header5,
+  //                 async (data) => {
+  //                   if (data.affectedRows !== 0) {
+  //                     // toast.success("Record updated Successfully");
+  //                   } else {
+  //                     //toast.error("Record Not Updated");
+  //                   }
+  //                 }
+  //               );
+  //             }
+  //           } else {
+  //             //toast.error("Record Not Updated");
+  //           }
+  //           //update nc programs
+
+  //           let header2 = {
+  //             Id: formHeader.Ncid,
+  //             Qty: issuenowval,
+  //           };
+
+  //           postRequest(
+  //             endpoints.updateQtyAllotedncprograms1,
+  //             header2,
+  //             async (data) => {
+  //               if (data.affectedRows !== 0) {
+  //                 //toast.success("Record updated Successfully");
+  //               } else {
+  //                 //toast.error("Record Not Updated");
+  //               }
+  //             }
+  //           );
+
+  //           //update running no
+
+  //           const inputData = {
+  //             SrlType: "ShopFloor_PartIssueVoucher",
+  //             Period: formatDate(new Date(), 6),
+  //             RunningNo: newNo,
+  //           };
+
+  //           postRequest(endpoints.updateRunningNo, inputData, (data) => {});
+  //           console.log("Return id = ", issueidval);
+  //           //return data.insertId;
+  //           nav(
+  //             "/MaterialManagement/ShopFloorIssue/IVListService/Issued/ShopMatIssueVoucher",
+
+  //             {
+  //               state: {
+  //                 issueIDVal: data.insertId,
+  //               },
+  //             }
+  //           );
+  //         }
+  //       );
+  //     });
+  //   });
+  // };
+
   const CreatePartsIssueVoucher = async () => {
-    //get running no and assign to RvNo
     let yyyy = formatDate(new Date(), 6).toString();
-    const url =
-      endpoints.getRunningNo +
-      "?SrlType=ShopFloor_PartIssueVoucher&Period=" +
-      yyyy;
-    //console.log(url);
+    const url = `${endpoints.getNewRunningNo}?SrlType=ShopFloor_PartIssueVoucher&Period=${yyyy}&VoucherNoLength=4&ResetValue=0&UnitName=${unitName}`;
 
     getRequest(url, async (data) => {
-      data.map((obj) => {
-        let newNo = parseInt(obj.Running_No) + 1;
-        console.log("newno = ", newNo);
-        //insert into shopfloorpartissueregister
+      let newNo = parseInt(data.runningNo) + 1;
 
-        let header1 = {
-          IV_No: newNo,
-          Issue_date: formatDate(new Date(), 2),
-          NC_ProgramNo: formHeader.NCProgramNo,
-          QtyIssued: issuenowval,
-          QtyReturned: 0,
-          QtyUsed: 0,
-          Ncid: formHeader.Ncid,
-        };
+      let header1 = {
+        IV_No: newNo,
+        Issue_date: formatDate(new Date(), 2),
+        NC_ProgramNo: formHeader.NCProgramNo,
+        QtyIssued: issuenowval,
+        QtyReturned: 0,
+        QtyUsed: 0,
+        Ncid: formHeader.Ncid,
+      };
 
-        postRequest(
-          endpoints.insertShopfloorPartIssueRegister,
-          header1,
+      // Insert the new issue register record
+      postRequest(
+        endpoints.insertShopfloorPartIssueRegister,
+        header1,
+        async (data) => {
+          if (data.affectedRows !== 0) {
+            await delay(100);
+            setissueidval(data.insertId);
 
-          async (data) => {
-            if (data.affectedRows !== 0) {
-              //toast.success("Record Inserted Successfully");
-              await delay(100);
-              setissueidval(data.insertId);
-              console.log("data insert id = ", data.insertId);
-              //insert into shopfloorBOMIssueDetails
-
-              for (let i = 0; i < secondTable.length; i++) {
-                if (secondTable[i].issueNow > 0) {
-                  //console.log("NR = ", secondTable[i]);
-                  let header3 = {
-                    IV_ID: data.insertId,
-                    RV_Id: secondTable[i].RVId,
-                    PartReceipt_DetailsID: secondTable[i].Id,
-                    QtyIssued: secondTable[i].issueNow,
-                    QtyReturned: 0,
-                    QtyUsed: 0,
-                  };
-
-                  postRequest(
-                    endpoints.insertShopfloorBOMIssueDetails,
-                    header3,
-                    async (data) => {
-                      if (data.affectedRows !== 0) {
-                        //toast.success("Record Inserted Successfully");
-                      } else {
-                        //toast.error("Record Not Updated");
-                      }
-                    }
-                  );
-                }
-
-                //update mtrl part receipt details
-                // let header4 = {
-                //   Id: secondTable[i].Id,
-                //   Qty: secondTable[i].issueNow,
-                // };
-                // postRequest(
-                //   endpoints.updateQtyIssuedPartReceiptDetails1,
-                //   header4,
-                //   (data) => {
-                //     if (data.affectedRows !== 0) {
-                //       toast.success("Record updated Successfully");
-                //     } else {
-                //       toast.error("Record Not Updated");
-                //     }
-                //   }
-                // );
-
-                let header5 = {
-                  Id: secondTable[i].Id,
-                  Qty: secondTable[i].issueNow,
+            // Insert BOM Issue Details
+            for (let i = 0; i < secondTable.length; i++) {
+              if (secondTable[i].issueNow > 0) {
+                let header3 = {
+                  IV_ID: data.insertId,
+                  RV_Id: secondTable[i].RVId,
+                  PartReceipt_DetailsID: secondTable[i].Id,
+                  QtyIssued: secondTable[i].issueNow,
+                  QtyReturned: 0,
+                  QtyUsed: 0,
                 };
 
                 postRequest(
-                  endpoints.updateQtyIssuedPartReceiptDetails2,
-                  header5,
+                  endpoints.insertShopfloorBOMIssueDetails,
+                  header3,
                   async (data) => {
                     if (data.affectedRows !== 0) {
-                      // toast.success("Record updated Successfully");
-                    } else {
-                      //toast.error("Record Not Updated");
+                      console.log("BOM Issue Details Inserted");
                     }
                   }
                 );
               }
-            } else {
-              //toast.error("Record Not Updated");
-            }
-            //update nc programs
 
-            let header2 = {
-              Id: formHeader.Ncid,
-              Qty: issuenowval,
-            };
+              let header5 = {
+                Id: secondTable[i].Id,
+                Qty: secondTable[i].issueNow,
+              };
 
-            postRequest(
-              endpoints.updateQtyAllotedncprograms1,
-              header2,
-              async (data) => {
-                if (data.affectedRows !== 0) {
-                  //toast.success("Record updated Successfully");
-                } else {
-                  //toast.error("Record Not Updated");
+              postRequest(
+                endpoints.updateQtyIssuedPartReceiptDetails2,
+                header5,
+                async (data) => {
+                  if (data.affectedRows !== 0) {
+                    console.log("Qty Issued Updated");
+                  }
                 }
-              }
-            );
-
-            //update running no
-
-            const inputData = {
-              SrlType: "ShopFloor_PartIssueVoucher",
-              Period: formatDate(new Date(), 6),
-              RunningNo: newNo,
-            };
-
-            postRequest(endpoints.updateRunningNo, inputData, (data) => {});
-            console.log("Return id = ", issueidval);
-            //return data.insertId;
-            nav(
-              "/MaterialManagement/ShopFloorIssue/IVListService/Issued/ShopMatIssueVoucher",
-
-              {
-                state: {
-                  issueIDVal: data.insertId,
-                },
-              }
-            );
+              );
+            }
           }
-        );
-      });
+
+          // Update NC Programs
+          let header2 = {
+            Id: formHeader.Ncid,
+            Qty: issuenowval,
+          };
+
+          postRequest(
+            endpoints.updateQtyAllotedncprograms1,
+            header2,
+            async (data) => {
+              if (data.affectedRows !== 0) {
+                console.log("NC Programs Updated");
+              }
+            }
+          );
+
+          // Update Running Number
+          const inputData = {
+            SrlType: "ShopFloor_PartIssueVoucher",
+            Period: formatDate(new Date(), 6),
+            RunningNo: newNo,
+            UnitName: unitName,
+          };
+
+          postRequest(endpoints.updateRunNo, inputData, (data) => {
+            console.log("Running Number Updated");
+          });
+
+          // Navigate to the next page
+          nav(
+            "/MaterialManagement/ShopFloorIssue/IVListService/Issued/ShopMatIssueVoucher",
+            {
+              state: {
+                issueIDVal: data.insertId,
+              },
+            }
+          );
+        }
+      );
     });
   };
 
@@ -571,7 +650,6 @@ function MaterialAllotmentMain() {
 
     setSecondTable(updatedSecondTable);
     const sumByCustBOM = updateSumByCustBOM(updatedSecondTable);
-    console.log("Sum of issueNow values by CustBOM_Id:", sumByCustBOM);
   };
 
   const isAnyQtyAvailableZero = () => {
@@ -580,8 +658,6 @@ function MaterialAllotmentMain() {
 
   const blockInvalidQtyChar = (e) =>
     ["e", "E", "+", "-", "."].includes(e.key) && e.preventDefault();
-
-  console.log("secondTable", secondTable);
 
   return (
     <div>
@@ -752,18 +828,6 @@ function MaterialAllotmentMain() {
       </div>
 
       <div style={{ height: "220px", overflowY: "scroll" }}>
-        {/* <BootstrapTable
-          keyField="id"
-          columns={columns1}
-          data={firstTable}
-          striped
-          hover
-          condensed
-          //pagination={paginationFactory()
-          selectRow={selectRow1}
-           headerClasses="header-class tableHeaderBGColor"
-        ></BootstrapTable> */}
-
         <Table className="table custom-table " striped bordered hover>
           <thead className="header-class">
             <tr>
@@ -836,19 +900,6 @@ function MaterialAllotmentMain() {
                       selectRow2.onSelect(row, true);
                     }}
                   >
-                    {/* <td
-                      onClick={() => {
-                        setSelectedCell({ rowId: row.Id, colId: "Id" });
-                        setRow2(row);
-                        setSelectedRow(null);
-                      }}
-                      className={
-                        isSelectedCell(row.Id, "Id") ? "selected-row" : ""
-                      }
-                    >
-                      {row.Id}
-                    </td> */}
-
                     <td
                       onClick={() => {
                         setSelectedCell({ rowId: row.Id, colId: "RV_No" });

@@ -14,7 +14,7 @@ const { endpoints } = require("../../../../../api/constants");
 function UnitsMatAllotmentForm() {
   const nav = useNavigate();
   const location = useLocation();
-  console.log("ncid = ", location?.state?.ncid);
+
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
   const [formHeader, setFormHeader] = useState({});
@@ -34,6 +34,9 @@ function UnitsMatAllotmentForm() {
   const [showok, setShowok] = useState(false);
   let [messageok, setmessageok] = useState("");
 
+  const storedData = JSON.parse(localStorage.getItem("LazerUser"));
+  let unitName = storedData.data[0]["UnitName"];
+
   const fetchData = async () => {
     //get formHeader data
     let url1 = endpoints.getRowByNCID + "?id=" + location.state.ncid;
@@ -42,14 +45,9 @@ function UnitsMatAllotmentForm() {
       data["QtyAllottedTemp"] = data.QtyAllotted;
 
       setFormHeader(data);
-      //setAllData(data);
-      console.log("data", data.Mtrl_Code);
-      console.log("Shape", data.Shape);
-      console.log("Para1", data.Para1);
-      console.log("Para2", data.Para2);
 
       let url2 = endpoints.getCustomerByCustCode + "?code=" + data.Cust_Code;
-      //console.log(url2);
+
       getRequest(url2, async (data1) => {
         setFormHeader({
           ...data,
@@ -71,8 +69,6 @@ function UnitsMatAllotmentForm() {
         "&para2=" +
         data.Para2;
       getRequest(url3, async (data2) => {
-        //console.log("form header data = ", data);
-        console.log("first table data = ", data2);
         setFirstTable(data2);
         if (data2.length == 0) {
           toast.warning(
@@ -172,7 +168,6 @@ function UnitsMatAllotmentForm() {
         }
       } else {
         firstTableRow.forEach((obj) => {
-          //console.log(obj);
           if (obj == row) {
             obj.Locked = 0;
           }
@@ -190,8 +185,6 @@ function UnitsMatAllotmentForm() {
     },
     onSelectAll: async (isSelect, rows) => {
       if (isSelect) {
-        console.log("rows =  selectall");
-        //setFirstTableSelectIndex([...firstTableSelectIndex, row.MtrlStockID]);
         let tempIndex = [];
         for (let i = 0; i < rows.length; i++) {
           tempIndex.push(rows[i].MtrlStockID);
@@ -200,31 +193,17 @@ function UnitsMatAllotmentForm() {
         let firstno = formHeader.QtyAllottedTemp + firstTableRow.length;
         let secondno = formHeader.Qty;
         let updatedFirstTableRow = [];
-        console.log("initial first = ", firstno, " second = ", secondno);
-        // for (
-        //   let i = rows.length - 1;
-        //   i >= 0 && firstno < secondno;
-        //   i--, firstno++
-        // ) {
-        //   //console.log("i = ", i, " secondno = ", secondno);
-        //   updatedFirstTableRow.push(rows[i]);
-        // }
 
         for (let i = 0; i < rows.length && firstno < secondno; i++, firstno++) {
-          console.log("i = ", i, " secondno = ", secondno);
           updatedFirstTableRow.push(rows[i]);
         }
         await delay(100);
         setFirstTableSelectIndex(tempIndex);
-        console.log("index = ", firstTableSelectIndex);
-        console.log("updated = ", updatedFirstTableRow);
+
         setFirstTableRow(updatedFirstTableRow);
         setSecondTableRow(updatedFirstTableRow);
       } else {
-        console.log("rows =  deselectall");
-
         firstTableRow.forEach((obj) => {
-          console.log(obj);
           obj.Locked = 0;
         });
 
@@ -234,8 +213,6 @@ function UnitsMatAllotmentForm() {
       }
     },
   };
-
-  console.log("firstTableRow", firstTableRow);
 
   const selectRow2 = {
     mode: "checkbox",
@@ -280,31 +257,23 @@ function UnitsMatAllotmentForm() {
     },
   };
 
-  console.log("QtyAllotted", formHeader.QtyAllotted);
-
   const allotMaterial = async () => {
     setFormHeader({
       ...formHeader,
       QtyAllotted: parseInt(formHeader.QtyAllottedTemp) + firstTableRow.length,
     });
-    console.log("QtyAllottedTemp", formHeader.QtyAllottedTemp);
-    console.log("firstTableRow.length", firstTableRow.length);
 
     //set second table
     setSecondTable(secondTableRow);
 
     firstTableRow.forEach((obj) => {
-      console.log(obj);
       obj.Locked = 1;
     });
     await delay(100);
     setFirstTableRow(firstTableRow);
 
     setSecondTableSelectIndex([]);
-    console.log("first table row = ", firstTableRow);
   };
-
-  console.log("secondTableRow", secondTable);
 
   const uncheckSelectedRows = () => {
     const updatedFirstTable = firstTable.map((row) => {
@@ -324,72 +293,7 @@ function UnitsMatAllotmentForm() {
     setFirstTable(updatedFirstTable);
   };
 
-  // const CancelAllotMaterial = async () => {
-  //   console.log("second table row = ", secondTableRow);
-  //   console.log("selectedRowsInSecondTable = ", selectedRowsInSecondTable);
-  //   uncheckSelectedRows();
-  //   //setSecondTableRow(secondTable)
-  //   // setFormHeader({
-  //   //   ...formHeader,
-  //   //   QtyAllotted: secondTableRow.length,
-  //   // });
-
-  //   //second table
-  //   //setSecondTable(secondTableRow);
-  //   let secondTableRowObj = [];
-  //   secondTableRow.forEach((obj1) => {
-  //     let flag = 0;
-  //     selectedRowsInSecondTable.forEach((obj2) => {
-  //       if (obj1.MtrlStockID === obj2.MtrlStockID) {
-  //         flag = 1;
-  //       }
-  //     });
-  //     if (flag == 0) {
-  //       secondTableRowObj.push(obj1);
-  //     }
-  //   });
-  //   console.log("secondTableRowObj = ", secondTableRowObj);
-
-  //   setSecondTable(secondTableRowObj);
-  //   setSecondTableRow(secondTableRowObj);
-  //   setSelectedRowsInSecondTable([]);
-  //   setSecondTableSelectIndex([]);
-  //   await delay(200);
-
-  //   //deselect first table checkbox
-  //   const secondTableMtrlId = [];
-  //   secondTableRowObj.map((obj) => {
-  //     secondTableMtrlId.push(obj.MtrlStockID);
-  //   });
-  //   setFirstTableSelectIndex(secondTableMtrlId);
-
-  //   //update firsttable row
-  //   let firstTableRowObj = [];
-  //   firstTable.forEach((obj1) => {
-  //     secondTableRowObj.forEach((obj2) => {
-  //       if (obj1.MtrlStockID === obj2.MtrlStockID) {
-  //         firstTableRowObj.push(obj1);
-  //       }
-  //     });
-  //   });
-  //   setFirstTableRow(firstTableRowObj);
-
-  //   setFormHeader({
-  //     ...formHeader,
-  //     QtyAllotted: secondTableRowObj.length,
-  //   });
-
-  //   //await delay(500);
-  //   console.log("After second table row = ", secondTableRow);
-  //   console.log(
-  //     "After selectedRowsInSecondTable = ",
-  //     selectedRowsInSecondTable
-  //   );
-  // };
-
   const CancelAllotMaterial = async () => {
-    console.log("second table row = ", secondTableRow);
-    console.log("selectedRowsInSecondTable = ", selectedRowsInSecondTable);
     uncheckSelectedRows();
 
     // Calculate the new "Allotted" value by subtracting the count of selected rows in the second table
@@ -408,8 +312,6 @@ function UnitsMatAllotmentForm() {
         (obj2) => obj1.MtrlStockID === obj2.MtrlStockID
       );
     });
-
-    console.log("secondTableRowObj = ", secondTableRowObj);
 
     setSecondTable(secondTableRowObj);
     setSecondTableRow(secondTableRowObj);
@@ -434,197 +336,346 @@ function UnitsMatAllotmentForm() {
       });
     });
     setFirstTableRow(firstTableRowObj);
-
-    // console.log("After second table row = ", secondTableRow);
-    // console.log(
-    //   "After selectedRowsInSecondTable = ",
-    //   selectedRowsInSecondTable
-    // );
   };
 
+  // let modalResponse = async (data) => {
+  //   if (data === "yes") {
+  //     let yyyy = formatDate(new Date(), 6).toString();
+  //     const url =
+  //       endpoints.getRunningNo +
+  //       "?SrlType=ShopFloor_SheetIssueVoucher&Period=" +
+  //       yyyy;
+
+  //     getRequest(url, async (data) => {
+  //       data.map(async (obj) => {
+  //         let newNo = parseInt(obj.Running_No) + 1;
+  //         console.log("getRunningNo data", data);
+  //         console.log("newno = ", newNo);
+
+  //         let header1 = {
+  //           IV_No: newNo,
+  //           Issue_date: formatDate(new Date(), 2),
+  //           NC_ProgramNo: formHeader.NCProgramNo,
+  //           QtyIssued: secondTable.length,
+  //           QtyReturned: 0,
+  //           Ncid: formHeader.Ncid,
+  //         };
+  //         postRequest(
+  //           endpoints.insertShopfloorMaterialIssueRegister,
+  //           header1,
+  //           async (data) => {
+  //             if (data.affectedRows !== 0) {
+  //               console.log("insertid = ", data.insertId);
+  //               //await delay(500);
+  //               setissueidval(data.insertId);
+  //               await delay(500);
+  //               setissueidval(data.insertId);
+
+  //               //update ncprogram
+  //               //update nc programs
+  //               let header2 = {
+  //                 Id: formHeader.Ncid,
+  //                 Qty: secondTable.length,
+  //               };
+  //               postRequest(
+  //                 endpoints.updateQtyAllotedncprograms2,
+  //                 header2,
+  //                 async (data) => {
+  //                   if (data.affectedRows !== 0) {
+  //                     //toast.success("Record updated Successfully");
+  //                   } else {
+  //                     //toast.error("Record Not Updated");
+  //                   }
+  //                 }
+  //               );
+
+  //               //find nor return
+  //               var noreturn = 0;
+  //               switch (formHeader.Shape) {
+  //                 case "Sheet":
+  //                   noreturn = 0;
+  //                   break;
+  //                 case "Units":
+  //                   noreturn = 1;
+  //                   break;
+  //                 case "Tube Round":
+  //                   noreturn = 1;
+  //                   break;
+  //                 case "Tube Square":
+  //                   noreturn = 1;
+  //                   break;
+  //                 case "Tube Rectangle":
+  //                   noreturn = 1;
+  //                   break;
+  //                 case "Tiles":
+  //                   noreturn = 1;
+  //                   break;
+  //                 case "Plate":
+  //                   noreturn = 0;
+  //                   break;
+  //                 case "Strip":
+  //                   noreturn = 0;
+  //                   break;
+  //                 default:
+  //                   noreturn = 0;
+  //                   break;
+  //               }
+  //               await delay(1000);
+  //               setissueidval(data.insertId);
+  //               console.log("issueidval = ", issueidval);
+
+  //               //console.log("shape = ", formHeader.Shape, " noreturn = ", noreturn);
+  //               for (let i = 0; i < secondTable.length; i++) {
+  //                 //update mtrlstock lock
+  //                 let header3 = {
+  //                   id: secondTable[i].MtrlStockID,
+  //                 };
+  //                 postRequest(
+  //                   endpoints.updateMtrlStockLock,
+  //                   header3,
+  //                   async (data) => {
+  //                     if (data.affectedRows !== 0) {
+  //                       //toast.success("Record updated Successfully");
+  //                     } else {
+  //                       //toast.error("Record Not Updated");
+  //                     }
+  //                   }
+  //                 );
+  //                 //insert ncprogrammtrlallotmentlist
+  //                 let header4 = {
+  //                   TaskNo: formHeader.TaskNo,
+  //                   NCProgramNo: formHeader.NCProgramNo,
+  //                   ShapeMtrlID: secondTable[i].MtrlStockID,
+  //                   Mtrl_Code: secondTable[i].Mtrl_Code,
+  //                   NCPara1: formHeader.Para1,
+  //                   NCPara2: formHeader.Para2,
+  //                   NCPara3: formHeader.Para3,
+  //                   Para1: secondTable[i].DynamicPara1,
+  //                   Para2: secondTable[i].DynamicPara2,
+  //                   Para3: secondTable[i].DynamicPara3,
+  //                   IssueId: data.insertId,
+  //                   NoReturn: noreturn,
+  //                   Ncid: formHeader.Ncid,
+  //                 };
+  //                 postRequest(
+  //                   endpoints.insertncprogrammtrlallotmentlist,
+  //                   header4,
+  //                   async (data) => {
+  //                     if (data.affectedRows !== 0) {
+  //                       //toast.success("Record updated Successfully");
+  //                     } else {
+  //                       //toast.error("Record Not Updated");
+  //                     }
+  //                   }
+  //                 );
+  //               }
+
+  //               //update running no
+  //               const inputData = {
+  //                 SrlType: "ShopFloor_SheetIssueVoucher",
+  //                 Period: formatDate(new Date(), 6),
+  //                 RunningNo: newNo,
+  //               };
+  //               postRequest(endpoints.updateRunningNo, inputData, (data) => {});
+  //               //console.log("Return id = ", issueidval);
+  //               //return data.insertId;
+
+  //               console.log("insertid again = ", data.insertId);
+  //               if (data.insertId > 0) {
+  //                 let series = "";
+  //                 for (
+  //                   let i = 0;
+  //                   i < parseInt(obj.Length) - newNo.toString().length;
+  //                   i++
+  //                 ) {
+  //                   series = series + "0";
+  //                 }
+
+  //                 console.log("obj.Length", obj.Length);
+  //                 series = series + "" + newNo;
+  //                 console.log("Issue Voucner number is created : " + series);
+  //                 localStorage.setItem(
+  //                   "issuevoucer",
+  //                   "Issue Voucner number is created : " + series
+  //                 );
+  //                 localStorage.issuevoucer =
+  //                   "Issue Voucner number is created : " + series;
+  //                 //await delay(500);
+  //                 //setmessageok("Issue Voucner number is created : " + series);
+  //                 //setmessageok(localStorage.getItem("issuevoucer"));
+  //                 //messageok = "Issue Voucner number is created : " + series;
+  //                 //setmessageok("Issue Voucner number is created : " + series);
+  //                 //await delay(500);
+  //                 //setmessageok("Issue Voucner number is created : " + series);
+
+  //                 setShowok(true);
+  //               }
+
+  //               //toast.success("Record Inserted");
+  //             } else {
+  //               //toast.error("Record Not Inserted");
+  //             }
+  //           }
+  //         );
+  //       });
+  //     });
+  //   }
+  // };
+
   let modalResponse = async (data) => {
-    // alert("okkkk22");
-    //await delay(500);
-    //console.log("data = ", data);
     if (data === "yes") {
-      //get running no and assign to RvNo
       let yyyy = formatDate(new Date(), 6).toString();
-      const url =
-        endpoints.getRunningNo +
-        "?SrlType=ShopFloor_SheetIssueVoucher&Period=" +
-        yyyy;
-      //console.log(url);
+      // const url = `${endpoints.getNewRunningNo}?SrlType=ShopFloor_SheetIssueVoucher&Period=${yyyy}&VoucherNoLength=5&ResetValue=0&UnitName=Jigani`;
+      const url = `${endpoints.getNewRunningNo}?SrlType=ShopFloor_SheetIssueVoucher&Period=${yyyy}&VoucherNoLength=5&ResetValue=0&UnitName=${unitName}`;
+
       getRequest(url, async (data) => {
-        data.map(async (obj) => {
-          let newNo = parseInt(obj.Running_No) + 1;
-          console.log("newno = ", newNo);
+        let newNo = parseInt(data.runningNo) + 1;
 
-          //insert into shopfloormaterialissueregister
-          let header1 = {
-            IV_No: newNo,
-            Issue_date: formatDate(new Date(), 2),
-            NC_ProgramNo: formHeader.NCProgramNo,
-            QtyIssued: secondTable.length,
-            QtyReturned: 0,
-            Ncid: formHeader.Ncid,
-          };
-          postRequest(
-            endpoints.insertShopfloorMaterialIssueRegister,
-            header1,
-            async (data) => {
-              if (data.affectedRows !== 0) {
-                console.log("insertid = ", data.insertId);
-                //await delay(500);
-                setissueidval(data.insertId);
-                await delay(500);
-                setissueidval(data.insertId);
+        let header1 = {
+          IV_No: newNo,
+          Issue_date: formatDate(new Date(), 2),
+          NC_ProgramNo: formHeader.NCProgramNo,
+          QtyIssued: secondTable.length,
+          QtyReturned: 0,
+          Ncid: formHeader.Ncid,
+        };
 
-                //update ncprogram
-                //update nc programs
-                let header2 = {
-                  Id: formHeader.Ncid,
-                  Qty: secondTable.length,
+        postRequest(
+          endpoints.insertShopfloorMaterialIssueRegister,
+          header1,
+          async (data) => {
+            if (data.affectedRows !== 0) {
+              setissueidval(data.insertId);
+              await delay(500);
+              setissueidval(data.insertId);
+
+              // Update NC programs
+              let header2 = {
+                Id: formHeader.Ncid,
+                Qty: secondTable.length,
+              };
+              postRequest(
+                endpoints.updateQtyAllotedncprograms2,
+                header2,
+                async (data) => {
+                  if (data.affectedRows !== 0) {
+                    // Handle success
+                  } else {
+                    // Handle error
+                  }
+                }
+              );
+
+              // Determine No Return based on Shape
+              let noreturn = 0;
+              switch (formHeader.Shape) {
+                case "Sheet":
+                  noreturn = 0;
+                  break;
+                case "Units":
+                  noreturn = 1;
+                  break;
+                case "Tube Round":
+                  noreturn = 1;
+                  break;
+                case "Tube Square":
+                  noreturn = 1;
+                  break;
+                case "Tube Rectangle":
+                  noreturn = 1;
+                  break;
+                case "Tiles":
+                  noreturn = 1;
+                  break;
+                case "Plate":
+                  noreturn = 0;
+                  break;
+                case "Strip":
+                  noreturn = 0;
+                  break;
+                default:
+                  noreturn = 0;
+                  break;
+              }
+              await delay(1000);
+              setissueidval(data.insertId);
+
+              for (let i = 0; i < secondTable.length; i++) {
+                // Update mtrlstock lock
+                let header3 = {
+                  id: secondTable[i].MtrlStockID,
                 };
                 postRequest(
-                  endpoints.updateQtyAllotedncprograms2,
-                  header2,
+                  endpoints.updateMtrlStockLock,
+                  header3,
                   async (data) => {
                     if (data.affectedRows !== 0) {
-                      //toast.success("Record updated Successfully");
+                      // Handle success
                     } else {
-                      //toast.error("Record Not Updated");
+                      // Handle error
                     }
                   }
                 );
 
-                //find nor return
-                var noreturn = 0;
-                switch (formHeader.Shape) {
-                  case "Sheet":
-                    noreturn = 0;
-                    break;
-                  case "Units":
-                    noreturn = 1;
-                    break;
-                  case "Tube Round":
-                    noreturn = 1;
-                    break;
-                  case "Tube Square":
-                    noreturn = 1;
-                    break;
-                  case "Tube Rectangle":
-                    noreturn = 1;
-                    break;
-                  case "Tiles":
-                    noreturn = 1;
-                    break;
-                  case "Plate":
-                    noreturn = 0;
-                    break;
-                  case "Strip":
-                    noreturn = 0;
-                    break;
-                  default:
-                    noreturn = 0;
-                    break;
-                }
-                await delay(1000);
-                setissueidval(data.insertId);
-                console.log("issueidval = ", issueidval);
-
-                //console.log("shape = ", formHeader.Shape, " noreturn = ", noreturn);
-                for (let i = 0; i < secondTable.length; i++) {
-                  //update mtrlstock lock
-                  let header3 = {
-                    id: secondTable[i].MtrlStockID,
-                  };
-                  postRequest(
-                    endpoints.updateMtrlStockLock,
-                    header3,
-                    async (data) => {
-                      if (data.affectedRows !== 0) {
-                        //toast.success("Record updated Successfully");
-                      } else {
-                        //toast.error("Record Not Updated");
-                      }
-                    }
-                  );
-                  //insert ncprogrammtrlallotmentlist
-                  let header4 = {
-                    TaskNo: formHeader.TaskNo,
-                    NCProgramNo: formHeader.NCProgramNo,
-                    ShapeMtrlID: secondTable[i].MtrlStockID,
-                    Mtrl_Code: secondTable[i].Mtrl_Code,
-                    NCPara1: formHeader.Para1,
-                    NCPara2: formHeader.Para2,
-                    NCPara3: formHeader.Para3,
-                    Para1: secondTable[i].DynamicPara1,
-                    Para2: secondTable[i].DynamicPara2,
-                    Para3: secondTable[i].DynamicPara3,
-                    IssueId: data.insertId,
-                    NoReturn: noreturn,
-                    Ncid: formHeader.Ncid,
-                  };
-                  postRequest(
-                    endpoints.insertncprogrammtrlallotmentlist,
-                    header4,
-                    async (data) => {
-                      if (data.affectedRows !== 0) {
-                        //toast.success("Record updated Successfully");
-                      } else {
-                        //toast.error("Record Not Updated");
-                      }
-                    }
-                  );
-                }
-
-                //update running no
-                const inputData = {
-                  SrlType: "ShopFloor_SheetIssueVoucher",
-                  Period: formatDate(new Date(), 6),
-                  RunningNo: newNo,
+                // Insert into ncprogrammtrlallotmentlist
+                let header4 = {
+                  TaskNo: formHeader.TaskNo,
+                  NCProgramNo: formHeader.NCProgramNo,
+                  ShapeMtrlID: secondTable[i].MtrlStockID,
+                  Mtrl_Code: secondTable[i].Mtrl_Code,
+                  NCPara1: formHeader.Para1,
+                  NCPara2: formHeader.Para2,
+                  NCPara3: formHeader.Para3,
+                  Para1: secondTable[i].DynamicPara1,
+                  Para2: secondTable[i].DynamicPara2,
+                  Para3: secondTable[i].DynamicPara3,
+                  IssueId: data.insertId,
+                  NoReturn: noreturn,
+                  Ncid: formHeader.Ncid,
                 };
-                postRequest(endpoints.updateRunningNo, inputData, (data) => {});
-                //console.log("Return id = ", issueidval);
-                //return data.insertId;
-
-                console.log("insertid again = ", data.insertId);
-                if (data.insertId > 0) {
-                  //open popup modal
-                  let series = "";
-                  for (
-                    let i = 0;
-                    i < parseInt(obj.Length) - newNo.toString().length;
-                    i++
-                  ) {
-                    series = series + "0";
+                postRequest(
+                  endpoints.insertncprogrammtrlallotmentlist,
+                  header4,
+                  async (data) => {
+                    if (data.affectedRows !== 0) {
+                      // Handle success
+                    } else {
+                      // Handle error
+                    }
                   }
-                  series = series + "" + newNo;
-                  console.log("Issue Voucner number is created : " + series);
-                  localStorage.setItem(
-                    "issuevoucer",
-                    "Issue Voucner number is created : " + series
-                  );
-                  localStorage.issuevoucer =
-                    "Issue Voucner number is created : " + series;
-                  //await delay(500);
-                  //setmessageok("Issue Voucner number is created : " + series);
-                  //setmessageok(localStorage.getItem("issuevoucer"));
-                  //messageok = "Issue Voucner number is created : " + series;
-                  //setmessageok("Issue Voucner number is created : " + series);
-                  //await delay(500);
-                  //setmessageok("Issue Voucner number is created : " + series);
-
-                  setShowok(true);
-                }
-
-                //toast.success("Record Inserted");
-              } else {
-                //toast.error("Record Not Inserted");
+                );
               }
+
+              // Update running no
+              const inputData = {
+                SrlType: "ShopFloor_SheetIssueVoucher",
+                Period: formatDate(new Date(), 6),
+                RunningNo: newNo,
+                UnitName: unitName,
+              };
+              postRequest(endpoints.updateRunNo, inputData, (data) => {});
+
+              if (data.insertId > 0) {
+                // Open popup modal
+                let series = "";
+                for (let i = 0; i < 5 - newNo.toString().length; i++) {
+                  series += "0";
+                }
+                series += newNo;
+
+                localStorage.setItem(
+                  "issuevoucer",
+                  "Issue Voucher number is created: " + series
+                );
+                localStorage.issuevoucer =
+                  "Issue Voucner number is created : " + series;
+                setShowok(true);
+              }
+            } else {
+              // Handle error
             }
-          );
-        });
+          }
+        );
       });
     }
   };
@@ -641,6 +692,7 @@ function UnitsMatAllotmentForm() {
       console.log("data is not ok");
     }
   };
+
   const issueToProduction = () => {
     if (secondTable.length === 0) {
       toast.error("Please Select material before alloting");
@@ -652,7 +704,6 @@ function UnitsMatAllotmentForm() {
     // )
   };
 
-  console.log("formHeader", formHeader);
   return (
     <>
       <OkModal
