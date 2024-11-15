@@ -19,6 +19,7 @@ function ShopFloorMaterialAllotment(props) {
 	const [treeData, setTreeData] = useState([]);
 	const [ncid, setncid] = useState("");
 	const [custCode, setCustCode] = useState("");
+	const [CustMtrl, setCustMtrl] = useState("");
 
 	const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 	const fetchData = async () => {
@@ -210,9 +211,16 @@ function ShopFloorMaterialAllotment(props) {
 		clickToSelect: true,
 		bgColor: "#98A8F8",
 		onSelect: (row, isSelect, rowIndex, e) => {
+			//VEERANNA 1142024
+			// console.log("selected source", row.CustMtrl);
+			// if (row.CustMtrl === "Magod") {
+			// 	// toast.error("Selected source is Magod you can't proceed");
+			// 	toast.error("Can't allot material for sales(Magod) orders");
+			// } else {
 			setncid(row.Ncid);
-
 			setCustCode(row.Cust_Code);
+			setCustMtrl(row.CustMtrl);
+			// }
 		},
 	};
 
@@ -221,13 +229,25 @@ function ShopFloorMaterialAllotment(props) {
 			toast.error("Please select table row");
 		} else {
 			if (props.formtype == "Parts") {
-				nav(
-					"/MaterialManagement/ShopFloorIssue/Service/Parts/ShopFloorAllotmentForm", //MaterialAllotmentMain
+				//VEERANNA11042024
+				props.formtype === "Parts" &&
+				(CustMtrl === "Magod" || CustMtrl !== "Customer")
+					? toast.error("Can't allot material for sales(Magod) orders")
+					: nav(
+							"/MaterialManagement/ShopFloorIssue/Service/Parts/ShopFloorAllotmentForm", //MaterialAllotmentMain
 
-					{
-						state: { ncid, custCode },
-					}
-				);
+							{
+								state: { ncid, custCode },
+							}
+					  );
+
+				// nav(
+				// 	"/MaterialManagement/ShopFloorIssue/Service/Parts/ShopFloorAllotmentForm", //MaterialAllotmentMain
+
+				// 	{
+				// 		state: { ncid, custCode },
+				// 	}
+				// );
 			} else if (props.formtype == "Units" || props.formtype == "Others") {
 				nav(
 					"/MaterialManagement/ShopFloorIssue/Service/Units/MaterialAllotmentForm", //UnitsMatAllotmentForm
