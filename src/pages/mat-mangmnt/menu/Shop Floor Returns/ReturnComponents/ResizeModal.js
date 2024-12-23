@@ -15,11 +15,12 @@ function ResizeModal({ open1, setOpen1, row, resizeModal }) {
   //console.log("row val =", row);
   //setrow(row);
   let [locationData, setLocationData] = useState([]);
-  //useEffect(() => {
-  getRequest(endpoints.getMaterialLocationList, (data) => {
-    setLocationData(data);
-  });
-  //}, []);
+
+  useEffect(() => {
+    getRequest(endpoints.getMaterialLocationList, (data) => {
+      setLocationData(data);
+    });
+  }, []);
 
   const handlSave = () => {
     console.log("row = ", row);

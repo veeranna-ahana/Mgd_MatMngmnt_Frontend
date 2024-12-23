@@ -193,6 +193,7 @@ import { AiFillCaretDown } from "react-icons/ai";
 import { CgLogIn, CgProfile } from "react-icons/cg";
 
 function Header() {
+
 	// Function to get user data from cookies
 	const getUser = () => {
 		// const cookieData = Cookies.get("LazerUser");
@@ -253,24 +254,25 @@ function Header() {
 					) : (
 						""
 					)} */}
-					{userData.Name} - {userData.UnitName} | {""}
-					<button
-						style={{
-							backgroundColor: "transparent",
-							border: "none",
-							color: "black",
-							fontSize: "12px",
-							fontWeight: "600",
-						}}
-						onClick={logout}>
-						Sign Out
-					</button>
-				</div>
-			</nav>
+          {userData.Name} - {userData.UnitName} | {""}
+          <button
+            style={{
+              backgroundColor: "transparent",
+              border: "none",
+              color: "black",
+              fontSize: "12px",
+              fontWeight: "600",
+            }}
+            onClick={logout}
+          >
+            Sign Out
+          </button>
+        </div>
+      </nav>
 
-			<div style={{ height: "10px" }}>&nbsp;</div>
-		</>
-	);
+      <div style={{ height: "10px" }}>&nbsp;</div>
+    </>
+  );
 }
 
 export default Header;

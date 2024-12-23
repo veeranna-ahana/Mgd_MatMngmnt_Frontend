@@ -14,6 +14,7 @@ const { getRequest, postRequest } = require("../../../../../api/apiinstance");
 const { endpoints } = require("../../../../../api/constants");
 
 function ShopFloorMaterialAllotment(props) {
+
 	const nav = useNavigate();
 	const [tableData, setTableData] = useState([]);
 	const [treeData, setTreeData] = useState([]);
@@ -21,190 +22,191 @@ function ShopFloorMaterialAllotment(props) {
 	const [custCode, setCustCode] = useState("");
 	const [CustMtrl, setCustMtrl] = useState("");
 
-	const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-	const fetchData = async () => {
-		//get table data
-		let url1 =
-			endpoints.getShopFloorServicePartTable +
-			"?type=" +
-			props.type +
-			"&hasbom=" +
-			props.hasbom;
-		await getRequest(url1, async (data) => {
-			//delay(5000);
-			// data = data.filter((obj) => {
-			// 	return obj["PStatus"] !== "Completed";
-			// });
-			//await delay(3000);
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+  const fetchData = async () => {
+    //get table data
+    let url1 =
+      endpoints.getShopFloorServicePartTable +
+      "?type=" +
+      props.type +
+      "&hasbom=" +
+      props.hasbom;
+    await getRequest(url1, async (data) => {
+      //delay(5000);
+      // data = data.filter((obj) => {
+      // 	return obj["PStatus"] !== "Completed";
+      // });
+      //await delay(3000);
 
-			setTableData(data);
-		});
-		let url2 =
-			endpoints.getShopFloorServiceTreeViewMachine +
-			"?type=" +
-			props.type +
-			"&hasbom=" +
-			props.hasbom;
-		await getRequest(url2, async (data) => {
-			data.forEach(async (item) => {
-				let url3 =
-					endpoints.getShopFloorServiceTreeViewProcess +
-					"?type=" +
-					props.type +
-					"&hasbom=" +
-					props.hasbom +
-					"&machine=" +
-					item.machine +
-					"&tree=1";
-				await getRequest(url3, async (data1) => {
-					item["process"] = data1;
-					data1.forEach(async (item1) => {
-						let url4 =
-							endpoints.getShopFloorServiceTreeViewMtrlCode +
-							"?type=" +
-							props.type +
-							"&hasbom=" +
-							props.hasbom +
-							"&machine=" +
-							item.machine +
-							"&process=" +
-							item1.MProcess +
-							"&tree=1";
-						await getRequest(url4, async (data2) => {
-							item1["material"] = data2;
-						});
-					});
-				});
-			});
-			if (props.formtype === "Parts") {
-				await delay(800);
-			} else {
-				await delay(800);
-			}
-			setTreeData(data);
-		});
-	};
-	useEffect(() => {
-		fetchData();
-	}, []);
+      setTableData(data);
+    });
+    let url2 =
+      endpoints.getShopFloorServiceTreeViewMachine +
+      "?type=" +
+      props.type +
+      "&hasbom=" +
+      props.hasbom;
+    await getRequest(url2, async (data) => {
+      data.forEach(async (item) => {
+        let url3 =
+          endpoints.getShopFloorServiceTreeViewProcess +
+          "?type=" +
+          props.type +
+          "&hasbom=" +
+          props.hasbom +
+          "&machine=" +
+          item.machine +
+          "&tree=1";
+        await getRequest(url3, async (data1) => {
+          item["process"] = data1;
+          data1.forEach(async (item1) => {
+            let url4 =
+              endpoints.getShopFloorServiceTreeViewMtrlCode +
+              "?type=" +
+              props.type +
+              "&hasbom=" +
+              props.hasbom +
+              "&machine=" +
+              item.machine +
+              "&process=" +
+              item1.MProcess +
+              "&tree=1";
+            await getRequest(url4, async (data2) => {
+              item1["material"] = data2;
+            });
+          });
+        });
+      });
+      if (props.formtype === "Parts") {
+        await delay(800);
+      } else {
+        await delay(800);
+      }
+      setTreeData(data);
+    });
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-	const columns = [
-		{
-			text: "Id",
-			dataField: "Ncid",
-			hidden: true,
-		},
-		{
-			text: "Task No",
-			dataField: "TaskNo",
-			headerStyle: { whiteSpace: "nowrap" },
-			sort: true,
-		},
-		{
-			text: "PStatus",
-			dataField: "PStatus",
-			sort: true,
-		},
-		{
-			text: "Cust Name",
-			dataField: "Cust_Name",
-			headerStyle: { whiteSpace: "nowrap" },
-			sort: true,
-		},
-		{
-			text: "NCProgram No",
-			dataField: "NCProgramNo",
-			headerStyle: { whiteSpace: "nowrap" },
-			sort: true,
-		},
-		{
-			text: "Machine",
-			dataField: "Machine",
-			sort: true,
-		},
-		{
-			text: "Operation",
-			dataField: "Operation",
-			sort: true,
-		},
-		{
-			text: "Mtrl Code",
-			dataField: "Mtrl_Code",
-			headerStyle: { whiteSpace: "nowrap" },
-			sort: true,
-		},
-		{
-			text: "Source",
-			dataField: "CustMtrl",
-			sort: true,
-		},
-		{
-			text: "Qty",
-			dataField: "Qty",
-			sort: true,
-		},
-		{
-			text: "QtyAllotted",
-			dataField: "QtyAllotted",
-			sort: true,
-		},
-	];
+  const columns = [
+    {
+      text: "Id",
+      dataField: "Ncid",
+      hidden: true,
+    },
+    {
+      text: "Task No",
+      dataField: "TaskNo",
+      headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
+    },
+    {
+      text: "PStatus",
+      dataField: "PStatus",
+      sort: true,
+    },
+    {
+      text: "Cust Name",
+      dataField: "Cust_Name",
+      headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
+    },
+    {
+      text: "NCProgram No",
+      dataField: "NCProgramNo",
+      headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
+    },
+    {
+      text: "Machine",
+      dataField: "Machine",
+      sort: true,
+    },
+    {
+      text: "Operation",
+      dataField: "Operation",
+      sort: true,
+    },
+    {
+      text: "Mtrl Code",
+      dataField: "Mtrl_Code",
+      headerStyle: { whiteSpace: "nowrap" },
+      sort: true,
+    },
+    {
+      text: "Source",
+      dataField: "CustMtrl",
+      sort: true,
+    },
+    {
+      text: "Qty",
+      dataField: "Qty",
+      sort: true,
+    },
+    {
+      text: "QtyAllotted",
+      dataField: "QtyAllotted",
+      sort: true,
+    },
+  ];
 
-	const treeViewclickMachine = (machine) => {
-		let url =
-			endpoints.getShopFloorServiceTreeViewProcess +
-			"?type=" +
-			props.type +
-			"&hasbom=" +
-			props.hasbom +
-			"&machine=" +
-			machine +
-			"&tree=0";
-		getRequest(url, async (data) => {
-			// data = data.filter((obj) => obj["PStatus"] !== "Completed");
+  const treeViewclickMachine = (machine) => {
+    let url =
+      endpoints.getShopFloorServiceTreeViewProcess +
+      "?type=" +
+      props.type +
+      "&hasbom=" +
+      props.hasbom +
+      "&machine=" +
+      machine +
+      "&tree=0";
+    getRequest(url, async (data) => {
+      // data = data.filter((obj) => obj["PStatus"] !== "Completed");
 
-			setTableData(data);
-		});
-	};
+      setTableData(data);
+    });
+  };
 
-	const treeViewclickProcess = (machine, process) => {
-		let url =
-			endpoints.getShopFloorServiceTreeViewMtrlCode +
-			"?type=" +
-			props.type +
-			"&hasbom=" +
-			props.hasbom +
-			"&machine=" +
-			machine +
-			"&process=" +
-			process +
-			"&tree=0";
-		getRequest(url, async (data) => {
-			// data = data.filter((obj) => obj["PStatus"] !== "Completed");
+  const treeViewclickProcess = (machine, process) => {
+    let url =
+      endpoints.getShopFloorServiceTreeViewMtrlCode +
+      "?type=" +
+      props.type +
+      "&hasbom=" +
+      props.hasbom +
+      "&machine=" +
+      machine +
+      "&process=" +
+      process +
+      "&tree=0";
+    getRequest(url, async (data) => {
+      // data = data.filter((obj) => obj["PStatus"] !== "Completed");
 
-			setTableData(data);
-		});
-	};
+      setTableData(data);
+    });
+  };
 
-	const treeViewclickMaterial = (machine, process, material) => {
-		let url =
-			endpoints.getShopFloorServiceTreeViewMtrlCodeClick +
-			"?type=" +
-			props.type +
-			"&hasbom=" +
-			props.hasbom +
-			"&machine=" +
-			machine +
-			"&process=" +
-			process +
-			"&material=" +
-			material;
-		getRequest(url, async (data) => {
-			// data = data.filter((obj) => obj["PStatus"] !== "Completed");
+  const treeViewclickMaterial = (machine, process, material) => {
+    let url =
+      endpoints.getShopFloorServiceTreeViewMtrlCodeClick +
+      "?type=" +
+      props.type +
+      "&hasbom=" +
+      props.hasbom +
+      "&machine=" +
+      machine +
+      "&process=" +
+      process +
+      "&material=" +
+      material;
+    getRequest(url, async (data) => {
+      // data = data.filter((obj) => obj["PStatus"] !== "Completed");
 
-			setTableData(data);
-		});
-	};
+      setTableData(data);
+    });
+  };
+
 
 	const selectRow = {
 		mode: "radio",
