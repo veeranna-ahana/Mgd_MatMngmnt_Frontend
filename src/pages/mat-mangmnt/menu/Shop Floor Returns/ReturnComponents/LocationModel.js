@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
@@ -41,9 +41,16 @@ function LocationModel({ show, setShow, scrapModal }) {
   };
 
   let [locationData, setLocationData] = useState([]);
-  getRequest(endpoints.getMaterialLocationList, (data) => {
-    setLocationData(data);
-  });
+
+  useEffect(() => {
+    getRequest(endpoints.getMaterialLocationList, (data) => {
+      setLocationData(data);
+    });
+  }, []);
+
+  // getRequest(endpoints.getMaterialLocationList, (data) => {
+  //   setLocationData(data);
+  // });
 
   return (
     <>

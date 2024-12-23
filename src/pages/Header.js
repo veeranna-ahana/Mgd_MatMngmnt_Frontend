@@ -193,48 +193,50 @@ import { AiFillCaretDown } from "react-icons/ai";
 import { CgLogIn, CgProfile } from "react-icons/cg";
 
 function Header() {
-	// Function to get user data from cookies
-	const getUser = () => {
-		// const cookieData = Cookies.get("LazerUser");
-		const cookieData = JSON.parse(Cookies.get("userData"));
-		console.log("cookieData:", cookieData.Name);
-		if (cookieData) {
-			const data = cookieData;
-			console.log("data", data);
-			return data.data;
-		}
-		return null;
-	};
-	const userData = JSON.parse(Cookies.get("userData"));
-	console.log("User Data:", userData.Name);
-	// Function to handle logout
-	const logout = () => {
-		Cookies.remove("userData");
-		window.location.replace("http://172.16.20.61:3000/");
-		// window.location.replace("http://192.168.1.25:9000/");
-	};
+  // Function to get user data from cookies
+  const getUser = () => {
+    // const cookieData = Cookies.get("LazerUser");
+    const cookieData = JSON.parse(Cookies.get("userData"));
+    console.log("cookieData:", cookieData.Name);
+    if (cookieData) {
+      const data = cookieData;
+      console.log("data", data);
+      return data.data;
+    }
+    return null;
+  };
+  const userData = JSON.parse(Cookies.get("userData"));
+  console.log("User Data:", userData.Name);
+  // Function to handle logout
+  const logout = () => {
+    Cookies.remove("userData");
+    // window.location.replace("http://172.16.20.61:3000/");
+    // window.location.replace("http://192.168.1.25:9000/");
+    window.location.replace("http://localhost:3000/");
+  };
 
-	const [anchorEl, setAnchorEl] = useState(null);
-	const userDropDown = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const userDropDown = Boolean(anchorEl);
 
-	const handleClick = (event) => {
-		setAnchorEl(event.currentTarget);
-	};
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-	const handleClose = () => {
-		setAnchorEl(null);
-	};
-	console.log("userData?.Name", userData?.Name);
-	return (
-		<>
-			<nav className="header">
-				<div style={{ marginLeft: "10px" }}>
-					<h4 style={{ fontSize: "16px", fontWeight: "600" }}>Magod ERP</h4>
-				</div>
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  console.log("userData?.Name", userData?.Name);
+  return (
+    <>
+      <nav className="header">
+        <div style={{ marginLeft: "10px" }}>
+          <h4 style={{ fontSize: "16px", fontWeight: "600" }}>Magod ERP</h4>
+        </div>
 
-				<div
-					style={{ marginRight: "30px", fontSize: "12px", fontWeight: "600" }}>
-					{/* {getUser() ? (
+        <div
+          style={{ marginRight: "30px", fontSize: "12px", fontWeight: "600" }}
+        >
+          {/* {getUser() ? (
 						<>
 							{userData?.Name} - {getUser()[0]["UnitName"]} |{" "}
 							<button
@@ -252,24 +254,25 @@ function Header() {
 					) : (
 						""
 					)} */}
-					{userData.Name} - {userData.UnitName} | {""}
-					<button
-						style={{
-							backgroundColor: "transparent",
-							border: "none",
-							color: "black",
-							fontSize: "12px",
-							fontWeight: "600",
-						}}
-						onClick={logout}>
-						Sign Out
-					</button>
-				</div>
-			</nav>
+          {userData.Name} - {userData.UnitName} | {""}
+          <button
+            style={{
+              backgroundColor: "transparent",
+              border: "none",
+              color: "black",
+              fontSize: "12px",
+              fontWeight: "600",
+            }}
+            onClick={logout}
+          >
+            Sign Out
+          </button>
+        </div>
+      </nav>
 
-			<div style={{ height: "10px" }}>&nbsp;</div>
-		</>
-	);
+      <div style={{ height: "10px" }}>&nbsp;</div>
+    </>
+  );
 }
 
 export default Header;

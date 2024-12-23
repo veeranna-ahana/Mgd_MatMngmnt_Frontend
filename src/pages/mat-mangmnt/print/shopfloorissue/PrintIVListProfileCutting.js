@@ -1,9 +1,12 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { PDFViewer, StyleSheet, Image } from "@react-pdf/renderer";
+import { PDFViewer, StyleSheet, Image, pdf } from "@react-pdf/renderer";
 import { useLocation } from "react-router-dom";
 import PrintIVListProfileCuttingTable1 from "./PrintIVListProfileCuttingTable1";
 import PrintIVListProfileCuttingTable2 from "./PrintIVListProfileCuttingTable2";
 import Modal from "react-bootstrap/Modal";
+import { Button } from "react-bootstrap";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const { getRequest, postRequest } = require("../../../api/apiinstance");
 const { endpoints } = require("../../../api/constants");
@@ -64,6 +67,48 @@ function PrintIVListProfileCutting({
     });
   }
 
+  const savePdfToServer = async () => {
+    try {
+      const adjustment = "IVListProfileCutting";
+      await axios.post(endpoints.pdfServer, { adjustment });
+
+      const blob = await pdf(
+        noDetails === 0 ? (
+          <PrintIVListProfileCuttingTable1
+            formHeader={formHeader}
+            tableData={tableData}
+            PDFData={PDFData}
+          />
+        ) : (
+          <PrintIVListProfileCuttingTable2
+            formHeader={formHeader}
+            tableData={tableData}
+            combineSheets={combineSheets}
+            PDFData={PDFData}
+          />
+        )
+      ).toBlob();
+
+      const file = new File([blob], "GeneratedPDF.pdf", {
+        type: "application/pdf",
+      });
+
+      const formData = new FormData();
+
+      formData.append("file", file);
+
+      const response = await axios.post(endpoints.savePdf, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      if (response.status === 200) {
+        toast.success("PDF saved successfully!");
+      }
+    } catch (error) {
+      console.error("Error saving PDF to server:", error);
+    }
+  };
+
   useEffect(() => {
     fetchPDFData();
   }, []);
@@ -73,7 +118,23 @@ function PrintIVListProfileCutting({
   return (
     <Modal show={isOpen} onHide={handleClose} fullscreen>
       <Modal.Header closeButton>
-        <Modal.Title>Material : Floor Issue</Modal.Title>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          <Modal.Title>Material : Floor Issue</Modal.Title>
+          <Button
+            variant="primary"
+            onClick={savePdfToServer}
+            style={{ fontSize: "10px" }}
+          >
+            Save to Server
+          </Button>
+        </div>
       </Modal.Header>
       <Modal.Body>
         <Fragment>
