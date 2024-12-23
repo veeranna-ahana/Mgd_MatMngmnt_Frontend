@@ -14,11 +14,13 @@ const { getRequest, postRequest } = require("../../../../../api/apiinstance");
 const { endpoints } = require("../../../../../api/constants");
 
 function ShopFloorMaterialAllotment(props) {
-  const nav = useNavigate();
-  const [tableData, setTableData] = useState([]);
-  const [treeData, setTreeData] = useState([]);
-  const [ncid, setncid] = useState("");
-  const [custCode, setCustCode] = useState("");
+
+	const nav = useNavigate();
+	const [tableData, setTableData] = useState([]);
+	const [treeData, setTreeData] = useState([]);
+	const [ncid, setncid] = useState("");
+	const [custCode, setCustCode] = useState("");
+	const [CustMtrl, setCustMtrl] = useState("");
 
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
   const fetchData = async () => {
@@ -205,141 +207,162 @@ function ShopFloorMaterialAllotment(props) {
     });
   };
 
-  const selectRow = {
-    mode: "radio",
-    clickToSelect: true,
-    bgColor: "#98A8F8",
-    onSelect: (row, isSelect, rowIndex, e) => {
-      setncid(row.Ncid);
 
-      setCustCode(row.Cust_Code);
-    },
-  };
+	const selectRow = {
+		mode: "radio",
+		clickToSelect: true,
+		bgColor: "#98A8F8",
+		onSelect: (row, isSelect, rowIndex, e) => {
+			//VEERANNA 1142024
+			// console.log("selected source", row.CustMtrl);
+			// if (row.CustMtrl === "Magod") {
+			// 	// toast.error("Selected source is Magod you can't proceed");
+			// 	toast.error("Can't allot material for sales(Magod) orders");
+			// } else {
+			setncid(row.Ncid);
+			setCustCode(row.Cust_Code);
+			setCustMtrl(row.CustMtrl);
+			// }
+		},
+	};
 
-  const allotMaterial = () => {
-    if (ncid === "") {
-      toast.error("Please select table row");
-    } else {
-      if (props.formtype == "Parts") {
-        nav(
-          "/MaterialManagement/ShopFloorIssue/Service/Parts/ShopFloorAllotmentForm", //MaterialAllotmentMain
+	const allotMaterial = () => {
+		if (ncid === "") {
+			toast.error("Please select table row");
+		} else {
+			if (props.formtype == "Parts") {
+				//VEERANNA11042024
+				props.formtype === "Parts" &&
+				(CustMtrl === "Magod" || CustMtrl !== "Customer")
+					? toast.error("Can't allot material for sales(Magod) orders")
+					: nav(
+							"/MaterialManagement/ShopFloorIssue/Service/Parts/ShopFloorAllotmentForm", //MaterialAllotmentMain
 
-          {
-            state: { ncid, custCode },
-          }
-        );
-      } else if (props.formtype == "Units" || props.formtype == "Others") {
-        nav(
-          "/MaterialManagement/ShopFloorIssue/Service/Units/MaterialAllotmentForm", //UnitsMatAllotmentForm
-          {
-            state: { ncid, custCode },
-          }
-        );
-      }
-    }
-  };
-  return (
-    <div>
-      <h4 className="title">Shop Floor Material Allotment</h4>
-      <div className="row col-md-8 ">
-        {/* <h4 style={{ marginLeft: "30px" }}>{props.formtype}</h4> */}
-        <label className="col-md-2 ms-2">{props.formtype}</label>
-        <button
-          className=" col-md-3 button-style "
-          style={{ width: "100px" }}
-          onClick={allotMaterial}
-          // disabled={boolVal1 | boolVal4}
-        >
-          Allot Material
-        </button>
-        <button
-          className="button-style  col-md-2"
-          style={{ width: "50px" }}
-          id="btnclose"
-          type="submit"
-          onClick={() => nav("/MaterialManagement")}
-        >
-          Close
-        </button>
-      </div>
-      <div className="row mt-4">
-        <div className="col-md-2">
-          {/* <NavComp /> */}
-          {treeData?.map((node, i) => {
-            const machine = node.machine;
-            const label = (
-              <span className="node" style={{ fontSize: "12px" }}>
-                {machine}
-              </span>
-            );
-            return (
-              <TreeView
-                key={machine + "|" + i}
-                nodeLabel={label}
-                defaultCollapsed={true}
-                onClick={() => treeViewclickMachine(machine)}
-              >
-                {node.process?.map((pro) => {
-                  const label2 = (
-                    <span className="node" style={{ fontSize: "12px" }}>
-                      {pro.MProcess}
-                    </span>
-                  );
-                  return (
-                    <TreeView
-                      nodeLabel={label2}
-                      key={pro.MProcess}
-                      defaultCollapsed={true}
-                      onClick={() =>
-                        treeViewclickProcess(machine, pro.MProcess)
-                      }
-                    >
-                      {pro.material?.map((mat) => {
-                        const label3 = (
-                          <span className="node" style={{ fontSize: "12px" }}>
-                            {mat.Mtrl_Code}
-                          </span>
-                        );
-                        return (
-                          <TreeView
-                            nodeLabel={label3}
-                            key={mat.Mtrl_Code}
-                            defaultCollapsed={true}
-                            onClick={() =>
-                              treeViewclickMaterial(
-                                machine,
-                                pro.MProcess,
-                                mat.Mtrl_Code
-                              )
-                            }
-                          ></TreeView>
-                        );
-                      })}
-                    </TreeView>
-                  );
-                })}
-              </TreeView>
-            );
-          })}
-        </div>
-        <div className="col-md-10">
-          <div style={{ height: "375px", overflow: "scroll" }}>
-            <BootstrapTable
-              keyField="Ncid"
-              columns={columns}
-              data={tableData}
-              striped
-              hover
-              condensed
-              //pagination={paginationFactory()}
-              selectRow={selectRow}
-              headerClasses="header-class tableHeaderBGColor"
-            ></BootstrapTable>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+							{
+								state: { ncid, custCode },
+							}
+					  );
+
+				// nav(
+				// 	"/MaterialManagement/ShopFloorIssue/Service/Parts/ShopFloorAllotmentForm", //MaterialAllotmentMain
+
+				// 	{
+				// 		state: { ncid, custCode },
+				// 	}
+				// );
+			} else if (props.formtype == "Units" || props.formtype == "Others") {
+				nav(
+					"/MaterialManagement/ShopFloorIssue/Service/Units/MaterialAllotmentForm", //UnitsMatAllotmentForm
+					{
+						state: { ncid, custCode },
+					}
+				);
+			}
+		}
+	};
+	return (
+		<div>
+			<h4 className="title">Shop Floor Material Allotment</h4>
+			<div className="row col-md-8 ">
+				{/* <h4 style={{ marginLeft: "30px" }}>{props.formtype}</h4> */}
+				<label className="col-md-2 ms-2">{props.formtype}</label>
+				<button
+					className=" col-md-3 button-style "
+					style={{ width: "100px" }}
+					onClick={allotMaterial}
+					// disabled={boolVal1 | boolVal4}
+				>
+					Allot Material
+				</button>
+				<button
+					className="button-style  col-md-2"
+					style={{ width: "50px" }}
+					id="btnclose"
+					type="submit"
+					onClick={() => nav("/MaterialManagement")}>
+					Close
+				</button>
+			</div>
+			<div className="row mt-4">
+				<div className="col-md-2">
+					{/* <NavComp /> */}
+					{treeData?.map((node, i) => {
+						const machine = node.machine;
+						const label = (
+							<span
+								className="node"
+								style={{ fontSize: "12px" }}>
+								{machine}
+							</span>
+						);
+						return (
+							<TreeView
+								key={machine + "|" + i}
+								nodeLabel={label}
+								defaultCollapsed={true}
+								onClick={() => treeViewclickMachine(machine)}>
+								{node.process?.map((pro) => {
+									const label2 = (
+										<span
+											className="node"
+											style={{ fontSize: "12px" }}>
+											{pro.MProcess}
+										</span>
+									);
+									return (
+										<TreeView
+											nodeLabel={label2}
+											key={pro.MProcess}
+											defaultCollapsed={true}
+											onClick={() =>
+												treeViewclickProcess(machine, pro.MProcess)
+											}>
+											{pro.material?.map((mat) => {
+												const label3 = (
+													<span
+														className="node"
+														style={{ fontSize: "12px" }}>
+														{mat.Mtrl_Code}
+													</span>
+												);
+												return (
+													<TreeView
+														nodeLabel={label3}
+														key={mat.Mtrl_Code}
+														defaultCollapsed={true}
+														onClick={() =>
+															treeViewclickMaterial(
+																machine,
+																pro.MProcess,
+																mat.Mtrl_Code
+															)
+														}></TreeView>
+												);
+											})}
+										</TreeView>
+									);
+								})}
+							</TreeView>
+						);
+					})}
+				</div>
+				<div className="col-md-10">
+					<div style={{ height: "375px", overflow: "scroll" }}>
+						<BootstrapTable
+							keyField="Ncid"
+							columns={columns}
+							data={tableData}
+							striped
+							hover
+							condensed
+							//pagination={paginationFactory()}
+							selectRow={selectRow}
+							headerClasses="header-class tableHeaderBGColor"></BootstrapTable>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default ShopFloorMaterialAllotment;

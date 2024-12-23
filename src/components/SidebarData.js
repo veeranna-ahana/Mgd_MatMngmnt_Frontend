@@ -35,6 +35,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { ImCancelCircle } from "react-icons/im";
 import { RiScissorsCutFill } from "react-icons/ri";
 
+const previousMenuUrl = process.env.REACT_APP_PREVIOUS_MENU_URL;
 export const customerSidebar = [
 	/* {
     title: "Setup",
@@ -500,10 +501,7 @@ export const customerSidebar = [
 	},
 	{
 		title: "Previous Menu",
-		// path: "http://172.16.20.61:3000/home",
-		// path: "http://192.168.1.25:9000/home",
-		path: "http://localhost:3000/home",
-
+		path: previousMenuUrl,
 		icon: <MdIcon.MdPreview />,
 		iconClosed: <RiIcons.RiArrowDownSFill />,
 		iconOpened: <RiIcons.RiArrowUpSFill />,
