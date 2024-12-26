@@ -9,6 +9,12 @@ const { endpoints } = require("../../../../api/constants");
 
 function LocationModel({ show, setShow, scrapModal }) {
   const [open, setOpen] = useState(false);
+
+  const [row, setRow] = useState({
+    scrapWeight: "",
+    location: "",
+  });
+
   //   const handleOpen = () => setOpen(true);
   const handleOpen = () => {
     // alert("The material will be altered as SCRAP, Continue?");
@@ -20,24 +26,39 @@ function LocationModel({ show, setShow, scrapModal }) {
     } else {
       setOpen(true);
       setShow(false);
-      console.log("row = ", row);
     }
   };
 
   const handleClose = () => {
     toast.warning("Not saved as Scrap");
+    setRow({
+      scrapWeight: "",
+      location: "",
+    });
     setShow(false);
   };
 
-  const [row, setRow] = useState({
-    scrapWeight: "",
-    location: "",
-  });
+  // const InputHeaderEvent = (e) => {
+  //   const { value, name } = e.target;
+
+  //   row[name] = value;
+  // };
 
   const InputHeaderEvent = (e) => {
     const { value, name } = e.target;
 
-    row[name] = value;
+    if (name === "scrapWeight") {
+      const numericValue = value.replace(/[^0-9]/g, "");
+      setRow((prevState) => ({
+        ...prevState,
+        [name]: numericValue,
+      }));
+    } else {
+      setRow((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
   };
 
   let [locationData, setLocationData] = useState([]);
@@ -59,6 +80,7 @@ function LocationModel({ show, setShow, scrapModal }) {
         setOpen={setOpen}
         row={row}
         scrapModal={scrapModal}
+        setRow={setRow}
       />
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
