@@ -4,11 +4,10 @@ import { useLocation } from "react-router-dom";
 import PrintIVListProfileCuttingTable1 from "./PrintIVListProfileCuttingTable1";
 import PrintIVListProfileCuttingTable2 from "./PrintIVListProfileCuttingTable2";
 import Modal from "react-bootstrap/Modal";
-import { Button } from "react-bootstrap";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const { getRequest, postRequest } = require("../../../api/apiinstance");
+const { postRequest } = require("../../../api/apiinstance");
 const { endpoints } = require("../../../api/constants");
 
 const styles = StyleSheet.create({
@@ -127,13 +126,9 @@ function PrintIVListProfileCutting({
           }}
         >
           <Modal.Title>Material : Floor Issue</Modal.Title>
-          <Button
-            variant="primary"
-            onClick={savePdfToServer}
-            style={{ fontSize: "10px" }}
-          >
+          <button className="button-style" onClick={savePdfToServer}>
             Save to Server
-          </Button>
+          </button>
         </div>
       </Modal.Header>
       <Modal.Body>

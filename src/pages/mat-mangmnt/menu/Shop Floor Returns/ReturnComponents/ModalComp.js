@@ -3,13 +3,21 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 
-function ModalComp({ open, setOpen, setShow, row, scrapModal }) {
+function ModalComp({ open, setOpen, setShow, row, scrapModal, setRow }) {
   const handleClose = () => {
     scrapModal({});
+    setRow({
+      scrapWeight: "",
+      location: "",
+    });
     setOpen(false);
   };
   const handleYes = () => {
     scrapModal(row);
+    setRow({
+      scrapWeight: "",
+      location: "",
+    });
     setOpen(false);
   };
 

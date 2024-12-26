@@ -21,7 +21,7 @@ function PendingList(props) {
 
   const [showYesNo, setShowYesNo] = useState(false);
   const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
+
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
   const [open1, setOpen1] = useState(false);
@@ -49,7 +49,6 @@ function PendingList(props) {
 
   const fetchData = () => {
     getRequest(endpoints.getFirstTableShopFloorReturn, (data) => {
-      console.log("table data = ", data);
       setFirstTable(data);
       setFirstTableAll(data);
       let newobj = {
@@ -67,15 +66,13 @@ function PendingList(props) {
         mtrl_code: "",
         shape: null,
       };
-      //let uniqueData = [];
-      //uniqueData = uniqueData.push(newobj);
+
       const uniqueData = [
         newobj,
         ...new Map(data.map((item) => [item["Machine"], item])).values(),
       ];
-      console.log("tree data = ", uniqueData);
+
       setTreeData(uniqueData);
-      //console.log("unique = ", arrayUniqueByKey);
     });
   };
 
@@ -221,7 +218,6 @@ function PendingList(props) {
     bgColor: "#98A8F8",
     onSelect: (row, isSelect, rowIndex, e) => {
       setIsFirstRowSelected(true);
-      console.log("first row = ", row);
       setSecondTableSelectIndex([]);
       setFirstRowSelected(row);
       setSelectedSecondTableRows([]);
@@ -245,7 +241,6 @@ function PendingList(props) {
 
         setSecondTable(data);
         setIsSecondTableLoading(false);
-        console.log("second table data = ", data);
       });
     },
   };
@@ -290,8 +285,6 @@ function PendingList(props) {
     },
   };
 
-  console.log("selectedSecondTableRows", selectedSecondTableRows);
-
   const treeViewclickMachine = (machine) => {
     setSecondTable([]);
     setSelectedSecondTableRows([]);
@@ -302,22 +295,10 @@ function PendingList(props) {
     } else {
       const newTable = firstTableAll.filter((obj) => obj.Machine === machine);
       setFirstTable(newTable);
-
-      console.log("newTable", newTable);
     }
   };
-  // console.log("setSelectedSecondTableRows", SelectedSecondTableRows);
 
   function tableRefresh() {
-    //reset first table
-    // getRequest(endpoints.getFirstTableShopFloorReturn, (data) => {
-    //   setFirstTable(data);
-    //   setFirstTableAll(data);
-    //   console.log("first table refresh");
-    // });
-
-    // Reset first table based on the selected machine
-
     if (filteredMachine) {
       getRequest(endpoints.getFirstTableShopFloorReturn, (data) => {
         const filteredData = data.filter(
@@ -325,14 +306,12 @@ function PendingList(props) {
         );
         setFirstTable(filteredData);
         setFirstTableAll(data);
-        console.log("first table refresh");
       });
     } else {
       // If no machine is selected, set the first table to the entire data
       getRequest(endpoints.getFirstTableShopFloorReturn, (data) => {
         setFirstTable(data);
         setFirstTableAll(data);
-        console.log("first table refresh");
       });
     }
 
@@ -353,7 +332,7 @@ function PendingList(props) {
           sheet.RemPara2 = sheet.Para2 - sheet.NCPara1;
         }
       });
-      console.log("second table refresh");
+
       setSecondTable(data);
     });
   }
@@ -362,19 +341,15 @@ function PendingList(props) {
     if (selectedSecondTableRows.length === 0) {
       toast.error("Select Material to return to Stock");
     } else {
-      secondTableRow.ReminderPara1 = secondTableRow.RemPara1 - 10;
-      secondTableRow.ReminderPara2 = secondTableRow.RemPara2 - 10;
-      secondTableRow.location = "";
-
-      //console.log("rowval = ", rowVal);
-      console.log("selected rows = ", selectedSecondTableRows);
+      // secondTableRow.ReminderPara1 = secondTableRow.RemPara1 - 10;
+      // secondTableRow.ReminderPara2 = secondTableRow.RemPara2 - 10;
+      // secondTableRow.location = "";
 
       setOpen1(true);
     }
   };
 
   const resizeModal = (msg, row) => {
-    //console.log("msg = ", msg, " row = ", row);
     if (msg == "ok") {
       setShowYesNo(true);
       setRowValResize(row);
@@ -382,28 +357,25 @@ function PendingList(props) {
   };
 
   const modalYesNoResponse = (msg) => {
-    //console.log("msg = ", msg, "row = ", rowValResize);
+    // console.log("msg", rowValResize);
     if (msg == "yes") {
       if (rowValResize.ReminderPara1 < 10 || rowValResize.ReminderPara2 < 10) {
         toast.error("Cannot Resize to less than 10 mm");
       } else {
         //get mtrl_data by mtrl_code
         let url =
-          endpoints.getRowByMtrlCode + "?code=" + rowValResize.Mtrl_Code;
+          endpoints.getRowByMtrlCode + "?code=" + secondTableRow.Mtrl_Code;
         getRequest(url, async (data) => {
           let totwt = 0;
           totwt = getWeight(
             data,
-            parseFloat(rowValResize.Para1),
-            parseFloat(rowValResize.Para2),
+            parseFloat(secondTableRow.Para1),
+            parseFloat(secondTableRow.Para2),
             parseFloat(0)
           );
-          console.log("Total = ", totwt);
-          totwt = Math.round(0.000001 * totwt, 2);
-          console.log("Total After = ", totwt);
 
-          //setCalcWeightVal(parseFloat(totwt).toFixed(2));
-          //console.log("selected rows = ", selectedSecondTableRows);
+          totwt = Math.round(0.000001 * totwt, 2);
+
           for (let i = 0; i < selectedSecondTableRows.length; i++) {
             if (selectedSecondTableRows[i].Rejected === 1) {
               //return the sheet
@@ -449,15 +421,17 @@ function PendingList(props) {
 
             //update stock list
             let paraData3 = {
-              DynamicPara1: rowValResize.Para1,
-              DynamicPara2: rowValResize.Para2,
-              LocationNo: rowValResize.location,
+              DynamicPara1: secondTableRow.Para1,
+              DynamicPara2: secondTableRow.Para2,
+              LocationNo: secondTableRow.location,
               Weight: totwt,
               MtrlStockID: selectedSecondTableRows[i].ShapeMtrlID,
             };
-            postRequest(endpoints.updateMtrlStockLock1, paraData3, (data) => {
-              console.log("updated stock list");
-            });
+            postRequest(
+              endpoints.updateMtrlStockLock1,
+              paraData3,
+              (data) => {}
+            );
 
             //updatencprogrammtrlallotmentlistReturnStock
             let paraData4 = {
@@ -486,9 +460,9 @@ function PendingList(props) {
       setShow(true);
     }
   };
+
   const scrapModal = (data) => {
     if (Object.keys(data).length !== 0) {
-      console.log("Return form = ", data);
       for (let i = 0; i < selectedSecondTableRows.length; i++) {
         if (selectedSecondTableRows[i].Rejected === 1) {
           //return the sheet
@@ -560,7 +534,14 @@ function PendingList(props) {
     }
   };
 
-  console.log("secondTableRow", secondTableRow);
+  const resetYesNoModalState = () => {
+    setSecondTableRow((prevRow) => ({
+      ...prevRow,
+      ReminderPara1: (prevRow.RemPara1 || 0) - 10,
+      ReminderPara2: (prevRow.RemPara2 || 0) - 10,
+      location: "",
+    }));
+  };
 
   return (
     <>
@@ -569,6 +550,7 @@ function PendingList(props) {
         setShow={setShowYesNo}
         message="The Material measurements will be altered. Continue ?"
         modalResponse={modalYesNoResponse}
+        resetState={resetYesNoModalState}
       />
       <LocationModel show={show} setShow={setShow} scrapModal={scrapModal} />
       <ResizeReturnModal
@@ -611,31 +593,9 @@ function PendingList(props) {
           >
             Return To Stock
           </button>
-          {/* <button
-            className="button-style mt-0"
-            style={{ width: "170px" }}
-            onClick={() => {
-              if (selectedSecondTableRows.length === 0) {
-                toast.error("Select Material to return to Stock");
-              } else {
-                nav(
-                  "/MaterialManagement/ShopFloorReturns/PendingList/ResizeAndReturn/MaterialSplitter",
-                  {
-                    state: {
-                      secondTableRow: selectedSecondTableRows,
-                      type: "return",
-                    },
-                  }
-                );
-              }
-            }}
-          >
-            Resize and Return
-          </button> */}
 
           <button
             className="button-style mt-0"
-            //style={{ width: "170px" }}
             onClick={() => {
               if (selectedSecondTableRows.length === 0) {
                 toast.error("Select Material to return to Stock");
@@ -650,7 +610,7 @@ function PendingList(props) {
               ) {
                 toast.error("Selected materials cannot be split.");
               } else {
-                setIsModalOpen(true); // Open the modal
+                setIsModalOpen(true);
               }
             }}
           >

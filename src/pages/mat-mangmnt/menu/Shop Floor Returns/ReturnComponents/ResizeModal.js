@@ -10,11 +10,22 @@ const { endpoints } = require("../../../../api/constants");
 function ResizeModal({ open1, setOpen1, row, resizeModal }) {
   const [open, setOpen] = useState(false);
 
-  //console.log("row val =", row);
-  //var [row, setRow] = useState(row);
-  //console.log("row val =", row);
-  //setrow(row);
   let [locationData, setLocationData] = useState([]);
+  const [localRow, setLocalRow] = useState({
+    ReminderPara1: 0,
+    ReminderPara2: 0,
+    location: "",
+  });
+
+  useEffect(() => {
+    if (row) {
+      setLocalRow({
+        ReminderPara1: (row.RemPara1 || 0) - 10,
+        ReminderPara2: (row.RemPara2 || 0) - 10,
+        location: "",
+      });
+    }
+  }, [row]);
 
   useEffect(() => {
     getRequest(endpoints.getMaterialLocationList, (data) => {
@@ -23,39 +34,37 @@ function ResizeModal({ open1, setOpen1, row, resizeModal }) {
   }, []);
 
   const handlSave = () => {
-    console.log("row = ", row);
-    if (row.ReminderPara1 < 10 || row.ReminderPara2 < 10) {
+    if (localRow.ReminderPara1 < 10 || localRow.ReminderPara2 < 10) {
       toast.error("Dimension Should be usable");
-    } else if (row.location.length == 0) {
+    } else if (localRow.location.length == 0) {
       toast.error("Indicate the Storage Loaction");
     } else {
-      resizeModal("ok", row);
-      //setOpen(true);
+      resizeModal("ok", localRow);
       setOpen1(false);
     }
   };
   const handleCancel = () => {
+    setLocalRow({
+      ReminderPara1: (row.RemPara1 || 0) - 10,
+      ReminderPara2: (row.RemPara2 || 0) - 10,
+      location: "",
+    });
     toast.warning("Not saved to Stock");
     resizeModal("cancel", row);
+
     setOpen1(false);
   };
 
   const InputHeaderEvent = (e) => {
     const { value, name } = e.target;
-    console.log("name = ", name, " value = ", value);
-    /*row((preValue) => {
-      return {
-        ...preValue,
-        [name]: value,
-      };
-    });*/
-    row[name] = value;
+    setLocalRow((prev) => ({ ...prev, [name]: value }));
   };
-  //rowResizeModal = () => setrow(row);
+
+  // console.log("row", row);
+  // console.log("localRow", localRow);
 
   return (
     <>
-      {/* <ModalComp open={open} setOpen={setOpen} resizeModal={resizeModal} /> */}
       <Modal show={open1} onHide={handleCancel}>
         <Modal.Header closeButton>
           <Modal.Title style={{ fontSize: "14px" }}>Magod Material</Modal.Title>
@@ -85,15 +94,10 @@ function ResizeModal({ open1, setOpen1, row, resizeModal }) {
                 <input
                   className="in-field"
                   name="ReminderPara1"
-                  value={row.ReminderPara1}
+                  value={localRow.ReminderPara1}
                   onChange={InputHeaderEvent}
                 />
               </div>
-              {/* <div className="col-md-3 mt-3 ">
-                <button className="button-style" style={{ width: "80PX" }}>
-                  Save
-                </button>
-              </div> */}
             </div>
             <div className="row">
               <div className="col-md-2 mt-2">
@@ -111,15 +115,10 @@ function ResizeModal({ open1, setOpen1, row, resizeModal }) {
                 <input
                   className="in-field"
                   name="ReminderPara2"
-                  value={row.ReminderPara2}
+                  value={localRow.ReminderPara2}
                   onChange={InputHeaderEvent}
                 />
               </div>
-              {/* <div className="col-md-3 ">
-                <button className="button-style" style={{ width: "80PX" }}>
-                  Cancel
-                </button>
-              </div> */}
             </div>
             <div className="row mt-2">
               {" "}
@@ -131,6 +130,7 @@ function ResizeModal({ open1, setOpen1, row, resizeModal }) {
                 <select
                   className="ip-select dropdown-field"
                   name="location"
+                  value={localRow.location}
                   onChange={InputHeaderEvent}
                 >
                   <option value="" disabled selected>
@@ -147,13 +147,6 @@ function ResizeModal({ open1, setOpen1, row, resizeModal }) {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          {/* <Button variant="secondary" onClick={handleCancel}>
-            Cancel
-          </Button>
-          <Button variant="primary" onClick={handlSave}>
-            Save
-          </Button> */}
-
           <button
             className="button-style"
             style={{ width: "80px", backgroundColor: "gray" }}

@@ -38,8 +38,6 @@ function ResizeReturnModal({
 
   const nav = useNavigate();
 
-  // console.log("secondTableRowModal", secondTableRow);
-
   const materialCode = secondTableRow[0]?.Mtrl_Code;
   const quantity = secondTableRow?.length;
   const para1 = secondTableRow[0]?.Para1;

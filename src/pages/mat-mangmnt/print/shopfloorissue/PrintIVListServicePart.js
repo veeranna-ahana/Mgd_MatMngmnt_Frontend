@@ -3,8 +3,6 @@ import { PDFViewer, StyleSheet, pdf } from "@react-pdf/renderer";
 import { useLocation } from "react-router-dom";
 import PrintIVListServicePartTable from "./PrintIVListServicePartTable";
 import Modal from "react-bootstrap/Modal";
-import { Button } from "react-bootstrap";
-import { printIVListServicePart } from "../../../api/constants";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -101,13 +99,9 @@ function PrintIVListServicePart({
           }}
         >
           <Modal.Title>Assembly Parts Issue Voucher</Modal.Title>
-          <Button
-            variant="primary"
-            onClick={savePdfToServer}
-            style={{ fontSize: "10px" }}
-          >
+          <button className="button-style" onClick={savePdfToServer}>
             Save to Server
-          </Button>
+          </button>
         </div>
       </Modal.Header>
       <Modal.Body>
