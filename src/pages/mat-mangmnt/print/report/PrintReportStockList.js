@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { PDFViewer } from "@react-pdf/renderer";
+import { PDFViewer, pdf } from "@react-pdf/renderer";
 import PrintMaterialDCTable from "./PrintDailyReportReceiptTable";
 import { useLocation } from "react-router-dom";
 import PrintReportStockListTable from "./PrintReportStockListTable";
@@ -7,6 +7,8 @@ import PrintReportStockListTable from "./PrintReportStockListTable";
 import Modal from "react-bootstrap/Modal";
 import { postRequest } from "../../../api/apiinstance";
 import { endpoints } from "../../../api/constants";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 function PrintReportStockList(props) {
   const [PDFData, setPDFData] = useState({});
@@ -55,6 +57,45 @@ function PrintReportStockList(props) {
     fetchPDFData();
   }, []);
 
+  const savePdfToServer = async () => {
+    try {
+      const adjustment = "Selected_Stock_Report";
+      await axios.post(endpoints.pdfServer, { adjustment });
+
+      const blob = await pdf(
+        <PrintReportStockListTable
+          totQty1={props.totqty1}
+          totWeight1={props.totalweight1}
+          totQty2={props.totqty2}
+          totWeight2={props.totalweight2}
+          tableData={props.tableData}
+          scrapData={props.scrapData}
+          scrapFlag={props.scrapFlag}
+          customerDetails={props.customerDetails}
+          PDFData={PDFData}
+        />
+      ).toBlob();
+
+      const file = new File([blob], "GeneratedPDF.pdf", {
+        type: "application/pdf",
+      });
+
+      const formData = new FormData();
+
+      formData.append("file", file);
+
+      const response = await axios.post(endpoints.savePdf, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      if (response.status === 200) {
+        toast.success("PDF saved successfully!");
+      }
+    } catch (error) {
+      console.error("Error saving PDF to server:", error);
+    }
+  };
+
   return (
     <>
       <Modal
@@ -63,7 +104,19 @@ function PrintReportStockList(props) {
         fullscreen
       >
         <Modal.Header closeButton>
-          <Modal.Title>Print Selected Stock</Modal.Title>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
+            <Modal.Title>Print Selected Stock</Modal.Title>
+            <button className="button-style" onClick={savePdfToServer}>
+              Save to Server
+            </button>
+          </div>
         </Modal.Header>
         <Modal.Body>
           <Fragment>

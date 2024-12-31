@@ -1,8 +1,10 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { PDFViewer } from "@react-pdf/renderer";
+import { PDFViewer, pdf } from "@react-pdf/renderer";
 import { useLocation } from "react-router-dom";
 import PrintLocationStockDetailTableReport from "./PrintLocationStockDetailTableReport";
 import { Modal } from "react-bootstrap";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 import { postRequest } from "../../../api/apiinstance";
 import { endpoints } from "../../../api/constants";
@@ -33,6 +35,40 @@ function PrintLocationStockDetailReport(props) {
     fetchPDFData();
   }, []);
 
+  const savePdfToServer = async () => {
+    try {
+      const adjustment = "Location_Stock_Details_Report";
+      await axios.post(endpoints.pdfServer, { adjustment });
+
+      const blob = await pdf(
+        <PrintLocationStockDetailTableReport
+          formHeader={props.formHeader}
+          tableData={props.tableData}
+          tabletotal={props.tabletotal}
+          PDFData={PDFData}
+        />
+      ).toBlob();
+
+      const file = new File([blob], "GeneratedPDF.pdf", {
+        type: "application/pdf",
+      });
+
+      const formData = new FormData();
+
+      formData.append("file", file);
+
+      const response = await axios.post(endpoints.savePdf, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      if (response.status === 200) {
+        toast.success("PDF saved successfully!");
+      }
+    } catch (error) {
+      console.error("Error saving PDF to server:", error);
+    }
+  };
+
   return (
     <>
       <Modal
@@ -41,7 +77,19 @@ function PrintLocationStockDetailReport(props) {
         fullscreen
       >
         <Modal.Header closeButton>
-          <Modal.Title>Location Stock Details Report</Modal.Title>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
+            <Modal.Title>Location Stock Details Report</Modal.Title>
+            <button className="button-style" onClick={savePdfToServer}>
+              Save to Server
+            </button>
+          </div>
         </Modal.Header>
         <Modal.Body>
           <Fragment>
